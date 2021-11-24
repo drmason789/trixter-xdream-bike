@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject>Trixter.XDream.UI.Program</StartupObject>
+    <ApplicationIcon>White-X.ico</ApplicationIcon>
+    <Authors>David Mason</Authors>
+    <Description>Graphical user interface for reading the status of a Trixter X-Dream V1 exercise bike and setting its resistance.</Description>
+    <Copyright>(C) David Mason 2021</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="White-X.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trixter.XDream.API\Trixter.XDream.API.csproj" />
+  </ItemGroup>
+
+</Project>

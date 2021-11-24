@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
+    <PackageLicenseFile>F:\src\trixter-XDream\LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <Authors>David Mason</Authors>
+    <Description>A .NET Standard API for reading the state of a Trixter X-Dream V1 exercise bike, and setting its resistance.</Description>
+    <Copyright>(C) David Mason 2021</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+  </ItemGroup>
+
+</Project>

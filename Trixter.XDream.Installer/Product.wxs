@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+  <?define UPGRADE_CODE="{4C97982C-09F9-4515-9FA5-1F2625D04BAB}"?>
+  <?define OUTPUT_CAB="XDream"?>
+  <?define SOURCE_CONSOLE="..\\Trixter.XDream.Console\\bin\\$(var.Configuration)\\net48\\"?>
+  <?define SOURCE_UI="..\\Trixter.XDream.UI\\bin\\$(var.Configuration)\\net48\\"?>
+  <?define PRODUCT_NAME = "Trixter X-Dream X-Dream Bike Utilities"?>
+  <?define PRODUCT_DESC = "A set of utilities for testing a Trixter X-Dream V1 Exercise Bike"?>
+  <?define MANUFACTURER="David Mason"?>
+  <?define GITHUB_URL = "https://github.com/drmason789/trixter-XDream" ?>
+  <?define LICENSE="..\\LICENSE.rtf" ?>
+
+  <?include Version.wxi?>
+
+  <Product Id="*" Name="$(var.PRODUCT_NAME)" Language="1033" Version="$(var.VERSION)" Manufacturer="David Mason" UpgradeCode="$(var.UPGRADE_CODE)">
+    <Package InstallerVersion="400" Compressed="yes" InstallScope="perMachine" InstallPrivileges="elevated" />
+
+    <!-- Upgrade details -->
+
+    <Property Id="PREVIOUSVERSIONINSTALLED" Secure="yes" />
+    <Property Id="NEWERVERSIONINSTALLED" Secure="yes" />
+
+    <Upgrade Id="$(var.UPGRADE_CODE)">
+
+      <UpgradeVersion OnlyDetect="no" Property="PREVIOUSVERSIONINSTALLED" IncludeMaximum="no" Maximum="$(var.VERSION)" />
+
+      <UpgradeVersion OnlyDetect="yes" Property="NEWERVERSIONINSTALLED" IncludeMinimum="no" Minimum="$(var.VERSION)" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts Before="InstallInitialize"></RemoveExistingProducts>
+    </InstallExecuteSequence>
+
+    <Condition Message="A newer version of [ProductName] is already installed. The newer version must first be uninstalled.">NOT (NEWERVERSIONINSTALLED OR NEWERVERSIONINSTALLED64)</Condition>
+
+    <!-- Make the icons available-->
+    <Icon Id="white_x.ico" SourceFile="..\Trixter.XDream.UI\white-x.ico"/>
+    <Icon Id="white_x_console.ico" SourceFile="..\Trixter.XDream.Console\white-x-console.ico"/>
+
+    <!-- Installer icon in Settings/Apps and Control Panel/Programs and Features -->
+    <Property Id="ARPPRODUCTICON" Value="white_x.ico" />
+
+    <!-- Manufacturer (support) URL displayed in Control Panel / Programs and Features -->
+    <Property Id="ARPURLINFOABOUT" Value="$(var.GITHUB_URL)" />
+
+    <Property Id="ARPCOMMENTS" Value="$(var.PRODUCT_DESC)" />
+    <Property Id="ARPHELPLINK" Value="$(var.GITHUB_URL)" />
+
+    <!-- Media -->
+    <Media Id="1" Cabinet="$(var.OUTPUT_CAB).cab" EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="Trixter.XDream" Level="1">
+      <ComponentGroupRef Id="Components" />
+    </Feature>
+
+    <!--    Check for .NET 4.8  -->
+    <!-- https://www.mking.net/blog/detecting-dotnet-framework-versions-with-wix -->
+    <!-- https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed -->
+    <PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+    <Condition Message="This software requires the .NET Framework 4.8.">
+      <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
+    </Condition>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="TRIXTERFOLDER" Name="Trixter" >
+          <Directory Id="INSTALLLOCATION" Name="X-Dream Bike" />
+        </Directory>
+      </Directory>
+
+      
+      <Directory Id="ProgramMenuFolder" Name="PMenu" >
+        <Directory Id="ProgramMenuTrixterFolder" Name="Trixter"/>
+      </Directory>
+
+    </Directory>
+
+    
+
+    <ComponentGroup Id="Components">
+
+      <!--Begin Help Files-->
+      <Component Id="ProgramItems"  Guid="{2295BEAB-1010-43A5-B1F2-FCE74018B89F}" Directory="INSTALLLOCATION" Permanent="no" >
+        <RegistryValue Root='HKLM' Key='Software\$(var.MANUFACTURER)\$(var.PRODUCT_NAME)' Name='installed' Type='integer' Value='1' KeyPath='yes' />
+        <File Id="Trixter.XDream.Console.exe" Source="$(var.SOURCE_CONSOLE)Trixter.XDream.Console.exe" Vital="yes"  />
+        <File Id="Trixter.XDream.API.dll" Source="$(var.SOURCE_UI)Trixter.XDream.API.dll" Vital="yes"  />
+        <File Id="System.IO.Ports.dll" Source="$(var.SOURCE_UI)System.IO.Ports.dll" Vital="yes"  />
+        <File Id="Trixter.XDream.UI.exe" Source="$(var.SOURCE_UI)Trixter.XDream.UI.exe" Vital="yes"  />
+        <File Id="license.txt" Source="$(var.LICENSE)" Vital="yes"  />
+      </Component>
+      <!--End Help Files-->
+
+    </ComponentGroup>
+
+    <DirectoryRef Id="ProgramMenuTrixterFolder">
+      <Component Id="Shortcuts" Guid="{6018E398-5D27-4899-B3AA-4C5A0189B05D}" >
+
+        <Shortcut Id="Trixter.XDream.UI.ShortCut" Name="Trixter X-Dream Bike UI" Description="GUI"
+                  Target="[INSTALLLOCATION]Trixter.XDream.UI.exe" WorkingDirectory="INSTALLLOCATION" Icon="white_x.ico" />
+        <Shortcut Id="Trixter.XDream.Console.ShortCut" Name="Trixter X-Dream Bike Console" Description="Console application"
+                  Target="[INSTALLLOCATION]Trixter.XDream.Console.exe" WorkingDirectory="INSTALLLOCATION" Icon="white_x_console.ico" />
+
+        <RemoveFolder Id="RemoveINSTALLLOCATION" Directory="INSTALLLOCATION" On="uninstall"/>
+        <RemoveFolder Id="RemoveProgramMenuTrixterFolder" Directory="ProgramMenuTrixterFolder" On="uninstall" />
+        
+        <RegistryValue Root="HKCU" Key="Software\$(var.MANUFACTURER)\$(var.PRODUCT_NAME)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+
+    <Feature Id="All" Title="$(var.PRODUCT_NAME)" Level="1" >
+      <ComponentRef Id="Shortcuts"/>
+      <ComponentRef Id="ProgramItems"/>
+    </Feature>
+
+    <UIRef Id="WixUI_Minimal" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.LICENSE)" />
+    <!--<WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="DlgBmp.bmp" /> -->
+
+  </Product>
+</Wix>

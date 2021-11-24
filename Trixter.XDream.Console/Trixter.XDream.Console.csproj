@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <ApplicationIcon>White-X-console.ico</ApplicationIcon>
+    <Authors>David Mason</Authors>
+    <Description>Console application for reading the status of a Trixter X-Dream V1 exercise bike and setting its resistance.</Description>
+    <Copyright>(C) David Mason 2021</Copyright>
+    <PackageLicenseFile>..\LICENSE</PackageLicenseFile>
+
+    <LangVersion>7.3</LangVersion>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="White-X-console.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Trixter.XDream.API\Trixter.XDream.API.csproj" />
+  </ItemGroup>
+
+</Project>
