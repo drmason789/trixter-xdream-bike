@@ -29,6 +29,8 @@ namespace Trixter.XDream.Console
 
                 xbc.Connect(comPort);
 
+
+                System.Console.Title = "X-Dream Bike Diagnostic Utility";
                 System.Console.ReadLine();             
 
                 xbc.Disconnect();
@@ -72,7 +74,7 @@ namespace Trixter.XDream.Console
                 deltaR = 0;
             }
 
-            sb.AppendLine($"X-Dream Bike on port    : {comPort}");
+            sb.AppendLine($"Port              : {comPort}");
             sb.AppendLine($"Steering          : {e.Steering}  / {XDreamClient.MaxSteeringPosition}");
             sb.AppendLine($"Left Brake        : {e.LeftBrake} / {XDreamClient.MaxBrakePosition}");
             sb.AppendLine($"Right Brake       : {e.RightBrake} / {XDreamClient.MaxBrakePosition}");
