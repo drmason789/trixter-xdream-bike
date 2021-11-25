@@ -1,5 +1,5 @@
 # trixter-xdream-bike
-An API and set of utilities for interaction with a Trixter X-Dream V1 Exercise Bike.
+An API and set of utilities for interaction with a [Trixter X-Dream V1 Exercise Bike](https://www.amazon.co.uk/Trixter-X-Dream-Interactive-Exercise-Bike/dp/B008VOQXDA).
 
 
 # Trixer.XDream.API
