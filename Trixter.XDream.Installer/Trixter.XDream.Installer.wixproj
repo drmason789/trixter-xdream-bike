@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>cf7df41d-757d-4aa1-8b98-046730d0facc</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>trixter-xbike-utilities</OutputName>
+    <OutputName>trixter-xdream-utilities</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
