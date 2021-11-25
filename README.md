@@ -4,7 +4,7 @@ An API and set of utilities for interaction with a Trixter X-Dream V1 Exercise B
 
 # Trixer.XDream.API
 
-A .NET Standard 2.0 client API which provides classes to read from and write to a Trixter V1 X-Dream Bike.
+A .NET Standard 2.0 client API which provides classes to read status from and send resistance to a Trixter V1 X-Dream Bike.
 
 # Trixter.XDream.Console
 
