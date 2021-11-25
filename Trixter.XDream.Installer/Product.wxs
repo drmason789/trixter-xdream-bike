@@ -5,7 +5,7 @@
   <?define OUTPUT_CAB="XDream"?>
   <?define SOURCE_CONSOLE="..\\Trixter.XDream.Console\\bin\\$(var.Configuration)\\net48\\"?>
   <?define SOURCE_UI="..\\Trixter.XDream.UI\\bin\\$(var.Configuration)\\net48\\"?>
-  <?define PRODUCT_NAME = "Trixter X-Dream X-Dream Bike Utilities"?>
+  <?define PRODUCT_NAME = "Trixter X-Dream Bike Utilities"?>
   <?define PRODUCT_DESC = "A set of utilities for testing a Trixter X-Dream V1 Exercise Bike"?>
   <?define MANUFACTURER="David Mason"?>
   <?define GITHUB_URL = "https://github.com/drmason789/trixter-XDream" ?>
