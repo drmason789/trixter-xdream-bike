@@ -193,7 +193,7 @@ namespace Trixter.XDream.UI
             this.lbCrankSpeed.Name = "lbCrankSpeed";
             this.lbCrankSpeed.Size = new System.Drawing.Size(120, 24);
             this.lbCrankSpeed.TabIndex = 23;
-            this.lbCrankSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbCrankSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbOther7
             // 
@@ -347,6 +347,7 @@ namespace Trixter.XDream.UI
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(120, 184);
             this.checkedListBox1.TabIndex = 4;
+            this.checkedListBox1.TabStop = false;
             // 
             // gbOutput
             // 

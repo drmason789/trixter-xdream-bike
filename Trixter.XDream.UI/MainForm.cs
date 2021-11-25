@@ -95,7 +95,7 @@ namespace Trixter.XDream.UI
                 this.lbFlywheel.Text = "0 RPM";
             this.lbHeartRate.Text = $"{message.HeartRate} BPM";
             if(message.CrankRevolutionTime!=0)
-                this.lbCrankSpeed.Text = $"{1000d / message.CrankRevolutionTime} RPM";
+                this.lbCrankSpeed.Text = $"{message.CrankRevolutionTime} (units?)";
             else
                 this.lbCrankSpeed.Text = "";
 
