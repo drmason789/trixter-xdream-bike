@@ -10,6 +10,10 @@ A .NET Standard 2.0 client API which provides classes to read status from and se
 
 A replacement for the test application supplied with the X-Dream software.
 
+So far the only improvements over the original are:
+- it detects the COM port the bike is on
+- it is maintainable
+
 ![image](https://user-images.githubusercontent.com/29954900/143327269-294438e2-16b4-476b-881d-7cdc1987ddbf.png)
 
 
