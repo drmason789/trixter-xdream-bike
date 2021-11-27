@@ -1,5 +1,5 @@
 # trixter-xdream-bike
-An API and set of utilities for interaction with a Trixter X-Dream V1 Exercise Bike.
+An API and set of utilities for interaction with a [Trixter X-Dream V1 Exercise Bike](https://www.amazon.co.uk/Trixter-X-Dream-Interactive-Exercise-Bike/dp/B008VOQXDA).
 
 
 # Trixer.XDream.API
@@ -13,6 +13,11 @@ A replacement for the test application supplied with the X-Dream software.
 So far the only improvements over the original are:
 - it detects the COM port the bike is on
 - it is maintainable
+
+It needs to catch up (hopefully it will with support from the community):
+- conversion of raw flywheel time to RPM
+- power calculation
+- resistance increments
 
 ![image](https://user-images.githubusercontent.com/29954900/143327269-294438e2-16b4-476b-881d-7cdc1987ddbf.png)
 
