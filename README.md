@@ -4,6 +4,10 @@ An API and set of utilities for interaction with a [Trixter X-Dream V1 Exercise 
 The "Trixter" company or companies that made this bike and the X-Dream mountain biking simulator are now dissolved.  
 This repository and the associated discussions / wikis are not associated with these companies or any that acquired them.
 
+The source code in this repository is intended to provide developers with an API to interact with this bike, and some diagnostic tools to demonstrate its use, and to eventually become better alternatives to the equivalent utilities provided with the original X-Dream software.
+
+Help with the X-Dream mountain biking simulation software itself can be found in the Discussions.
+
 # Trixer.XDream.API
 
 A .NET Standard 2.0 client API which provides classes to read status from and send resistance to a Trixter V1 X-Dream Bike.
