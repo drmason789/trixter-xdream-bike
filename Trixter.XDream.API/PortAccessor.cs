@@ -11,6 +11,11 @@ namespace Trixter.XDream.API
 
     internal class PortAccessor : IDisposable
     {
+        private const int MinimumRetryIntervalMilliseconds = 100;
+        
+        private static int retries = 3;             
+        private static int retryIntervalMilliseconds = MinimumRetryIntervalMilliseconds;
+
         object sync = new object();
         SerialPort serialPort;
         byte[] inputBuffer;
@@ -21,6 +26,25 @@ namespace Trixter.XDream.API
             {
                 lock (sync) return this.serialPort?.IsOpen ?? false;
             }
+        }
+
+        /// <summary>
+        /// The number of retries attempts that will be made if an UnauthorisedAccessException is thrown
+        /// when the <see cref="SerialPort"/> object tries to connect.
+        /// </summary>
+        internal static int Retries 
+        {
+            get => retries; 
+            set { retries = Math.Max(0, value); }
+        }
+
+        /// <summary>
+        /// The number of milliseconds between retry attempts.
+        /// </summary>
+        internal static int RetryIntervalMilliseconds 
+        { 
+            get => retryIntervalMilliseconds; 
+            set { retryIntervalMilliseconds = Math.Max(MinimumRetryIntervalMilliseconds, value); }
         }
 
         public event PortDataReceivedEventHandler DataReceived;
@@ -78,18 +102,21 @@ namespace Trixter.XDream.API
             if (this.serialPort == null)
                 throw new Exception("Failed to configure serial port.");
 
-            int retries = 3;
+            for (int attempt = 0; attempt<Retries; attempt++)
+            {
+                try
+                {
+                    this.serialPort.Open();
+                    attempt = Retries;
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    // If the next attempt exceeds the number of retries, rethrow the exception
+                    if (attempt+1 >= Retries)
+                        throw;
 
-            try
-            {
-                this.serialPort.Open();
-            }
-            catch (UnauthorizedAccessException)
-            {
-                retries--;
-                if (retries == 0)
-                    throw;
-                Thread.Sleep(100);
+                    Thread.Sleep(RetryIntervalMilliseconds);
+                }
             }
 
             // flush the old data
@@ -102,8 +129,11 @@ namespace Trixter.XDream.API
 
         public void Disconnect()
         {
-            this.serialPort?.Close();
-            this.serialPort = null;
+            lock (sync)
+            {
+                this.serialPort?.Close();
+                this.serialPort = null;
+            }
         }
 
         public void Write(byte [] bytes)
@@ -151,7 +181,7 @@ namespace Trixter.XDream.API
             }
             catch
             {
-
+                // TODO: something more helpful to the client if an error occurs
             }
 
             finally
