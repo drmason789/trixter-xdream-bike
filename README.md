@@ -1,7 +1,7 @@
 # trixter-xdream-bike
 An API and set of utilities for interaction with a [Trixter X-Dream V1 Exercise Bike](https://www.amazon.co.uk/Trixter-X-Dream-Interactive-Exercise-Bike/dp/B008VOQXDA).
 
-This repository and the associated discussions / wikis have are not associated with the "Trixter" company that made X-Dream exercise bikes and the X-Dream mountain biking simulation software.
+This repository and the associated discussions / wikis are not associated with the "Trixter" company that made X-Dream exercise bikes and the X-Dream mountain biking simulation software.
 
 # Trixer.XDream.API
 
