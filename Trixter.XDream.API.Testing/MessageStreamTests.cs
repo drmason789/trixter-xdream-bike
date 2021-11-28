@@ -38,7 +38,7 @@ namespace Trixter.XDream.API.Testing
             Assert.AreEqual(expectedNumberOfPackets, xbm.Length);
         }
 
-        [Test(Description ="Test with input from flywheel, brakem steering, crank and button inputs.")]
+        [Test(Description ="Test with input from flywheel, brake and steering, crank and button inputs.")]
         public void TestGeneral() => TestBytes(Resources.input, 4586);
 
 
