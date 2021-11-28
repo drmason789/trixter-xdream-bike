@@ -8,15 +8,21 @@ namespace Trixter.XDream.API.Testing
     [TestFixture]
     public class MessageStreamTests
     {
-        [Test]
-        public void Test()
+
+        /// <summary>
+        /// Tests that the <see cref="PacketStateMachine"/> converts the supplied byte array into the expected
+        /// number of packets, and they all convert to <see cref="XDreamMessage"/> objects without error.
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="expectedNumberOfPackets"></param>
+        private void TestBytes(byte [] bytes, int expectedNumberOfPackets)
         {
             PacketStateMachine psm = new PacketStateMachine();
 
             List<byte[]> packets = new List<byte[]>();
             List<DateTimeOffset> timestamps = new List<DateTimeOffset>();
 
-            foreach(byte b in Resources.input)
+            foreach (byte b in bytes)
             {
                 if (psm.Add(b) == PacketState.Complete)
                 {
@@ -25,65 +31,23 @@ namespace Trixter.XDream.API.Testing
                 }
             }
 
-            Assert.AreEqual(4586, packets.Count);
+            Assert.AreEqual(expectedNumberOfPackets, packets.Count);
 
             var xbm = packets.Select((p, i) => new XDreamMessage(p, timestamps[i])).ToArray();
 
-            Assert.AreEqual(4586, xbm.Length);
-                       
-
+            Assert.AreEqual(expectedNumberOfPackets, xbm.Length);
         }
 
-
-        [Test]
-        public void HeartRate()
-        {
-            PacketStateMachine psm = new PacketStateMachine();
-
-            List<byte[]> packets = new List<byte[]>();
-            List<DateTimeOffset> timestamps = new List<DateTimeOffset>();
-
-            foreach (byte b in Resources.heartrate)
-            {
-                if (psm.Add(b) == PacketState.Complete)
-                {
-                    packets.Add(psm.LastPacket);
-                    timestamps.Add(DateTimeOffset.Now);
-                }
-            }
-
-            Assert.AreEqual(4587, packets.Count);
-
-            var xbm = packets.Select((p, i) => new XDreamMessage(p, timestamps[i])).ToArray();
-
-            Assert.AreEqual(4587, xbm.Length);
-        }
+        [Test(Description ="Test with input from flywheel, brakem steering, crank and button inputs.")]
+        public void TestGeneral() => TestBytes(Resources.input, 4586);
 
 
-        [Test]
-        public void Buttons()
-        {
-            PacketStateMachine psm = new PacketStateMachine();
+        [Test(Description ="Test with input focussed on heart rate data.")]
+        public void HeartRate() => TestBytes(Resources.heartrate, 4587);
 
-            List<byte[]> packets = new List<byte[]>();
-            List<DateTimeOffset> timestamps = new List<DateTimeOffset>();
 
-            foreach (byte b in Resources.buttons)
-            {
-                if (psm.Add(b) == PacketState.Complete)
-                {
-                    packets.Add(psm.LastPacket);
-                    timestamps.Add(DateTimeOffset.Now);
-                }
-            }
-
-            Assert.AreEqual(4586, packets.Count);
-
-            var xbm = packets.Select((p, i) => new XDreamMessage(p, timestamps[i])).ToArray();
-
-            Assert.AreEqual(4586, xbm.Length);
-
-            
-        }
+        [Test(Description ="Test with input from pressing all buttons on the controller sequentially.")]
+        public void Buttons() => TestBytes(Resources.buttons, 4586);
+        
     }
 }

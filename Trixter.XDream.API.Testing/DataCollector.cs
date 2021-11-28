@@ -17,7 +17,11 @@ namespace Trixter.XDream.API.Testing
         [Test, Explicit]
         public void Collect()
         {
+            // Note to developer: configure these temporarily to suit your local setup and goal
             string defaultPort = "COM2";
+            string outputFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "input.bin");
+            int sampleLengthSeconds = 60;
+            // --------------------------------------------------------------------------------------------------------------------------
 
             List<byte[]> blocks = new List<byte[]>();
 
@@ -26,13 +30,13 @@ namespace Trixter.XDream.API.Testing
                 pa.DataReceived += (sender, bytes) => blocks.Add(bytes);
                 pa.Connect(defaultPort);
 
-                Thread.Sleep(60000);
+                // Wait the specified time for the input to load into the block list.
+                Thread.Sleep(1000*sampleLengthSeconds);
             }
 
             byte[] allBytes = blocks.SelectMany(x => x).ToArray();
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            System.IO.File.WriteAllBytes(Path.Combine(desktop, "input.bin"), allBytes);
-
+            
+            System.IO.File.WriteAllBytes(outputFilePath, allBytes);
         }
 
         
