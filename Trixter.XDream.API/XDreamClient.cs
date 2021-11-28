@@ -40,8 +40,8 @@ namespace Trixter.XDream.API
 
         PortAccessor port;
         PacketStateMachine packetStateMachine;
-        int resistenceLevel = 0;
-        System.Timers.Timer resistenceTimer;
+        int resistanceLevel = 0;
+        System.Timers.Timer resistanceTimer;
         
 
         public bool IsDisposed { get; private set; } = false;
@@ -50,18 +50,18 @@ namespace Trixter.XDream.API
         
         public int Resistance
         { 
-            get => this.resistenceLevel; 
+            get => this.resistanceLevel; 
             set
             {
                 if (this.IsDisposed)
                     throw new InvalidOperationException();
 
-                this.resistenceLevel = Math.Min(resistanceLevels.Length-1, Math.Max(0, value));
+                this.resistanceLevel = Math.Min(resistanceLevels.Length-1, Math.Max(0, value));
 
-                if (this.resistenceLevel == 0)
-                    this.resistenceTimer.Stop();
+                if (this.resistanceLevel == 0)
+                    this.resistanceTimer.Stop();
                 else
-                    this.resistenceTimer.Start();
+                    this.resistanceTimer.Start();
             }
         }
 
@@ -82,11 +82,11 @@ namespace Trixter.XDream.API
             this.port = new PortAccessor();
             this.packetStateMachine = new PacketStateMachine();
             this.port.DataReceived += PortReader_DataReceived;
-            this.resistenceTimer = new System.Timers.Timer();
+            this.resistanceTimer = new System.Timers.Timer();
 
-            this.resistenceTimer.Interval = resistancePulseInterval;
-            this.resistenceTimer.AutoReset = true;
-            this.resistenceTimer.Elapsed += (s, e) => this.SendResistance();
+            this.resistanceTimer.Interval = resistancePulseInterval;
+            this.resistanceTimer.AutoReset = true;
+            this.resistanceTimer.Elapsed += (s, e) => this.SendResistance();
 
         }
 
@@ -113,7 +113,7 @@ namespace Trixter.XDream.API
                 return;
 
             this.Resistance = 0;
-            this.resistenceTimer.Stop();
+            this.resistanceTimer.Stop();
             this.port.Disconnect();
         }
 
@@ -121,7 +121,7 @@ namespace Trixter.XDream.API
         {
             if(this.port!=null && this.port.IsOpen)
             {
-                this.port.Write(resistanceLevels[this.resistenceLevel]);
+                this.port.Write(resistanceLevels[this.resistanceLevel]);
             }
         }
 
@@ -129,7 +129,7 @@ namespace Trixter.XDream.API
         {
             this.Disconnect();
 
-            this.resistenceTimer.Dispose();
+            this.resistanceTimer.Dispose();
             this.port.Dispose();
 
             this.IsDisposed = true;
