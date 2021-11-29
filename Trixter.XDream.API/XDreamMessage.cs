@@ -8,6 +8,26 @@ namespace Trixter.XDream.API
     [DebuggerDisplay("{Buttons}")]
     public class XDreamMessage 
     {
+        /* Packet content
+         *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+         * (00) Header ---------------+  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+         * (01) Steering ----------------+  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+         * (02) Unknown --------------------+  |  |  |  |  |  |  |  |  |  |  |  |  |
+         * (03) Crank position ----------------+  |  |  |  |  |  |  |  |  |  |  |  |
+         * (04) Right brake ----------------------+  |  |  |  |  |  |  |  |  |  |  |
+         * (05) Left brake --------------------------+  |  |  |  |  |  |  |  |  |  |
+         * (06) Unknown --------------------------------+  |  |  |  |  |  |  |  |  |
+         * (07) Unknown -----------------------------------+  |  |  |  |  |  |  |  |
+         * (08) Button flags ---------------------------------+  |  |  |  |  |  |  |
+         * (09) Button flags ------------------------------------+  |  |  |  |  |  |
+         * (0A) Crank revolution time (high byte) ------------------+  |  |  |  |  |
+         * (0B) Crank revolution time (low byte) ----------------------+  |  |  |  |
+         * (0C) Flywheel Revolution Time (high byte) ---------------------+  |  |  |
+         * (0D) Flywheel Revolution Time (low byte) -------------------------+  |  |
+         * (0E) Heart rate (BPM) -----------------------------------------------+  |
+         * (0F) Unknown -----------------------------------------------------------+
+         */
+        
         internal const int MessageSize = 32;
         internal const string MessageHeader = "6a";
         public const int Error = -1;
