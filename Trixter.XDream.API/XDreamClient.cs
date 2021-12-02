@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,8 +11,9 @@ namespace Trixter.XDream.API
 
     public class XDreamClient : IDisposable
     {
-        public const int MaximumResistance = 16;
+        public const int MaxResistance = 16;
         public const int MaxBrakePosition = 250;
+        public const int MinBrakePosition = 135;
         public const int MaxSteeringPosition = 255;
         public const int CrankPositions = 60;
 

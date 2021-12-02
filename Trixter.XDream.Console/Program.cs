@@ -116,7 +116,7 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Flywheel Rev Time : {e.FlywheelRevolutionTime}");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
-                sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaximumResistance}");
+                sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaxResistance}");
 
                 System.Console.Clear();
                 System.Console.WriteLine(sb.ToString());
