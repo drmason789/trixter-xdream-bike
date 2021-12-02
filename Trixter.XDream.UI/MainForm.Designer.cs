@@ -63,6 +63,7 @@ namespace Trixter.XDream.UI
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
+            this.bnRefreshPorts = new System.Windows.Forms.Button();
             this.vbActualResistance = new Trixter.XDream.UI.ValueBar();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
@@ -77,7 +78,7 @@ namespace Trixter.XDream.UI
             this.tbResistance.Name = "tbResistance";
             this.tbResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbResistance.Size = new System.Drawing.Size(45, 346);
-            this.tbResistance.TabIndex = 0;
+            this.tbResistance.TabIndex = 1;
             this.tbResistance.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tbResistance.ValueChanged += new System.EventHandler(this.tbResistance_ValueChanged);
             // 
@@ -370,7 +371,7 @@ namespace Trixter.XDream.UI
             this.cbApplyBrakes.Location = new System.Drawing.Point(9, 19);
             this.cbApplyBrakes.Name = "cbApplyBrakes";
             this.cbApplyBrakes.Size = new System.Drawing.Size(122, 24);
-            this.cbApplyBrakes.TabIndex = 2;
+            this.cbApplyBrakes.TabIndex = 0;
             this.cbApplyBrakes.Text = "Apply Brakes";
             this.cbApplyBrakes.UseVisualStyleBackColor = true;
             // 
@@ -386,6 +387,7 @@ namespace Trixter.XDream.UI
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bnRefreshPorts);
             this.groupBox1.Controls.Add(this.bnDisconnect);
             this.groupBox1.Controls.Add(this.bnConnect);
             this.groupBox1.Controls.Add(this.label5);
@@ -399,7 +401,7 @@ namespace Trixter.XDream.UI
             // 
             // bnDisconnect
             // 
-            this.bnDisconnect.Location = new System.Drawing.Point(279, 17);
+            this.bnDisconnect.Location = new System.Drawing.Point(384, 18);
             this.bnDisconnect.Name = "bnDisconnect";
             this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
             this.bnDisconnect.TabIndex = 3;
@@ -409,7 +411,7 @@ namespace Trixter.XDream.UI
             // 
             // bnConnect
             // 
-            this.bnConnect.Location = new System.Drawing.Point(198, 17);
+            this.bnConnect.Location = new System.Drawing.Point(303, 18);
             this.bnConnect.Name = "bnConnect";
             this.bnConnect.Size = new System.Drawing.Size(75, 23);
             this.bnConnect.TabIndex = 2;
@@ -434,6 +436,16 @@ namespace Trixter.XDream.UI
             this.cbPorts.Name = "cbPorts";
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
+            // 
+            // bnRefreshPorts
+            // 
+            this.bnRefreshPorts.Location = new System.Drawing.Point(192, 18);
+            this.bnRefreshPorts.Name = "bnRefreshPorts";
+            this.bnRefreshPorts.Size = new System.Drawing.Size(105, 23);
+            this.bnRefreshPorts.TabIndex = 1;
+            this.bnRefreshPorts.Text = "Refresh Port List";
+            this.bnRefreshPorts.UseVisualStyleBackColor = true;
+            this.bnRefreshPorts.Click += new System.EventHandler(this.btnRefreshPorts_Click);
             // 
             // vbActualResistance
             // 
@@ -508,6 +520,7 @@ namespace Trixter.XDream.UI
         private System.Windows.Forms.Label lbCrankSpeed;
         private System.Windows.Forms.CheckBox cbApplyBrakes;
         private ValueBar vbActualResistance;
+        private System.Windows.Forms.Button bnRefreshPorts;
     }
 }
 

@@ -16,22 +16,13 @@ namespace Trixter.XDream.UI
         {
             InitializeComponent();
 
-            var comPorts = System.IO.Ports.SerialPort.GetPortNames();
-            Array.Sort(comPorts);
-            this.cbPorts.Items.AddRange(comPorts);
+            this.RefreshPorts();
+            
 
-            var bikePort = XDreamClient.FindPorts(comPorts).FirstOrDefault();
-            if (bikePort != null)
-                this.cbPorts.SelectedItem = bikePort;
-            else if (comPorts.Length > 0)
-                this.cbPorts.SelectedIndex = 0;
-
-            this.bnConnect.Enabled = comPorts.Length > 0;
-            this.cbPorts.Enabled = comPorts.Length > 0;
             this.bnDisconnect.Enabled = false;
             
             this.gbInput.Enabled = false;
-            this.gbOutput.Enabled = false;
+            this.gbOutput.Enabled = false;            
 
         }
 
@@ -156,12 +147,31 @@ namespace Trixter.XDream.UI
                     this.bnDisconnect.Enabled = true;
                     this.gbInput.Enabled = true;
                     this.gbOutput.Enabled = true;
+                    this.bnRefreshPorts.Enabled = false;
                 }
                 catch 
                 {
                     MessageBox.Show($"Failed to connect to X-Dream Bike on {port}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void RefreshPorts()
+        {
+            var comPorts = System.IO.Ports.SerialPort.GetPortNames();
+            Array.Sort(comPorts);
+            this.cbPorts.Items.Clear();
+            this.cbPorts.Items.AddRange(comPorts);
+
+
+            var bikePort = XDreamClient.FindPorts(comPorts).FirstOrDefault();
+            if (bikePort != null)
+                this.cbPorts.SelectedItem = bikePort;
+            else if (comPorts.Length > 0)
+                this.cbPorts.SelectedIndex = 0;
+
+            this.bnConnect.Enabled = comPorts.Length > 0;
+            this.cbPorts.Enabled = comPorts.Length > 0;
         }
 
         private void bnDisconnect_Click(object sender, EventArgs e)
@@ -174,9 +184,13 @@ namespace Trixter.XDream.UI
                 this.bnConnect.Enabled = true;
                 this.gbInput.Enabled = false;
                 this.gbOutput.Enabled = false;
+                this.bnRefreshPorts.Enabled = true;
             }
         }
 
-       
+        private void btnRefreshPorts_Click(object sender, EventArgs e)
+        {
+            this.RefreshPorts();
+        }
     }
 }
