@@ -29,7 +29,7 @@ It needs to catch up (hopefully it will with support from the community):
 - power calculation
 - resistance increments
 
-![image](https://user-images.githubusercontent.com/29954900/143327269-294438e2-16b4-476b-881d-7cdc1987ddbf.png)
+![image](https://user-images.githubusercontent.com/29954900/144512736-ce764863-aff6-48e0-9f45-9f2bec9e9a62.png)
 
 
 # Trixter.XDream.UI
