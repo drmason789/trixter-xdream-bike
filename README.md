@@ -35,5 +35,7 @@ It needs to catch up (hopefully it will with support from the community):
 # Trixter.XDream.UI
 
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
+Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/143326620-ad0fee19-470d-40f7-bc22-0e2e5e2d902a.png)
+![image](https://user-images.githubusercontent.com/29954900/144513047-eea3cedf-43a5-486f-8ca5-c6dfeb236d61.png)
+
