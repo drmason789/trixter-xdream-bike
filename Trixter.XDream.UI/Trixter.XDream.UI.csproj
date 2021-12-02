@@ -11,8 +11,8 @@
     <Authors>David Mason</Authors>
     <Description>Graphical user interface for reading the status of a Trixter X-Dream V1 exercise bike and setting its resistance.</Description>
     <Copyright>(C) David Mason 2021</Copyright>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
   </PropertyGroup>
 
