@@ -29,11 +29,13 @@ It needs to catch up (hopefully it will with support from the community):
 - power calculation
 - resistance increments
 
-![image](https://user-images.githubusercontent.com/29954900/143327269-294438e2-16b4-476b-881d-7cdc1987ddbf.png)
+![image](https://user-images.githubusercontent.com/29954900/144512736-ce764863-aff6-48e0-9f45-9f2bec9e9a62.png)
 
 
 # Trixter.XDream.UI
 
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
+Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/143326620-ad0fee19-470d-40f7-bc22-0e2e5e2d902a.png)
+![image](https://user-images.githubusercontent.com/29954900/144513047-eea3cedf-43a5-486f-8ca5-c6dfeb236d61.png)
+
