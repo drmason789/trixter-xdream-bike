@@ -10,8 +10,8 @@
     <Authors>David Mason</Authors>
     <Description>A .NET Standard API for reading the state of a Trixter X-Dream V1 exercise bike, and setting its resistance.</Description>
     <Copyright>(C) David Mason 2021</Copyright>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
-    <FileVersion>1.1.0</FileVersion>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <FileVersion>1.1.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
