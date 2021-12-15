@@ -27,15 +27,18 @@ namespace Trixter.XDream.API
          * (0E) Heart rate (BPM) -----------------------------------------------+  |
          * (0F) Unknown -----------------------------------------------------------+
          */
-        
+
+        internal static readonly Func<int, int> flywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(553578d / x + 3.7723));
+        internal static readonly Func<int, int> crankRawToRpm = x => x <= 0 ? 0 : (x >= 65534 ? 0 : (int)(1.0d / (6e-6))/x);
+
+
         internal const int MessageSize = 32;
         internal const string MessageHeader = "6a";
         public const int Error = -1;
 
         private const int packetLength = 16;
      
-        public byte[] rawInput;      
-
+        public byte[] rawInput;
 
         public DateTimeOffset TimeStamp { get; }
 
@@ -82,26 +85,28 @@ namespace Trixter.XDream.API
                
 
         /// <summary>
-        /// Crank revolution time. Unknown units.
+        /// Crank speed measurement. 
         /// </summary>
-        public int CrankRevolutionTime => 256 * this.rawInput[10] + this.rawInput[11];       
+        public int Crank => 256 * this.rawInput[10] + this.rawInput[11];       
         
+        // The crank position, 1..60.
+        public int CrankPosition => (int)this.rawInput[3];
 
         /// <summary>
-        /// Flywheel revolution time. Null if the flywheel isn't revolving.
+        /// The calculated RPM of the crank.
         /// </summary>
-        public int? FlywheelRevolutionTime
-        {
-            get
-            {
-                var result = (int)this.rawInput[12] * 256 + this.rawInput[13];
-                if (result < 0)
-                    return null;
-                return result;
-            }
-        }
+        public int CrankRPM => crankRawToRpm(this.Crank);
 
-        public int CrankPosition => (int)this.rawInput[3];
+        /// <summary>
+        /// Flywheel speed measurement.
+        /// </summary>
+        public int Flywheel => this.rawInput[12] * 256 + this.rawInput[13];
+
+
+        /// <summary>
+        /// The calculated RPM of the flywheel.
+        /// </summary>
+        public int FlywheelRPM => flywheelRawToRpm(this.Flywheel);
 
         public int HeartRate => (int)this.rawInput[14];
 

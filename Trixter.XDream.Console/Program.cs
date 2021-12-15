@@ -113,8 +113,8 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Left Brake        : {e.LeftBrake} / {XDreamClient.MaxBrakePosition}");
                 sb.AppendLine($"Right Brake       : {e.RightBrake} / {XDreamClient.MaxBrakePosition}");
                 sb.AppendLine($"Crank Position    : {e.CrankPosition} / {XDreamClient.CrankPositions}");
-                sb.AppendLine($"Crank Rev Time    : {e.CrankRevolutionTime} (units?)");
-                sb.AppendLine($"Flywheel Rev Time : {e.FlywheelRevolutionTime} (units?)");
+                sb.AppendLine($"Crank Speed       : {e.Crank} : {e.CrankRPM} RPM");
+                sb.AppendLine($"Flywheel Speed    : {e.Flywheel} : {e.FlywheelRPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
                 sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaxResistance}");

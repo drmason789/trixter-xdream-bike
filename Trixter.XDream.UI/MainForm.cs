@@ -101,13 +101,9 @@ namespace Trixter.XDream.UI
             this.lbRightBrakeValue.Text = message.RightBrake.ToString();
             this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
 
-            // No interpretation of these values as yet            
-            if (message.FlywheelRevolutionTime.HasValue)
-                this.lbFlywheelValue.Text = $"{message.FlywheelRevolutionTime.Value} (units?)";
-            else
-                this.lbFlywheelValue.Text = "";
+            this.lbFlywheelValue.Text = $"{message.Flywheel} : {message.FlywheelRPM} RPM";
             this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
-            this.lbCrankSpeedValue.Text = $"{message.CrankRevolutionTime} (units?)";
+            this.lbCrankSpeedValue.Text = $"{message.Crank} : {message.CrankRPM} RPM";
 
             this.lbOther2.Text = message.Other2.ToString();
             this.lbOther6.Text = message.Other6.ToString();
