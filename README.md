@@ -36,5 +36,5 @@ It needs to catch up (hopefully it will with support from the community):
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/144513047-eea3cedf-43a5-486f-8ca5-c6dfeb236d61.png)
+![image](https://user-images.githubusercontent.com/29954900/146271821-94389020-e35c-4e8e-8cf3-ab6b4fa3377d.png)
 
