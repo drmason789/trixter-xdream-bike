@@ -25,11 +25,10 @@ So far the only improvements over the original are:
 - it is maintainable
 
 It needs to catch up (hopefully it will with support from the community):
-- conversion of raw flywheel time to RPM
 - power calculation
 - resistance increments
 
-![image](https://user-images.githubusercontent.com/29954900/144512736-ce764863-aff6-48e0-9f45-9f2bec9e9a62.png)
+![image](https://user-images.githubusercontent.com/29954900/146271192-187b01aa-af90-4301-acab-8ea95e26bbd9.png)
 
 
 # Trixter.XDream.UI
