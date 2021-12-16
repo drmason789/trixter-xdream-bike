@@ -25,11 +25,10 @@ So far the only improvements over the original are:
 - it is maintainable
 
 It needs to catch up (hopefully it will with support from the community):
-- conversion of raw flywheel time to RPM
 - power calculation
 - resistance increments
 
-![image](https://user-images.githubusercontent.com/29954900/144512736-ce764863-aff6-48e0-9f45-9f2bec9e9a62.png)
+![image](https://user-images.githubusercontent.com/29954900/146271192-187b01aa-af90-4301-acab-8ea95e26bbd9.png)
 
 
 # Trixter.XDream.UI
@@ -37,5 +36,5 @@ It needs to catch up (hopefully it will with support from the community):
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/144513047-eea3cedf-43a5-486f-8ca5-c6dfeb236d61.png)
+![image](https://user-images.githubusercontent.com/29954900/146271821-94389020-e35c-4e8e-8cf3-ab6b4fa3377d.png)
 
