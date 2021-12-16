@@ -10,7 +10,7 @@ namespace Trixter.XDream.UI
     {
         private XDreamClient client;
         private DateTime lastMessageTime = DateTime.MinValue;
-        private XDreamMessage lastMessage = null;
+        private XDreamState lastMessage = null;
 
         public MainForm()
         {
@@ -64,12 +64,12 @@ namespace Trixter.XDream.UI
             if (this.client != null)
             {
                 this.client.Disconnect();
-                this.client.MessageReceived -= this.Update;
+                this.client.StateUpdated -= this.Update;
                 this.client = null;
             }
         }
 
-        public void Update(object sender, XDreamMessage message)
+        public void Update(object sender, XDreamState message)
         {
             if (this.client==null || this.IsDisposed || !this.Visible)
                 return;
@@ -133,7 +133,7 @@ namespace Trixter.XDream.UI
             if(port!=null)
             {
                 this.client = new XDreamClient();
-                this.client.MessageReceived += this.Update;
+                this.client.StateUpdated += this.Update;
 
                 try
                 {

@@ -3,10 +3,8 @@ using System.Diagnostics;
 
 namespace Trixter.XDream.API
 {
-
-
     [DebuggerDisplay("{Buttons}")]
-    public class XDreamMessage 
+    internal class XDreamMessage : XDreamState
     {
         /* Packet content
          *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -29,7 +27,7 @@ namespace Trixter.XDream.API
          */
 
         internal static readonly Func<int, int> flywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(553578d / x + 3.7723));
-        internal static readonly Func<int, int> crankRawToRpm = x => x <= 0 ? 0 : (x >= 65534 ? 0 : (int)(1.0d / (6e-6))/x);
+        internal static readonly Func<int, int> crankRawToRpm = x => x <= 0 ? 0 : (x >= 65534 ? 0 : (int)(1.0d / (6e-6)) / x);
 
 
         internal const int MessageSize = 32;
@@ -37,13 +35,13 @@ namespace Trixter.XDream.API
         public const int Error = -1;
 
         private const int packetLength = 16;
-     
+
         public byte[] rawInput;
 
         public DateTimeOffset TimeStamp { get; }
 
         public XDreamControllerButtons Buttons { get; }
-             
+
 
         public XDreamMessage(byte[] rawInput, DateTimeOffset? timeStamp = null)
         {
@@ -64,7 +62,7 @@ namespace Trixter.XDream.API
         public int Steering => (int)this.rawInput[1];
         public int LeftBrake => (int)this.rawInput[5];
         public int RightBrake => (int)this.rawInput[4];
-                    
+
 
         public bool FrontGearUp => this.Buttons.HasFlag(XDreamControllerButtons.FrontGearUp);
         public bool FrontGearDown => this.Buttons.HasFlag(XDreamControllerButtons.FrontGearDown);
@@ -82,14 +80,16 @@ namespace Trixter.XDream.API
         public bool Red => this.Buttons.HasFlag(XDreamControllerButtons.Red);
         public bool Green => this.Buttons.HasFlag(XDreamControllerButtons.Green);
         public bool Blue => this.Buttons.HasFlag(XDreamControllerButtons.Blue);
-               
+
 
         /// <summary>
         /// Crank speed measurement. 
         /// </summary>
-        public int Crank => 256 * this.rawInput[10] + this.rawInput[11];       
-        
-        // The crank position, 1..60.
+        public int Crank => 256 * this.rawInput[10] + this.rawInput[11];
+
+        /// <summary>
+        /// The crank position, 1..60.
+        /// </summary>
         public int CrankPosition => (int)this.rawInput[3];
 
         /// <summary>

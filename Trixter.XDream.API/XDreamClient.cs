@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Trixter.XDream.API
 {
-
+    public delegate void XDreamStateUpdatedDelegate(XDreamClient sender, XDreamState state);
 
     public class XDreamClient : IDisposable
     {
@@ -46,7 +46,7 @@ namespace Trixter.XDream.API
 
         public bool IsDisposed { get; private set; } = false;
         
-        public event EventHandler<XDreamMessage> MessageReceived;
+        public event XDreamStateUpdatedDelegate StateUpdated;
         
         public int Resistance
         { 
@@ -65,18 +65,8 @@ namespace Trixter.XDream.API
             }
         }
 
-        protected virtual void OnMessageReceived(XDreamMessage message)
-        {
-            if (MessageReceived != null)
-                this.MessageReceived(this, message);
-        }
-
-        private void AssertNotDisposed()
-        {
-            if (this.IsDisposed)
-                throw new InvalidOperationException("Object is disposed.");
-        }
-
+        protected virtual void OnStateUpdated(XDreamState message) => this.StateUpdated?.Invoke(this, message);
+    
         public XDreamClient()
         {
             this.port = new PortAccessor();
@@ -95,7 +85,7 @@ namespace Trixter.XDream.API
             for(int i=0; i<bytes.Length; i++)
             {
                 if (this.packetStateMachine.Add(bytes[i]) == PacketState.Complete)
-                    this.OnMessageReceived(new XDreamMessage(this.packetStateMachine.LastPacket));
+                    this.OnStateUpdated(new XDreamMessage(this.packetStateMachine.LastPacket));
             }
         }
 
@@ -150,15 +140,15 @@ namespace Trixter.XDream.API
 
         private static bool TryPort(string port)
         {
-            List<XDreamMessage> messages = new List<XDreamMessage>(100);
+            List<XDreamState> messages = new List<XDreamState>(100);
 
             using (XDreamClient xbc = new XDreamClient())
             {
-                EventHandler<XDreamMessage> messageReceived = (s, m) => { messages.Add(m); };
+                XDreamStateUpdatedDelegate messageReceived = (s, m) => { messages.Add(m); };
 
                 try
                 {
-                    xbc.MessageReceived += messageReceived;
+                    xbc.StateUpdated += messageReceived;
                     xbc.Connect(port);
                     Thread.Sleep(1000);
 

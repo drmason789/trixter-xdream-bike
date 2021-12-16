@@ -11,7 +11,7 @@ namespace Trixter.XDream.API.Testing
 
         /// <summary>
         /// Tests that the <see cref="PacketStateMachine"/> converts the supplied byte array into the expected
-        /// number of packets, and they all convert to <see cref="XDreamMessage"/> objects without error.
+        /// number of packets, and they all convert to <see cref="XDreamState"/> objects without error.
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="expectedNumberOfPackets"></param>

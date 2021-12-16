@@ -30,7 +30,7 @@ namespace Trixter.XDream.Console
 
             using (XDreamClient xbc = new XDreamClient())
             {
-                xbc.MessageReceived += Xbc_MessageReceived;
+                xbc.StateUpdated += Xbc_StateUpdated;
 
                 xbc.Connect(comPort);
 
@@ -71,7 +71,7 @@ namespace Trixter.XDream.Console
             }
         }
 
-        private static void Xbc_MessageReceived(object sender, XDreamMessage e)
+        private static void Xbc_StateUpdated(object sender, XDreamState e)
         {
 
             if (e.Buttons.HasFlag(XDreamControllerButtons.FrontGearUp))
@@ -97,7 +97,6 @@ namespace Trixter.XDream.Console
                 if (DateTime.Now.Subtract(lastUpdate).TotalMilliseconds < updateInterval)
                     return;
                 lastUpdate = DateTime.Now;
-
 
                 StringBuilder sb = new StringBuilder();
                 XDreamClient xbc = (XDreamClient)sender;

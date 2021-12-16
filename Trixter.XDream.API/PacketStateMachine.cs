@@ -62,7 +62,7 @@ namespace Trixter.XDream.API
 
             if(state==State.HeaderChar1)
             {
-                if(b==XDreamMessage.MessageHeader[1])
+                if(b== XDreamMessage.MessageHeader[1])
                 {
                     this.state = State.Body;
                     this.bytes.Add(b);
@@ -76,7 +76,7 @@ namespace Trixter.XDream.API
             if(state==State.Body)
             {
                 this.bytes.Add(b);
-                if (this.bytes.Count>=XDreamMessage.MessageSize)
+                if (this.bytes.Count>= XDreamMessage.MessageSize)
                 {
                     this.state = State.NextHeaderChar0;
                 }
