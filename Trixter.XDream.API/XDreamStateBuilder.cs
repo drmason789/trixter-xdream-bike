@@ -2,6 +2,10 @@
 
 namespace Trixter.XDream.API
 {
+
+    /// <summary>
+    /// Writeable implementation of <see cref="XDreamState"/> to build valid read-only <see cref="XDreamState"/> objects.
+    /// </summary>
     internal class XDreamStateBuilder : XDreamState
     {
         private int crank;

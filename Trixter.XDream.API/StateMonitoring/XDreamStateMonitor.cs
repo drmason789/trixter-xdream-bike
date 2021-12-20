@@ -11,6 +11,11 @@ namespace Trixter.XDream.API
         private XDreamState previousState;
 
         /// <summary>
+        /// The date-time of the last update received.
+        /// </summary>
+        public DateTimeOffset LastUpdateTimestamp => this.previousState != null ? this.previousState.TimeStamp : DateTimeOffset.MinValue;
+
+        /// <summary>
         /// Select the changes that are reported.
         /// </summary>
         public XDreamStateChanges Filter { get; set; } =
