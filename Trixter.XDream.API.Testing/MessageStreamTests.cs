@@ -10,7 +10,7 @@ namespace Trixter.XDream.API.Testing
     {
 
         /// <summary>
-        /// Convert an array of bytes into an array of XDremState objects.
+        /// Convert an array of bytes into an array of XDreamState objects.
         /// </summary>
         /// <param name="bytes"></param>
         /// <param name="getTimestamp"></param>

@@ -10,7 +10,7 @@ namespace Trixter.XDream.API.Testing
     public class StateMonitorTests
     {
         /// <summary>
-        /// All individual <see cref="XDremStateChanges"/> values.
+        /// All individual <see cref="XDreamStateChanges"/> values.
         /// </summary>
         static readonly XDreamStateChanges[] allChanges = Enum.GetValues(typeof(XDreamStateChanges)).Cast<XDreamStateChanges>().Where(x => x != XDreamStateChanges.Buttons).ToArray();
 
