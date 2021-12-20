@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Trixter.XDream.API
 {
     [DebuggerDisplay("{Buttons}")]
-    internal class XDreamMessage : XDreamState
+    internal class XDreamMessage : XDreamState    
     {
         /* Packet content
          *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -123,4 +123,6 @@ namespace Trixter.XDream.API
         #endregion
 
     }
+
+    
 }
