@@ -11,6 +11,7 @@ namespace Trixter.XDream.UI
         private XDreamClient client;
         private DateTime lastMessageTime = DateTime.MinValue;
         private XDreamState lastMessage = null;
+        private ICrankMeter crankMeter = new HybridCrankMeter();
 
         public MainForm()
         {
@@ -74,6 +75,8 @@ namespace Trixter.XDream.UI
             if (this.client==null || this.IsDisposed || !this.Visible)
                 return;
 
+            this.crankMeter.AddData(message);
+
             if (DateTime.Now.Subtract(this.lastMessageTime).TotalMilliseconds < 100)
                 return;
 
@@ -101,9 +104,13 @@ namespace Trixter.XDream.UI
             this.lbRightBrakeValue.Text = message.RightBrake.ToString();
             this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
 
+            
+            this.lbCrankSpeedValue.Text = $"{message.Crank} : {this.crankMeter.RPM} RPM";
+            this.lbCrankDirectionValue.Text = $"{this.crankMeter.Direction}";
+
             this.lbFlywheelValue.Text = $"{message.Flywheel} : {message.FlywheelRPM} RPM";
             this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
-            this.lbCrankSpeedValue.Text = $"{message.Crank} : {message.CrankRPM} RPM";
+            
 
             this.lbOther2.Text = message.Other2.ToString();
             this.lbOther6.Text = message.Other6.ToString();

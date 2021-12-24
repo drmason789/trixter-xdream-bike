@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Trixter.XDream.API
 {
-    [DebuggerDisplay("{Buttons}")]
+    [DebuggerDisplay("{DebuggerDisplay}")]
     internal class XDreamMessage : XDreamState    
     {
         /* Packet content
@@ -26,9 +27,8 @@ namespace Trixter.XDream.API
          * (0F) Unknown -----------------------------------------------------------+
          */
 
-        internal static readonly Func<int, int> flywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(553578d / x + 3.7723));
-        internal static readonly Func<int, int> crankRawToRpm = x => x <= 0 ? 0 : (x >= 65534 ? 0 : (int)(1.0d / (6e-6)) / x);
-
+        internal static readonly Func<int, int> flywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(1<<19) / x );
+        
 
         internal const int MessageSize = 32;
         internal const string MessageHeader = "6a";
@@ -36,7 +36,14 @@ namespace Trixter.XDream.API
 
         private const int packetLength = 16;
 
-        public byte[] rawInput;
+        internal byte[] rawInput;
+
+        private string DebuggerDisplay => $"{TimeStamp:mm:ss.fff} : {Buttons}";
+
+        /// <summary>
+        /// Raw data from device.
+        /// </summary>
+        public byte[] RawInput => this.rawInput.ToArray(); // make a copy to avoid editing
 
         public DateTimeOffset TimeStamp { get; }
 
@@ -91,11 +98,6 @@ namespace Trixter.XDream.API
         /// The crank position, 1..60.
         /// </summary>
         public int CrankPosition => (int)this.rawInput[3];
-
-        /// <summary>
-        /// The calculated RPM of the crank.
-        /// </summary>
-        public int CrankRPM => crankRawToRpm(this.Crank);
 
         /// <summary>
         /// Flywheel speed measurement.

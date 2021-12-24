@@ -106,7 +106,7 @@ namespace Trixter.XDream.API
             get => crank;
             set
             {
-                if (!XDreamCrankPositions.IsValidCrankReading(value))
+                if (!CrankPositions.IsValidCrankTimeReading(value))
                     throw new ArgumentOutOfRangeException(nameof(value));
                 crank = value;
             }
@@ -117,7 +117,7 @@ namespace Trixter.XDream.API
             get => crankPosition;
             set
             {
-                if (!XDreamCrankPositions.IsValidCrankPosition(value))
+                if (!CrankPositions.IsValidCrankPosition(value))
                     throw new ArgumentOutOfRangeException(nameof(value));
                 crankPosition = value;
             }

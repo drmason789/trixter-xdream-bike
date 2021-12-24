@@ -14,15 +14,16 @@ namespace Trixter.XDream.Console
         static object sync = new object();
         static DateTime lastUpdate = DateTime.MinValue;
 
-        static bool hadFrontGearUp=false, hadFrontGearDown=false;
+        static bool hadFrontGearUp = false, hadFrontGearDown = false;
         static int deltaR = 0;
         static string comPort;
+        static ICrankMeter crankMeter = new HybridCrankMeter();
 
         static int Main(string[] args)
         {
             comPort = XDreamClient.FindPorts().FirstOrDefault();
 
-            if(string.IsNullOrEmpty(comPort))
+            if (string.IsNullOrEmpty(comPort))
             {
                 System.Console.WriteLine("Unable to find X-Dream Bike on any COM port.");
                 return 1;
@@ -74,11 +75,13 @@ namespace Trixter.XDream.Console
         private static void Xbc_StateUpdated(object sender, XDreamState e)
         {
 
+            crankMeter.AddData(e);
+
             if (e.Buttons.HasFlag(XDreamControllerButtons.FrontGearUp))
             {
                 hadFrontGearUp = true;
             }
-            else if(hadFrontGearUp)
+            else if (hadFrontGearUp)
             {
                 deltaR++;
                 hadFrontGearUp = false;
@@ -112,8 +115,10 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Left Brake        : {e.LeftBrake} / {XDreamClient.MaxBrakePosition}");
                 sb.AppendLine($"Right Brake       : {e.RightBrake} / {XDreamClient.MaxBrakePosition}");
                 sb.AppendLine($"Crank Position    : {e.CrankPosition} / {XDreamClient.CrankPositions}");
-                sb.AppendLine($"Crank Speed       : {e.Crank} : {e.CrankRPM} RPM");
-                sb.AppendLine($"Flywheel Speed    : {e.Flywheel} : {e.FlywheelRPM} RPM");
+                sb.AppendLine($"Crank Rev Time    : {e.Crank} (units?)");
+                sb.AppendLine($"Crank Direction   : {(crankMeter.HasData ? crankMeter.Direction:CrankDirection.None)}");
+                sb.AppendLine($"Crank RPM         : {(crankMeter.HasData ? crankMeter.RPM : 0)}");
+                sb.AppendLine($"Flywheel Rev Time : {e.Flywheel} (units?)");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
                 sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaxResistance}");

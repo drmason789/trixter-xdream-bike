@@ -121,6 +121,12 @@
   <data name="buttons" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\buttons.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="crank_speed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\crank-speed.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_crank_messages" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-crank.messages.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="heartrate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\heartrate.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

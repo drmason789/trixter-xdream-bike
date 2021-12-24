@@ -81,7 +81,7 @@ namespace Trixter.XDream.API.Testing
         }
 
         private static void ChangeCrankPosition(XDreamStateBuilder state)
-            => state.CrankPosition = XDreamCrankPositions.Add(state.CrankPosition, 1);
+            => state.CrankPosition = CrankPositions.Add(state.CrankPosition, 1);
 
 
         private static void ChangeHeartRate(XDreamStateBuilder state)

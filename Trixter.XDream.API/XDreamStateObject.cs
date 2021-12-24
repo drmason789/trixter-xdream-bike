@@ -1,16 +1,19 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Trixter.XDream.API
 {
+    [DebuggerDisplay("{DebuggerDisplay}")]
     internal class XDreamStateObject : XDreamState
     {
+        private string DebuggerDisplay => $"{TimeStamp:mm:ss.fff} : {CrankPosition} {Crank}";
+
         internal XDreamStateObject(XDreamState toCopy)
         {
             this.Buttons = toCopy.Buttons;
             this.Steering = toCopy.Steering;
             this.Crank = toCopy.Crank;
             this.CrankPosition = toCopy.CrankPosition;
-            this.CrankRPM = toCopy.CrankRPM;
             this.Flywheel = toCopy.Flywheel;
             this.FlywheelRPM = toCopy.FlywheelRPM;
             this.LeftBrake = toCopy.LeftBrake;
@@ -34,10 +37,8 @@ namespace Trixter.XDream.API
         public bool Green => this.Buttons.HasFlag(XDreamControllerButtons.Green);
         public bool Blue => this.Buttons.HasFlag(XDreamControllerButtons.Blue);
 
-
         public int Crank { get; private set; }
         public int CrankPosition { get; private set; }
-        public int CrankRPM { get; private set; }
         public int Flywheel { get; private set; }
         public int FlywheelRPM { get; private set; }
         public int HeartRate { get; private set; }

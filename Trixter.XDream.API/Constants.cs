@@ -14,6 +14,11 @@
 
         public const int MaxSteering = 255; // right
         public const int MinSteering = 0; // left
+
+
+        public const int MillisecondsPerMinute = 60 * 1000;
+
+        public const string StateTimestampError = "Timestamp is prior to the previous.";
     }
 
 }

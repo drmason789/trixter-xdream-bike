@@ -12,7 +12,6 @@ namespace Trixter.XDream.API
         XDreamControllerButtons Buttons { get; }
         int Crank { get; }
         int CrankPosition { get; }
-        int CrankRPM { get; }
         bool DownArrow { get; }
         int Flywheel { get; }
         int FlywheelRPM { get; }
