@@ -12,6 +12,7 @@
     <Copyright>(C) David Mason 2021</Copyright>
 	<AssemblyVersion>1.0.1</AssemblyVersion>
     <FileVersion>1.0.1</FileVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

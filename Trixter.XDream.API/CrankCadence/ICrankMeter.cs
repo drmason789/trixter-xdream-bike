@@ -53,8 +53,8 @@ namespace Trixter.XDream.API
         /// <summary>
         /// Add data from an <see cref="XDreamState"/> object.
         /// </summary>
-        /// <param name="message"></param>
-        void AddData(XDreamState message);
+        /// <param name="state"></param>
+        void AddData(XDreamState state);
         
     }
 
