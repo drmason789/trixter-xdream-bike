@@ -9,6 +9,7 @@ namespace Trixter.XDream.UI
     {
         const string appearanceCategory = "Appearance";
         const string valueCategory = "Value";
+        const string behaviorCategory = "Behavior";
 
         private Brush barBrush;
         private int value;
@@ -43,6 +44,13 @@ namespace Trixter.XDream.UI
             }
         }
 
+        /// <summary>
+        /// If set to true, out of range values are clipped to the Minimum and Maximum. Otherwise an execption is thrown.
+        /// </summary>
+        [Browsable(true), Category(behaviorCategory)]
+        public bool ClipOutOfRangeValues { get; set; }
+        
+
         [Browsable(true), Category(appearanceCategory)]
         public int Maximum
         {
@@ -68,8 +76,11 @@ namespace Trixter.XDream.UI
                 if (this.value != value)
                 {
                     if (value < 0 || value > this.Maximum)
-                        throw new ArgumentOutOfRangeException(nameof(value));
-
+                    {
+                        if(!this.ClipOutOfRangeValues)
+                            throw new ArgumentOutOfRangeException(nameof(value));
+                        value = Math.Max(0, Math.Min(this.Maximum, value));
+                    }
                     this.value = value;
                     barRect = null;
                     this.Invalidate();

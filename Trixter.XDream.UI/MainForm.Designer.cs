@@ -31,10 +31,9 @@ namespace Trixter.XDream.UI
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tbResistance = new System.Windows.Forms.TrackBar();
-            this.pbSteering = new System.Windows.Forms.ProgressBar();
-            this.pbLeftBrake = new System.Windows.Forms.ProgressBar();
-            this.pbRightBrake = new System.Windows.Forms.ProgressBar();
             this.gbInput = new System.Windows.Forms.GroupBox();
+            this.lbCrankDirection = new System.Windows.Forms.Label();
+            this.lbCrankDirectionValue = new System.Windows.Forms.Label();
             this.lbCrankSpeed = new System.Windows.Forms.Label();
             this.lbOther15 = new System.Windows.Forms.Label();
             this.lbHeartRateValue = new System.Windows.Forms.Label();
@@ -56,7 +55,6 @@ namespace Trixter.XDream.UI
             this.lbSteering = new System.Windows.Forms.Label();
             this.clbButtons = new System.Windows.Forms.CheckedListBox();
             this.gbOutput = new System.Windows.Forms.GroupBox();
-            this.vbActualResistance = new Trixter.XDream.UI.ValueBar();
             this.cbApplyBrakes = new System.Windows.Forms.CheckBox();
             this.lbResistance = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -65,8 +63,10 @@ namespace Trixter.XDream.UI
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.lbCrankDirection = new System.Windows.Forms.Label();
-            this.lbCrankDirectionValue = new System.Windows.Forms.Label();
+            this.vbActualResistance = new Trixter.XDream.UI.ValueBar();
+            this.vbRightBrake = new Trixter.XDream.UI.ValueBar();
+            this.vbLeftBrake = new Trixter.XDream.UI.ValueBar();
+            this.vbSteering = new Trixter.XDream.UI.ValueBar();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
             this.gbOutput.SuspendLayout();
@@ -84,44 +84,11 @@ namespace Trixter.XDream.UI
             this.tbResistance.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tbResistance.ValueChanged += new System.EventHandler(this.tbResistance_ValueChanged);
             // 
-            // pbSteering
-            // 
-            this.pbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.pbSteering.Location = new System.Drawing.Point(92, 25);
-            this.pbSteering.MarqueeAnimationSpeed = 0;
-            this.pbSteering.Maximum = 255;
-            this.pbSteering.Name = "pbSteering";
-            this.pbSteering.Size = new System.Drawing.Size(198, 23);
-            this.pbSteering.Step = 1;
-            this.pbSteering.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbSteering.TabIndex = 1;
-            // 
-            // pbLeftBrake
-            // 
-            this.pbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.pbLeftBrake.Location = new System.Drawing.Point(92, 54);
-            this.pbLeftBrake.MarqueeAnimationSpeed = 0;
-            this.pbLeftBrake.Maximum = 250;
-            this.pbLeftBrake.Name = "pbLeftBrake";
-            this.pbLeftBrake.Size = new System.Drawing.Size(198, 23);
-            this.pbLeftBrake.Step = 1;
-            this.pbLeftBrake.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbLeftBrake.TabIndex = 2;
-            // 
-            // pbRightBrake
-            // 
-            this.pbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.pbRightBrake.Location = new System.Drawing.Point(92, 83);
-            this.pbRightBrake.MarqueeAnimationSpeed = 0;
-            this.pbRightBrake.Maximum = 250;
-            this.pbRightBrake.Name = "pbRightBrake";
-            this.pbRightBrake.Size = new System.Drawing.Size(198, 23);
-            this.pbRightBrake.Step = 1;
-            this.pbRightBrake.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pbRightBrake.TabIndex = 3;
-            // 
             // gbInput
             // 
+            this.gbInput.Controls.Add(this.vbRightBrake);
+            this.gbInput.Controls.Add(this.vbLeftBrake);
+            this.gbInput.Controls.Add(this.vbSteering);
             this.gbInput.Controls.Add(this.lbCrankDirection);
             this.gbInput.Controls.Add(this.lbCrankDirectionValue);
             this.gbInput.Controls.Add(this.lbCrankSpeed);
@@ -144,15 +111,31 @@ namespace Trixter.XDream.UI
             this.gbInput.Controls.Add(this.lbLeftBrake);
             this.gbInput.Controls.Add(this.lbSteering);
             this.gbInput.Controls.Add(this.clbButtons);
-            this.gbInput.Controls.Add(this.pbLeftBrake);
-            this.gbInput.Controls.Add(this.pbRightBrake);
-            this.gbInput.Controls.Add(this.pbSteering);
             this.gbInput.Location = new System.Drawing.Point(9, 73);
             this.gbInput.Name = "gbInput";
             this.gbInput.Size = new System.Drawing.Size(347, 432);
             this.gbInput.TabIndex = 4;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "From Device";
+            // 
+            // lbCrankDirection
+            // 
+            this.lbCrankDirection.AutoSize = true;
+            this.lbCrankDirection.Location = new System.Drawing.Point(9, 178);
+            this.lbCrankDirection.Name = "lbCrankDirection";
+            this.lbCrankDirection.Size = new System.Drawing.Size(80, 13);
+            this.lbCrankDirection.TabIndex = 30;
+            this.lbCrankDirection.Text = "Crank Direction";
+            this.lbCrankDirection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbCrankDirectionValue
+            // 
+            this.lbCrankDirectionValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbCrankDirectionValue.Location = new System.Drawing.Point(92, 172);
+            this.lbCrankDirectionValue.Name = "lbCrankDirectionValue";
+            this.lbCrankDirectionValue.Size = new System.Drawing.Size(120, 24);
+            this.lbCrankDirectionValue.TabIndex = 29;
+            this.lbCrankDirectionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbCrankSpeed
             // 
@@ -367,19 +350,6 @@ namespace Trixter.XDream.UI
             this.gbOutput.TabStop = false;
             this.gbOutput.Text = "To Device";
             // 
-            // vbActualResistance
-            // 
-            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbActualResistance.Location = new System.Drawing.Point(108, 60);
-            this.vbActualResistance.Maximum = 16;
-            this.vbActualResistance.Name = "vbActualResistance";
-            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.vbActualResistance.Size = new System.Drawing.Size(23, 351);
-            this.vbActualResistance.TabIndex = 3;
-            this.vbActualResistance.Text = "valueBar1";
-            this.vbActualResistance.Value = 0;
-            // 
             // cbApplyBrakes
             // 
             this.cbApplyBrakes.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -464,24 +434,58 @@ namespace Trixter.XDream.UI
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
             // 
-            // lbCrankDirection
+            // vbActualResistance
             // 
-            this.lbCrankDirection.AutoSize = true;
-            this.lbCrankDirection.Location = new System.Drawing.Point(9, 178);
-            this.lbCrankDirection.Name = "lbCrankDirection";
-            this.lbCrankDirection.Size = new System.Drawing.Size(80, 13);
-            this.lbCrankDirection.TabIndex = 30;
-            this.lbCrankDirection.Text = "Crank Direction";
-            this.lbCrankDirection.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbActualResistance.ClipOutOfRangeValues = true;
+            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbActualResistance.Location = new System.Drawing.Point(108, 60);
+            this.vbActualResistance.Maximum = 16;
+            this.vbActualResistance.Name = "vbActualResistance";
+            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.vbActualResistance.Size = new System.Drawing.Size(23, 351);
+            this.vbActualResistance.TabIndex = 3;
+            this.vbActualResistance.Text = "valueBar1";
+            this.vbActualResistance.Value = 0;
             // 
-            // lbCrankDirectionValue
+            // vbRightBrake
             // 
-            this.lbCrankDirectionValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankDirectionValue.Location = new System.Drawing.Point(92, 172);
-            this.lbCrankDirectionValue.Name = "lbCrankDirectionValue";
-            this.lbCrankDirectionValue.Size = new System.Drawing.Size(120, 24);
-            this.lbCrankDirectionValue.TabIndex = 29;
-            this.lbCrankDirectionValue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbRightBrake.ClipOutOfRangeValues = true;
+            this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbRightBrake.Location = new System.Drawing.Point(92, 83);
+            this.vbRightBrake.Maximum = 250;
+            this.vbRightBrake.Name = "vbRightBrake";
+            this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbRightBrake.Size = new System.Drawing.Size(196, 24);
+            this.vbRightBrake.TabIndex = 33;
+            this.vbRightBrake.Value = 0;
+            // 
+            // vbLeftBrake
+            // 
+            this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbLeftBrake.ClipOutOfRangeValues = true;
+            this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbLeftBrake.Location = new System.Drawing.Point(92, 53);
+            this.vbLeftBrake.Maximum = 250;
+            this.vbLeftBrake.Name = "vbLeftBrake";
+            this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbLeftBrake.Size = new System.Drawing.Size(196, 24);
+            this.vbLeftBrake.TabIndex = 32;
+            this.vbLeftBrake.Value = 0;
+            // 
+            // vbSteering
+            // 
+            this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbSteering.ClipOutOfRangeValues = true;
+            this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbSteering.Location = new System.Drawing.Point(92, 24);
+            this.vbSteering.Maximum = 255;
+            this.vbSteering.Name = "vbSteering";
+            this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbSteering.Size = new System.Drawing.Size(196, 24);
+            this.vbSteering.TabIndex = 31;
+            this.vbSteering.Value = 0;
             // 
             // MainForm
             // 
@@ -510,9 +514,6 @@ namespace Trixter.XDream.UI
         #endregion
 
         private System.Windows.Forms.TrackBar tbResistance;
-        private System.Windows.Forms.ProgressBar pbSteering;
-        private System.Windows.Forms.ProgressBar pbLeftBrake;
-        private System.Windows.Forms.ProgressBar pbRightBrake;
         private System.Windows.Forms.GroupBox gbInput;
         private System.Windows.Forms.GroupBox gbOutput;
         private System.Windows.Forms.Label lbResistance;
@@ -546,6 +547,9 @@ namespace Trixter.XDream.UI
         private System.Windows.Forms.Button bnRefreshPorts;
         private System.Windows.Forms.Label lbCrankDirection;
         private System.Windows.Forms.Label lbCrankDirectionValue;
+        private ValueBar vbRightBrake;
+        private ValueBar vbLeftBrake;
+        private ValueBar vbSteering;
     }
 }
 

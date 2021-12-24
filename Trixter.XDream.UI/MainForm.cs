@@ -96,11 +96,11 @@ namespace Trixter.XDream.UI
 
             this.UpdateResistance();
             this.vbActualResistance.Value = this.client.Resistance;
-            this.pbSteering.Value = message.Steering;
+            this.vbSteering.Value = message.Steering;
             this.lbSteeringValue.Text = message.Steering.ToString();
-            this.pbLeftBrake.Value = message.LeftBrake;
+            this.vbLeftBrake.Value = message.LeftBrake;
             this.lbLeftBrakeValue.Text = message.LeftBrake.ToString();
-            this.pbRightBrake.Value = message.RightBrake;
+            this.vbRightBrake.Value = message.RightBrake;
             this.lbRightBrakeValue.Text = message.RightBrake.ToString();
             this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
 
