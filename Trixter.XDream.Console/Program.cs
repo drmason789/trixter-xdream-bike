@@ -102,11 +102,10 @@ namespace Trixter.XDream.Console
                 lastUpdate = DateTime.Now;
 
                 StringBuilder sb = new StringBuilder();
-                XDreamClient xbc = (XDreamClient)sender;
-
+                
                 if (deltaR != 0)
                 {
-                    xbc.Resistance += deltaR;
+                    sender.Resistance += deltaR;
                     deltaR = 0;
                 }
 
