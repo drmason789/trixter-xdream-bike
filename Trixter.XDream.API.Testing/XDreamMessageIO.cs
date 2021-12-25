@@ -38,8 +38,6 @@ namespace Trixter.XDream.API.Testing
                 return result.ToArray();
             }
         }
-
-
     
 
 }

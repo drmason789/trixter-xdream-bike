@@ -28,7 +28,7 @@ namespace Trixter.XDream.API.Testing
 
             bool seenFast = false, finished = false;
 
-            using (var xbc = new XDreamClient())
+            using (var xbc = new XDreamSerialPort())
             {
 
                 //XDreamStateMonitor monitor = new XDreamStateMonitor { Filter=XDreamStateChanges.Flywheel };

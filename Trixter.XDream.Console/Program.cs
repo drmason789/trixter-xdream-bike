@@ -17,12 +17,12 @@ namespace Trixter.XDream.Console
         static bool hadFrontGearUp = false, hadFrontGearDown = false;
         static int deltaR = 0;
         static string comPort;
-        static ICrankMeter crankMeter = new HybridCrankMeter();
-        static IFlywheelMeter flywheelMeter = new MappedFlywheelMeter();
+
+        
 
         static int Main(string[] args)
         {
-            comPort = XDreamClient.FindPorts().FirstOrDefault();
+            comPort = XDreamSerialPort.FindPorts().FirstOrDefault();
 
             if (string.IsNullOrEmpty(comPort))
             {
@@ -30,11 +30,13 @@ namespace Trixter.XDream.Console
                 return 1;
             }
 
-            using (XDreamClient xbc = new XDreamClient())
+            using (XDreamSerialPort port = new XDreamSerialPort())
             {
-                xbc.StateUpdated += Xbc_StateUpdated;
+                XDreamMachine xdm = XDreamBikeFactory.CreatePremium(port);
 
-                xbc.Connect(comPort);
+                xdm.StateUpdated += Xbc_StateUpdated;
+
+                port.Connect(comPort);
 
                 System.Console.Title = "X-Dream Bike Diagnostic Utility";
 
@@ -50,7 +52,7 @@ namespace Trixter.XDream.Console
                 }
 
 
-                xbc.Disconnect();
+                port.Disconnect();
             }
 
             return 0;
@@ -73,11 +75,8 @@ namespace Trixter.XDream.Console
             }
         }
 
-        private static void Xbc_StateUpdated(object sender, XDreamState e)
+        private static void Xbc_StateUpdated(XDreamMachine sender, XDreamState e)
         {
-
-            crankMeter.AddData(e);
-
             if (e.Buttons.HasFlag(XDreamControllerButtons.FrontGearUp))
             {
                 hadFrontGearUp = true;
@@ -112,18 +111,18 @@ namespace Trixter.XDream.Console
                 }
 
                 sb.AppendLine($"Port              : {comPort}");
-                sb.AppendLine($"Steering          : {e.Steering}  / {XDreamClient.MaxSteeringPosition}");
-                sb.AppendLine($"Left Brake        : {e.LeftBrake} / {XDreamClient.MaxBrakePosition}");
-                sb.AppendLine($"Right Brake       : {e.RightBrake} / {XDreamClient.MaxBrakePosition}");
-                sb.AppendLine($"Crank Position    : {e.CrankPosition} / {XDreamClient.CrankPositions}");
+                sb.AppendLine($"Steering          : {e.Steering}  / {Constants.MaxSteering}");
+                sb.AppendLine($"Left Brake        : {e.LeftBrake} / {Constants.MaxBrake}");
+                sb.AppendLine($"Right Brake       : {e.RightBrake} / {Constants.MaxBrake}");
+                sb.AppendLine($"Crank Position    : {e.CrankPosition} / {CrankPositions.Positions}");
                 sb.AppendLine($"Crank Rev Time    : {e.Crank} (units?)");
-                sb.AppendLine($"Crank RPM         : {(crankMeter.HasData ? crankMeter.RPM : 0)}");
-                sb.AppendLine($"Crank Direction   : {(crankMeter.HasData ? crankMeter.Direction:CrankDirection.None)}");
+                sb.AppendLine($"Crank RPM         : {(sender.CrankMeter.HasData ? sender.CrankMeter.RPM : 0)}");
+                sb.AppendLine($"Crank Direction   : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction:CrankDirection.None)}");
                 sb.AppendLine($"Flywheel Rev Time : {e.Flywheel} (units?)");
-                sb.AppendLine($"Flywheel RPM      : {flywheelMeter.RPM} RPM");
+                sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
-                sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaxResistance}");
+                sb.AppendLine($"Resistance        : {sender.Resistance} / {XDreamSerialPort.MaxResistance}");
 
                 System.Console.Clear();
                 System.Console.WriteLine(sb.ToString());

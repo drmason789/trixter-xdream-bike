@@ -1,6 +1,6 @@
 ﻿namespace Trixter.XDream.API
 {
-    internal static class Constants
+    public static class Constants
     {
         public const int MaxHeartRate = 300;
         public const int MinHeartRate = 0; // no reading
@@ -14,6 +14,8 @@
 
         public const int MaxSteering = 255; // right
         public const int MinSteering = 0; // left
+             
+
 
 
         public const int MillisecondsPerMinute = 60 * 1000;
