@@ -93,6 +93,16 @@ namespace Trixter.XDream.API.Testing {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] flywheel_spindown_messages {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] heartrate {
             get {
                 object obj = ResourceManager.GetObject("heartrate", resourceCulture);

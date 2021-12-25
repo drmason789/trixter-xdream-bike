@@ -15,7 +15,6 @@ namespace Trixter.XDream.API
             this.Crank = toCopy.Crank;
             this.CrankPosition = toCopy.CrankPosition;
             this.Flywheel = toCopy.Flywheel;
-            this.FlywheelRPM = toCopy.FlywheelRPM;
             this.LeftBrake = toCopy.LeftBrake;
             this.RightBrake = toCopy.RightBrake;
             this.HeartRate = toCopy.HeartRate;
@@ -40,7 +39,6 @@ namespace Trixter.XDream.API
         public int Crank { get; private set; }
         public int CrankPosition { get; private set; }
         public int Flywheel { get; private set; }
-        public int FlywheelRPM { get; private set; }
         public int HeartRate { get; private set; }
         public int LeftBrake { get; private set; }
         public int Other15 { get; private set; }

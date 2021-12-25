@@ -18,6 +18,7 @@ namespace Trixter.XDream.Console
         static int deltaR = 0;
         static string comPort;
         static ICrankMeter crankMeter = new HybridCrankMeter();
+        static IFlywheelMeter flywheelMeter = new MappedFlywheelMeter();
 
         static int Main(string[] args)
         {
@@ -116,9 +117,10 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Right Brake       : {e.RightBrake} / {XDreamClient.MaxBrakePosition}");
                 sb.AppendLine($"Crank Position    : {e.CrankPosition} / {XDreamClient.CrankPositions}");
                 sb.AppendLine($"Crank Rev Time    : {e.Crank} (units?)");
-                sb.AppendLine($"Crank Direction   : {(crankMeter.HasData ? crankMeter.Direction:CrankDirection.None)}");
                 sb.AppendLine($"Crank RPM         : {(crankMeter.HasData ? crankMeter.RPM : 0)}");
+                sb.AppendLine($"Crank Direction   : {(crankMeter.HasData ? crankMeter.Direction:CrankDirection.None)}");
                 sb.AppendLine($"Flywheel Rev Time : {e.Flywheel} (units?)");
+                sb.AppendLine($"Flywheel RPM      : {flywheelMeter.RPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
                 sb.AppendLine($"Resistance        : {(sender as XDreamClient)?.Resistance} / {XDreamClient.MaxResistance}");

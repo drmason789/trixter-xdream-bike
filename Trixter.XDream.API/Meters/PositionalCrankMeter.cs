@@ -155,4 +155,6 @@ namespace Trixter.XDream.API
         public void AddData(XDreamState state)
             => AddData(state.TimeStamp, state.CrankPosition, state.Crank);        
     }
+
 }
+

@@ -11,7 +11,6 @@ namespace Trixter.XDream.API
         private int crank;
         private int crankPosition;
         private int flywheel;
-        private int flywheelRPM;
         private int heartRate;
         private int leftBrake;
         private int other15;
@@ -21,7 +20,7 @@ namespace Trixter.XDream.API
         private int rightBrake;
         private int steering;
         private DateTimeOffset timeStamp;
-        private int crankRPM;
+        
 
         private bool HasButton(XDreamControllerButtons which) => (this.Buttons & which) == which;
         private void SetButton(XDreamControllerButtons which, bool value)
@@ -123,13 +122,6 @@ namespace Trixter.XDream.API
             }
         }
 
-        public int CrankRPM
-        { 
-            get => crankRPM; 
-            set { this.crankRPM = value; } 
-        }
-
-
         public int Flywheel
         {
             get => flywheel;
@@ -139,13 +131,6 @@ namespace Trixter.XDream.API
                 this.flywheel = value;
             }
         }
-
-        public int FlywheelRPM
-        { 
-            get => flywheelRPM; 
-            set { this.flywheelRPM = value; }
-        }
-
         public int HeartRate
         {
             get => heartRate;

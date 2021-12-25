@@ -27,8 +27,7 @@ namespace Trixter.XDream.API
          * (0F) Unknown -----------------------------------------------------------+
          */
 
-        internal static readonly Func<int, int> flywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(1<<19) / x );
-        
+      
 
         internal const int MessageSize = 32;
         internal const string MessageHeader = "6a";
@@ -103,12 +102,6 @@ namespace Trixter.XDream.API
         /// Flywheel speed measurement.
         /// </summary>
         public int Flywheel => this.rawInput[12] * 256 + this.rawInput[13];
-
-
-        /// <summary>
-        /// The calculated RPM of the flywheel.
-        /// </summary>
-        public int FlywheelRPM => flywheelRawToRpm(this.Flywheel);
 
         public int HeartRate => (int)this.rawInput[14];
 

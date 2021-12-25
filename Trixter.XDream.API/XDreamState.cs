@@ -14,7 +14,6 @@ namespace Trixter.XDream.API
         int CrankPosition { get; }
         bool DownArrow { get; }
         int Flywheel { get; }
-        int FlywheelRPM { get; }
         bool FrontGearDown { get; }
         bool FrontGearUp { get; }
         bool Green { get; }
