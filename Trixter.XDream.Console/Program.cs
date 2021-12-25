@@ -18,7 +18,7 @@ namespace Trixter.XDream.Console
         static int deltaR = 0;
         static string comPort;
 
-        
+
 
         static int Main(string[] args)
         {
@@ -102,12 +102,16 @@ namespace Trixter.XDream.Console
                 lastUpdate = DateTime.Now;
 
                 StringBuilder sb = new StringBuilder();
-                
+
                 if (deltaR != 0)
                 {
                     sender.Resistance += deltaR;
                     deltaR = 0;
                 }
+
+                string flywheelTime = string.Empty;
+                if (e.Flywheel < 65534)
+                    flywheelTime = (e.Flywheel * 0.1).ToString("0") + "ms";
 
                 sb.AppendLine($"Port              : {comPort}");
                 sb.AppendLine($"Steering          : {e.Steering}  / {Constants.MaxSteering}");
@@ -116,8 +120,8 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Crank Position    : {e.CrankPosition} / {CrankPositions.Positions}");
                 sb.AppendLine($"Crank Rev Time    : {e.Crank} (units?)");
                 sb.AppendLine($"Crank RPM         : {(sender.CrankMeter.HasData ? sender.CrankMeter.RPM : 0)}");
-                sb.AppendLine($"Crank Direction   : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction:CrankDirection.None)}");
-                sb.AppendLine($"Flywheel Rev Time : {e.Flywheel} (units?)");
+                sb.AppendLine($"Crank Direction   : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction : CrankDirection.None)}");
+                sb.AppendLine($"Flywheel Rev Time : {flywheelTime}");
                 sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
