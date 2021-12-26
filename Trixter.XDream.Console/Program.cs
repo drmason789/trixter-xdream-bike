@@ -121,7 +121,9 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Crank Rev Time    : {e.Crank} (units?)");
                 sb.AppendLine($"Crank RPM         : {(sender.CrankMeter.HasData ? sender.CrankMeter.RPM : 0)}");
                 sb.AppendLine($"Crank Direction   : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction : CrankDirection.None)}");
+                sb.AppendLine($"Crank Revs        : {sender.TripMeter.CrankRevolutions:0.0}");
                 sb.AppendLine($"Flywheel Rev Time : {flywheelTime}");
+                sb.AppendLine($"Flywheel Revs     : {sender.TripMeter.FlywheelRevolutions:0.0}");
                 sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");

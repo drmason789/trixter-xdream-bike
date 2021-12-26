@@ -67,6 +67,10 @@ namespace Trixter.XDream.UI
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
+            this.lbFlywheelRevsValue = new System.Windows.Forms.Label();
+            this.lbFlywheelRevs = new System.Windows.Forms.Label();
+            this.lbCrankRevs = new System.Windows.Forms.Label();
+            this.lbCrankRevsValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
             this.gbOutput.SuspendLayout();
@@ -86,6 +90,10 @@ namespace Trixter.XDream.UI
             // 
             // gbInput
             // 
+            this.gbInput.Controls.Add(this.lbCrankRevs);
+            this.gbInput.Controls.Add(this.lbCrankRevsValue);
+            this.gbInput.Controls.Add(this.lbFlywheelRevs);
+            this.gbInput.Controls.Add(this.lbFlywheelRevsValue);
             this.gbInput.Controls.Add(this.vbRightBrake);
             this.gbInput.Controls.Add(this.vbLeftBrake);
             this.gbInput.Controls.Add(this.vbSteering);
@@ -487,6 +495,44 @@ namespace Trixter.XDream.UI
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
             // 
+            // lbFlywheelRevsValue
+            // 
+            this.lbFlywheelRevsValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbFlywheelRevsValue.Location = new System.Drawing.Point(279, 290);
+            this.lbFlywheelRevsValue.Name = "lbFlywheelRevsValue";
+            this.lbFlywheelRevsValue.Size = new System.Drawing.Size(61, 24);
+            this.lbFlywheelRevsValue.TabIndex = 34;
+            this.lbFlywheelRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbFlywheelRevs
+            // 
+            this.lbFlywheelRevs.AutoSize = true;
+            this.lbFlywheelRevs.Location = new System.Drawing.Point(233, 270);
+            this.lbFlywheelRevs.Name = "lbFlywheelRevs";
+            this.lbFlywheelRevs.Size = new System.Drawing.Size(107, 13);
+            this.lbFlywheelRevs.TabIndex = 36;
+            this.lbFlywheelRevs.Text = "Flywheel Revolutions";
+            this.lbFlywheelRevs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbCrankRevs
+            // 
+            this.lbCrankRevs.AutoSize = true;
+            this.lbCrankRevs.Location = new System.Drawing.Point(246, 324);
+            this.lbCrankRevs.Name = "lbCrankRevs";
+            this.lbCrankRevs.Size = new System.Drawing.Size(94, 13);
+            this.lbCrankRevs.TabIndex = 38;
+            this.lbCrankRevs.Text = "Crank Revolutions";
+            this.lbCrankRevs.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbCrankRevsValue
+            // 
+            this.lbCrankRevsValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbCrankRevsValue.Location = new System.Drawing.Point(279, 341);
+            this.lbCrankRevsValue.Name = "lbCrankRevsValue";
+            this.lbCrankRevsValue.Size = new System.Drawing.Size(61, 24);
+            this.lbCrankRevsValue.TabIndex = 37;
+            this.lbCrankRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -550,6 +596,10 @@ namespace Trixter.XDream.UI
         private ValueBar vbRightBrake;
         private ValueBar vbLeftBrake;
         private ValueBar vbSteering;
+        private System.Windows.Forms.Label lbCrankRevs;
+        private System.Windows.Forms.Label lbCrankRevsValue;
+        private System.Windows.Forms.Label lbFlywheelRevs;
+        private System.Windows.Forms.Label lbFlywheelRevsValue;
     }
 }
 

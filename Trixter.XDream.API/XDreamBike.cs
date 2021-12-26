@@ -16,6 +16,7 @@ namespace Trixter.XDream.API
         // Using member fields for access to all members of actual rather than publically exposed type
         private ThreadSafeFlywheelMeter flywheelMeter;
         private ThreadSafeCrankMeter crankMeter;
+        private ThreadSafeTripMeter tripMeter;
 
         private ConcurrentQueue<XDreamState> stateQueue;
         private XDreamState state;        
@@ -32,6 +33,8 @@ namespace Trixter.XDream.API
 
         public ICrankMeter CrankMeter => this.crankMeter;
 
+        public ITripMeter TripMeter => this.tripMeter;
+
         public XDreamState State => this.DoLocked(() => this.state);
 
         public int Resistance
@@ -46,9 +49,11 @@ namespace Trixter.XDream.API
 
             this.flywheelMeter = ThreadSafeFlywheelMeter.TryCreate(flywheelMeter) ?? throw new ArgumentNullException(nameof(flywheelMeter));
             this.crankMeter = ThreadSafeCrankMeter.TryCreate(crankMeter) ?? throw new ArgumentNullException(nameof (crankMeter));
+            this.tripMeter = ThreadSafeTripMeter.TryCreate(new TripMeter(flywheelMeter, crankMeter));
 
             this.flywheelMeter.SyncRoot = this.SyncRoot;
             this.crankMeter.SyncRoot = this.SyncRoot;
+            this.tripMeter.SyncRoot = this.SyncRoot;
             this.stateQueue = new ConcurrentQueue<XDreamState>();
 
             this.DataSource.StateUpdated += DataSource_StateUpdated;
@@ -69,6 +74,7 @@ namespace Trixter.XDream.API
                     {
                         this.FlywheelMeter.AddData(state);
                         this.CrankMeter.AddData(state);
+                        this.TripMeter.Update(state.TimeStamp);
                         this.state = state;
                     }
 

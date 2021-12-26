@@ -23,6 +23,12 @@
         /// </summary>
         ICrankMeter CrankMeter { get; }
 
+
+        /// <summary>
+        /// Meter that determines the cumulative revolutions of the crank and flywheel.
+        /// </summary>
+        ITripMeter TripMeter { get; }
+
         /// <summary>
         /// The last reported state of the machine.
         /// </summary>

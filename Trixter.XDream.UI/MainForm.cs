@@ -116,6 +116,9 @@ namespace Trixter.XDream.UI
                 this.lbFlywheelValue.Text = $"{message.Flywheel} : {this.xdreamMachine.FlywheelMeter.RPM} RPM";
                 this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
 
+                this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
+                this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
+
                 this.lbOther2.Text = message.Other2.ToString();
                 this.lbOther6.Text = message.Other6.ToString();
                 this.lbOther7.Text = message.Other7.ToString();
