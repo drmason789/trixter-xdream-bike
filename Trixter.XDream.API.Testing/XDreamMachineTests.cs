@@ -5,6 +5,7 @@ using System.Threading;
 
 namespace Trixter.XDream.API.Testing
 {
+    [TestFixture]
     public class XDreamMachineTests
     {
         [Test]
@@ -27,6 +28,4 @@ namespace Trixter.XDream.API.Testing
 
         }
     }
-    
-
 }

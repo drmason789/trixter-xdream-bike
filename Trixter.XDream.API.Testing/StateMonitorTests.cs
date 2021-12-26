@@ -160,7 +160,7 @@ namespace Trixter.XDream.API.Testing
         }
 
         [Test(Description ="A test that uses real data, obtained from a real X-Dream bike, with a real person pedalling, pushing buttons and pulling levers.")]
-        public void KeepItReal()
+        public void KeepingItReal()
         {
             Random random = new Random();
             DateTimeOffset t = DateTimeOffset.UtcNow;

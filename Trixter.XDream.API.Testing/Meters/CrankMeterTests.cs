@@ -31,15 +31,22 @@ namespace Trixter.XDream.API.Testing
         /// <param name="sampleIntervalMilliseconds"></param>
         /// <param name="lengthMilliseconds"></param>
         /// <param name="startTimestamp"></param>
+        /// <param name="rpmToRaw">Functor to calculate the raw crank reading from the RPM.</param>
+        /// <param name="flywheelReading">Functor to provide a flywheel reading at a specified number of milliseconds since the start time.</param>
         /// <returns></returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public static XDreamState [] GenerateCadenceData(int rpm, int sampleIntervalMilliseconds, int lengthMilliseconds, DateTimeOffset startTimestamp, Func<int,int> rpmToRaw)
+        public static XDreamState [] GenerateCadenceData(int rpm, int sampleIntervalMilliseconds, int lengthMilliseconds, DateTimeOffset startTimestamp,
+            Func<int,int> rpmToRaw, Func<int, int> flywheelReading)
         {
             if(sampleIntervalMilliseconds < 1)
                 throw new ArgumentOutOfRangeException(nameof(sampleIntervalMilliseconds));
             if (lengthMilliseconds < sampleIntervalMilliseconds)
                 throw new ArgumentException(nameof(sampleIntervalMilliseconds));
+            if (rpmToRaw == null)
+                throw new ArgumentNullException(nameof(rpmToRaw));
+            if (flywheelReading == null)
+                throw new ArgumentNullException(nameof(flywheelReading));
 
             double dt= sampleIntervalMilliseconds;  
             double dp_dt = 0.01 * rpm;
@@ -57,6 +64,7 @@ namespace Trixter.XDream.API.Testing
             {
                 if ((int)p != builder.CrankPosition)
                     builder.CrankPosition = CrankPositions.Add(builder.CrankPosition, (int)p - builder.CrankPosition);
+                builder.Flywheel = flywheelReading((int)t);
                 builder.TimeStamp = startTimestamp.AddMilliseconds(t);
             
                 result.Add(builder.ToReadOnly());

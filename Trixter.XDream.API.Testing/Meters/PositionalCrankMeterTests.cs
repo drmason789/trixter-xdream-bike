@@ -116,7 +116,7 @@ namespace Trixter.XDream.API.Testing
             PositionalCrankMeter cs = new PositionalCrankMeter(smoothingInterval);
             var expectedDirection = CrankPositions.GetDirection(rpm);
             int directionalRpm = Math.Abs(rpm);
-            XDreamState[] cadenceData = CrankMeterTests.GenerateCadenceData(rpm, 10, 2*smoothingInterval, DateTimeOffset.UtcNow, MappedCrankMeter.DefaultMappingRawToRpm);
+            XDreamState[] cadenceData = CrankMeterTests.GenerateCadenceData(rpm, 10, 2*smoothingInterval, DateTimeOffset.UtcNow, MappedCrankMeter.DefaultMappingRawToRpm, x=>65534);
 
             Array.ForEach(cadenceData, cs.AddData);
 

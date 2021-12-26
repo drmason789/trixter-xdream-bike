@@ -41,7 +41,7 @@ namespace Trixter.XDream.API.Testing
                        
             for(int rpm=15; rpm<=HybridCrankMeter.PositionalUpperLimitRPM+100; rpm++)
             {
-                var states = CrankMeterTests.GenerateCadenceData(rpm, sampleIntervalMilliseconds, 2000, t0, rpmToRaw);
+                var states = CrankMeterTests.GenerateCadenceData(rpm, sampleIntervalMilliseconds, 2000, t0, rpmToRaw, x=>65534);
 
                 allStates.AddRange(states);
                 expectedRPMs.AddRange(Enumerable.Range(0, states.Length).Select(x=>rpm));
