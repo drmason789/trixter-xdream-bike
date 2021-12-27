@@ -18,7 +18,7 @@ namespace Trixter.XDream.API
         private int other6;
         private int other7;
         private int rightBrake = Constants.MaxBrake;
-        private int steering = (Constants.MaxSteering+Constants.MinSteering) >> 1;
+        private int steering = Constants.MidSteering;
         private DateTimeOffset timeStamp;
         
 

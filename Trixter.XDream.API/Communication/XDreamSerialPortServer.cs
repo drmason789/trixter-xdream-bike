@@ -15,12 +15,20 @@ namespace Trixter.XDream.API
     {
         public const int StateUpdatePulseIntervalMilliseconds = 10;
 
+        /// <summary>
+        /// The number of millseconds the requested resitance is sustained.
+        /// </summary>
+        public const int ResistanceIntervalMilliseconds = 50;
+
         readonly object resistanceSync = new object();
         int resistanceLevel = 0;
+        DateTimeOffset resistanceExpires;
 
         private readonly object stateSync = new object();
         private XDreamState state;
         private byte[] stateBytes;
+
+        private System.Timers.Timer resistanceTimer;
 
         public event XDreamResistanceChangedDelegate<XDreamServer> ResistanceChanged;
 
@@ -54,6 +62,17 @@ namespace Trixter.XDream.API
                         this.resistanceLevel = value;
                         changed = true;
                     }
+
+                    if (value > 0)
+                    {
+                        this.resistanceExpires = DateTimeOffset.UtcNow.AddMilliseconds(ResistanceIntervalMilliseconds);
+                        this.resistanceTimer.Start();
+                    }
+                    else
+                    {
+                        this.resistanceExpires = DateTimeOffset.MaxValue;
+                        this.resistanceTimer.Stop();
+                    }
                 }
 
                 if (changed) this.OnResistanceChanged();
@@ -73,7 +92,31 @@ namespace Trixter.XDream.API
 
         public XDreamSerialPortServer() : base(new ResistancePacketStateMachine(), StateUpdatePulseIntervalMilliseconds)
         {
+            this.resistanceTimer = new System.Timers.Timer();
+            this.resistanceTimer.Interval = ResistanceIntervalMilliseconds;
+            this.resistanceTimer.AutoReset = false;
+            this.resistanceTimer.Elapsed += ResistanceTimer_Elapsed;
+        }
 
+        private void ResistanceTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            lock(this.resistanceSync)
+            {
+                
+                if (this.resistanceExpires == DateTimeOffset.MaxValue)
+                    return;
+                double t = (this.resistanceExpires - DateTime.UtcNow).TotalMilliseconds;
+                if (t<=0)
+                {
+                    this.Resistance = 0;
+                } 
+                else 
+                {
+                    this.resistanceTimer.Interval = t;
+                    this.resistanceTimer.Start();
+
+                }
+            }
         }
 
         protected override void OnSendPacket(out byte[] outputPacket)
@@ -82,7 +125,14 @@ namespace Trixter.XDream.API
                 outputPacket = stateBytes;
             
         }
-             
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            this.resistanceTimer?.Dispose();
+            this.resistanceTimer = null;
+        }
 
     }
 }

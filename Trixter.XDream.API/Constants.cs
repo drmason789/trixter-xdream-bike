@@ -13,6 +13,7 @@
         public const int MinBrake = 135; // full on
 
         public const int MaxSteering = 255; // right
+        public const int MidSteering = (MaxSteering+MinSteering)>>1;
         public const int MinSteering = 0; // left
              
 

@@ -88,7 +88,7 @@ namespace Trixter.XDream.API
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.Disconnect();
 
