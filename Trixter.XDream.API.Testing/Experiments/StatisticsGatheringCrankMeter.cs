@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Experiments
 {
     /// <summary>
     /// Experimental class to establish a relationship between the raw crank time value that comes from the 

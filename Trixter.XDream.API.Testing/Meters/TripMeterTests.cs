@@ -17,7 +17,7 @@ namespace Trixter.XDream.API.Testing
             ITripMeter tm = new TripMeter(fwm, cm);
 
             var inputMessages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
-            var statistics = new Statistics();
+            var statistics = new Experiments.Statistics();
             DateTimeOffset last = DateTimeOffset.MinValue, t0=inputMessages[0].TimeStamp;
             List<string> logs = new List<string>(inputMessages.Length);
 

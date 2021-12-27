@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Experiments
 {
     [DebuggerDisplay("N:{N} Sum:{Sum} Mean:{Mean} Var:{Variance} StdDev:{StandardDeviation}")]
     public class Statistics

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Experiments
 {
 
     /// <summary>

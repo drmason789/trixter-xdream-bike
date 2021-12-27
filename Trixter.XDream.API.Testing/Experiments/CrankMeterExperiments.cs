@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Experiments
 {
     [TestFixture]
-    public class Experiments
+    public class CrankMeterExperiments
     {
         [Explicit]
         [Test]
