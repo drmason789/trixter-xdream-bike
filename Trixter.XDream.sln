@@ -15,8 +15,6 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Trixter.XDream.Installer", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{67EB8205-A989-4ED8-8032-4C36AF9F4685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trixter.XDream.Controller", "Trixter.XDream.Controller\Trixter.XDream.Controller.csproj", "{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,14 +63,6 @@ Global
 		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|Any CPU.Build.0 = Release|x86
 		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x86.ActiveCfg = Release|x86
 		{CF7DF41D-757D-4AA1-8B98-046730D0FACC}.Release|x86.Build.0 = Release|x86
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Debug|x86.Build.0 = Debug|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x86.ActiveCfg = Release|Any CPU
-		{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
