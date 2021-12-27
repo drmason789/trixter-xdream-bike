@@ -87,17 +87,15 @@ namespace Trixter.XDream.UI
                 if (this.InvokeRequired)
                 {
                     Monitor.Exit(this.sync);
-
                     try
                     {
                         this.Invoke(new MethodInvoker(() => this.Update(sender, message)));
                     }
-                    catch (ObjectDisposedException)
+                    catch(ObjectDisposedException)
                     {
                         // TODO: refactor so this doesn't happen
                         // Checking for (!this.IsDisposed && !this.Disposing) is not enough.
                     }
-
                     return;
                 }
 

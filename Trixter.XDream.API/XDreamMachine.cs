@@ -1,8 +1,10 @@
-﻿namespace Trixter.XDream.API
+﻿using System;
+
+namespace Trixter.XDream.API
 {
 
 #pragma warning disable IDE1006 // Naming Styles
-    public interface XDreamMachine
+    public interface XDreamMachine : IDisposable
 #pragma warning restore IDE1006 // Naming Styles
     {
         event XDreamStateUpdatedDelegate<XDreamMachine> StateUpdated;

@@ -59,9 +59,9 @@ namespace Trixter.XDream.API
             this.DataSource.StateUpdated += DataSource_StateUpdated;
 
             this.queueProcessor = new BackgroundWorker();
+            this.queueProcessor.WorkerSupportsCancellation = true;
             this.queueProcessor.DoWork += QueueProcessor_DoWork;
             this.queueProcessor.RunWorkerAsync();
-            
         }
 
         private void QueueProcessor_DoWork(object sender, DoWorkEventArgs e)
@@ -93,8 +93,17 @@ namespace Trixter.XDream.API
         
         public void Dispose()
         {
-            this.queueProcessor?.Dispose();
-            this.queueProcessor = null;
+            if (this.queueProcessor != null)
+            {
+                this.queueProcessor.CancelAsync();
+
+                // wait a few ms for the processing to stop
+                for (DateTimeOffset start = DateTimeOffset.Now;
+                    this.queueProcessor.CancellationPending && DateTimeOffset.Now.Subtract(start).TotalMilliseconds < 500;) { }
+
+                this.queueProcessor.Dispose();
+                this.queueProcessor = null;
+            }
         }
        
 
