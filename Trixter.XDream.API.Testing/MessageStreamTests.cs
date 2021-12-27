@@ -17,7 +17,7 @@ namespace Trixter.XDream.API.Testing
         /// <returns></returns>
         public static XDreamState [] GetStates(byte[] bytes, Func<DateTimeOffset> getTimestamp)
         {
-            PacketStateMachine psm = new PacketStateMachine();
+            PacketStateMachine psm = new PacketStateMachine(XDreamMessage.MessageSize);
 
             List<byte[]> packets = new List<byte[]>();
             List<DateTimeOffset> timestamps = new List<DateTimeOffset>();

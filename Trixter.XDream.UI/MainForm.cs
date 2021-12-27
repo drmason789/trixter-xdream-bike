@@ -35,10 +35,10 @@ namespace Trixter.XDream.UI
 
             if(this.lastMessage!=null && this.cbApplyBrakes.Checked)
             {
-                brake = (int)(0.5+( 2* Constants.MaxBrake - this.lastMessage.LeftBrake - this.lastMessage.RightBrake) * scale * XDreamSerialPort.MaxResistance / 2);
+                brake = (int)(0.5+( 2* Constants.MaxBrake - this.lastMessage.LeftBrake - this.lastMessage.RightBrake) * scale * XDreamSerialPortClient.MaxResistance / 2);
             }
 
-            return Math.Max(0,Math.Min(XDreamSerialPort.MaxResistance, result + brake));
+            return Math.Max(0,Math.Min(XDreamSerialPortClient.MaxResistance, result + brake));
 
         }
 
@@ -156,7 +156,7 @@ namespace Trixter.XDream.UI
 
                 try
                 {
-                    (this.xdreamMachine.DataSource as XDreamSerialPort).Connect(port);
+                    (this.xdreamMachine.DataSource as XDreamSerialPortClient).Connect(port);
                     this.cbPorts.Enabled = false;
                     this.bnConnect.Enabled = false;
                     this.bnDisconnect.Enabled = true;
@@ -178,7 +178,7 @@ namespace Trixter.XDream.UI
             this.cbPorts.Items.Clear();
             this.cbPorts.Items.AddRange(comPorts);
 
-            var bikePort = XDreamSerialPort.FindPorts(comPorts).FirstOrDefault();
+            var bikePort = XDreamSerialPortClient.FindPorts(comPorts).FirstOrDefault();
             if (bikePort != null)
                 this.cbPorts.SelectedItem = bikePort;
             else if (comPorts.Length > 0)
@@ -194,7 +194,7 @@ namespace Trixter.XDream.UI
             {
                 if (this.xdreamMachine != null)
                 {
-                    using (XDreamSerialPort port = this.xdreamMachine.DataSource as XDreamSerialPort)
+                    using (XDreamSerialPortClient port = this.xdreamMachine.DataSource as XDreamSerialPortClient)
                         port.Disconnect();
 
                     this.xdreamMachine = null;

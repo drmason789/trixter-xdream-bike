@@ -49,7 +49,7 @@ namespace Trixter.XDream.API.Testing
 
         private void TestPacketStateMachine(string text, string expected)
         {
-            PacketStateMachine psm = new PacketStateMachine();
+            PacketStateMachine psm = new PacketStateMachine(XDreamMessage.MessageSize);
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach(char c in text)

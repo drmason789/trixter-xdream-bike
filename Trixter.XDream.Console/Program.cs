@@ -22,7 +22,7 @@ namespace Trixter.XDream.Console
 
         static int Main(string[] args)
         {
-            comPort = XDreamSerialPort.FindPorts().FirstOrDefault();
+            comPort = XDreamSerialPortClient.FindPorts().FirstOrDefault();
 
             if (string.IsNullOrEmpty(comPort))
             {
@@ -30,7 +30,7 @@ namespace Trixter.XDream.Console
                 return 1;
             }
 
-            using (XDreamSerialPort port = new XDreamSerialPort())
+            using (XDreamSerialPortClient port = new XDreamSerialPortClient())
             {
                 XDreamMachine xdm = XDreamBikeFactory.CreatePremium(port);
 
@@ -127,7 +127,7 @@ namespace Trixter.XDream.Console
                 sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
-                sb.AppendLine($"Resistance        : {sender.Resistance} / {XDreamSerialPort.MaxResistance}");
+                sb.AppendLine($"Resistance        : {sender.Resistance} / {XDreamSerialPortClient.MaxResistance}");
 
                 System.Console.Clear();
                 System.Console.WriteLine(sb.ToString());

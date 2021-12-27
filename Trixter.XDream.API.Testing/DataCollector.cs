@@ -53,7 +53,7 @@ namespace Trixter.XDream.API.Testing
 
             List<XDreamState> messages = new List<XDreamState>();
 
-            using (var xbc = new XDreamSerialPort())
+            using (var xbc = new XDreamSerialPortClient())
             {
                 xbc.StateUpdated += (s, m) => { messages.Add(m); }; ;
                 xbc.Connect(defaultPort);

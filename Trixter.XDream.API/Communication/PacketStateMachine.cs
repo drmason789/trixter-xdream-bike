@@ -19,6 +19,8 @@ namespace Trixter.XDream.API
         int nextPossiblePacketHeader = 0;
         State state = State.HeaderChar0;
         byte[] lastPacket=null;
+        string header;
+        private int messageSize;
 
         public byte[] LastPacket
         {
@@ -26,7 +28,7 @@ namespace Trixter.XDream.API
             {
                 if (this.lastPacket == null)
                     return null;
-                if (this.lastPacket.Length == XDreamMessage.MessageSize)
+                if (this.lastPacket.Length == this.messageSize)
                 {
                     string packet = new string(this.lastPacket.Select(b=>(char)b).ToArray());
                     byte[] newArray = new byte[this.lastPacket.Length / 2];
@@ -38,6 +40,19 @@ namespace Trixter.XDream.API
             }
         }
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="messageSize">The length of the text for the incoming package.</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public PacketStateMachine(int messageSize)
+        {
+            if (messageSize <= 2)
+                throw new ArgumentOutOfRangeException(nameof(messageSize));                       
+
+            this.messageSize = messageSize;
+            this.header = XDreamSerialData.MessageHeaderText;
+        }
 
         public void Reset()
         {
@@ -51,7 +66,7 @@ namespace Trixter.XDream.API
             if (this.state == State.HeaderChar0)
             {
                 // Looking for the first character of
-                if(b==XDreamMessage.MessageHeader[0])
+                if(b==this.header[0])
                 {
                     this.state = State.HeaderChar1;
                     this.bytes.Add(b);
@@ -62,7 +77,7 @@ namespace Trixter.XDream.API
 
             if(state==State.HeaderChar1)
             {
-                if(b== XDreamMessage.MessageHeader[1])
+                if(b== this.header[1])
                 {
                     this.state = State.Body;
                     this.bytes.Add(b);
@@ -76,12 +91,12 @@ namespace Trixter.XDream.API
             if(state==State.Body)
             {
                 this.bytes.Add(b);
-                if (this.bytes.Count>= XDreamMessage.MessageSize)
+                if (this.bytes.Count>= this.messageSize)
                 {
                     this.state = State.NextHeaderChar0;
                 }
 
-                if (this.nextPossiblePacketHeader ==0 && this.bytes[this.bytes.Count - 1] == XDreamMessage.MessageHeader[1] && this.bytes[this.bytes.Count - 2] == XDreamMessage.MessageHeader[0])
+                if (this.nextPossiblePacketHeader ==0 && this.bytes[this.bytes.Count - 1] == this.header[1] && this.bytes[this.bytes.Count - 2] == this.header[0])
                     this.nextPossiblePacketHeader = this.bytes.Count - 2;
 
                 return PacketState.Incomplete;
@@ -90,7 +105,7 @@ namespace Trixter.XDream.API
             if(state==State.NextHeaderChar0)
             {
                 this.bytes.Add(b);
-                if (b == XDreamMessage.MessageHeader[0])
+                if (b == this.header[0])
                 {
                     this.state = State.NextHeaderChar1;
                     return PacketState.Incomplete;
@@ -104,9 +119,9 @@ namespace Trixter.XDream.API
             if (state == State.NextHeaderChar1)
             {
                 this.bytes.Add(b);
-                if (b == XDreamMessage.MessageHeader[1])
+                if (b == this.header[1])
                 {
-                    this.lastPacket = this.bytes.Take(XDreamMessage.MessageSize).ToArray();
+                    this.lastPacket = this.bytes.Take(this.messageSize).ToArray();
                     this.nextPossiblePacketHeader = this.bytes.Count - 2;
                     this.NextHeader();
                     return PacketState.Complete;
