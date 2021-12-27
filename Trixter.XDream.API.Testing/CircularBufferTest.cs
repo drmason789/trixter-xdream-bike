@@ -1,11 +1,13 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace Trixter.XDream.API.Testing
 {
     [TestFixture]
     public class CircularBufferTest
     {
+
         [Test]
         public void TestAdd()
         {
@@ -66,7 +68,58 @@ namespace Trixter.XDream.API.Testing
             buffer.RemoveTail();
 
             Assert.AreEqual(0, buffer.Count);
+
+            this.TestExceptions(buffer);
         }
+
+        [Test]
+        public void Clear()
+        {
+            const int initialCapacity = 3, delta = 2;
+            CircularBuffer<int> buffer = new CircularBuffer<int>(initialCapacity, delta);
+
+            Assert.AreEqual(initialCapacity, buffer.Capacity);
+
+            // Fill the buffer
+            buffer.AddRange(1, 2, 3);
+            CollectionAssert.AreEqual(new[] { 1, 2, 3 }, buffer);
+
+            // Clear it
+            buffer.Clear();
+
+            // Check there's nothing in it...
+            Assert.AreEqual(0, buffer.Count);
+
+            // and it still works
+            CollectionAssert.AreEqual(new int[] { }, buffer);
+            Assert.AreEqual(3, buffer.Capacity);
+
+            buffer.Add(1);
+            Assert.AreEqual(1, buffer.Count);
+            Assert.AreEqual(1, buffer.Tail);
+            Assert.AreEqual(1, buffer.Head);
+            Assert.AreEqual(3, buffer.Capacity);
+
+
+            buffer.RemoveTail();
+            Assert.AreEqual(0, buffer.Count);
+            Assert.AreEqual(3, buffer.Capacity);
+
+            this.TestExceptions(buffer);
+        }
+
+        /// <summary>
+        /// Test that an empty buffer throws the expected exceptions.
+        /// </summary>
+        /// <param name="emptyBuffer"></param>
+        public void TestExceptions(CircularBuffer<int> emptyBuffer)
+        {
+            Assert.AreEqual(0, emptyBuffer.Count);
+            Assert.Throws<InvalidOperationException>(() => { int x=emptyBuffer.Head; });
+            Assert.Throws<InvalidOperationException>(() => { int x = emptyBuffer.Tail; });
+            Assert.Throws<InvalidOperationException>(() => emptyBuffer.RemoveTail());
+        }
+
 
         [Test]
         public void TestEnumerator()

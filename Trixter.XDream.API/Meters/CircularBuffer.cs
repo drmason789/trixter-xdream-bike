@@ -1,9 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Trixter.XDream.API
 {
+    /// <summary>
+    /// A FILO buffer, allowing a client to put items on the front (head), and take them off the back (tail). 
+    /// A queue-stack hybrid: push like a stack, dequeue like a queue. Uses a circular buffer internally, 
+    /// moving the head and tail indexes rather than the items themselves. Automatically expands if an item
+    /// is added beyond its current capacity.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    [DebuggerDisplay("Count = {Count}")]
     public class CircularBuffer<T> : IEnumerable<T>
     {
         private T[] buffer;
@@ -11,7 +20,7 @@ namespace Trixter.XDream.API
         private int tail = -1;
         private int head = -1;
         private int delta;
-
+        
         /// <summary>
         /// Throws an <see cref="InvalidOperationException"/> if the buffer is empty.
         /// Used interally to provide a consistent exception and message for this error.
@@ -74,6 +83,23 @@ namespace Trixter.XDream.API
         /// <param name="value"></param>
         /// <returns></returns>
         private int Increment(int value) => (value + 1) % this.buffer.Length;
+
+        /// <summary>
+        /// Clear the specified elements. Not strictly necessary but when debugging it is easier to see
+        /// the current content when old content is not there.
+        /// </summary>
+        /// <param name="from">First bound. Can be after the second bound.</param>
+        /// <param name="to">Second bound. Can be before the first bound.</param>
+        private void ClearBuffer(int from, int to)
+        {
+            if (from == to)
+                this.buffer[from] = default(T);
+            else
+            {
+                int start = Math.Min(from, to), end = Math.Max(from, to);
+                Array.Clear(this.buffer, start, end - start + 1);
+            }
+        }
 
         /// <summary>
         /// Add the item to the head.
@@ -149,9 +175,7 @@ namespace Trixter.XDream.API
             if (this.tail == -1)
                 throw GetBufferEmptyException();
 
-            // not strictly necessary but it is easier to see the current content when debugging
-            // if the removed data has actually been removed.
-            this.buffer[this.tail] = default(T);
+            this.ClearBuffer(this.tail, this.tail);
 
             if (this.tail == this.head)
                 this.tail = this.head = -1;
@@ -193,6 +217,10 @@ namespace Trixter.XDream.API
         /// </summary>
         public void Clear()
         {
+            if (this.Count == 0)
+                return;
+
+            this.ClearBuffer(this.tail, this.head);
             this.tail = this.head = -1;
             this.Count = 0;
         }
