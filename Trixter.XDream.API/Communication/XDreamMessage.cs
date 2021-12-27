@@ -25,7 +25,7 @@ namespace Trixter.XDream.API
          * (0C) Flywheel Revolution Time (high byte) ---------------------+  |  |  |
          * (0D) Flywheel Revolution Time (low byte) -------------------------+  |  |
          * (0E) Heart rate (BPM) -----------------------------------------------+  |
-         * (0F) Unknown -----------------------------------------------------------+
+         * (0F) XOR of 00..0E------------------------------------------------------+
          */
         internal const int MessageSize = 32;
         
@@ -103,18 +103,6 @@ namespace Trixter.XDream.API
 
         public int HeartRate => (int)this.rawInput[14];
 
-        #region Unknown values
-        public int Other2 => (int)this.rawInput[2];
-        public int Other6 => (int)this.rawInput[6];
-        public int Other7 => (int)this.rawInput[7];
-
-        /// <summary>
-        /// Unknown from last byte, seems to change with most inputs.
-        /// Perhaps a change type indicator?
-        /// </summary>
-        public int Other15 => (int)this.rawInput[15];
-        #endregion
-
         internal static byte[] GetDataPacket(XDreamState state)
         {
             if (state == null)
@@ -127,12 +115,12 @@ namespace Trixter.XDream.API
 
             result[0x00] = 0x6a;
             result[0x01] = (byte)state.Steering;
-            result[0x02] = (byte)state.Other2;
+            result[0x02] = 128;
             result[0x03] = (byte)state.CrankPosition;
             result[0x04] = (byte)state.RightBrake;
             result[0x05] = (byte)state.LeftBrake;
-            result[0x06] = (byte)state.Other6;
-            result[0x07] = (byte)state.Other7;
+            result[0x06] = 255;
+            result[0x07] = 255;
 
             int notButtons = ~(int)state.Buttons;            
 
@@ -143,7 +131,7 @@ namespace Trixter.XDream.API
             result[0x0C] = (byte)(state.Flywheel >> 8);
             result[0x0D] = (byte)(state.Flywheel & 0xFF);
             result[0x0E] = (byte)state.HeartRate;
-            result[0x0F] = 0; // TODO: work out what this field is.
+            result[0x0F] = result.Take(0x0E).Aggregate((a, b) => (byte)(a ^ b));
 
             return result;
         }

@@ -19,11 +19,7 @@ namespace Trixter.XDream.API
         bool Green { get; }
         int HeartRate { get; }
         bool LeftArrow { get; }
-        int LeftBrake { get; }
-        int Other15 { get; }
-        int Other2 { get; }
-        int Other6 { get; }
-        int Other7 { get; }
+        int LeftBrake { get; }        
         bool Red { get; }
         bool RightArrow { get; }
         int RightBrake { get; }
@@ -31,5 +27,8 @@ namespace Trixter.XDream.API
         int Steering { get; }
         DateTimeOffset TimeStamp { get; }
         bool UpArrow { get; }
+
+        
     }
+
 }

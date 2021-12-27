@@ -21,7 +21,7 @@ namespace Trixter.XDream.API.Testing.Experiments
             // Note to developer: configure these temporarily to suit your local setup and goal
             string defaultPort = "COM2";
             string outputFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "flywheel-spindown.messages.bin");
-            
+
             // --------------------------------------------------------------------------------------------------------------------------
 
             List<XDreamState> messages = new List<XDreamState>();
@@ -77,18 +77,18 @@ namespace Trixter.XDream.API.Testing.Experiments
             List<KeyValuePair<double, int>> changes = new List<KeyValuePair<double, int>>();
 
 
-            foreach(var message in messages.Skip(1))
+            foreach (var message in messages.Skip(1))
             {
-                if(message.Flywheel!=last.Flywheel)
+                if (message.Flywheel != last.Flywheel)
                 {
                     changes.Add(new KeyValuePair<double, int>(message.TimeStamp.Subtract(t0).TotalMilliseconds, message.Flywheel));
                 }
 
                 last = message;
             }
-                       
 
-            for(int i=1; i<changes.Count; i++)
+
+            for (int i = 1; i < changes.Count; i++)
             {
                 double dt = changes[i].Key - changes[i - 1].Key;
                 double rpm = 60000d / dt;
@@ -99,4 +99,5 @@ namespace Trixter.XDream.API.Testing.Experiments
         }
 
     }
+
 }

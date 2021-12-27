@@ -165,7 +165,7 @@ namespace Trixter.XDream.API.Testing
             Random random = new Random();
             DateTimeOffset t = DateTimeOffset.UtcNow;
             Func<DateTimeOffset> getTimestamp = () => t = t.AddMilliseconds(11d + (1d - 2 * random.NextDouble()));
-            var states = MessageStreamTests.GetStates(Resources.input, getTimestamp);
+            var states = XDreamMessageIO.GetStates(Resources.input, getTimestamp);
             List<XDreamStateChangeEventArgs> stateChanges = new List<XDreamStateChangeEventArgs>();
 
             XDreamStateMonitor monitor = new XDreamStateMonitor();

@@ -126,11 +126,6 @@ namespace Trixter.XDream.UI
                 this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
                 this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
 
-                this.lbOther2.Text = message.Other2.ToString();
-                this.lbOther6.Text = message.Other6.ToString();
-                this.lbOther7.Text = message.Other7.ToString();
-                this.lbOther15.Text = message.Other15.ToString();
-
                 this.clbButtons.SetItemChecked(0, message.FrontGearUp);
                 this.clbButtons.SetItemChecked(1, message.FrontGearDown);
                 this.clbButtons.SetItemChecked(2, message.BackGearUp);
@@ -208,6 +203,7 @@ namespace Trixter.XDream.UI
 
                     this.cbPorts.Enabled = true;
                     this.bnConnect.Enabled = true;
+                    this.bnDisconnect.Enabled = false;
                     this.gbInput.Enabled = false;
                     this.gbOutput.Enabled = false;
                     this.bnRefreshPorts.Enabled = true;

@@ -13,15 +13,10 @@ namespace Trixter.XDream.API
         private int flywheel = Constants.MaxFlywheelReading;
         private int heartRate = 0;
         private int leftBrake = Constants.MaxBrake;
-        private int other15;
-        private int other2;
-        private int other6;
-        private int other7;
         private int rightBrake = Constants.MaxBrake;
         private int steering = Constants.MidSteering;
         private DateTimeOffset timeStamp;
         
-
         private bool HasButton(XDreamControllerButtons which) => (this.Buttons & which) == which;
         private void SetButton(XDreamControllerButtons which, bool value)
         {
@@ -150,14 +145,6 @@ namespace Trixter.XDream.API
                 this.leftBrake = value;
             }
         }
-
-        public int Other15 { get => other15; set { this.other15 = value; } }
-
-        public int Other2 { get => other2; set { this.other2 = value; } }
-
-        public int Other6 { get => other6; set { this.other6 = value; } }
-
-        public int Other7 { get => other7; set { this.other7 = value; } }
 
         public int RightBrake
         { 

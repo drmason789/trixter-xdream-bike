@@ -27,7 +27,7 @@ namespace Trixter.XDream.API.Testing
             Assert.NotNull(GetPortPair(), "The virtual COM port pair is not configured.\r\n" +
                 "Install com0com and run the " + nameof(InstallPorts) + " \"test\" with Visual Studio elevated to configure it.\r\n" +
                 "After that, the tests don't need to be run elevated to use the port pair.\r\n" +
-                "Run the "+nameof(UninstallPorts)+" \"test\" elevated to remove the port pair");
+                "Run the " + nameof(UninstallPorts) + " \"test\" elevated to remove the port pair");
         }
 
         private static Com0Com.CSharp.CrossoverPortPair GetPortPair(Com0Com.CSharp.Com0ComSetupCFacade setupCFacade=null)
@@ -84,7 +84,7 @@ namespace Trixter.XDream.API.Testing
 
         }
 
-        [Test]
+        [Test, Explicit]
         public void TestXDreamServerWithPortAccessorClient()
         {
             PortAccessor client = new PortAccessor();
@@ -119,7 +119,7 @@ namespace Trixter.XDream.API.Testing
 
         }
 
-        [Test]
+        [Test, Explicit]
         public void TestXDreamClientServer()
         {
             XDreamSerialPortClient client = new XDreamSerialPortClient();

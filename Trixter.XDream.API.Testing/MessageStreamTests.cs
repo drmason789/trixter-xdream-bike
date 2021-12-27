@@ -9,31 +9,7 @@ namespace Trixter.XDream.API.Testing
     public class MessageStreamTests
     {
 
-        /// <summary>
-        /// Convert an array of bytes into an array of XDreamState objects.
-        /// </summary>
-        /// <param name="bytes"></param>
-        /// <param name="getTimestamp"></param>
-        /// <returns></returns>
-        public static XDreamState [] GetStates(byte[] bytes, Func<DateTimeOffset> getTimestamp)
-        {
-            PacketStateMachine psm = new PacketStateMachine();
 
-            List<byte[]> packets = new List<byte[]>();
-            List<DateTimeOffset> timestamps = new List<DateTimeOffset>();
-
-            foreach (byte b in bytes)
-            {
-                if (psm.Add(b) == PacketState.Complete)
-                {
-                    packets.Add(psm.LastPacket);
-                    timestamps.Add(getTimestamp());
-                }
-            }
-            
-            var xbm = packets.Select((p, i) => new XDreamMessage(p, timestamps[i])).ToArray();
-            return xbm;
-        }
 
         /// <summary>
         /// Tests that the <see cref="PacketStateMachine"/> converts the supplied byte array into the expected
@@ -43,7 +19,7 @@ namespace Trixter.XDream.API.Testing
         /// <param name="expectedNumberOfPackets"></param>
         private void TestBytes(byte [] bytes, int expectedNumberOfPackets)
         {
-            var xbm = GetStates(bytes, ()=>DateTimeOffset.UtcNow);
+            var xbm = XDreamMessageIO.GetStates(bytes, ()=>DateTimeOffset.UtcNow);
 
             Assert.AreEqual(expectedNumberOfPackets, xbm.Length);
         }
