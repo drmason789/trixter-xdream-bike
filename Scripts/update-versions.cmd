@@ -39,6 +39,10 @@ echo Updating UI
 call :updatecsproj "..\%txd%.UI\%txd%.UI.csproj"
 %checkError%
 
+echo Updating Test Controller
+call :updatecsproj "..\%txd%.TestController\%txd%.TestController.csproj"
+%checkError%
+
 echo Updating installer project
 call :regexReplace "..\%txd%.Installer\Version.wxi" "%wixVersionRegex%" "%wixVersionReplacement%" utf8
 %checkError%
