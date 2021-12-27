@@ -4,7 +4,6 @@ namespace Trixter.XDream.API
 {
     public abstract class XDreamSerialPortBase : IDisposable
     {
-        public const int MaxResistance = 16;
               
         PortAccessor port;        
         IPacketStateMachine packetStateMachine;

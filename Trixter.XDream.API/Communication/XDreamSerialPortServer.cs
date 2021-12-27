@@ -28,6 +28,8 @@ namespace Trixter.XDream.API
         private XDreamState state;
         private byte[] stateBytes;
 
+        public List<string> packetsReceived = new List<string>();
+
         private System.Timers.Timer resistanceTimer;
 
         public event XDreamResistanceChangedDelegate<XDreamServer> ResistanceChanged;
@@ -85,7 +87,7 @@ namespace Trixter.XDream.API
         {
             if(packet?.Length==XDreamSerialData.ResistancePacketLength)
             {
-                this.Resistance= packet[1]/16;
+                this.Resistance= packet[1];
             }
         }
 

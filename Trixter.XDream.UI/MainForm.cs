@@ -23,7 +23,10 @@ namespace Trixter.XDream.UI
             this.bnDisconnect.Enabled = false;
             
             this.gbInput.Enabled = false;
-            this.gbOutput.Enabled = false;            
+            this.gbOutput.Enabled = false;
+
+            this.vbActualResistance.Maximum = XDreamSerialPortClient.MaxResistance;
+            this.tbResistance.Maximum = XDreamSerialPortClient.MaxResistance;
 
         }
 

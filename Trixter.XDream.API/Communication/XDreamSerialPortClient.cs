@@ -12,7 +12,7 @@ namespace Trixter.XDream.API
     /// </summary>
     public class XDreamSerialPortClient : XDreamSerialPortBase, XDreamClient
     {
-        
+        public const int MaxResistance = XDreamSerialData.MaxResistance;
         public const int ResistancePulseIntervalMilliseconds = 10;
         
         int resistanceLevel = 0;                      
@@ -27,7 +27,7 @@ namespace Trixter.XDream.API
                 if (this.IsDisposed)
                     throw new InvalidOperationException();
 
-                this.resistanceLevel = Math.Min(XDreamSerialData.ResistanceLevels.Length-1, Math.Max(0, value));
+                this.resistanceLevel = Math.Min(XDreamSerialData.ResistanceLevels.Count-1, Math.Max(0, value));
 
                 if (this.resistanceLevel == 0)
                     this.MessageTimerEnabled = false;
