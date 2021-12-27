@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Trixter.XDream.API
 {
-    internal class PacketStateMachine
+    internal class PacketStateMachine : IPacketStateMachine
     {
         private enum State
         {
@@ -21,6 +21,7 @@ namespace Trixter.XDream.API
         byte[] lastPacket=null;
         string header;
         private int messageSize;
+               
 
         public byte[] LastPacket
         {
@@ -43,14 +44,9 @@ namespace Trixter.XDream.API
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="messageSize">The length of the text for the incoming package.</param>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public PacketStateMachine(int messageSize)
+        public PacketStateMachine()
         {
-            if (messageSize <= 2)
-                throw new ArgumentOutOfRangeException(nameof(messageSize));                       
-
-            this.messageSize = messageSize;
+            this.messageSize = XDreamMessage.MessageSize;
             this.header = XDreamSerialData.MessageHeaderText;
         }
 

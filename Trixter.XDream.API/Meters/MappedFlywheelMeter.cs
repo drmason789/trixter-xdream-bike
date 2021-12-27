@@ -5,6 +5,7 @@ namespace Trixter.XDream.API
     public class MappedFlywheelMeter : IFlywheelMeter
     {
         public static readonly Func<int, int> DefaultFlywheelRawToRpm = x => x <= 0 ? int.MaxValue : (x >= 65534 ? 0 : (int)(600000 / x));
+        public static readonly Func<int, int> DefaultFlywheelRpmToRaw = x => x <= 0 ? 65534 : Math.Min(65534, (int)(600000 / x));
 
         private Func<int, int> flywheelRawToRpm;
 

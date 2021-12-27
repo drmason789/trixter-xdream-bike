@@ -41,7 +41,7 @@ namespace Trixter.XDream.API
         protected override void OnPacketReceived(byte[] packet) => this.OnStateUpdated(new XDreamMessage(packet));
         
 
-        public XDreamSerialPortClient() : base(XDreamMessage.MessageSize, ResistancePulseIntervalMilliseconds)
+        public XDreamSerialPortClient() : base(new PacketStateMachine(), ResistancePulseIntervalMilliseconds)
         {
 
         }

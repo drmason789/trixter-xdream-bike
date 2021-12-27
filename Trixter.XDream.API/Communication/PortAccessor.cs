@@ -143,7 +143,14 @@ namespace Trixter.XDream.API
                 if (!this.IsOpen)
                     throw new InvalidOperationException();
 
-                this.serialPort?.Write(bytes, 0, bytes.Length);
+                try
+                {
+                    this.serialPort?.Write(bytes, 0, bytes.Length);
+                }
+                catch (TimeoutException)
+                {
+                    // TODO: work out if this actually matters.
+                }
             }          
 
         }

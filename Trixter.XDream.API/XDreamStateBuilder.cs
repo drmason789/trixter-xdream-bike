@@ -8,17 +8,17 @@ namespace Trixter.XDream.API
     /// </summary>
     public class XDreamStateBuilder : XDreamState
     {
-        private int crank;
-        private int crankPosition;
-        private int flywheel;
-        private int heartRate;
-        private int leftBrake;
+        private int crank = 0;
+        private int crankPosition = CrankPositions.MinCrankPosition;
+        private int flywheel = Constants.MaxFlywheelReading;
+        private int heartRate = 0;
+        private int leftBrake = Constants.MaxBrake;
         private int other15;
         private int other2;
         private int other6;
         private int other7;
-        private int rightBrake;
-        private int steering;
+        private int rightBrake = Constants.MaxBrake;
+        private int steering = (Constants.MaxSteering+Constants.MinSteering) >> 1;
         private DateTimeOffset timeStamp;
         
 

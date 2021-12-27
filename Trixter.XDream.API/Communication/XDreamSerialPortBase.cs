@@ -7,7 +7,7 @@ namespace Trixter.XDream.API
         public const int MaxResistance = 16;
               
         PortAccessor port;        
-        PacketStateMachine packetStateMachine;
+        IPacketStateMachine packetStateMachine;
         System.Timers.Timer messageTimer;
 
         public int MessagePulseIntervalMilliseconds { get; private set; }
@@ -31,10 +31,10 @@ namespace Trixter.XDream.API
         protected virtual void BeforeDisconnect() { }
         protected virtual void AfterConnect() { }
 
-        public XDreamSerialPortBase(int packetTextLength, int messagePulseIntervalMilliseconds)
+        internal XDreamSerialPortBase(IPacketStateMachine packetStateMachine, int messagePulseIntervalMilliseconds)
         {
             this.port = new PortAccessor();
-            this.packetStateMachine = new PacketStateMachine(packetTextLength);
+            this.packetStateMachine = packetStateMachine;
             this.port.DataReceived += PortReader_DataReceived;
 
             this.MessagePulseIntervalMilliseconds = messagePulseIntervalMilliseconds;

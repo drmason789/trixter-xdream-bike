@@ -11,7 +11,7 @@ namespace Trixter.XDream.API
     public class MappedCrankMeter : ICrankMeter
     {
         public static readonly Func<int, int> DefaultMappingRawToRpm = x => x <= 0 ? 0 : (x >= 65534 ? 0 : (int)(1.0d / (6e-6)) / x);
-
+        
         private int[] mapToRpm;
         private DateTimeOffset lastUpdate;
 

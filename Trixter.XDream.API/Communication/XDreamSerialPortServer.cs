@@ -71,7 +71,7 @@ namespace Trixter.XDream.API
         }
 
 
-        public XDreamSerialPortServer() : base(2*XDreamSerialData.ResistancePacketLength, StateUpdatePulseIntervalMilliseconds)
+        public XDreamSerialPortServer() : base(new ResistancePacketStateMachine(), StateUpdatePulseIntervalMilliseconds)
         {
 
         }
