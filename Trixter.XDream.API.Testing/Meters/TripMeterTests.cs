@@ -49,7 +49,7 @@ namespace Trixter.XDream.API.Testing
 
 
             Assert.AreEqual(19, Math.Round(tm.CrankRevolutions, 0, MidpointRounding.AwayFromZero));
-            Assert.AreEqual(253, Math.Round(tm.FlywheelRevolutions,0,MidpointRounding.AwayFromZero));
+            Assert.AreEqual(243, Math.Round(tm.FlywheelRevolutions,0,MidpointRounding.AwayFromZero));
         }
 
         [Test]
@@ -71,8 +71,8 @@ namespace Trixter.XDream.API.Testing
             // Wait for the asynchronous message processing to catch up.
             Thread.Sleep(1000);
 
-            Assert.AreEqual(199.98, tm.CrankRevolutions);
-            Assert.AreEqual(999.9, tm.FlywheelRevolutions);
+            Assert.AreEqual(199.98m, tm.CrankRevolutions);
+            Assert.AreEqual(959.904m, tm.FlywheelRevolutions);
 
         }
     }
