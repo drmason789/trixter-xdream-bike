@@ -117,8 +117,12 @@ namespace Trixter.XDream.API.Testing.Generators
 
             Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = CrankPositions.MinCrankPosition - 1; });
             Assert.Throws<ArgumentOutOfRangeException>(() => { c.CrankPosition = CrankPositions.MaxCrankPosition + 1; });
+            Assert.DoesNotThrow(() => { c.CrankPosition = CrankPositions.MaxCrankPosition; });
+            Assert.DoesNotThrow(() => { c.CrankPosition = CrankPositions.MinCrankPosition; });
             Assert.Throws<ArgumentOutOfRangeException>(() => c.RPM = -1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => c.RPM = AutoCranker.MaxRPM);
+            Assert.Throws<ArgumentOutOfRangeException>(() => c.RPM = AutoCranker.MaxRPM + 1);
+            Assert.DoesNotThrow(() => c.RPM = 0);
+            Assert.DoesNotThrow(() => c.RPM = AutoCranker.MaxRPM);
         }
 
     }
