@@ -36,7 +36,7 @@ So far the improvements over the original are:
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-In addition to reading and displaying values from the bikem, it also calculates flywheel and crank cumulative revolutions.
+In addition to reading and displaying values from the bike, it also calculates flywheel and crank cumulative revolutions.
 
-![image](https://user-images.githubusercontent.com/29954900/146271821-94389020-e35c-4e8e-8cf3-ab6b4fa3377d.png)
+![image](https://user-images.githubusercontent.com/29954900/147611052-6f039786-b207-4956-9828-129ab35dabfb.png)
 
