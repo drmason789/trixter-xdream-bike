@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Trixter.XDream.Controller
+namespace Trixter.XDream.TestController
 {
     static class Program
     {

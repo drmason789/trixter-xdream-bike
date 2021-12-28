@@ -2,7 +2,7 @@
 using Trixter.XDream.API;
 using Trixter.XDream.API.Generators;
 
-namespace Trixter.XDream.Controller
+namespace Trixter.XDream.TestController
 {
     class Controller
     {

@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using Trixter.XDream.API;
 
-namespace Trixter.XDream.Controller
+namespace Trixter.XDream.TestController
 {
     public partial class ControllerForm : Form
     {
