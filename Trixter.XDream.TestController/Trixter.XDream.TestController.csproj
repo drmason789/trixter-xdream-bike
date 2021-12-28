@@ -53,7 +53,6 @@
     <Compile Include="ControllerForm.Designer.cs">
       <DependentUpon>ControllerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pedaller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ControllerForm.resx">

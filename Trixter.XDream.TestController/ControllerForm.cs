@@ -14,6 +14,7 @@ namespace Trixter.XDream.Controller
         const int MaxBrake = Constants.MaxBrake, MinBrake = Constants.MinBrake;
         Func<int, int> invertBrakeValue = v => MaxBrake - v + MinBrake;
         const int MaxFlywheelRPM = 1000;
+        DateTimeOffset lastCrankPositionInvalidated = DateTimeOffset.MinValue;
 
         public ControllerForm()
         {
@@ -62,10 +63,15 @@ namespace Trixter.XDream.Controller
             this.controller = new Controller();
 
             this.controller.ResistanceChanged += Controller_ResistanceChanged;
-            this.controller.Pedaller.CrankPositionChanged += Pedaller_CrankPositionChanged;
+            this.controller.CrankPositionChanged += Controller_CrankPositionChanged;
 
             this.controller.Connect();
             this.controller.Send();
+
+            this.nudCrankPosition.Paint += (s, e) =>
+            {
+                this.DoWithSuppressedEvents(() => this.nudCrankPosition.Value = this.controller.State.CrankPosition);
+            };
         }
 
         private void DoWithSuppressedEvents(Action action)
@@ -92,7 +98,16 @@ namespace Trixter.XDream.Controller
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(new MethodInvoker(UpdateResistance));
+                try
+                {
+                    this.Invoke(new MethodInvoker(UpdateResistance));
+                }
+                catch (ObjectDisposedException)
+                {
+                    // TODO: refactor so this doesn't happen
+                    // Checking for (!this.IsDisposed && !this.Disposing) is not enough.
+                }
+
                 return;
             }
             this.lbResistanceValue.Text = this.controller.Resistance.ToString();
@@ -189,14 +204,18 @@ namespace Trixter.XDream.Controller
                 int crankTime = MappedCrankMeter.DefaultMappingRpmToRaw(rpm);
                 this.nudCrankRevTime.Value = crankTime;
 
-                this.controller.Pedaller.RPM = rpm;
+                this.controller.CrankRPM = rpm;
 
             });
         }
 
-        private void Pedaller_CrankPositionChanged(Pedaller sender, int newPosition)
+        private void Controller_CrankPositionChanged(Controller sender, int delta)
         {
-            //this.nudCrankPosition.Value = newPosition;
+            if ((DateTimeOffset.Now - this.lastCrankPositionInvalidated).TotalMilliseconds > 10)
+            {
+                this.nudCrankPosition.Invalidate();
+                this.lastCrankPositionInvalidated = DateTimeOffset.Now;
+            }
         }
 
         private void tbFlywheelSpeed_ValueChanged(object sender, System.EventArgs e)
