@@ -11,8 +11,8 @@
     <Authors>David Mason</Authors>
     <Description>Test Controller to emulate a Trixter X-Dream V1 exercise bike.</Description>
     <Copyright>(C) David Mason 2021</Copyright>
-    <AssemblyVersion>1.1.1</AssemblyVersion>
-    <FileVersion>1.1.1</FileVersion>
+    <AssemblyVersion>1.2.0</AssemblyVersion>
+    <FileVersion>1.2.0</FileVersion>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
   </PropertyGroup>
 
