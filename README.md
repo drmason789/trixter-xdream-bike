@@ -28,7 +28,7 @@ So far the improvements over the original are:
 - it calculates flywheel and crank cumulative revolutions.
 - it is maintainable
 
-![image](https://user-images.githubusercontent.com/29954900/146271192-187b01aa-af90-4301-acab-8ea95e26bbd9.png)
+![image](https://user-images.githubusercontent.com/29954900/147611201-be38db34-9844-47ce-9540-2d258ceae498.png)
 
 
 # Trixter.XDream.UI
