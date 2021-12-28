@@ -120,11 +120,10 @@
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="bnRefreshPorts.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAACiSURBVDhPxZK9DYMwEEYtpaBDmSBIdEhUocggGSYTpAkNMEeyXCbge8JIRj7zU/GkJ5/s83HY
-        dmeQ+XGVRvbyK38+vkt4y9sUxlzkIDtZMuEhZo5CrSykCZufU7jgKh/yI//SLEDbfMWikq/AXEbQXtj2
-        YTiwvdR+XHCkgJm79xfmG4lYO8QQcsg1SV3jDGvkJNl6SKyRs0n4lJE42faZODcCK74Y6wvJzTIAAAAA
-        SUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAKJJREFUOE/F
+        kr0NgzAQRi2loEOZIEh0SFShyCAZJhOkCQ0wR7JcJuB7wkhGPvNT8aQnn+zzcdh2Z5D5cZVG9vIrfz6+
+        S3jL2xTGXOQgO1ky4SFmjkKtLKQJm59TuOAqH/Ij/9IsQNt8xaKSr8BcRtBe2PZhOLC91H5ccKSAmbv3
+        F+YbiVg7xBByyDVJXeMMa+Qk2XpIrJGzSfiUkTjZ9pk4NwIrvhjrC8nNMgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
