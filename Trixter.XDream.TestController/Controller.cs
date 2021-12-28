@@ -10,6 +10,8 @@ namespace Trixter.XDream.Controller
 
         public int Resistance { get; private set; } = 0;
 
+        public Pedaller Pedaller { get; private set; }
+
         public event XDreamResistanceChangedDelegate<Controller> ResistanceChanged;
         
 
@@ -22,7 +24,16 @@ namespace Trixter.XDream.Controller
             this.State.Flywheel = 65534;
             this.server = new XDreamSerialPortServer();
             this.server.ResistanceChanged += Server_ResistanceChanged;
+            this.Pedaller = new Pedaller();
+            this.Pedaller.CrankPositionChanged += Pedaller_CrankPositionChanged;
             
+        }
+
+        private void Pedaller_CrankPositionChanged(Pedaller sender, int newPosition)
+        {
+            this.State.Crank = sender.CrankTime;
+            this.State.CrankPosition = sender.CrankPosition;
+            this.Send();
         }
 
         private void Server_ResistanceChanged(XDreamServer sender)

@@ -9,7 +9,7 @@ namespace Trixter.XDream.Controller
     {
 
         Controller controller;
-        
+
         bool suppressEvents = false;
         const int MaxBrake = Constants.MaxBrake, MinBrake = Constants.MinBrake;
         Func<int, int> invertBrakeValue = v => MaxBrake - v + MinBrake;
@@ -62,6 +62,7 @@ namespace Trixter.XDream.Controller
             this.controller = new Controller();
 
             this.controller.ResistanceChanged += Controller_ResistanceChanged;
+            this.controller.Pedaller.CrankPositionChanged += Pedaller_CrankPositionChanged;
 
             this.controller.Connect();
             this.controller.Send();
@@ -155,17 +156,47 @@ namespace Trixter.XDream.Controller
 
         private void bnButton_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Space || e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter)
                 bnButton_Pressed(sender, null);
         }
 
         private void tbSteering_MouseUp(object sender, MouseEventArgs e)
         {
+            this.tbSteering.Value = Constants.MidSteering;
+
+        }
+
+        private void tbCrankSpeed_ValueChanged(object sender, System.EventArgs e)
+        {
             this.DoWithSuppressedEvents(() =>
             {
-                this.suppressEvents = true;
-                this.tbSteering.Value = Constants.MidSteering;
+                int rpm;
+
+                if (sender == this.tbCrankSpeed)
+                {
+                    rpm = this.tbCrankSpeed.Value;
+                    this.nudCrankRPM.Value = rpm;
+
+                }
+                else if (sender == this.nudCrankRPM)
+                {
+                    rpm = (int)this.nudCrankRPM.Value;
+                    this.tbCrankSpeed.Value = rpm;
+                }
+                else
+                    throw new Exception("Unexpected sender.");
+
+                int crankTime = MappedCrankMeter.DefaultMappingRpmToRaw(rpm);
+                this.nudCrankRevTime.Value = crankTime;
+
+                this.controller.Pedaller.RPM = rpm;
+
             });
+        }
+
+        private void Pedaller_CrankPositionChanged(Pedaller sender, int newPosition)
+        {
+            //this.nudCrankPosition.Value = newPosition;
         }
 
         private void tbFlywheelSpeed_ValueChanged(object sender, System.EventArgs e)
@@ -194,7 +225,7 @@ namespace Trixter.XDream.Controller
                 this.controller.State.Flywheel = flywheelTime;
                 this.controller.Send();
 
-            });            
+            });
         }
 
         private void nudFlywheelRevTime_ValueChanged(object sender, System.EventArgs e)
@@ -212,17 +243,8 @@ namespace Trixter.XDream.Controller
 
         private void Brake_MouseUp(object sender, MouseEventArgs e)
         {
-            this.DoWithSuppressedEvents(() => 
-            {
-                int releaseBrake = MaxBrake;
-                this.tbLeftBrake.Value = invertBrakeValue(releaseBrake);
-                this.tbBothBrakes.Value = this.tbLeftBrake.Value;
-                this.tbRightBrake.Value = this.tbLeftBrake.Value;
-                this.nudLeftBrake.Value = releaseBrake;
-                this.nudRightBrake.Value = releaseBrake;
-            });
+            ((TrackBar)sender).Value = invertBrakeValue(MaxBrake);
         }
-           
 
         private void Brake_ValueChanged(object sender, EventArgs e)
         {
