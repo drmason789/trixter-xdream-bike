@@ -14,21 +14,21 @@ Help with the X-Dream mountain biking simulation software itself can be found in
 
 # Trixer.XDream.API
 
-A .NET Standard 2.0 client API which provides classes to read status from and send resistance to a Trixter V1 X-Dream Bike.
+A .NET Standard 2.0 client API which provides classes to:
+- read status from and send resistance to a Trixter V1 X-Dream Bike.
+- emulate a Trixter V1 X-Dream Bike.
 
 # Trixter.XDream.Console
 
 A replacement for the test application supplied with the X-Dream software.
 
-So far the only improvements over the original are:
+So far the improvements over the original are:
 - it detects the COM port the bike is on
+- it detects backpedalling and shows the crank RPM in the backwards direction
+- it calculates flywheel and crank cumulative revolutions.
 - it is maintainable
 
-It needs to catch up (hopefully it will with support from the community):
-- power calculation
-- resistance increments
-
-![image](https://user-images.githubusercontent.com/29954900/146271192-187b01aa-af90-4301-acab-8ea95e26bbd9.png)
+![image](https://user-images.githubusercontent.com/29954900/147611201-be38db34-9844-47ce-9540-2d258ceae498.png)
 
 
 # Trixter.XDream.UI
@@ -36,5 +36,7 @@ It needs to catch up (hopefully it will with support from the community):
 A graphic user interface showing the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/146271821-94389020-e35c-4e8e-8cf3-ab6b4fa3377d.png)
+In addition to reading and displaying values from the bike, it also calculates flywheel and crank cumulative revolutions.
+
+![image](https://user-images.githubusercontent.com/29954900/147611052-6f039786-b207-4956-9828-129ab35dabfb.png)
 
