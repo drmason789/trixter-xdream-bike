@@ -265,6 +265,24 @@ namespace Trixter.XDream.TestController
             ((TrackBar)sender).Value = invertBrakeValue(MaxBrake);
         }
 
+        private void bnGamePad_Click(object sender, EventArgs e)
+        {
+            this.controller.ResistanceChanged -= Controller_ResistanceChanged;
+            this.controller.CrankPositionChanged -= Controller_CrankPositionChanged;
+            
+            try
+            {
+                var gp = new GamePadForm();
+                gp.Controller = this.controller;
+                gp.ShowDialog();
+            }
+            finally
+            {
+                this.controller.ResistanceChanged += Controller_ResistanceChanged;
+                this.controller.CrankPositionChanged += Controller_CrankPositionChanged;
+            }
+        }
+
         private void Brake_ValueChanged(object sender, EventArgs e)
         {
             this.DoWithSuppressedEvents(() =>

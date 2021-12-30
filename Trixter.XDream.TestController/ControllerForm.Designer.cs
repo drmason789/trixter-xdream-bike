@@ -45,6 +45,12 @@ namespace Trixter.XDream.TestController
             this.bnRightGearDown = new System.Windows.Forms.Button();
             this.bnRightGearUp = new System.Windows.Forms.Button();
             this.gbControls = new System.Windows.Forms.GroupBox();
+            this.bnGamePad = new System.Windows.Forms.Button();
+            this.lbBothBrakes = new System.Windows.Forms.Label();
+            this.lbRightBrake = new System.Windows.Forms.Label();
+            this.lbLeftBrake = new System.Windows.Forms.Label();
+            this.lbRightGears = new System.Windows.Forms.Label();
+            this.lbLeftGears = new System.Windows.Forms.Label();
             this.nudLeftBrake = new System.Windows.Forms.NumericUpDown();
             this.nudRightBrake = new System.Windows.Forms.NumericUpDown();
             this.tbBothBrakes = new System.Windows.Forms.TrackBar();
@@ -66,11 +72,6 @@ namespace Trixter.XDream.TestController
             this.nudCrankRPM = new System.Windows.Forms.NumericUpDown();
             this.tbCrankSpeed = new System.Windows.Forms.TrackBar();
             this.nudCrankRevTime = new System.Windows.Forms.NumericUpDown();
-            this.lbLeftGears = new System.Windows.Forms.Label();
-            this.lbRightGears = new System.Windows.Forms.Label();
-            this.lbRightBrake = new System.Windows.Forms.Label();
-            this.lbLeftBrake = new System.Windows.Forms.Label();
-            this.lbBothBrakes = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
             this.gbControls.SuspendLayout();
@@ -276,6 +277,7 @@ namespace Trixter.XDream.TestController
             // 
             // gbControls
             // 
+            this.gbControls.Controls.Add(this.bnGamePad);
             this.gbControls.Controls.Add(this.lbBothBrakes);
             this.gbControls.Controls.Add(this.lbRightBrake);
             this.gbControls.Controls.Add(this.lbLeftBrake);
@@ -305,6 +307,64 @@ namespace Trixter.XDream.TestController
             this.gbControls.TabIndex = 14;
             this.gbControls.TabStop = false;
             this.gbControls.Text = "Controls";
+            // 
+            // bnGamePad
+            // 
+            this.bnGamePad.Location = new System.Drawing.Point(6, 239);
+            this.bnGamePad.Name = "bnGamePad";
+            this.bnGamePad.Size = new System.Drawing.Size(67, 26);
+            this.bnGamePad.TabIndex = 24;
+            this.bnGamePad.Text = "Gamepad";
+            this.bnGamePad.UseVisualStyleBackColor = true;
+            this.bnGamePad.Click += new System.EventHandler(this.bnGamePad_Click);
+            // 
+            // lbBothBrakes
+            // 
+            this.lbBothBrakes.AutoSize = true;
+            this.lbBothBrakes.Location = new System.Drawing.Point(159, 16);
+            this.lbBothBrakes.Name = "lbBothBrakes";
+            this.lbBothBrakes.Size = new System.Drawing.Size(65, 13);
+            this.lbBothBrakes.TabIndex = 23;
+            this.lbBothBrakes.Text = "Both Brakes";
+            this.lbBothBrakes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbRightBrake
+            // 
+            this.lbRightBrake.AutoSize = true;
+            this.lbRightBrake.Location = new System.Drawing.Point(282, 19);
+            this.lbRightBrake.Name = "lbRightBrake";
+            this.lbRightBrake.Size = new System.Drawing.Size(63, 13);
+            this.lbRightBrake.TabIndex = 22;
+            this.lbRightBrake.Text = "Right Brake";
+            this.lbRightBrake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbLeftBrake
+            // 
+            this.lbLeftBrake.AutoSize = true;
+            this.lbLeftBrake.Location = new System.Drawing.Point(17, 18);
+            this.lbLeftBrake.Name = "lbLeftBrake";
+            this.lbLeftBrake.Size = new System.Drawing.Size(56, 13);
+            this.lbLeftBrake.TabIndex = 21;
+            this.lbLeftBrake.Text = "Left Brake";
+            // 
+            // lbRightGears
+            // 
+            this.lbRightGears.AutoSize = true;
+            this.lbRightGears.Location = new System.Drawing.Point(252, 101);
+            this.lbRightGears.Name = "lbRightGears";
+            this.lbRightGears.Size = new System.Drawing.Size(97, 13);
+            this.lbRightGears.TabIndex = 20;
+            this.lbRightGears.Text = "Right (Back) Gears";
+            this.lbRightGears.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbLeftGears
+            // 
+            this.lbLeftGears.AutoSize = true;
+            this.lbLeftGears.Location = new System.Drawing.Point(16, 101);
+            this.lbLeftGears.Name = "lbLeftGears";
+            this.lbLeftGears.Size = new System.Drawing.Size(89, 13);
+            this.lbLeftGears.TabIndex = 19;
+            this.lbLeftGears.Text = "Left (Front) Gears";
             // 
             // nudLeftBrake
             // 
@@ -607,59 +667,11 @@ namespace Trixter.XDream.TestController
             this.nudCrankRevTime.Size = new System.Drawing.Size(72, 20);
             this.nudCrankRevTime.TabIndex = 19;
             // 
-            // lbLeftGears
-            // 
-            this.lbLeftGears.AutoSize = true;
-            this.lbLeftGears.Location = new System.Drawing.Point(16, 101);
-            this.lbLeftGears.Name = "lbLeftGears";
-            this.lbLeftGears.Size = new System.Drawing.Size(89, 13);
-            this.lbLeftGears.TabIndex = 19;
-            this.lbLeftGears.Text = "Left (Front) Gears";
-            // 
-            // lbRightGears
-            // 
-            this.lbRightGears.AutoSize = true;
-            this.lbRightGears.Location = new System.Drawing.Point(252, 101);
-            this.lbRightGears.Name = "lbRightGears";
-            this.lbRightGears.Size = new System.Drawing.Size(97, 13);
-            this.lbRightGears.TabIndex = 20;
-            this.lbRightGears.Text = "Right (Back) Gears";
-            this.lbRightGears.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbRightBrake
-            // 
-            this.lbRightBrake.AutoSize = true;
-            this.lbRightBrake.Location = new System.Drawing.Point(282, 19);
-            this.lbRightBrake.Name = "lbRightBrake";
-            this.lbRightBrake.Size = new System.Drawing.Size(63, 13);
-            this.lbRightBrake.TabIndex = 22;
-            this.lbRightBrake.Text = "Right Brake";
-            this.lbRightBrake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbLeftBrake
-            // 
-            this.lbLeftBrake.AutoSize = true;
-            this.lbLeftBrake.Location = new System.Drawing.Point(17, 18);
-            this.lbLeftBrake.Name = "lbLeftBrake";
-            this.lbLeftBrake.Size = new System.Drawing.Size(56, 13);
-            this.lbLeftBrake.TabIndex = 21;
-            this.lbLeftBrake.Text = "Left Brake";
-            // 
-            // lbBothBrakes
-            // 
-            this.lbBothBrakes.AutoSize = true;
-            this.lbBothBrakes.Location = new System.Drawing.Point(159, 16);
-            this.lbBothBrakes.Name = "lbBothBrakes";
-            this.lbBothBrakes.Size = new System.Drawing.Size(65, 13);
-            this.lbBothBrakes.TabIndex = 23;
-            this.lbBothBrakes.Text = "Both Brakes";
-            this.lbBothBrakes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // ControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 291);
+            this.ClientSize = new System.Drawing.Size(815, 289);
             this.Controls.Add(this.gbCrank);
             this.Controls.Add(this.gbFlywheel);
             this.Controls.Add(this.groupBox1);
@@ -736,6 +748,7 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.Label lbBothBrakes;
         private System.Windows.Forms.Label lbRightBrake;
         private System.Windows.Forms.Label lbLeftBrake;
+        private System.Windows.Forms.Button bnGamePad;
     }
 }
 

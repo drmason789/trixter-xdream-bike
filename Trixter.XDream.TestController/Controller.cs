@@ -23,7 +23,7 @@ namespace Trixter.XDream.TestController
             {
                 this.autoCranker.RPM = value;
                 this.crankTimer.Stop();
-                this.crankTimer.Interval = this.autoCranker.MillisecondsPerPosition;
+                this.crankTimer.Interval = Math.Max(20,this.autoCranker.MillisecondsPerPosition);
                 this.crankTimer.Enabled = value > 0;
                 this.CrankTimer_Elapsed(this.crankTimer, null);
             }
