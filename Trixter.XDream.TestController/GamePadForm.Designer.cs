@@ -113,6 +113,8 @@
             this.bnRightGearDown.TabStop = false;
             this.bnRightGearDown.Text = "PgDn";
             this.bnRightGearDown.UseVisualStyleBackColor = true;
+            this.bnRightGearDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnRightGearDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnRightGearDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnRightGearDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -127,6 +129,10 @@
             this.bnGreen.TabStop = false;
             this.bnGreen.Text = "Enter";
             this.bnGreen.UseVisualStyleBackColor = false;
+            this.bnGreen.Click += new System.EventHandler(this.bnGreen_Click);
+            this.bnGreen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnGreen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.bnGreen_KeyPress);
+            this.bnGreen.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnGreen.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnGreen.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -139,6 +145,8 @@
             this.bnRightGearUp.TabStop = false;
             this.bnRightGearUp.Text = "PgUp";
             this.bnRightGearUp.UseVisualStyleBackColor = true;
+            this.bnRightGearUp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnRightGearUp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnRightGearUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnRightGearUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -153,6 +161,8 @@
             this.bnRed.TabStop = false;
             this.bnRed.Text = "Esc";
             this.bnRed.UseVisualStyleBackColor = false;
+            this.bnRed.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnRed.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnRed.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnRed.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -167,6 +177,8 @@
             this.cbSeated.Text = "Space (Seated)";
             this.cbSeated.UseVisualStyleBackColor = true;
             this.cbSeated.CheckedChanged += new System.EventHandler(this.cbSeated_CheckedChanged);
+            this.cbSeated.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.cbSeated.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             // 
             // bnLeftGearDown
             // 
@@ -177,6 +189,8 @@
             this.bnLeftGearDown.TabStop = false;
             this.bnLeftGearDown.Text = "Del";
             this.bnLeftGearDown.UseVisualStyleBackColor = true;
+            this.bnLeftGearDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnLeftGearDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnLeftGearDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnLeftGearDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -191,6 +205,8 @@
             this.bnBlue.TabStop = false;
             this.bnBlue.Text = "V";
             this.bnBlue.UseVisualStyleBackColor = false;
+            this.bnBlue.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnBlue.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnBlue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnBlue.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -203,6 +219,8 @@
             this.bnLeftGearUp.TabStop = false;
             this.bnLeftGearUp.Text = "Ins";
             this.bnLeftGearUp.UseVisualStyleBackColor = true;
+            this.bnLeftGearUp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnLeftGearUp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnLeftGearUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnLeftGearUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -215,6 +233,8 @@
             this.bnUp.TabStop = false;
             this.bnUp.Text = "Up";
             this.bnUp.UseVisualStyleBackColor = true;
+            this.bnUp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnUp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnUp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -227,6 +247,8 @@
             this.bnRight.TabStop = false;
             this.bnRight.Text = "Right";
             this.bnRight.UseVisualStyleBackColor = true;
+            this.bnRight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnRight.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnRight.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnRight.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -239,6 +261,8 @@
             this.bnLeft.TabStop = false;
             this.bnLeft.Text = "Left";
             this.bnLeft.UseVisualStyleBackColor = true;
+            this.bnLeft.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnLeft.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnLeft.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
@@ -251,20 +275,26 @@
             this.bnDown.TabStop = false;
             this.bnDown.Text = "Down";
             this.bnDown.UseVisualStyleBackColor = true;
+            this.bnDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
+            this.bnDown.KeyUp += new System.Windows.Forms.KeyEventHandler(this.bnGreen_KeyUp);
             this.bnDown.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Button_Pressed);
             this.bnDown.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Button_Released);
             // 
             // GamePadForm
             // 
-            this.AcceptButton = this.bnGreen;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 348);
             this.Controls.Add(this.gbControls);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GamePadForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "X-Dream Gamepad Emulator";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GamePadForm_KeyUp);

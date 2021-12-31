@@ -216,5 +216,20 @@ namespace Trixter.XDream.TestController
                 e.Handled = true;
             }
         }
+
+        private void bnGreen_KeyUp(object sender, KeyEventArgs e)
+        {
+            GamePadForm_KeyUp(sender, e);
+        }
+
+        private void bnGreen_Click(object sender, EventArgs e)
+        {
+            GamePadForm_KeyDown(sender, new KeyEventArgs(Keys.Enter));
+        }
+
+        private void bnGreen_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GamePadForm_KeyDown(sender, new KeyEventArgs(Keys.Enter));
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace Trixter.XDream.TestController
         private XDreamSerialPortServer server;
         private AutoCranker autoCranker;
         private System.Timers.Timer crankTimer;
+        private DateTimeOffset lastCrankUpdate;
 
         public XDreamStateBuilder State { get;  }
 
@@ -23,9 +24,12 @@ namespace Trixter.XDream.TestController
             {
                 this.autoCranker.RPM = value;
                 this.crankTimer.Stop();
-                this.crankTimer.Interval = Math.Max(20,this.autoCranker.MillisecondsPerPosition);
-                this.crankTimer.Enabled = value > 0;
-                this.CrankTimer_Elapsed(this.crankTimer, null);
+                this.crankTimer.Interval = this.autoCranker.MillisecondsPerPosition;
+                
+                if (value > 0)
+                    this.crankTimer.Start();
+                else                
+                    this.CrankTimer_Elapsed(this.crankTimer, null);
             }
         }
 
@@ -51,7 +55,12 @@ namespace Trixter.XDream.TestController
 
         private void CrankTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            this.autoCranker.Update(DateTimeOffset.Now);
+            DateTimeOffset now = DateTimeOffset.Now;
+            if (now > this.lastCrankUpdate)
+            {
+                this.lastCrankUpdate = now;
+                this.autoCranker.Update(now);
+            }
         }
 
         private void AutoCranker_CrankPositionChanged(ICadenceProvider sender, int delta)
