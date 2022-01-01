@@ -16,7 +16,6 @@ namespace Trixter.XDream.UI
         {
             //Application.SetHighDpiMode(HighDpiMode.SystemAware);
 
-            // Turn off visual styles to get fast moving progress bars
             Application.EnableVisualStyles();            
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
