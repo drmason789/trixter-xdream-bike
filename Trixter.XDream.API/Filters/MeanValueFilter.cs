@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Trixter.XDream.API.Testing.Experiments
+namespace Trixter.XDream.API.Filters
 {
 
     /// <summary>
     /// Filter to track the average value over a specified time period. 
     /// No weighting by length of time between samples - relies on reasonably uniform sample intervals.
     /// </summary>
-    public class MeanValueFilter
+    internal class MeanValueFilter
     {
         double periodMilliseconds;
         int? value;
@@ -24,13 +24,13 @@ namespace Trixter.XDream.API.Testing.Experiments
         }      
 
         CircularBuffer<Sample> buffer;
-        Statistics statistics;
+        MeanCalculator statistics;
 
         public MeanValueFilter(int periodMilliseconds)
         {
             this.buffer = new CircularBuffer<Sample>(1000, 1000);
             this.periodMilliseconds = periodMilliseconds;
-            this.statistics = new Statistics();
+            this.statistics = new MeanCalculator();
         }
 
         public void Add(int x, DateTimeOffset t)
