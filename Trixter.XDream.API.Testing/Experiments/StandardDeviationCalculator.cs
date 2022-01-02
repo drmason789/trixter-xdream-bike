@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using Trixter.XDream.API.Filters;
 
 namespace Trixter.XDream.API.Testing.Experiments
 {
-    public class StandardDeviationCalculator : MeanCalculator
+    internal class StandardDeviationCalculator : MeanCalculator
     {
         private double? variance = null;
         private double? stddev = null;

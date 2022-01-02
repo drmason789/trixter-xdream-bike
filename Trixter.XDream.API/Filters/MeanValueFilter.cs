@@ -10,7 +10,8 @@ namespace Trixter.XDream.API.Filters
     internal class MeanValueFilter
     {
         double periodMilliseconds;
-        int? value;
+        int? intValue;
+        double? value;
 
         private class Sample
         {
@@ -37,22 +38,43 @@ namespace Trixter.XDream.API.Filters
         {
             this.buffer.Add(new Sample(x, t));
             this.statistics.Add(x);
+            this.intValue = null;
             this.value = null;
             DateTimeOffset limit = t.AddMilliseconds(-periodMilliseconds);
             this.buffer.RemoveTailWhile(s => s.T < limit, s => this.statistics.Remove(s.Value));
         }
 
 
-        public int Value
+        public int IntValue
         {
             get 
             { 
-                if(this.value == null)
+                if(this.intValue == null)
                 {
-                    this.value =(int)(Math.Round(statistics.Mean, 0,MidpointRounding.AwayFromZero));
+                    this.intValue =(int)(Math.Round(this.Value, 0,MidpointRounding.AwayFromZero));
+                }
+                return this.intValue.Value;
+            }
+        }
+
+        public double Value
+        {
+            get
+            {
+                if (this.value == null)
+                {
+                    this.value = statistics.Mean;
                 }
                 return this.value.Value;
             }
+        }
+
+        public void Reset()
+        {
+            this.buffer.Clear();
+            this.statistics = new MeanCalculator();
+            this.intValue = null;
+            this.value = null;
         }
     }
 }

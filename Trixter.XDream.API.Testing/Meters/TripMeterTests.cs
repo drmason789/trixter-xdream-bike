@@ -17,7 +17,7 @@ namespace Trixter.XDream.API.Testing
             ITripMeter tm = new TripMeter(fwm, cm);
 
             var inputMessages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
-            var statistics = new Experiments.Statistics();
+            var statistics = new Experiments.StandardDeviationCalculator();
             DateTimeOffset last = DateTimeOffset.MinValue, t0=inputMessages[0].TimeStamp;
             List<string> logs = new List<string>(inputMessages.Length);
 
@@ -31,7 +31,7 @@ namespace Trixter.XDream.API.Testing
                     if(last!=DateTimeOffset.MinValue)
                     {
                         double dt = (m.TimeStamp - last).TotalMilliseconds;
-                        statistics += dt;
+                        statistics.Add(dt);
 
                         logs.Add($"{(m.TimeStamp-t0).TotalMilliseconds},{(cm.HasData ? cm.Direction : CrankDirection.None)},{(cm.HasData ? cm.RPM : 0)},{fwm.RPM}");
                     }

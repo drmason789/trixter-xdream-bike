@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Trixter.XDream.API.Filters;
 
 namespace Trixter.XDream.API.Testing.Experiments
 {
@@ -12,7 +13,7 @@ namespace Trixter.XDream.API.Testing.Experiments
         private const int MaxCrankRPM = 300;
 
         private ICrankMeter inner;
-        Statistics[] rpmStats, rawStats;
+        StandardDeviationCalculator[] rpmStats, rawStats;
         MeanValueFilter rawFilter, rpmFilter;
 
         public StatisticsGatheringCrankMeter(ICrankMeter inner, int rawDataFilterPeriod)
@@ -40,7 +41,7 @@ namespace Trixter.XDream.API.Testing.Experiments
         {
             this.rawFilter.Add(rawData, timestamp);
 
-            rawData = this.rawFilter.Value;
+            rawData = this.rawFilter.IntValue;
 
             this.inner.AddData(timestamp, crankPosition, rawData);
 
@@ -48,12 +49,12 @@ namespace Trixter.XDream.API.Testing.Experiments
             {
                 this.rpmFilter.Add(inner.RPM, timestamp);
 
-                int rpm = this.rpmFilter.Value;
+                int rpm = this.rpmFilter.IntValue;
 
                 if (rawData > 0 && rpm < this.rpmStats.Length)
                 {
-                    this.rpmStats[rpm] += rawData;
-                    this.rawStats[rawData] += rpm;                    
+                    this.rpmStats[rpm].Add(rawData);
+                    this.rawStats[rawData].Add(rpm);
                 }
             }
 
@@ -65,8 +66,8 @@ namespace Trixter.XDream.API.Testing.Experiments
         public void Reset()
         {
             this.inner.Reset();
-            this.rpmStats = Enumerable.Range(0, MaxCrankRPM).Select(x=>new Statistics()).ToArray();
-            this.rawStats = Enumerable.Range(0, 65536).Select(x => new Statistics()).ToArray();
+            this.rpmStats = Enumerable.Range(0, MaxCrankRPM).Select(x=>new StandardDeviationCalculator()).ToArray();
+            this.rawStats = Enumerable.Range(0, 65536).Select(x => new StandardDeviationCalculator()).ToArray();
 
         }
 
