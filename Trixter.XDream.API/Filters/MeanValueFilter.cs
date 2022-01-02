@@ -12,6 +12,7 @@ namespace Trixter.XDream.API.Filters
         double periodMilliseconds;
         int? intValue;
         double? value;
+        double? valuePerMillisecond;
 
         private class Sample
         {
@@ -27,6 +28,16 @@ namespace Trixter.XDream.API.Filters
         CircularBuffer<Sample> buffer;
         MeanCalculator statistics;
 
+        protected T CalculateCached<T>(Func<T> calculation, ref T? cached) where T:struct
+        {
+            if (cached.HasValue)
+                return cached.Value;
+
+            cached = calculation();
+
+            return cached.Value;
+        }
+
         public MeanValueFilter(int periodMilliseconds)
         {
             this.buffer = new CircularBuffer<Sample>(1000, 1000);
@@ -38,36 +49,32 @@ namespace Trixter.XDream.API.Filters
         {
             this.buffer.Add(new Sample(x, t));
             this.statistics.Add(x);
-            this.intValue = null;
-            this.value = null;
+
             DateTimeOffset limit = t.AddMilliseconds(-periodMilliseconds);
             this.buffer.RemoveTailWhile(s => s.T < limit, s => this.statistics.Remove(s.Value));
+
+            // Clear the caches
+            this.intValue = null;
+            this.value = null;
+            this.valuePerMillisecond = null;
         }
 
 
-        public int IntValue
-        {
-            get 
-            { 
-                if(this.intValue == null)
-                {
-                    this.intValue =(int)(Math.Round(this.Value, 0,MidpointRounding.AwayFromZero));
-                }
-                return this.intValue.Value;
-            }
-        }
+        public int IntValue => this.CalculateCached(() => (int)Math.Round(this.Value, 0, MidpointRounding.AwayFromZero), ref this.intValue);
 
-        public double Value
-        {
-            get
-            {
-                if (this.value == null)
-                {
-                    this.value = statistics.Mean;
-                }
-                return this.value.Value;
-            }
-        }
+        public double Value => this.CalculateCached(() => this.statistics.Mean, ref this.value);
+        
+        public double ValuePerMillisecond => this.CalculateCached(()=>this.statistics.Sum / this.Period, ref this.valuePerMillisecond);
+        
+        /// <summary>
+        /// The time difference between the first and last sample.
+        /// </summary>
+        public double Period => (this.buffer.Head.T - this.buffer.Tail.T).TotalMilliseconds;
+
+        /// <summary>
+        /// The <see cref="DateTimeOffset"/> of the most recent sample.
+        /// </summary>
+        public DateTimeOffset LastSampleTime => this.buffer.Count >0 ? this.buffer.Head.T : DateTimeOffset.MinValue;
 
         public void Reset()
         {

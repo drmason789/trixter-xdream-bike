@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Trixter.XDream.API.Filters;
 
 namespace Trixter.XDream.API
 {
@@ -15,26 +16,7 @@ namespace Trixter.XDream.API
         private const int MaximumSmoothingIntervalMilliseconds = 60000; // for very slow movement
         private const int DefaultSmoothingIntervalMilliseconds = 500;
 
-        private DateTimeOffset t0;
-        private CircularBuffer<CrankChange> crankChanges;
-        private int sumOfCrankChanges = 0;
-
-        private DateTimeOffset lastMessageTimestamp;
-        
-        [DebuggerDisplay("{T}: {Delta}")]
-        private class CrankChange
-        {
-            public static readonly CrankChange Zero = new CrankChange(0, 0);
-
-            public int Delta;
-            public int T;
-
-            public CrankChange(int delta, int t)
-            {
-                this.Delta = delta;
-                this.T = t;
-            }
-        }             
+        private MeanValueFilter crankChangeFilter;
         
         /// <summary>
         /// Indicates if the object is ready to provide data. It needs to have received 2 updates
@@ -84,21 +66,17 @@ namespace Trixter.XDream.API
                 throw new ArgumentOutOfRangeException(nameof(smoothingIntervalMilliseconds), 
                     $"Value should be from {MinimumSmoothingIntervalMilliseconds} to {MaximumSmoothingIntervalMilliseconds}.");
 
-            this.crankChanges = new CircularBuffer<CrankChange>(smoothingIntervalMilliseconds, smoothingIntervalMilliseconds);
+            this.crankChangeFilter = new MeanValueFilter(smoothingIntervalMilliseconds);
             this.SmoothingIntervalMilliseconds = smoothingIntervalMilliseconds;
         }
-        public void Reset() => Reset(DateTimeOffset.MinValue);        
-
-        private void Reset(DateTimeOffset timestamp)
+     
+        public void Reset()
         {
             this.Direction = CrankDirection.None;
-            this.lastMessageTimestamp = timestamp;
             this.RPM = 0;
             this.RawValue = 0;
-            this.t0 = timestamp;
             this.HasData = false;
-            this.crankChanges.Clear();
-            this.sumOfCrankChanges = 0;
+            this.crankChangeFilter.Reset();
         }               
 
         public void AddData(DateTimeOffset timestamp, int crankPosition, int crankRevolutionTime)
@@ -108,7 +86,7 @@ namespace Trixter.XDream.API
                 throw new ArgumentOutOfRangeException(nameof(crankPosition));            
 
             // Ensure the sample is in the right order
-            double timeSinceLastMessage = timestamp.Subtract(this.lastMessageTimestamp).TotalMilliseconds;
+            double timeSinceLastMessage = timestamp.Subtract(this.crankChangeFilter.LastSampleTime).TotalMilliseconds;
             if (timeSinceLastMessage < 0)
                 throw new ArgumentException(Constants.StateTimestampError, nameof(timestamp));
 
@@ -118,38 +96,22 @@ namespace Trixter.XDream.API
             // If it's been too long since the last message, start over at this one.
             if (timeSinceLastMessage > this.MaximumMessageInterval)
             {
-                this.Reset(timestamp);
-
+                this.Reset();
                 this.CrankPosition = crankPosition;
-                this.crankChanges.Add(CrankChange.Zero);
+                this.crankChangeFilter.Add(0, timestamp);
                 return;
             }
 
-            // The change in location...
+            // Update the change in position
             int dp = CrankPositions.DirectionalCrankDelta(this.CrankPosition, crankPosition);
-
-            // ..and the current position in time
-            int t = (int)(timestamp - this.t0).TotalMilliseconds;
-
-            // Off with the old...
-            int lowerLimit = t - this.SmoothingIntervalMilliseconds;
-            this.crankChanges.RemoveTailWhile(cc => cc.T < lowerLimit, cc => this.sumOfCrankChanges -= cc.Delta);
-
-            // ...and on with the new.
-            this.crankChanges.Add(new CrankChange(dp, t));
-            this.sumOfCrankChanges += dp;
-
-            // get the time period
-            int dt = Math.Max(1, t - this.crankChanges.Tail.T);
+            this.crankChangeFilter.Add(dp, timestamp);
 
             // Calculate the properties
-            this.Direction = CrankPositions.GetDirection(this.sumOfCrankChanges);
-            this.RPM = CrankPositions.CalculateRPM(this.sumOfCrankChanges, dt);
+            double crankChangesPerMillisecond = this.crankChangeFilter.ValuePerMillisecond;
+            this.Direction = CrankPositions.GetDirection(Math.Sign(crankChangesPerMillisecond));
+            this.RPM = CrankPositions.CalculateRPM(crankChangesPerMillisecond, 1);
             this.HasData = true;
             this.CrankPosition = crankPosition;
-
-            // Store the message time for future comparison
-            this.lastMessageTimestamp = timestamp;
         }
 
         public void AddData(XDreamState state)

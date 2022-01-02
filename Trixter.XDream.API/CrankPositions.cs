@@ -129,7 +129,7 @@ namespace Trixter.XDream.API
         /// <param name="positions"></param>
         /// <param name="milliseconds"></param>
         /// <returns></returns>
-        public static int CalculateRPM(int positions, int milliseconds)
+        public static int CalculateRPM(double positions, double milliseconds)
         {
             double crankPositionsPerMillisecond = Math.Abs((double)positions / milliseconds);
             double crankPositionsPerMinute = Constants.MillisecondsPerMinute * crankPositionsPerMillisecond;
