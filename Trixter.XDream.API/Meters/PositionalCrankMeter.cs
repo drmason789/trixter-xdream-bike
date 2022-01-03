@@ -98,16 +98,18 @@ namespace Trixter.XDream.API
             {
                 this.Reset();
                 this.CrankPosition = crankPosition;
-                this.crankChangeFilter.Add(0, timestamp);
+                this.crankChangeFilter.Add(crankPosition, timestamp);
                 return;
             }
 
             // Update the change in position
             int dp = CrankPositions.DirectionalCrankDelta(this.CrankPosition, crankPosition);
-            this.crankChangeFilter.Add(dp, timestamp);
+
+            // Use the AddDelta method because dp is not necessarily new crank position - old crank position
+            this.crankChangeFilter.AddDelta(dp, timestamp);
 
             // Calculate the properties
-            double crankChangesPerMillisecond = this.crankChangeFilter.ValuePerMillisecond;
+            double crankChangesPerMillisecond = this.crankChangeFilter.DeltaPerMillisecond;
             this.Direction = CrankPositions.GetDirection(Math.Sign(crankChangesPerMillisecond));
             this.RPM = CrankPositions.CalculateRPM(crankChangesPerMillisecond, 1);
             this.HasData = true;
