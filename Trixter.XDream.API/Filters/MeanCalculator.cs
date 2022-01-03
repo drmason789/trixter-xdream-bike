@@ -26,9 +26,19 @@ namespace Trixter.XDream.API.Filters
             return cached.Value;
         }
 
+        /// <summary>
+        /// The number of items in the calculation.
+        /// </summary>
         public int N { get; protected set; } = 0;
+
+        /// <summary>
+        /// The mean: sum divided by the number of items.
+        /// </summary>
         public double Mean => this.Calculate(() => this.Sum / this.N, ref this.mean);
         
+        /// <summary>
+        /// The sum of the items added.
+        /// </summary>
         public double Sum { get; protected set; }
         
         public MeanCalculator()
@@ -36,6 +46,8 @@ namespace Trixter.XDream.API.Filters
 
         }
 
+
+        #region Template methods
         protected virtual void DoAdd(double x)
         {
             this.Sum += x;
@@ -54,6 +66,18 @@ namespace Trixter.XDream.API.Filters
             this.mean = null;
         }
 
+        protected virtual void DoReset()
+        {
+            this.mean = null;
+            this.Sum = 0;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Add an item.
+        /// </summary>
+        /// <param name="x"></param>
         public void Add(double x)
         {
             this.DoAdd(x);
@@ -61,6 +85,11 @@ namespace Trixter.XDream.API.Filters
             this.Invalidate();
         }
 
+        /// <summary>
+        /// Remove an item. If the removal will result in an invalid calculation or state of the object, an <see cref="InvalidOperationException"/> is thrown.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <exception cref="InvalidOperationException"></exception>
         public void Remove(double x)
         {
             if (this.N == 0)
@@ -71,10 +100,24 @@ namespace Trixter.XDream.API.Filters
             this.Invalidate();
         }
 
+        /// <summary>
+        /// Invalidate the cached values.
+        /// </summary>
         protected void Invalidate()
         {
             this.debuggerDisplay = null;
             this.DoInvalidate();
+        }
+
+        /// <summary>
+        /// Rest the object to its initial state.
+        /// </summary>
+        public void Reset()
+        {
+            this.N = 0;
+            this.DoReset();
+            this.Invalidate();
+
         }
     }
 }
