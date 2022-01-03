@@ -10,7 +10,7 @@
     <ApplicationIcon>White-X.ico</ApplicationIcon>
     <Authors>David Mason</Authors>
     <Description>Test Controller to emulate a Trixter X-Dream V1 exercise bike.</Description>
-    <Copyright>(C) David Mason 2021</Copyright>
+    <Copyright>(C) David Mason 2021-2022</Copyright>
     <AssemblyVersion>1.2.0</AssemblyVersion>
     <FileVersion>1.2.0</FileVersion>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
