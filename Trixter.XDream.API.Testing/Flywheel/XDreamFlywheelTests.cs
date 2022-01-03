@@ -17,6 +17,9 @@ namespace Trixter.XDream.API.Testing
 
             // 220mm is an approximate measurement with the flywheel installed on the bike.
             Assert.AreEqual(220, flywheel.Radius, "Flywheel radius");
+
+            // This is a regression test value. Correctness unknown.
+            Assert.AreEqual(0.41187783076277362d, flywheel.MomentOfInertia, "Moment of Inertia");
         }
     }
 }

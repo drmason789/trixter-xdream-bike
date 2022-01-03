@@ -93,6 +93,7 @@ namespace Trixter.XDream.API.Testing
         const double Volume_ConicFrustums_Outer2 = // Outer part:     > | <
             2 * Math.PI * (1 * 1) * 0.0005 // Disc: Radius 0.5m thickness 0.001m   
             - 2 * Math.PI / 3 * 0.0005 * (1 * 1 + 0.5 * 0.5 + 1 * 0.5); // Conic frustum: Outer radius 1m thickness 0m to radius 0.5m thickness 0.002m.
+
         #endregion
 
         /// <summary>
@@ -152,6 +153,20 @@ namespace Trixter.XDream.API.Testing
             IFlywheel fw = new SectionedFlywheel(sections);
 
             Assert.AreEqual(expectedMass, fw.Mass, tolerance);
+        }
+
+        [Test]
+        [TestCase(new int[] { 1000 }, new int[] { 1 }, 0.0015707963267948967, TestName = "Moment of Inertia: Solid Disk - 1 section")]
+        [TestCase(new int[] { 100, 400, 500 }, new int[] { 1, 1, 1 }, 0.0015707963267948967, TestName = "Moment of Inertia: Solid Disk - 3 sections")]
+        [TestCase(new int[] { 100, 400, 500 }, new int[] { 1, 1, 0 }, 0.0014726215563702157, TestName = "Moment of Inertia: Hollow Disk - 3 sections")]
+        public void TestMomentOfInertia_MultipleSectionsSingleDensity(int[] radii, int[] thicknesses, double expectedI)
+        {
+            var sections = FlywheelTestUtilities.CreateBlockSections(radii, thicknesses);
+
+            IFlywheel fw = new SectionedFlywheel(sections);
+
+            Assert.AreEqual(sections.Max(s => s.OuterRadius), fw.Radius, tolerance);
+            Assert.AreEqual(expectedI, fw.MomentOfInertia, tolerance);
         }
     }
 }

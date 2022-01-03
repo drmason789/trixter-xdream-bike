@@ -18,6 +18,8 @@ namespace Trixter.XDream.API.Flywheel
         public int Radius { get; }
         public double Mass { get; }
 
+        public double MomentOfInertia { get; }
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -61,8 +63,12 @@ namespace Trixter.XDream.API.Flywheel
 
             this.Radius = this.sectionsWithMass.Max(s => s.OuterRadius);
             this.Mass = calculatedMass;
+            this.MomentOfInertia = this.CalculateMomentOfInertia(1);
         }
-   
+
+        protected double CalculateMomentOfInertia(int deltaR)
+            => this.densityAdjustment.GetValueOrDefault(1)*this.sectionsWithMass.Sum(s => s.CalculateMomentOfInertia(deltaR));
+    
     }
 
 }

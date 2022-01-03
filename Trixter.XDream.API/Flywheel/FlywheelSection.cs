@@ -211,7 +211,43 @@ namespace Trixter.XDream.API.Flywheel
             }
 
             return result;
-        }      
+        }
+
+        private double CalculateMomentOfInertia(int innerRadius, int outerRadius)
+        {
+            double mass = CalculateMass(innerRadius, outerRadius);
+            double ir = 0.001 * innerRadius, or = 0.001 * outerRadius;
+            double result = mass * 0.5 * (or * or + ir * ir);
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates the moment of inertia of the segment.
+        /// </summary>
+        /// <param name="delta">Slice width for non-flat segments.</param>
+        /// <returns></returns>
+        public double CalculateMomentOfInertia(int delta)
+        {
+            this.AssertInnerRadius();
+
+            double result = 0;
+
+            if (this.slope == 0)
+            {
+                result = CalculateMomentOfInertia(this.InnerRadius, this.OuterRadius);
+            }
+            else
+            {
+                for (int r0 = this.InnerRadius; r0 < this.OuterRadius; r0 += delta)
+                {
+                    int r1 = Math.Min(this.OuterRadius, r0 + delta);
+
+                    result += CalculateMomentOfInertia(r0, r1);
+                }
+            }
+
+            return result;
+        }
     }
 
 }

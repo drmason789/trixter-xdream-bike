@@ -14,6 +14,12 @@ namespace Trixter.XDream.API.Flywheel
         /// Mass in kilograms.
         /// </summary>
         double Mass { get; }
+
+        /// <summary>
+        /// Moment of Inertia
+        /// </summary>
+        double MomentOfInertia { get; }
+
     }
 
 }
