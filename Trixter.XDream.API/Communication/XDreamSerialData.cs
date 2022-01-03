@@ -23,6 +23,9 @@ namespace Trixter.XDream.API
 
         public static readonly IReadOnlyList<byte[]> ResistanceLevels =
             Enumerable.Range(0, MaxResistance+1).Select(i => CalculateResistancePacket(i)).ToList();
+
+        public static IPacketStateMachine CreateBikeStatePacketStateMachine() => new TextBytesPacketStateMachine(MessageHeader, XDreamMessage.MessageSize);
+        public static IPacketStateMachine CreateResistancePacketStateMachine() => new BytePacketStateMachine(MessageHeader, ResistancePacketLength);    
                              
     }
 }

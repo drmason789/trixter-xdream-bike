@@ -12,7 +12,7 @@ namespace Trixter.XDream.API.Testing
 
 
         /// <summary>
-        /// Tests that the <see cref="PacketStateMachine"/> converts the supplied byte array into the expected
+        /// Tests that the <see cref="TextBytesPacketStateMachine"/> converts the supplied byte array into the expected
         /// number of packets, and they all convert to <see cref="XDreamState"/> objects without error.
         /// </summary>
         /// <param name="bytes"></param>
@@ -25,15 +25,15 @@ namespace Trixter.XDream.API.Testing
         }
 
         [Test(Description ="Test with input from flywheel, brake and steering, crank and button inputs.")]
-        public void TestGeneral() => TestBytes(Resources.input, 4586);
+        public void TestGeneral() => TestBytes(Resources.input, 4587);
 
 
         [Test(Description ="Test with input focussed on heart rate data.")]
-        public void HeartRate() => TestBytes(Resources.heartrate, 4587);
+        public void HeartRate() => TestBytes(Resources.heartrate, 4588);
 
 
         [Test(Description ="Test with input from pressing all buttons on the controller sequentially.")]
-        public void Buttons() => TestBytes(Resources.buttons, 4586);
+        public void Buttons() => TestBytes(Resources.buttons, 4587);
 
        
     }
