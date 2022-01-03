@@ -10,7 +10,7 @@ namespace Trixter.XDream.API.Testing
         [Test]
         public void TestDefaultXDreamFlywheel()
         {
-            var flywheel = XDreamFlywheel.CreateDefault();
+            var flywheel = XDreamFlywheel.Default;
 
             // 15kg is a vague memory of a measurement from an uninstalled flywheel. It's possibly closer to 14.8kg
             Assert.AreEqual(15.0d, flywheel.Mass, "Unexpected mass. Check section density.");

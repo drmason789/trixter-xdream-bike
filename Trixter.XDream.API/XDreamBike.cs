@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using Trixter.XDream.API.Flywheel;
 
 namespace Trixter.XDream.API
 {
@@ -17,6 +18,7 @@ namespace Trixter.XDream.API
         private ThreadSafeFlywheelMeter flywheelMeter;
         private ThreadSafeCrankMeter crankMeter;
         private ThreadSafeTripMeter tripMeter;
+        private ThreadSafePowerMeter powerMeter;
 
         private ConcurrentQueue<XDreamState> stateQueue;
         private XDreamState state;        
@@ -35,6 +37,8 @@ namespace Trixter.XDream.API
 
         public ITripMeter TripMeter => this.tripMeter;
 
+        public IPowerMeter PowerMeter => this.powerMeter;
+
         public XDreamState State => this.DoLocked(() => this.state);
 
         public int Resistance
@@ -46,14 +50,14 @@ namespace Trixter.XDream.API
         public XDreamBike(XDreamClient dataSource, IFlywheelMeter flywheelMeter, ICrankMeter crankMeter)
         {
             this.DataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
-
             this.flywheelMeter = ThreadSafeFlywheelMeter.TryCreate(flywheelMeter) ?? throw new ArgumentNullException(nameof(flywheelMeter));
             this.crankMeter = ThreadSafeCrankMeter.TryCreate(crankMeter) ?? throw new ArgumentNullException(nameof (crankMeter));
             this.tripMeter = ThreadSafeTripMeter.TryCreate(new TripMeter(flywheelMeter, crankMeter));
-
+            this.powerMeter = ThreadSafePowerMeter.TryCreate(new PowerMeter(XDreamFlywheel.Default.MomentOfInertia));
             this.flywheelMeter.SyncRoot = this.SyncRoot;
             this.crankMeter.SyncRoot = this.SyncRoot;
             this.tripMeter.SyncRoot = this.SyncRoot;
+            this.powerMeter.SyncRoot = this.SyncRoot;
             this.stateQueue = new ConcurrentQueue<XDreamState>();
 
             this.DataSource.StateUpdated += DataSource_StateUpdated;
@@ -74,7 +78,9 @@ namespace Trixter.XDream.API
                     {
                         this.FlywheelMeter.AddData(state);
                         this.CrankMeter.AddData(state);
+                        this.PowerMeter.Update(state.TimeStamp, this.FlywheelMeter.RPM);
                         this.TripMeter.Update(state.TimeStamp);
+
                         this.state = state;
                     }
 

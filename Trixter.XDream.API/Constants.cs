@@ -1,4 +1,6 @@
-﻿namespace Trixter.XDream.API
+﻿using System;
+
+namespace Trixter.XDream.API
 {
     public static class Constants
     {
@@ -15,11 +17,13 @@
         public const int MaxSteering = 255; // right
         public const int MidSteering = (MaxSteering+MinSteering)>>1;
         public const int MinSteering = 0; // left
-             
 
 
+        public const int MillisecondsPerSecond = 1000;
+        public const int MillisecondsPerMinute = SecondsPerMinute * MillisecondsPerSecond;
+        public const int SecondsPerMinute = 60;
 
-        public const int MillisecondsPerMinute = 60 * 1000;
+        public const double RpmToRadiansPerSecond = Math.PI * 2 / Constants.SecondsPerMinute;
 
         public const string StateTimestampError = "Timestamp is prior to the previous.";
     }

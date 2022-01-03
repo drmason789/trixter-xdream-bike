@@ -60,11 +60,11 @@ namespace Trixter.XDream.API.Flywheel
             };
 
         /// <summary>
-        /// Create an XDreamFlywheel object with a mass from a constant resulting from a physcial measurement rather than 
+        /// An XDreamFlywheel object with a mass from a constant resulting from a physcial measurement rather than 
         /// calculated from the configured density and volume of the segments.
         /// </summary>
         /// <returns></returns>
-        public static XDreamFlywheel CreateDefault() => new XDreamFlywheel(XDreamFlywheelExpectedMassKilograms);
+        public static XDreamFlywheel Default { get; } = new XDreamFlywheel(XDreamFlywheelExpectedMassKilograms);
 
         public XDreamFlywheel(double? mass) : base(XDreamFlyWheelSections, mass)
         {

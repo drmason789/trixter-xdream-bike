@@ -129,6 +129,8 @@ namespace Trixter.XDream.UI
                 this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
                 this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
 
+                this.lbPowerValue.Text = this.xdreamMachine.PowerMeter.Power + " W";
+
                 this.clbButtons.SetItemChecked(0, message.FrontGearUp);
                 this.clbButtons.SetItemChecked(1, message.FrontGearDown);
                 this.clbButtons.SetItemChecked(2, message.BackGearUp);
