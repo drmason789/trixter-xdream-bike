@@ -11,7 +11,6 @@ namespace Trixter.XDream.API.Filters
     {
         double periodMilliseconds;
         int? intValue;
-        double? value;
         double? valuePerMillisecond;
 
         private class Sample
@@ -55,14 +54,13 @@ namespace Trixter.XDream.API.Filters
 
             // Clear the caches
             this.intValue = null;
-            this.value = null;
             this.valuePerMillisecond = null;
         }
 
 
         public int IntValue => this.CalculateCached(() => (int)Math.Round(this.Value, 0, MidpointRounding.AwayFromZero), ref this.intValue);
 
-        public double Value => this.CalculateCached(() => this.statistics.Mean, ref this.value);
+        public double Value => this.statistics.Mean; // no need to cache becasue the MeanCalculator object already does this.
         
         public double ValuePerMillisecond => this.CalculateCached(()=>this.statistics.Sum / this.Period, ref this.valuePerMillisecond);
         
@@ -81,7 +79,7 @@ namespace Trixter.XDream.API.Filters
             this.buffer.Clear();
             this.statistics = new MeanCalculator();
             this.intValue = null;
-            this.value = null;
+            this.valuePerMillisecond = null;
         }
     }
 }
