@@ -12,34 +12,34 @@ namespace Trixter.XDream.API
         private const int PeriodOfChangeTrackerMilliseconds = 1000;
         private const int MinimumSamplePeriodMilliseconds = 500;
 
-        private MeanValueFilter rpmChangeTracker;
+        private MeanValueFilter angularVelocityTracker;
         private double momentOfInertia;
-        private int? previousRPM;
 
         public int Power { get; private set; }
 
         public PowerMeter(double flywheelMomentOfInertia)
         {
             this.momentOfInertia = flywheelMomentOfInertia;
-            this.rpmChangeTracker = new MeanValueFilter(PeriodOfChangeTrackerMilliseconds);
+            this.angularVelocityTracker = new MeanValueFilter(PeriodOfChangeTrackerMilliseconds);
         }
 
         public void Update(DateTimeOffset timestamp, int rpm)
         {
-            this.rpmChangeTracker.Add(rpm, timestamp);
 
-            if (this.previousRPM == null || this.rpmChangeTracker.Period < MinimumSamplePeriodMilliseconds)
+            double angularVelocity = rpm * Constants.RpmToRadiansPerSecond;
+
+            this.angularVelocityTracker.Add(angularVelocity, timestamp);
+
+            if (this.angularVelocityTracker.Period < MinimumSamplePeriodMilliseconds)
             {
-                this.previousRPM = rpm;
                 this.Power = 0;
                 return;
             }
             
-            double acceleration = this.rpmChangeTracker.DeltaPerMillisecond * Constants.MillisecondsPerMinute * Constants.RpmToRadiansPerSecond;
+            double acceleration = this.angularVelocityTracker.DeltaPerMillisecond * Constants.MillisecondsPerSecond;
 
             if (acceleration > 0)
             {
-                double angularVelocity = rpm * Constants.RpmToRadiansPerSecond;
                 double torque = this.momentOfInertia * acceleration;
                 double power = torque * angularVelocity;
 
@@ -49,7 +49,6 @@ namespace Trixter.XDream.API
             {
                 this.Power = 0;
             }
-            this.previousRPM = rpm;
         }
     }
 }

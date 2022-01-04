@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Trixter.XDream.API.Filters
 {
@@ -7,14 +8,16 @@ namespace Trixter.XDream.API.Filters
     /// Filter to track the average value over a specified time period. 
     /// No weighting by length of time between samples - relies on reasonably uniform sample intervals.
     /// </summary>
+    [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
     internal class MeanValueFilter
     {
+        [DebuggerDisplay("{T:ss.ffffff} : v={Value} d={Delta}")]
         private class Sample
         {
-            public int Value;
-            public int? Delta;
+            public double Value;
+            public double? Delta;
             public DateTimeOffset T;
-            public Sample(DateTimeOffset t, int v, int? d)
+            public Sample(DateTimeOffset t, double v, double? d)
             {
                 this.Value = v;
                 this.Delta = d;
@@ -68,7 +71,7 @@ namespace Trixter.XDream.API.Filters
                 });
         }
 
-        private void Add(int x, int? dx, DateTimeOffset t)
+        private void Add(double x, double? dx, DateTimeOffset t)
         {
             this.buffer.Add(new Sample(t, x, dx));
             this.meanValue.Add(x);
@@ -86,13 +89,13 @@ namespace Trixter.XDream.API.Filters
             if (this.buffer.Count == 0)
                 throw new InvalidOperationException("Adding a delta requires an existing value in the buffer.");
 
-            int x = this.buffer.Head.Value + dx;
+            double x = this.buffer.Head.Value + dx;
             this.Add(x, dx, t);
         }
 
-        public void Add(int x, DateTimeOffset t)
+        public void Add(double x, DateTimeOffset t)
         {
-            int? delta = this.buffer.Count > 0 ? (int?)(x - this.buffer.Head.Value) : null;
+            double? delta = this.buffer.Count > 0 ? (double?)(x - this.buffer.Head.Value) : null;
 
             this.Add(x, delta, t);
         }
@@ -135,6 +138,11 @@ namespace Trixter.XDream.API.Filters
         /// The <see cref="DateTimeOffset"/> of the most recent sample.
         /// </summary>
         public DateTimeOffset LastSampleTime => this.buffer.Count >0 ? this.buffer.Head.T : DateTimeOffset.MinValue;
+
+        /// <summary>
+        /// The number of samples in the buffer.
+        /// </summary>
+        public int Count => this.buffer.Count;
 
         private void ClearCachedValues()
         {
