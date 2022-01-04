@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Trixter.XDream.API.Communications;
 
 namespace Trixter.XDream.API.Testing
 {

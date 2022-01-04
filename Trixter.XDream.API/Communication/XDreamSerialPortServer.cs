@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace Trixter.XDream.API
+
+namespace Trixter.XDream.API.Communications
 {
     /// <summary>
     /// Implementation of <see cref="XDreamServer"/> that acts as a proxy for a Trixter X-Dream V1 bike over a serial port.
@@ -16,7 +12,7 @@ namespace Trixter.XDream.API
         public const int StateUpdatePulseIntervalMilliseconds = 10;
 
         /// <summary>
-        /// The number of millseconds the requested resitance is sustained.
+        /// The number of millseconds the requested resistance is sustained.
         /// </summary>
         public const int ResistanceIntervalMilliseconds = 50;
 

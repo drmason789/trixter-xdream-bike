@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
     public class ThreadSafePowerMeter : ThreadLockable, IPowerMeter
     {

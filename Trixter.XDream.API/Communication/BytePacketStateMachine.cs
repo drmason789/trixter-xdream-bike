@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
 
     /// <summary>

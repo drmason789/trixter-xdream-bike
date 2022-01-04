@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.StateMonitoring
 {
     [DebuggerDisplay("Changes: {Changes}")]
     public class XDreamStateChangeEventArgs

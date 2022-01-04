@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trixter.XDream.API.Meters;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Meters
 {
 
     [TestFixture]

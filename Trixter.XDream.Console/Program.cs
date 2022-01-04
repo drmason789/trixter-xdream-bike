@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Communications;
 
 namespace Trixter.XDream.Console
 {

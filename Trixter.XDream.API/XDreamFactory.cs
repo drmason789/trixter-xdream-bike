@@ -1,4 +1,7 @@
-﻿namespace Trixter.XDream.API
+﻿using Trixter.XDream.API.Communications;
+using Trixter.XDream.API.Meters;
+
+namespace Trixter.XDream.API
 {
     public static class XDreamBikeFactory
     {

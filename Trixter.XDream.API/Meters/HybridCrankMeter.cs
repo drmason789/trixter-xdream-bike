@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
 
     /// <summary>

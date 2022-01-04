@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API.Filters
 {

@@ -1,4 +1,4 @@
-﻿namespace Trixter.XDream.API
+﻿namespace Trixter.XDream.API.Communications
 {
     internal interface IPacketStateMachine
     {

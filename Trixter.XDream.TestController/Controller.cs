@@ -1,6 +1,8 @@
 ﻿using System;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Communications;
 using Trixter.XDream.API.Generators;
+using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.TestController
 {

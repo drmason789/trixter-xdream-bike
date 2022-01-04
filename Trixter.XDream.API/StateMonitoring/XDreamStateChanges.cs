@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.StateMonitoring
 {
     [Flags]
     public enum XDreamStateChanges

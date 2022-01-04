@@ -5,8 +5,9 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using NUnit.Framework;
+using Trixter.XDream.API.Communications;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Experimental
 {
     [TestFixture]
     public class DataCollector

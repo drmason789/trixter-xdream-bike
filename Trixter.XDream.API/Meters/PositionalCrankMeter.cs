@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Trixter.XDream.API.Filters;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
     /// <summary>
     /// Uses the change in crank position over a sampling interval to determine speed (RPM) and direction of crank movement.

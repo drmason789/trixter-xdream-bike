@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
     /// <summary>
     /// Implementation of <see cref="XDreamClient"/> that interacts with a real Trixter X-Dream V1 bike over a serial port.

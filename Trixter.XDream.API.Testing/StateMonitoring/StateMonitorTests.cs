@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Trixter.XDream.API.StateMonitoring;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.StateMonitoring
 {
     [TestFixture]
     public class StateMonitorTests

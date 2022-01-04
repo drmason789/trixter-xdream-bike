@@ -2,7 +2,7 @@
 using System.Linq;
 using Trixter.XDream.API.Flywheel;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Flywheel
 {
     public static class FlywheelTestUtilities
     {

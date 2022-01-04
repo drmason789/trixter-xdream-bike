@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trixter.XDream.API.Testing.Experiments
+namespace Trixter.XDream.API.Testing.Experimental
 {
     public class LeastSquaresInterpolator
     {

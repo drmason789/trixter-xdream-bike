@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
 
     /// <summary>

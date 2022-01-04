@@ -5,8 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Communications;
 
-namespace Trixter.XDream.API.Testing.Experiments
+namespace Trixter.XDream.API.Testing.Experimental
 {
     [TestFixture, Explicit]
     public class FlywheelSpinDown

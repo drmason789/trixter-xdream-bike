@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
     /// <summary>
     /// Mapped crank meter that uses a functor to map crank time input values to RPM. 

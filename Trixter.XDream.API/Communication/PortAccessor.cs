@@ -3,7 +3,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
 
     internal delegate void PortDataReceivedEventHandler(PortAccessor sender, byte[] bytes);

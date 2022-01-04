@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Trixter.XDream.API.Communications;
+using Trixter.XDream.API.Meters;
 
-namespace Trixter.XDream.API.Testing.Experiments
+namespace Trixter.XDream.API.Testing.Experimental
 {
     [TestFixture]
     public class CrankMeterExperiments
@@ -70,7 +72,7 @@ namespace Trixter.XDream.API.Testing.Experiments
         [Test(Description = "Use average values over 500ms and least squares interpolation to find a line for the RPM from raw input.")]
         public void CorrelateCrankSpeed2()
         {
-            var messages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
+            XDreamMessage[] messages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
 
             StatisticsGatheringCrankMeter cm = new StatisticsGatheringCrankMeter(new PositionalCrankMeter(), 500);
 

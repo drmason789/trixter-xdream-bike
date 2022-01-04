@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
     /// <summary>
     /// A FILO buffer, allowing a client to put items on the front (head), and take them off the back (tail). 

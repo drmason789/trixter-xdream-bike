@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
     public abstract class XDreamSerialPortBase : IDisposable
     {

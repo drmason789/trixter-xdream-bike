@@ -6,8 +6,9 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Trixter.XDream.API.Communications;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Communications
 {
     /// <summary>
     /// Uses virtual COM ports configured using com0com (which must be installed) to test message passing between 

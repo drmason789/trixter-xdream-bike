@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Communications;
 
 namespace Trixter.XDream.UI
 {

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Trixter.XDream.API.Flywheel;
+using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.API
 {

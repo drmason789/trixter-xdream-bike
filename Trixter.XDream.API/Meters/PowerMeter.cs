@@ -1,7 +1,7 @@
 ﻿using System;
 using Trixter.XDream.API.Filters;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
 
     /// <summary>

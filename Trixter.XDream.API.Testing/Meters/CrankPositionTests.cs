@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Meters
 {
     [TestFixture]
     public class CrankPositionTests

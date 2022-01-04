@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using Trixter.XDream.API.Flywheel;
+using Trixter.XDream.API.Meters;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Meters
 {
     [TestFixture(typeof(EnergyPowerMeter))]
     [TestFixture(typeof(PowerMeter))]

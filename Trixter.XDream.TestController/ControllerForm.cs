@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 using Trixter.XDream.API;
+using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.TestController
 {

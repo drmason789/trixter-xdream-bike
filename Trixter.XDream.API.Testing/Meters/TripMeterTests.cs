@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Trixter.XDream.API.Meters;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Meters
 {
     [TestFixture]
     public class TripMeterTests
@@ -17,7 +18,7 @@ namespace Trixter.XDream.API.Testing
             ITripMeter tm = new TripMeter(fwm, cm);
 
             var inputMessages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
-            var statistics = new Experiments.StandardDeviationCalculator();
+            var statistics = new Experimental.StandardDeviationCalculator();
             DateTimeOffset last = DateTimeOffset.MinValue, t0=inputMessages[0].TimeStamp;
             List<string> logs = new List<string>(inputMessages.Length);
 

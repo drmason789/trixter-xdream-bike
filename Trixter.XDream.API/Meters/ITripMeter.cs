@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Meters
 {
     public interface ITripMeter
     {

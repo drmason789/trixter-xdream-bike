@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Trixter.XDream.API.Flywheel;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Flywheel
 {
     
     [TestFixture(Description ="General flywheel functionality tests")]

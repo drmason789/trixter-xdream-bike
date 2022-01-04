@@ -1,8 +1,9 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
 using System.Text;
+using Trixter.XDream.API.Communications;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Communications
 {
     [TestFixture]
     public class PacketStateMachineTests

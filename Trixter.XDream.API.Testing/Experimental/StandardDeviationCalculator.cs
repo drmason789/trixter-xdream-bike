@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Trixter.XDream.API.Filters;
 
-namespace Trixter.XDream.API.Testing.Experiments
+namespace Trixter.XDream.API.Testing.Experimental
 {
     internal class StandardDeviationCalculator : MeanCalculator
     {

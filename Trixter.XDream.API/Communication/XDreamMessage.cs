@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.Communications
 {
     [DebuggerDisplay("{DebuggerDisplay}")]
     internal class XDreamMessage : XDreamState    

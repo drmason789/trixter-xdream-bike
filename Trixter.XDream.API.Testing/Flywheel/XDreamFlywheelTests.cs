@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Trixter.XDream.API.Flywheel;
 
-namespace Trixter.XDream.API.Testing
+namespace Trixter.XDream.API.Testing.Flywheel
 {
     [TestFixture(Description ="Tests specifically for the X-Dream V1 flywheel model")]
     public class XDreamFlywheelTests

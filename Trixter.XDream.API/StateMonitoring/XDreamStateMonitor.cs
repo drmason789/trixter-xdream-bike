@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Trixter.XDream.API
+namespace Trixter.XDream.API.StateMonitoring
 {
     public delegate void XDreamStateChangeEventDelegate(XDreamStateMonitor sender, XDreamStateChangeEventArgs args);
 
