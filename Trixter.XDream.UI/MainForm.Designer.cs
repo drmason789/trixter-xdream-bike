@@ -32,6 +32,8 @@ namespace Trixter.XDream.UI
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tbResistance = new System.Windows.Forms.TrackBar();
             this.gbInput = new System.Windows.Forms.GroupBox();
+            this.lbPower = new System.Windows.Forms.Label();
+            this.lbPowerValue = new System.Windows.Forms.Label();
             this.lbCrankRevs = new System.Windows.Forms.Label();
             this.lbCrankRevsValue = new System.Windows.Forms.Label();
             this.lbFlywheelRevs = new System.Windows.Forms.Label();
@@ -68,8 +70,6 @@ namespace Trixter.XDream.UI
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.lbPower = new System.Windows.Forms.Label();
-            this.lbPowerValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
             this.gbOutput.SuspendLayout();
@@ -123,6 +123,25 @@ namespace Trixter.XDream.UI
             this.gbInput.TabIndex = 4;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "From Device";
+            // 
+            // lbPower
+            // 
+            this.lbPower.AutoSize = true;
+            this.lbPower.Location = new System.Drawing.Point(265, 257);
+            this.lbPower.Name = "lbPower";
+            this.lbPower.Size = new System.Drawing.Size(37, 13);
+            this.lbPower.TabIndex = 40;
+            this.lbPower.Text = "Power";
+            this.lbPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbPowerValue
+            // 
+            this.lbPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbPowerValue.Location = new System.Drawing.Point(279, 274);
+            this.lbPowerValue.Name = "lbPowerValue";
+            this.lbPowerValue.Size = new System.Drawing.Size(60, 24);
+            this.lbPowerValue.TabIndex = 39;
+            this.lbPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbCrankRevs
             // 
@@ -237,7 +256,6 @@ namespace Trixter.XDream.UI
             this.lbHeartRateValue.Name = "lbHeartRateValue";
             this.lbHeartRateValue.Size = new System.Drawing.Size(60, 24);
             this.lbHeartRateValue.TabIndex = 26;
-            this.lbHeartRateValue.Text = "300 BPM";
             this.lbHeartRateValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbHeartRate
@@ -504,25 +522,6 @@ namespace Trixter.XDream.UI
             this.cbPorts.Name = "cbPorts";
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
-            // 
-            // lbPower
-            // 
-            this.lbPower.AutoSize = true;
-            this.lbPower.Location = new System.Drawing.Point(265, 257);
-            this.lbPower.Name = "lbPower";
-            this.lbPower.Size = new System.Drawing.Size(37, 13);
-            this.lbPower.TabIndex = 40;
-            this.lbPower.Text = "Power";
-            this.lbPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbPowerValue
-            // 
-            this.lbPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbPowerValue.Location = new System.Drawing.Point(279, 274);
-            this.lbPowerValue.Name = "lbPowerValue";
-            this.lbPowerValue.Size = new System.Drawing.Size(60, 24);
-            this.lbPowerValue.TabIndex = 39;
-            this.lbPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
