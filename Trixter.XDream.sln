@@ -7,15 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API", "Trixt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API.Testing", "Trixter.XDream.API.Testing\Trixter.XDream.API.Testing.csproj", "{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.Console", "Trixter.XDream.Console\Trixter.XDream.Console.csproj", "{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.UI", "Trixter.XDream.UI\Trixter.XDream.UI.csproj", "{31AA2944-8D0F-4108-A59C-A2B675595B75}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Trixter.XDream.Installer", "Trixter.XDream.Installer\Trixter.XDream.Installer.wixproj", "{CF7DF41D-757D-4AA1-8B98-046730D0FACC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{67EB8205-A989-4ED8-8032-4C36AF9F4685}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trixter.XDream.TestController", "Trixter.XDream.TestController\Trixter.XDream.TestController.csproj", "{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.TestController", "Trixter.XDream.TestController\Trixter.XDream.TestController.csproj", "{43464F43-D57D-4E83-B11D-0FD86D6DFD3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,14 +39,6 @@ Global
 		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x86.ActiveCfg = Release|Any CPU
 		{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}.Release|x86.Build.0 = Release|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Debug|x86.Build.0 = Debug|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Release|x86.ActiveCfg = Release|Any CPU
-		{F8F58A77-C748-4A84-8C79-C7F68BEB38DB}.Release|x86.Build.0 = Release|Any CPU
 		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31AA2944-8D0F-4108-A59C-A2B675595B75}.Debug|x86.ActiveCfg = Debug|Any CPU

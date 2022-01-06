@@ -3,11 +3,13 @@ using System.Linq;
 using System.Text;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Communications;
+using Trixter.XDream.UI.Properties;
 
-namespace Trixter.XDream.Console
+namespace Trixter.XDream.UI
 {
-    class Program
+    class ConsoleFunctionality
     {
+
         const int updateInterval = 1000;
         const int timeout = 1500;
 
@@ -20,40 +22,50 @@ namespace Trixter.XDream.Console
         static string comPort;
 
 
-
-        static int Main(string[] args)
+        public static int Entry(string[] args)
         {
-            comPort = XDreamSerialPortClient.FindPorts().FirstOrDefault();
+            Win32.AllocConsole();
 
-            if (string.IsNullOrEmpty(comPort))
+            try
             {
-                System.Console.WriteLine("Unable to find X-Dream Bike on any COM port.");
-                return 1;
-            }
-
-            using (XDreamSerialPortClient port = new XDreamSerialPortClient())
-            {
-                XDreamMachine xdm = XDreamBikeFactory.CreatePremium(port);
-
-                xdm.StateUpdated += Xbc_StateUpdated;
-
-                port.Connect(comPort);
 
                 System.Console.Title = "X-Dream Bike Diagnostic Utility";
+                Win32.SetWindowIcon(Resources.White_X_console);
 
-                using (System.Timers.Timer clsTimer = new System.Timers.Timer())
+                comPort = XDreamSerialPortClient.FindPorts().FirstOrDefault();
+
+                if (string.IsNullOrEmpty(comPort))
                 {
-                    clsTimer.Interval = Math.Max(updateInterval, timeout / 2);
-                    clsTimer.AutoReset = true;
-                    clsTimer.Elapsed += ClsTimer_Elapsed;
-                    clsTimer.Start();
-
-                    System.Console.ReadLine();
-                    clsTimer.Stop();
+                    System.Console.WriteLine("Unable to find X-Dream Bike on any COM port.");
+                    return 1;
                 }
 
+                using (XDreamSerialPortClient port = new XDreamSerialPortClient())
+                {
+                    XDreamMachine xdm = XDreamBikeFactory.CreatePremium(port);
 
-                port.Disconnect();
+                    xdm.StateUpdated += Xbc_StateUpdated;
+
+                    port.Connect(comPort);
+
+                    using (System.Timers.Timer clsTimer = new System.Timers.Timer())
+                    {
+                        clsTimer.Interval = Math.Max(updateInterval, timeout / 2);
+                        clsTimer.AutoReset = true;
+                        clsTimer.Elapsed += ClsTimer_Elapsed;
+                        clsTimer.Start();
+
+                        System.Console.ReadLine();
+                        clsTimer.Stop();
+                    }
+
+
+                    port.Disconnect();
+                }
+            }
+            finally
+            {
+                Win32.FreeConsole();
             }
 
             return 0;

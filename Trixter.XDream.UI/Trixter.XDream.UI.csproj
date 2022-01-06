@@ -14,15 +14,18 @@
     <AssemblyVersion>1.2.0</AssemblyVersion>
     <FileVersion>1.2.0</FileVersion>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\Refresh-16.png" />
     <None Remove="Resources\Refresh-32.png" />
     <None Remove="Resources\Refresh.png" />
+    <None Remove="Resources\White-X-console.ico" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\White-X-console.ico" />
     <Content Include="White-X.ico" />
   </ItemGroup>
 
