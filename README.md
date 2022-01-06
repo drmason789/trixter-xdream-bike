@@ -33,12 +33,12 @@ So far the improvements over the originals are:
 The default mode of the utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
 
-![image](https://user-images.githubusercontent.com/29954900/147611052-6f039786-b207-4956-9828-129ab35dabfb.png)
+![image](https://user-images.githubusercontent.com/29954900/148430609-30bca02a-2880-44a2-9505-023048c13555.png)
 
 The utility also has a console mode to provide a similar experience to the original.
 If the utility is invoked with the --console command line option, or through the program menu short cut for the console mode, it shows a console application.
 
-![image](https://user-images.githubusercontent.com/29954900/147611201-be38db34-9844-47ce-9540-2d258ceae498.png)
+![image](https://user-images.githubusercontent.com/29954900/148430888-c37726aa-3c2b-47d3-87fc-34d3f5ecd4e9.png)
 
 
 
