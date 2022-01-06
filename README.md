@@ -24,11 +24,11 @@ A replacement for the console and UI test applications that were supplied with t
 
 So far the improvements over the originals are:
 - console and GUI options in a single application
-- it detects the COM port the bike is on
-- it detects backpedalling and shows the crank RPM in the backwards direction
-- it calculates flywheel and crank cumulative revolutions.
-- it is maintainable
-- The next release includes an estimate of the power being applied to the flywheel.
+- detects the COM port the bike is on
+- detects backpedalling and shows the crank RPM in the backwards direction
+- calculates flywheel and crank cumulative revolutions.
+- estimates of the power being applied to the flywheel (not accounting for resistance)
+- is maintainable
 
 The default mode of the utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
 Each brake applies 50% flywheel resistance.
