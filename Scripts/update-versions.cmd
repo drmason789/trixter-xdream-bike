@@ -31,12 +31,8 @@ echo Updating API
 call :updatecsproj "..\%txd%.API\%txd%.API.csproj"
 %checkError%
 
-echo Updating Console
-call :updatecsproj "..\%txd%.Console\%txd%.Console.csproj"
-%checkError%
-
-echo Updating UI
-call :updatecsproj "..\%txd%.UI\%txd%.UI.csproj"
+echo Updating Diagnostics
+call :updatecsproj "..\%txd%.UI\%txd%.Diagnostics.csproj"
 %checkError%
 
 echo Updating Test Controller
