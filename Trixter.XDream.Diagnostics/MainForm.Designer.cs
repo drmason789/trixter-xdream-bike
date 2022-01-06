@@ -1,5 +1,5 @@
 ﻿
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
     partial class MainForm
     {
@@ -38,9 +38,9 @@ namespace Trixter.XDream.UI
             this.lbCrankRevsValue = new System.Windows.Forms.Label();
             this.lbFlywheelRevs = new System.Windows.Forms.Label();
             this.lbFlywheelRevsValue = new System.Windows.Forms.Label();
-            this.vbRightBrake = new Trixter.XDream.UI.ValueBar();
-            this.vbLeftBrake = new Trixter.XDream.UI.ValueBar();
-            this.vbSteering = new Trixter.XDream.UI.ValueBar();
+            this.vbRightBrake = new Trixter.XDream.Diagnostics.ValueBar();
+            this.vbLeftBrake = new Trixter.XDream.Diagnostics.ValueBar();
+            this.vbSteering = new Trixter.XDream.Diagnostics.ValueBar();
             this.lbCrankDirection = new System.Windows.Forms.Label();
             this.lbCrankDirectionValue = new System.Windows.Forms.Label();
             this.lbCrankSpeed = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@ namespace Trixter.XDream.UI
             this.clbButtons = new System.Windows.Forms.CheckedListBox();
             this.gbOutput = new System.Windows.Forms.GroupBox();
             this.lbAppliedResistance = new System.Windows.Forms.Label();
-            this.vbActualResistance = new Trixter.XDream.UI.ValueBar();
+            this.vbActualResistance = new Trixter.XDream.Diagnostics.ValueBar();
             this.cbApplyBrakes = new System.Windows.Forms.CheckBox();
             this.lbResistance = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();

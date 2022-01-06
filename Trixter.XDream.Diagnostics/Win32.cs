@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
     static class Win32
     {

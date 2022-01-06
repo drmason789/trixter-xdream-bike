@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Communications;
 
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
     public partial class MainForm : Form
     {

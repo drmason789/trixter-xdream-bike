@@ -35,8 +35,8 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Trixter.XDream.UI\Trixter.XDream.UI.csproj">
-      <Name>Trixter.XDream.UI</Name>
+    <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj">
+      <Name>Trixter.XDream.Diagnostics</Name>
       <Project>{31aa2944-8d0f-4108-a59c-a2b675595b75}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>

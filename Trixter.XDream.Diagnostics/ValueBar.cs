@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
     public class ValueBar : Label
     {

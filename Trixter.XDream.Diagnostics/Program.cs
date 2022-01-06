@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Trixter.XDream.UI.Properties;
+using Trixter.XDream.Diagnostics.Properties;
 
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
 
     internal static class Program

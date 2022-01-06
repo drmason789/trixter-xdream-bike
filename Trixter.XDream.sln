@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API", "Trixt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.API.Testing", "Trixter.XDream.API.Testing\Trixter.XDream.API.Testing.csproj", "{C68527A5-6EA1-4603-8BEE-85A89A25F6A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.UI", "Trixter.XDream.UI\Trixter.XDream.UI.csproj", "{31AA2944-8D0F-4108-A59C-A2B675595B75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trixter.XDream.Diagnostics", "Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj", "{31AA2944-8D0F-4108-A59C-A2B675595B75}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Trixter.XDream.Installer", "Trixter.XDream.Installer\Trixter.XDream.Installer.wixproj", "{CF7DF41D-757D-4AA1-8B98-046730D0FACC}"
 EndProject

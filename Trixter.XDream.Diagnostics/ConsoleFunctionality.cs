@@ -3,9 +3,9 @@ using System.Linq;
 using System.Text;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Communications;
-using Trixter.XDream.UI.Properties;
+using Trixter.XDream.Diagnostics.Properties;
 
-namespace Trixter.XDream.UI
+namespace Trixter.XDream.Diagnostics
 {
     class ConsoleFunctionality
     {
