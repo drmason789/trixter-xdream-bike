@@ -13,17 +13,8 @@ namespace Trixter.XDream.Diagnostics
         [DllImport("Kernel32.dll", SetLastError = true)]
         public static extern int FreeConsole();
 
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool SetConsoleIcon(IntPtr hIcon);
-        
         [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
         private static extern IntPtr SendMessage(IntPtr hWnd, int Msg, int wParam, IntPtr lParam);
-
-
-        public static void SetConsoleIcon(System.Drawing.Icon icon)
-        {
-            SetConsoleIcon(icon.Handle);
-        }
 
         public static void SetWindowIcon(System.Drawing.Icon icon)
         {
