@@ -32,7 +32,7 @@ call :updatecsproj "..\%txd%.API\%txd%.API.csproj"
 %checkError%
 
 echo Updating Diagnostics
-call :updatecsproj "..\%txd%.UI\%txd%.Diagnostics.csproj"
+call :updatecsproj "..\%txd%.Diagnostics\%txd%.Diagnostics.csproj"
 %checkError%
 
 echo Updating Test Controller
