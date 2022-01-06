@@ -73,19 +73,22 @@ namespace Trixter.XDream.API
         {
             while (!this.queueProcessor.CancellationPending)
             {
-                while (!this.queueProcessor.CancellationPending && this.stateQueue.TryDequeue(out var state))
+                while (!this.queueProcessor.CancellationPending && this.stateQueue.TryDequeue(out var newState))
                 {
                     lock (this.SyncRoot)
                     {
-                        this.FlywheelMeter.AddData(state);
-                        this.CrankMeter.AddData(state);
-                        this.PowerMeter.Update(state.TimeStamp, this.FlywheelMeter.RPM);
-                        this.TripMeter.Update(state.TimeStamp);
+                        if (this.state?.TimeStamp >= newState.TimeStamp)
+                            continue; // TODO: warning log
 
-                        this.state = state;
+                        this.FlywheelMeter.AddData(newState);
+                        this.CrankMeter.AddData(newState);
+                        this.PowerMeter.Update(newState.TimeStamp, this.FlywheelMeter.RPM);
+                        this.TripMeter.Update(newState.TimeStamp);
+
+                        this.state = newState;
                     }
 
-                    this.OnStateUpdated(state);
+                    this.OnStateUpdated(newState);
                 }
                 Thread.Sleep(1);
             }
