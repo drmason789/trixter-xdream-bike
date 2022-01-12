@@ -120,11 +120,11 @@ namespace Trixter.XDream.Diagnostics
                 this.vbRightBrake.Value = message.RightBrake;
                 this.lbRightBrakeValue.Text = message.RightBrake.ToString();
                 this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
-
-                this.lbCrankSpeedValue.Text = $"{message.Crank} : {this.xdreamMachine.CrankMeter.RPM} RPM";
+                this.lbCrankTimeValue.Text = message.Crank.ToString();
+                this.lbCrankSpeedValue.Text = this.xdreamMachine.CrankMeter.RPM.ToString()+" RPM";
                 this.lbCrankDirectionValue.Text = $"{this.xdreamMachine.CrankMeter.Direction}";
-
-                this.lbFlywheelValue.Text = $"{message.Flywheel} : {this.xdreamMachine.FlywheelMeter.RPM} RPM";
+                this.lbFlywheelTimeValue.Text = message?.Flywheel.ToString();
+                this.lbFlywheelSpeedValue.Text = this.xdreamMachine.FlywheelMeter.RPM.ToString()+" RPM";
                 this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
 
                 this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
@@ -227,6 +227,9 @@ namespace Trixter.XDream.Diagnostics
             this.RefreshPorts();
         }
 
-       
+        private void cbRawData_CheckedChanged(object sender, EventArgs e)
+        {
+            this.pnRawData.Visible = this.cbRawData.Checked;
+        }
     }
 }
