@@ -10,8 +10,8 @@ namespace Trixter.XDream.API.Communications
     /// State machine for packets that arrive as text encoded hexadecimal numbers.
     /// </summary>
     internal class TextBytesPacketStateMachine : IPacketStateMachine
-    {       
-        private List<byte> bytes = new List<byte>(XDreamMessage.MessageSize);
+    {
+        private List<byte> bytes;
         private int messageSize;
         private BytePacketStateMachine innerStateMachine;
         private string header;
@@ -24,9 +24,12 @@ namespace Trixter.XDream.API.Communications
         /// </summary>
         public TextBytesPacketStateMachine(byte header, int messageSize)
         {
+            if(messageSize%2!=0 || messageSize<2)
+                throw new ArgumentException(nameof(messageSize));
             this.messageSize = messageSize;
             this.header = header.ToString("x2");
-            this.innerStateMachine = new BytePacketStateMachine(XDreamSerialData.MessageHeader, this.messageSize / 2);
+            this.innerStateMachine = new BytePacketStateMachine(header, this.messageSize / 2);
+            this.bytes = new List<byte>(messageSize);
         }
 
         public void Reset()
@@ -36,7 +39,6 @@ namespace Trixter.XDream.API.Communications
 
         public PacketState Add(byte b)
         {
-
             char c = (char)b;
 
             if(!char.IsDigit(c) && !(c>='a' && c<='f'))
@@ -44,19 +46,16 @@ namespace Trixter.XDream.API.Communications
                 this.Reset();
                 return PacketState.Invalid;
             }
+                        
+            if (bytes.Count<this.header.Length && b!=this.header[bytes.Count])
+            {
+                this.bytes.Clear();
+                return PacketState.None;
+            }
 
             this.bytes.Add(b);
 
-            // Look for the header
-            if (this.bytes.Count<3)
-            {
-                while (this.bytes.Count > 0 && this.bytes[0] != this.header[0] || this.bytes.Count>1 && this.bytes[1]!=this.header[1]) 
-                    this.bytes.RemoveAt(0);
-
-                return this.bytes.Count>0 ? PacketState.Incomplete:PacketState.None;
-            }
-
-            if(this.bytes.Count==this.messageSize)
+            if (this.bytes.Count==this.messageSize)
             {
                 this.innerStateMachine.Reset();
 
