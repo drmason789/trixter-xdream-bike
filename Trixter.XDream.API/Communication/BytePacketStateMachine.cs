@@ -10,21 +10,11 @@ namespace Trixter.XDream.API.Communications
     /// </summary>
     internal class BytePacketStateMachine : IPacketStateMachine
     {
-        private enum State
-        {
-            Header,
-            Body,
-            Checksum
-        }
-
         List<byte> bytes = new List<byte>();
-        
-        State state = State.Header;
         byte header;
         private int messageSize;
 
         public byte[] LastPacket { get; private set; }
-
 
         /// <summary>
         /// Constructor.
@@ -33,7 +23,7 @@ namespace Trixter.XDream.API.Communications
         {
             this.messageSize = packetLength;
             this.header = headerByte;
-            this.bytes = new List<byte>();
+            this.bytes = new List<byte>(packetLength);
 
             this.Reset();
         }
@@ -41,56 +31,28 @@ namespace Trixter.XDream.API.Communications
         public void Reset()
         {
             this.bytes.Clear();
-            this.state = State.Header;
         }
 
         public PacketState Add(byte b)
         {
-            if (this.state == State.Header)
-            {
-                if (b == this.header)
-                {
-                    this.state = State.Body;
-                    this.bytes.Add(b);
-                    return PacketState.Incomplete;
-                }
-                this.state = 0;
-                this.bytes.Clear();
+            if (this.bytes.Count == 0 && b != this.header)
                 return PacketState.None;
-            }
 
+            this.bytes.Add(b);
 
-            if (state == State.Body)
-            {
-                this.bytes.Add(b);
-
-                if (this.bytes.Count == this.messageSize-1)
-                    this.state = State.Checksum;                
-
+            if (bytes.Count < this.messageSize)
                 return PacketState.Incomplete;
-            }
 
-            if (state == State.Checksum)
+            byte checksum = this.bytes.Take(this.messageSize - 1).Aggregate((b0, b1) => (byte)(b0 ^ b1));
+            if (b == checksum)
             {
-                this.bytes.Add(b);
-                byte checksum = this.bytes.Take(this.messageSize - 1).Aggregate((b0,b1) => (byte)(b0^b1));
-                if (b == checksum)
-                {
-                    this.LastPacket = this.bytes.Take(this.messageSize).ToArray();
-                    this.NextHeader();
-                    return PacketState.Complete;
-                }
-
-                // Unexpected character - this is not a proper packet                
-                this.NextHeader();
-                return PacketState.Invalid;
+                this.LastPacket = this.bytes.ToArray();
+                this.bytes.Clear();
+                return PacketState.Complete;
             }
 
-            throw new InvalidOperationException("Object is in invalid state.");
-        }
-
-        private void NextHeader()
-        {
+            // Unexpected character - this is not a proper packet               
+            // Look for the next header character, starting after the first one, of course.
             int nextHeader = this.bytes.IndexOf(this.header, 1);
 
             if (nextHeader > 0)
@@ -99,7 +61,8 @@ namespace Trixter.XDream.API.Communications
             else
                 this.bytes.Clear();
 
-            this.state = this.bytes.Count > 0 ? State.Body : State.Header;
+            return PacketState.Invalid;
         }
+
     }
 }
