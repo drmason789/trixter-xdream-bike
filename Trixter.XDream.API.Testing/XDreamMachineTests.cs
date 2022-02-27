@@ -21,10 +21,17 @@ namespace Trixter.XDream.API.Testing
 
             Array.ForEach(inputMessages, xdc.UpdateState);
 
+            // Count the number of states that are expected
+            int expected = Math.Min(1, inputMessages.Length);
+            for (int i = 1; i < inputMessages.Length; i++)
+                if (inputMessages[i].TimeStamp > inputMessages[i - 1].TimeStamp)
+                    expected++;
+
+
             // Wait for the messages to be processed.
             Thread.Sleep(1000);
 
-            Assert.AreEqual(inputMessages.Length, states.Count);
+            Assert.AreEqual(expected, states.Count);
 
         }
     }
