@@ -13,7 +13,7 @@ namespace Trixter.XDream.API.Meters
 
         public int Power => this.DoLocked(()=>inner.Power);
 
-        public void Update(DateTimeOffset timestamp, int rpm) => this.DoLocked(()=>this.inner.Update(timestamp, rpm));
+        public void Update(DateTimeOffset timestamp, double angularVelocity) => this.DoLocked(()=>this.inner.Update(timestamp, angularVelocity));
 
         public static ThreadSafePowerMeter TryCreate(IPowerMeter inner)
         {

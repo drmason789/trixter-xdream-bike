@@ -21,6 +21,12 @@ namespace Trixter.XDream.API.Meters
         /// </summary>
         CrankDirection Direction { get; }
 
+
+        /// <summary>
+        /// Angular velocity in radians per second.
+        /// </summary>
+        double AngularVelocity { get; }
+
         /// <summary>
         /// The calculated revolutions per minute.
         /// </summary>

@@ -23,9 +23,8 @@ namespace Trixter.XDream.API.Meters
             this.energyTracker = new MeanValueFilter(PeriodOfChangeTrackerMilliseconds);
         }
 
-        public void Update(DateTimeOffset timestamp, int rpm)
+        public void Update(DateTimeOffset timestamp, double angularVelocity)
         {
-            double angularVelocity = rpm * Constants.RpmToRadiansPerSecond;
             double energy = 0.5 * this.momentOfInertia * angularVelocity * angularVelocity;
 
             this.energyTracker.Add(energy, timestamp);

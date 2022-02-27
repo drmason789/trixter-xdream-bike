@@ -21,6 +21,8 @@ namespace Trixter.XDream.API.Meters
 
         public int RawValue { get; private set; }
 
+        public double AngularVelocity => this.RPM * Constants.RpmToRadiansPerSecond;
+
         public int RPM { get; private set; }
 
         public void AddData(DateTimeOffset timestamp, int rawValue)

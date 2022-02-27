@@ -8,6 +8,8 @@ namespace Trixter.XDream.API
         public const int MaxCrankPosition = 60;
         public const int Positions = MaxCrankPosition - MinCrankPosition + 1;
 
+        public const double RadiansPerPosition = 2 * Math.PI / Positions;
+
         public const int MaxCrankTimeReading = 65535; // No movement
         public const int MinCrankTimeReading = 0; // No movement
 
@@ -135,6 +137,19 @@ namespace Trixter.XDream.API
             double crankPositionsPerMinute = Constants.MillisecondsPerMinute * crankPositionsPerMillisecond;
             var result= (int)(0.5 + RevolutionsPerPosition * crankPositionsPerMinute);
             return result;
+        }
+
+        /// <summary>
+        /// Calculate the angular velocity from the number of crank positions and the time taken.
+        /// </summary>
+        /// <param name="positions"></param>
+        /// <param name="milliseconds"></param>
+        /// <returns></returns>
+        public static double CalculateRadiansPerSecond(double positions, double milliseconds)
+        {
+            double crankPositionsPerMillisecond = Math.Abs((double)positions / milliseconds);
+            double crankPositionsPerSecond = Constants.MillisecondsPerSecond * crankPositionsPerMillisecond;
+            return crankPositionsPerSecond * RadiansPerPosition;
         }
     }
 

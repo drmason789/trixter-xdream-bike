@@ -23,11 +23,8 @@ namespace Trixter.XDream.API.Meters
             this.angularVelocityTracker = new MeanValueFilter(PeriodOfChangeTrackerMilliseconds);
         }
 
-        public void Update(DateTimeOffset timestamp, int rpm)
+        public void Update(DateTimeOffset timestamp, double angularVelocity)
         {
-
-            double angularVelocity = rpm * Constants.RpmToRadiansPerSecond;
-
             this.angularVelocityTracker.Add(angularVelocity, timestamp);
 
             if (this.angularVelocityTracker.Period < MinimumSamplePeriodMilliseconds)

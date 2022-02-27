@@ -30,9 +30,14 @@ namespace Trixter.XDream.API.Meters
         public int RawValue { get; private set; }
 
         /// <summary>
-        /// RPM calculated from the crank positions and timestamps.
+        /// The angular velocity in radians per second calculated from crank positions and timestamps.
         /// </summary>
-        public int RPM { get; private set; }
+        public double AngularVelocity { get; private set; }
+
+        /// <summary>
+        /// RPM (revolutions per minute) calculated from the <see cref="AngularVelocity"/>.
+        /// </summary>
+        public int RPM => (int)Math.Round(this.AngularVelocity * Constants.RadiansPerSecondToRpm, 0, MidpointRounding.AwayFromZero);
 
         /// <summary>
         /// Direction of crank movement.
@@ -73,7 +78,7 @@ namespace Trixter.XDream.API.Meters
         public void Reset()
         {
             this.Direction = CrankDirection.None;
-            this.RPM = 0;
+            this.AngularVelocity = 0d;
             this.RawValue = 0;
             this.HasData = false;
             this.crankChangeFilter.Reset();
@@ -111,7 +116,8 @@ namespace Trixter.XDream.API.Meters
             // Calculate the properties
             double crankChangesPerMillisecond = this.crankChangeFilter.DeltaPerMillisecond;
             this.Direction = CrankPositions.GetDirection(Math.Sign(crankChangesPerMillisecond));
-            this.RPM = CrankPositions.CalculateRPM(crankChangesPerMillisecond, 1);
+            this.AngularVelocity = CrankPositions.CalculateRadiansPerSecond(crankChangesPerMillisecond, 1);
+             
             this.HasData = true;
             this.CrankPosition = crankPosition;
         }

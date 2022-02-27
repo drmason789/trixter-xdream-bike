@@ -24,6 +24,8 @@ namespace Trixter.XDream.API
         public const int SecondsPerMinute = 60;
 
         public const double RpmToRadiansPerSecond = Math.PI * 2 / Constants.SecondsPerMinute;
+        public const double RadiansPerSecondToRpm = 1.0d / RpmToRadiansPerSecond;
+        public const double RadiansToRevolutions = 0.5 / Math.PI;
 
         public const string StateTimestampError = "Timestamp is prior to the previous.";
     }

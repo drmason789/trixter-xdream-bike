@@ -27,6 +27,8 @@ namespace Trixter.XDream.API.Meters
 
         public CrankDirection Direction => this.Current.Direction;
 
+        public double AngularVelocity => this.Current.AngularVelocity;
+
         public int RPM => this.Current.RPM;
 
         public int CrankPosition => this.Current.CrankPosition;

@@ -10,6 +10,8 @@ namespace Trixter.XDream.API.Testing.Meters
     [TestFixture]
     public class TripMeterTests
     {
+        const double tolerance = 0.0001;
+
         [Test(Description = "A test that uses real data, obtained from a real X-Dream bike, with a real person pedalling, pushing buttons and pulling levers.")]
         public void KeepingItReal()
         {
@@ -72,8 +74,8 @@ namespace Trixter.XDream.API.Testing.Meters
             // Wait for the asynchronous message processing to catch up.
             Thread.Sleep(1000);
 
-            Assert.AreEqual(199.98m, tm.CrankRevolutions);
-            Assert.AreEqual(959.904m, tm.FlywheelRevolutions);
+            Assert.AreEqual((double)199.98, (double)tm.CrankRevolutions, tolerance);
+            Assert.AreEqual((double)959.904m, (double)tm.FlywheelRevolutions, tolerance);
 
         }
     }

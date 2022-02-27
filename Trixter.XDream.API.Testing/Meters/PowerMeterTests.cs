@@ -44,7 +44,7 @@ namespace Trixter.XDream.API.Testing.Meters
             for(int i=0; i<rpms.Length; i++)
             {
                 t = t.AddMilliseconds(sampleTimes[i]);
-                powerMeter.Update(t, rpms[i]);
+                powerMeter.Update(t, rpms[i]*Constants.RpmToRadiansPerSecond);
             }
 
             Assert.AreEqual(expectedWatts, powerMeter.Power);

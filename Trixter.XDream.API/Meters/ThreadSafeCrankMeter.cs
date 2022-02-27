@@ -11,7 +11,8 @@ namespace Trixter.XDream.API.Meters
         public bool HasData => this.DoLocked(() => this.inner.HasData);
 
         public CrankDirection Direction => this.DoLocked(() => this.inner.Direction);
-
+        
+        public double AngularVelocity => this.DoLocked(() => this.inner.AngularVelocity);
         public int RPM => this.DoLocked(() => this.inner.RPM);
 
         public int CrankPosition => this.DoLocked(() => this.inner.CrankPosition);

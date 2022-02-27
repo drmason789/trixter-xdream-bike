@@ -30,6 +30,8 @@ namespace Trixter.XDream.API.Testing.Experimental
 
         public CrankDirection Direction => this.inner.Direction;
 
+        public double AngularVelocity => this.inner.AngularVelocity;
+
         public int RPM => this.inner.RPM;
 
         public int CrankPosition => this.inner.CrankPosition;

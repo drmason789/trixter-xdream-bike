@@ -8,6 +8,7 @@ namespace Trixter.XDream.API.Meters
 
         public int RawValue => DoLocked(() => this.inner.RawValue);
 
+        public double AngularVelocity => DoLocked(() => this.inner.AngularVelocity);
         public int RPM => DoLocked(() => this.inner.RPM);
 
         public ThreadSafeFlywheelMeter(IFlywheelMeter inner)
