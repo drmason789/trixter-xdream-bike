@@ -231,5 +231,10 @@ namespace Trixter.XDream.Diagnostics
         {
             this.pnRawData.Visible = this.cbRawData.Checked;
         }
+
+        private void btnDriver_Click(object sender, EventArgs e)
+        {
+            new GroupPolicyForm().ShowDialog();
+        }
     }
 }

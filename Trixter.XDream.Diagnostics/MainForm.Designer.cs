@@ -32,6 +32,12 @@ namespace Trixter.XDream.Diagnostics
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tbResistance = new System.Windows.Forms.TrackBar();
             this.gbInput = new System.Windows.Forms.GroupBox();
+            this.pnRawData = new System.Windows.Forms.Panel();
+            this.lbCrankTimeValue = new System.Windows.Forms.Label();
+            this.lbFlywheelTime = new System.Windows.Forms.Label();
+            this.lbFlywheelTimeValue = new System.Windows.Forms.Label();
+            this.lbCrankTime = new System.Windows.Forms.Label();
+            this.cbRawData = new System.Windows.Forms.CheckBox();
             this.lbPower = new System.Windows.Forms.Label();
             this.lbPowerValue = new System.Windows.Forms.Label();
             this.lbCrankRevs = new System.Windows.Forms.Label();
@@ -70,17 +76,12 @@ namespace Trixter.XDream.Diagnostics
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.cbRawData = new System.Windows.Forms.CheckBox();
-            this.lbFlywheelTimeValue = new System.Windows.Forms.Label();
-            this.lbCrankTimeValue = new System.Windows.Forms.Label();
-            this.lbCrankTime = new System.Windows.Forms.Label();
-            this.lbFlywheelTime = new System.Windows.Forms.Label();
-            this.pnRawData = new System.Windows.Forms.Panel();
+            this.btnDriver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
+            this.pnRawData.SuspendLayout();
             this.gbOutput.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.pnRawData.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbResistance
@@ -132,6 +133,67 @@ namespace Trixter.XDream.Diagnostics
             this.gbInput.TabIndex = 4;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "From Device";
+            // 
+            // pnRawData
+            // 
+            this.pnRawData.Controls.Add(this.lbCrankTimeValue);
+            this.pnRawData.Controls.Add(this.lbFlywheelTime);
+            this.pnRawData.Controls.Add(this.lbFlywheelTimeValue);
+            this.pnRawData.Controls.Add(this.lbCrankTime);
+            this.pnRawData.Location = new System.Drawing.Point(227, 334);
+            this.pnRawData.Name = "pnRawData";
+            this.pnRawData.Size = new System.Drawing.Size(114, 62);
+            this.pnRawData.TabIndex = 46;
+            this.pnRawData.Visible = false;
+            // 
+            // lbCrankTimeValue
+            // 
+            this.lbCrankTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbCrankTimeValue.Location = new System.Drawing.Point(52, 4);
+            this.lbCrankTimeValue.Name = "lbCrankTimeValue";
+            this.lbCrankTimeValue.Size = new System.Drawing.Size(60, 24);
+            this.lbCrankTimeValue.TabIndex = 42;
+            this.lbCrankTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbFlywheelTime
+            // 
+            this.lbFlywheelTime.AutoSize = true;
+            this.lbFlywheelTime.Location = new System.Drawing.Point(1, 40);
+            this.lbFlywheelTime.Name = "lbFlywheelTime";
+            this.lbFlywheelTime.Size = new System.Drawing.Size(48, 13);
+            this.lbFlywheelTime.TabIndex = 45;
+            this.lbFlywheelTime.Text = "Flywheel";
+            this.lbFlywheelTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbFlywheelTimeValue
+            // 
+            this.lbFlywheelTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbFlywheelTimeValue.Location = new System.Drawing.Point(52, 34);
+            this.lbFlywheelTimeValue.Name = "lbFlywheelTimeValue";
+            this.lbFlywheelTimeValue.Size = new System.Drawing.Size(60, 24);
+            this.lbFlywheelTimeValue.TabIndex = 43;
+            this.lbFlywheelTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbCrankTime
+            // 
+            this.lbCrankTime.AutoSize = true;
+            this.lbCrankTime.Location = new System.Drawing.Point(14, 9);
+            this.lbCrankTime.Name = "lbCrankTime";
+            this.lbCrankTime.Size = new System.Drawing.Size(35, 13);
+            this.lbCrankTime.TabIndex = 44;
+            this.lbCrankTime.Text = "Crank";
+            this.lbCrankTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cbRawData
+            // 
+            this.cbRawData.AutoSize = true;
+            this.cbRawData.Location = new System.Drawing.Point(235, 315);
+            this.cbRawData.Name = "cbRawData";
+            this.cbRawData.Size = new System.Drawing.Size(104, 17);
+            this.cbRawData.TabIndex = 41;
+            this.cbRawData.Text = "Show Raw Data";
+            this.cbRawData.UseVisualStyleBackColor = true;
+            this.cbRawData.CheckedChanged += new System.EventHandler(this.cbRawData_CheckedChanged);
             // 
             // lbPower
             // 
@@ -472,6 +534,7 @@ namespace Trixter.XDream.Diagnostics
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDriver);
             this.groupBox1.Controls.Add(this.bnRefreshPorts);
             this.groupBox1.Controls.Add(this.bnDisconnect);
             this.groupBox1.Controls.Add(this.bnConnect);
@@ -496,7 +559,7 @@ namespace Trixter.XDream.Diagnostics
             // 
             // bnDisconnect
             // 
-            this.bnDisconnect.Location = new System.Drawing.Point(309, 17);
+            this.bnDisconnect.Location = new System.Drawing.Point(308, 17);
             this.bnDisconnect.Name = "bnDisconnect";
             this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
             this.bnDisconnect.TabIndex = 3;
@@ -532,66 +595,15 @@ namespace Trixter.XDream.Diagnostics
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
             // 
-            // cbRawData
+            // btnDriver
             // 
-            this.cbRawData.AutoSize = true;
-            this.cbRawData.Location = new System.Drawing.Point(235, 315);
-            this.cbRawData.Name = "cbRawData";
-            this.cbRawData.Size = new System.Drawing.Size(104, 17);
-            this.cbRawData.TabIndex = 41;
-            this.cbRawData.Text = "Show Raw Data";
-            this.cbRawData.UseVisualStyleBackColor = true;
-            this.cbRawData.CheckedChanged += new System.EventHandler(this.cbRawData_CheckedChanged);
-            // 
-            // lbFlywheelTimeValue
-            // 
-            this.lbFlywheelTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbFlywheelTimeValue.Location = new System.Drawing.Point(52, 34);
-            this.lbFlywheelTimeValue.Name = "lbFlywheelTimeValue";
-            this.lbFlywheelTimeValue.Size = new System.Drawing.Size(60, 24);
-            this.lbFlywheelTimeValue.TabIndex = 43;
-            this.lbFlywheelTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbCrankTimeValue
-            // 
-            this.lbCrankTimeValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankTimeValue.Location = new System.Drawing.Point(52, 4);
-            this.lbCrankTimeValue.Name = "lbCrankTimeValue";
-            this.lbCrankTimeValue.Size = new System.Drawing.Size(60, 24);
-            this.lbCrankTimeValue.TabIndex = 42;
-            this.lbCrankTimeValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbCrankTime
-            // 
-            this.lbCrankTime.AutoSize = true;
-            this.lbCrankTime.Location = new System.Drawing.Point(14, 9);
-            this.lbCrankTime.Name = "lbCrankTime";
-            this.lbCrankTime.Size = new System.Drawing.Size(35, 13);
-            this.lbCrankTime.TabIndex = 44;
-            this.lbCrankTime.Text = "Crank";
-            this.lbCrankTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lbFlywheelTime
-            // 
-            this.lbFlywheelTime.AutoSize = true;
-            this.lbFlywheelTime.Location = new System.Drawing.Point(1, 40);
-            this.lbFlywheelTime.Name = "lbFlywheelTime";
-            this.lbFlywheelTime.Size = new System.Drawing.Size(48, 13);
-            this.lbFlywheelTime.TabIndex = 45;
-            this.lbFlywheelTime.Text = "Flywheel";
-            this.lbFlywheelTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pnRawData
-            // 
-            this.pnRawData.Controls.Add(this.lbCrankTimeValue);
-            this.pnRawData.Controls.Add(this.lbFlywheelTime);
-            this.pnRawData.Controls.Add(this.lbFlywheelTimeValue);
-            this.pnRawData.Controls.Add(this.lbCrankTime);
-            this.pnRawData.Location = new System.Drawing.Point(227, 334);
-            this.pnRawData.Name = "pnRawData";
-            this.pnRawData.Size = new System.Drawing.Size(114, 62);
-            this.pnRawData.TabIndex = 46;
-            this.pnRawData.Visible = false;
+            this.btnDriver.Location = new System.Drawing.Point(389, 17);
+            this.btnDriver.Name = "btnDriver";
+            this.btnDriver.Size = new System.Drawing.Size(75, 23);
+            this.btnDriver.TabIndex = 4;
+            this.btnDriver.Text = "Driver";
+            this.btnDriver.UseVisualStyleBackColor = true;
+            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
             // 
             // MainForm
             // 
@@ -609,12 +621,12 @@ namespace Trixter.XDream.Diagnostics
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).EndInit();
             this.gbInput.ResumeLayout(false);
             this.gbInput.PerformLayout();
+            this.pnRawData.ResumeLayout(false);
+            this.pnRawData.PerformLayout();
             this.gbOutput.ResumeLayout(false);
             this.gbOutput.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.pnRawData.ResumeLayout(false);
-            this.pnRawData.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -667,6 +679,7 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.Label lbFlywheelTimeValue;
         private System.Windows.Forms.Label lbCrankTime;
         private System.Windows.Forms.CheckBox cbRawData;
+        private System.Windows.Forms.Button btnDriver;
     }
 }
 
