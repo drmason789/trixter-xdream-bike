@@ -17,26 +17,22 @@ namespace Trixter.XDream.Diagnostics
         {
             InitializeComponent();
 
-            this.pbIcon.Image = System.Drawing.SystemIcons.Information.ToBitmap();
-
+            
             XDreamDeviceGroupPolicyUsbDeviceRestrictionReader xdr = new XDreamDeviceGroupPolicyUsbDeviceRestrictionReader();
             XDreamDeviceBlockingReport report = new XDreamDeviceBlockingReport(xdr);
 
-            string summary = report.GetSummary();
+            this.lbSummary.Text = report.GetSummary();
+            this.cbBlocking.Checked = xdr.DenyDeviceIDs;
+            this.cbRetroactive.Checked = xdr.DenyDeviceIDsRetroactive;
 
-            
-            int intialLabelHeight = this.label1.Height;
-            this.label1.Text = summary;                       
-            int dH = this.label1.Height - intialLabelHeight;
-                       
-
-            // Adjust the height of the dialog
-            this.Height += dH;
-
-            // Center the system icon vertically
-            this.pbIcon.Top = (this.ClientRectangle.Height - this.pbIcon.Height) / 2;
-
+            foreach (var item in xdr.XDreamDevicesListed)
+                this.lbDevices.Items.Add(item);
         }
 
+        private void cbBlocking_CheckedChanged(object sender, EventArgs e)
+        {
+            this.pnBlocking.Enabled = this.cbBlocking.Checked;
+            this.cbRetroactive.Enabled = this.cbBlocking.Checked;
+        }
     }
 }
