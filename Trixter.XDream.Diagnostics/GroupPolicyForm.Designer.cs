@@ -37,6 +37,8 @@
             this.pnBlocking = new System.Windows.Forms.Panel();
             this.cbRetroactive = new System.Windows.Forms.CheckBox();
             this.lbXDreamDevices = new System.Windows.Forms.Label();
+            this.lblOpinion = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnBlocking.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             // 
             this.btnOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOkay.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOkay.Location = new System.Drawing.Point(389, 175);
+            this.btnOkay.Location = new System.Drawing.Point(389, 210);
             this.btnOkay.Name = "btnOkay";
             this.btnOkay.Size = new System.Drawing.Size(75, 23);
             this.btnOkay.TabIndex = 2;
@@ -69,7 +71,7 @@
             this.lbDevices.IntegralHeight = false;
             this.lbDevices.Location = new System.Drawing.Point(10, 23);
             this.lbDevices.Name = "lbDevices";
-            this.lbDevices.Size = new System.Drawing.Size(458, 67);
+            this.lbDevices.Size = new System.Drawing.Size(458, 55);
             this.lbDevices.TabIndex = 6;
             // 
             // lbSummary
@@ -87,7 +89,7 @@
             // 
             this.cbBlocking.AutoCheck = false;
             this.cbBlocking.AutoSize = true;
-            this.cbBlocking.Location = new System.Drawing.Point(15, 52);
+            this.cbBlocking.Location = new System.Drawing.Point(15, 99);
             this.cbBlocking.Name = "cbBlocking";
             this.cbBlocking.Size = new System.Drawing.Size(109, 17);
             this.cbBlocking.TabIndex = 9;
@@ -102,16 +104,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnBlocking.Controls.Add(this.lbXDreamDevices);
             this.pnBlocking.Controls.Add(this.lbDevices);
-            this.pnBlocking.Location = new System.Drawing.Point(5, 75);
+            this.pnBlocking.Location = new System.Drawing.Point(5, 122);
             this.pnBlocking.Name = "pnBlocking";
-            this.pnBlocking.Size = new System.Drawing.Size(476, 96);
+            this.pnBlocking.Size = new System.Drawing.Size(476, 84);
             this.pnBlocking.TabIndex = 10;
             // 
             // cbRetroactive
             // 
             this.cbRetroactive.AutoCheck = false;
             this.cbRetroactive.AutoSize = true;
-            this.cbRetroactive.Location = new System.Drawing.Point(130, 52);
+            this.cbRetroactive.Location = new System.Drawing.Point(130, 99);
             this.cbRetroactive.Name = "cbRetroactive";
             this.cbRetroactive.Size = new System.Drawing.Size(125, 17);
             this.cbRetroactive.TabIndex = 7;
@@ -127,12 +129,34 @@
             this.lbXDreamDevices.TabIndex = 8;
             this.lbXDreamDevices.Text = "Known X-Dream Devices Registered";
             // 
+            // lblOpinion
+            // 
+            this.lblOpinion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOpinion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblOpinion.Location = new System.Drawing.Point(71, 54);
+            this.lblOpinion.Name = "lblOpinion";
+            this.lblOpinion.Size = new System.Drawing.Size(401, 40);
+            this.lblOpinion.TabIndex = 12;
+            this.lblOpinion.Text = "Opinion Text";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 54);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Opinion";
+            // 
             // GroupPolicyForm
             // 
             this.AcceptButton = this.btnOkay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 207);
+            this.ClientSize = new System.Drawing.Size(484, 242);
+            this.Controls.Add(this.lblOpinion);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.pnBlocking);
             this.Controls.Add(this.cbRetroactive);
             this.Controls.Add(this.cbBlocking);
@@ -162,5 +186,7 @@
         private System.Windows.Forms.Panel pnBlocking;
         private System.Windows.Forms.Label lbXDreamDevices;
         private System.Windows.Forms.CheckBox cbRetroactive;
+        private System.Windows.Forms.Label lblOpinion;
+        private System.Windows.Forms.Label label3;
     }
 }

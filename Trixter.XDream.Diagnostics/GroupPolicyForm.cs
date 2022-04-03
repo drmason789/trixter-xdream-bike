@@ -22,6 +22,7 @@ namespace Trixter.XDream.Diagnostics
             XDreamDeviceBlockingReport report = new XDreamDeviceBlockingReport(xdr);
 
             this.lbSummary.Text = report.GetSummary();
+            this.lblOpinion.Text = report.GetOpinion();
             this.cbBlocking.Checked = xdr.DenyDeviceIDs;
             this.cbRetroactive.Checked = xdr.DenyDeviceIDsRetroactive;
 

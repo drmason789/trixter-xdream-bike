@@ -14,9 +14,13 @@ namespace Trixter.XDream.Diagnostics
            // public const string NoKnownDevices = "No known X-Dream related devices are registered for restriction.";
             public const string UnrestrictedInstallation = "Installation of known X-Dream related devices is not restricted.";
             public const string InactiveRestrictions = "Although known X-Dream related devices are registered for restrictions, restrictions are not active.";
-            public const string OtherDevicesRestricted = "Restrictions are active, but no X-Dream related devices are registered for restriction.";
+            public const string OtherDevicesRestricted = "Restrictions are active, but no known X-Dream related devices are registered for restriction.";
             public const string DeviceRestricted = "At least 1 known X-Dream device is restricted from updates and new installations.";
             public const string DeviceRestrictedRetroactively = "At least 1 known X-Dream device is restricted";
+
+            public const string Ideal = "This is potentially ideal if the current driver works and is subject to automatic update by Windows.";
+            public const string Risky = "The current driver could be updated. This is not ideal if the current driver works and later ones do not.";
+            public const string NotIdeal = "No installations or updates of the device are permitted.";
         }
 
         public XDreamDeviceGroupPolicyUsbDeviceRestrictionReader Reader { get; }
@@ -28,23 +32,35 @@ namespace Trixter.XDream.Diagnostics
         
         public string GetSummary()
         {
-            StringBuilder result = new StringBuilder();
-         
-            if (!this.Reader.DenyDeviceIDs && !this.Reader.XDreamDeviceListed)
-                result.AppendLine(Constants.UnrestrictedInstallation);
-            else if (!this.Reader.DenyDeviceIDs && this.Reader.XDreamDeviceListed)
-                result.AppendLine(Constants.InactiveRestrictions);
-            else if (this.Reader.DenyDeviceIDs && !this.Reader.XDreamDeviceListed)
-                result.AppendLine(Constants.OtherDevicesRestricted);
-            else if (this.Reader.XDreamDeviceDenied)
+            if (!this.Reader.DenyDeviceIDs)
             {
-                if (this.Reader.DenyDeviceIDsRetroactive)
-                    result.AppendLine(Constants.DeviceRestrictedRetroactively);
-                else 
-                    result.AppendLine(Constants.DeviceRestricted);
+                if(!this.Reader.XDreamDeviceListed)
+                    return Constants.UnrestrictedInstallation;
+                return Constants.InactiveRestrictions;
             }
 
-            return result.ToString();
+            if (!this.Reader.XDreamDeviceListed)
+                return Constants.OtherDevicesRestricted;
+            else 
+            {
+                if (this.Reader.DenyDeviceIDsRetroactive)
+                    return Constants.DeviceRestrictedRetroactively;
+                else
+                    return Constants.DeviceRestricted;
+            }
+            return String.Empty;
+        }
+
+        public string GetOpinion()
+        {
+            if (!this.Reader.DenyDeviceIDs)
+                return Constants.Risky;
+            if (this.Reader.DenyDeviceIDsRetroactive)
+                return Constants.NotIdeal;
+            if (this.Reader.XDreamDeviceListed)
+                return Constants.Ideal;
+
+            return String.Empty;
         }
     }
 }
