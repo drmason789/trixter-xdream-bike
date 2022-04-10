@@ -17,6 +17,8 @@ namespace Trixter.XDream.API.Meters
 
         public decimal CrankRevolutions => this.DoLocked(() => inner.CrankRevolutions);
 
+        public decimal Power => this.DoLocked(() => inner.Power);
+
         public void Reset() => this.DoLocked(() =>this.inner.Reset());
 
         public void Update(DateTimeOffset timestamp) => this.DoLocked(() => this.inner.Update(timestamp));

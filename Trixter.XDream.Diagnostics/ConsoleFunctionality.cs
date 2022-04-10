@@ -135,6 +135,7 @@ namespace Trixter.XDream.Diagnostics
                 sb.AppendLine($"Flywheel Revs     : {sender.TripMeter.FlywheelRevolutions:0.0}");
                 sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
                 sb.AppendLine($"Power             : {sender.PowerMeter.Power} W");
+                sb.AppendLine($"Total Power       : {sender.TripMeter.Power:0} W");
                 sb.AppendLine($"Heart Rate        : {e.HeartRate}");
                 sb.AppendLine($"Buttons           : {e.Buttons}");
                 sb.AppendLine($"Resistance        : {sender.Resistance} / {XDreamSerialPortClient.MaxResistance}");

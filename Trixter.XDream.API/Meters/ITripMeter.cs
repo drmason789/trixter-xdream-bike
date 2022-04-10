@@ -9,6 +9,7 @@ namespace Trixter.XDream.API.Meters
         DateTimeOffset? StartTime { get; }
         decimal FlywheelRevolutions { get; }
         decimal CrankRevolutions { get; }
+        decimal Power { get; }
 
         void Update(DateTimeOffset timestamp);
         void Reset();

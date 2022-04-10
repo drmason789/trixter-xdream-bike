@@ -71,12 +71,14 @@ namespace Trixter.XDream.Diagnostics
             this.cbApplyBrakes = new System.Windows.Forms.CheckBox();
             this.lbResistance = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDriver = new System.Windows.Forms.Button();
             this.bnRefreshPorts = new System.Windows.Forms.Button();
             this.bnDisconnect = new System.Windows.Forms.Button();
             this.bnConnect = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.btnDriver = new System.Windows.Forms.Button();
+            this.lbTotalPower = new System.Windows.Forms.Label();
+            this.lbTotalPowerValue = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
             this.pnRawData.SuspendLayout();
@@ -98,6 +100,8 @@ namespace Trixter.XDream.Diagnostics
             // 
             // gbInput
             // 
+            this.gbInput.Controls.Add(this.lbTotalPower);
+            this.gbInput.Controls.Add(this.lbTotalPowerValue);
             this.gbInput.Controls.Add(this.pnRawData);
             this.gbInput.Controls.Add(this.cbRawData);
             this.gbInput.Controls.Add(this.lbPower);
@@ -140,7 +144,7 @@ namespace Trixter.XDream.Diagnostics
             this.pnRawData.Controls.Add(this.lbFlywheelTime);
             this.pnRawData.Controls.Add(this.lbFlywheelTimeValue);
             this.pnRawData.Controls.Add(this.lbCrankTime);
-            this.pnRawData.Location = new System.Drawing.Point(227, 334);
+            this.pnRawData.Location = new System.Drawing.Point(227, 353);
             this.pnRawData.Name = "pnRawData";
             this.pnRawData.Size = new System.Drawing.Size(114, 62);
             this.pnRawData.TabIndex = 46;
@@ -187,7 +191,7 @@ namespace Trixter.XDream.Diagnostics
             // cbRawData
             // 
             this.cbRawData.AutoSize = true;
-            this.cbRawData.Location = new System.Drawing.Point(235, 315);
+            this.cbRawData.Location = new System.Drawing.Point(235, 334);
             this.cbRawData.Name = "cbRawData";
             this.cbRawData.Size = new System.Drawing.Size(104, 17);
             this.cbRawData.TabIndex = 41;
@@ -198,7 +202,7 @@ namespace Trixter.XDream.Diagnostics
             // lbPower
             // 
             this.lbPower.AutoSize = true;
-            this.lbPower.Location = new System.Drawing.Point(265, 257);
+            this.lbPower.Location = new System.Drawing.Point(304, 243);
             this.lbPower.Name = "lbPower";
             this.lbPower.Size = new System.Drawing.Size(37, 13);
             this.lbPower.TabIndex = 40;
@@ -208,7 +212,7 @@ namespace Trixter.XDream.Diagnostics
             // lbPowerValue
             // 
             this.lbPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbPowerValue.Location = new System.Drawing.Point(279, 274);
+            this.lbPowerValue.Location = new System.Drawing.Point(279, 260);
             this.lbPowerValue.Name = "lbPowerValue";
             this.lbPowerValue.Size = new System.Drawing.Size(60, 24);
             this.lbPowerValue.TabIndex = 39;
@@ -217,7 +221,7 @@ namespace Trixter.XDream.Diagnostics
             // lbCrankRevs
             // 
             this.lbCrankRevs.AutoSize = true;
-            this.lbCrankRevs.Location = new System.Drawing.Point(246, 205);
+            this.lbCrankRevs.Location = new System.Drawing.Point(247, 197);
             this.lbCrankRevs.Name = "lbCrankRevs";
             this.lbCrankRevs.Size = new System.Drawing.Size(94, 13);
             this.lbCrankRevs.TabIndex = 38;
@@ -227,7 +231,7 @@ namespace Trixter.XDream.Diagnostics
             // lbCrankRevsValue
             // 
             this.lbCrankRevsValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbCrankRevsValue.Location = new System.Drawing.Point(279, 222);
+            this.lbCrankRevsValue.Location = new System.Drawing.Point(279, 214);
             this.lbCrankRevsValue.Name = "lbCrankRevsValue";
             this.lbCrankRevsValue.Size = new System.Drawing.Size(60, 24);
             this.lbCrankRevsValue.TabIndex = 37;
@@ -236,7 +240,7 @@ namespace Trixter.XDream.Diagnostics
             // lbFlywheelRevs
             // 
             this.lbFlywheelRevs.AutoSize = true;
-            this.lbFlywheelRevs.Location = new System.Drawing.Point(233, 151);
+            this.lbFlywheelRevs.Location = new System.Drawing.Point(234, 151);
             this.lbFlywheelRevs.Name = "lbFlywheelRevs";
             this.lbFlywheelRevs.Size = new System.Drawing.Size(107, 13);
             this.lbFlywheelRevs.TabIndex = 36;
@@ -547,6 +551,16 @@ namespace Trixter.XDream.Diagnostics
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Device";
             // 
+            // btnDriver
+            // 
+            this.btnDriver.Location = new System.Drawing.Point(389, 17);
+            this.btnDriver.Name = "btnDriver";
+            this.btnDriver.Size = new System.Drawing.Size(75, 23);
+            this.btnDriver.TabIndex = 4;
+            this.btnDriver.Text = "Driver";
+            this.btnDriver.UseVisualStyleBackColor = true;
+            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
+            // 
             // bnRefreshPorts
             // 
             this.bnRefreshPorts.Image = ((System.Drawing.Image)(resources.GetObject("bnRefreshPorts.Image")));
@@ -595,15 +609,24 @@ namespace Trixter.XDream.Diagnostics
             this.cbPorts.Size = new System.Drawing.Size(94, 21);
             this.cbPorts.TabIndex = 0;
             // 
-            // btnDriver
+            // lbTotalPower
             // 
-            this.btnDriver.Location = new System.Drawing.Point(389, 17);
-            this.btnDriver.Name = "btnDriver";
-            this.btnDriver.Size = new System.Drawing.Size(75, 23);
-            this.btnDriver.TabIndex = 4;
-            this.btnDriver.Text = "Driver";
-            this.btnDriver.UseVisualStyleBackColor = true;
-            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
+            this.lbTotalPower.AutoSize = true;
+            this.lbTotalPower.Location = new System.Drawing.Point(277, 289);
+            this.lbTotalPower.Name = "lbTotalPower";
+            this.lbTotalPower.Size = new System.Drawing.Size(64, 13);
+            this.lbTotalPower.TabIndex = 48;
+            this.lbTotalPower.Text = "Total Power";
+            this.lbTotalPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbTotalPowerValue
+            // 
+            this.lbTotalPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbTotalPowerValue.Location = new System.Drawing.Point(279, 305);
+            this.lbTotalPowerValue.Name = "lbTotalPowerValue";
+            this.lbTotalPowerValue.Size = new System.Drawing.Size(60, 24);
+            this.lbTotalPowerValue.TabIndex = 47;
+            this.lbTotalPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -680,6 +703,8 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.Label lbCrankTime;
         private System.Windows.Forms.CheckBox cbRawData;
         private System.Windows.Forms.Button btnDriver;
+        private System.Windows.Forms.Label lbTotalPower;
+        private System.Windows.Forms.Label lbTotalPowerValue;
     }
 }
 

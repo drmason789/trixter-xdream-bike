@@ -131,6 +131,7 @@ namespace Trixter.XDream.Diagnostics
                 this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
 
                 this.lbPowerValue.Text = this.xdreamMachine.PowerMeter.Power + " W";
+                this.lbTotalPowerValue.Text = this.xdreamMachine.TripMeter.Power.ToString("0") + " W";
 
                 this.clbButtons.SetItemChecked(0, message.FrontGearUp);
                 this.clbButtons.SetItemChecked(1, message.FrontGearDown);

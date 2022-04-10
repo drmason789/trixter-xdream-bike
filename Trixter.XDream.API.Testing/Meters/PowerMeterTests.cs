@@ -50,5 +50,6 @@ namespace Trixter.XDream.API.Testing.Meters
             Assert.AreEqual(expectedWatts, powerMeter.Power);
 
         }
+                
     }
 }

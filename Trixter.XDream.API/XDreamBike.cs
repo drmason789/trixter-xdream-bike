@@ -48,13 +48,13 @@ namespace Trixter.XDream.API
             set => this.DataSource.Resistance = value;
         }
      
-        public XDreamBike(XDreamClient dataSource, IFlywheelMeter flywheelMeter, ICrankMeter crankMeter)
+        public XDreamBike(XDreamClient dataSource, IFlywheelMeter flywheelMeter, ICrankMeter crankMeter, IPowerMeter powerMeter=null)
         {
             this.DataSource = dataSource ?? throw new ArgumentNullException(nameof(dataSource));
             this.flywheelMeter = ThreadSafeFlywheelMeter.TryCreate(flywheelMeter) ?? throw new ArgumentNullException(nameof(flywheelMeter));
             this.crankMeter = ThreadSafeCrankMeter.TryCreate(crankMeter) ?? throw new ArgumentNullException(nameof (crankMeter));
-            this.tripMeter = ThreadSafeTripMeter.TryCreate(new TripMeter(flywheelMeter, crankMeter));
-            this.powerMeter = ThreadSafePowerMeter.TryCreate(new PowerMeter(XDreamFlywheel.Default.MomentOfInertia));
+            this.powerMeter = ThreadSafePowerMeter.TryCreate(powerMeter ?? new PowerMeter(XDreamFlywheel.Default.MomentOfInertia));
+            this.tripMeter = ThreadSafeTripMeter.TryCreate(new TripMeter(flywheelMeter, crankMeter, this.powerMeter));            
             this.flywheelMeter.SyncRoot = this.SyncRoot;
             this.crankMeter.SyncRoot = this.SyncRoot;
             this.tripMeter.SyncRoot = this.SyncRoot;
