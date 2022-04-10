@@ -20,6 +20,7 @@ set assemblyVersionReplacement=${1}%newVersion%
 
 set csprojAssemblyVersionRegex=(\u003CAssemblyVersion\u003E)%versionNumberRegex%(\u003C/AssemblyVersion\u003E)
 set csprojFileVersionRegex=(\u003CFileVersion\u003E)%versionNumberRegex%(\u003C/FileVersion\u003E)
+set csprojProductVersionRegex=(\u003CVersion\u003E)%versionNumberRegex%(\u003C/Version\u003E)
 set csprojVersionReplacement=${1}%newVersion%${2}
 
 set wixVersionRegex=(.\?define\s+VERSION\s*=\s*.)%versionNumberRegex%(.\s*\?.)
@@ -55,6 +56,9 @@ call :regexReplace "%~1" "%csprojAssemblyVersionRegex%" "%csprojVersionReplaceme
 %checkError%
 
 call :regexReplace "%~1" "%csprojFileVersionRegex%" "%csprojVersionReplacement%" utf8
+%checkError%
+
+call :regexReplace "%~1" "%csprojProductVersionRegex%" "%csprojVersionReplacement%" utf8
 %checkError%
 
 %return%
