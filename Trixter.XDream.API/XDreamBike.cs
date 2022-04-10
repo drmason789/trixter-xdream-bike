@@ -82,7 +82,7 @@ namespace Trixter.XDream.API
 
                         this.FlywheelMeter.AddData(newState);
                         this.CrankMeter.AddData(newState);
-                        this.PowerMeter.Update(newState.TimeStamp, this.FlywheelMeter.RPM);
+                        this.PowerMeter.Update(newState.TimeStamp, this.FlywheelMeter.AngularVelocity);
                         this.TripMeter.Update(newState.TimeStamp);
 
                         this.state = newState;
