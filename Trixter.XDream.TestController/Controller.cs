@@ -12,6 +12,21 @@ namespace Trixter.XDream.TestController
         private AutoCranker autoCranker;
         private System.Timers.Timer crankTimer;
         private DateTimeOffset lastCrankUpdate;
+        private string comPort;
+
+        public bool IsConnected { get; private set; }
+
+        public string COMPort
+        {
+            get => this.comPort;
+            set
+            {
+                if (this.IsConnected)
+                    throw new InvalidOperationException("Cannot set COM port while connected.");
+                this.comPort = value;
+
+            } 
+        }
 
         public XDreamStateBuilder State { get;  }
 
@@ -83,25 +98,38 @@ namespace Trixter.XDream.TestController
 
         public void Connect()
         {
-        //    Com0Com.CSharp.Com0ComSetupCFacade setupCFacade = new Com0Com.CSharp.Com0ComSetupCFacade();
-        //var pairs = this.setupCFacade.GetCrossoverPortPairs();
+            //    Com0Com.CSharp.Com0ComSetupCFacade setupCFacade = new Com0Com.CSharp.Com0ComSetupCFacade();
+            //var pairs = this.setupCFacade.GetCrossoverPortPairs();
 
-        //    foreach(var pair in pairs)
-        //    {
-        //        if (pair.PortNameA == "COM13" && pair.PortNameB == "COM14")
-        //        {
-        //            this.portPair = pair;
-        //            break;
-        //        }
-        //    }
+            //    foreach(var pair in pairs)
+            //    {
+            //        if (pair.PortNameA == "COM13" && pair.PortNameB == "COM14")
+            //        {
+            //            this.portPair = pair;
+            //            break;
+            //        }
+            //    }
 
             //this.portPair = this.setupCFacade.CreatePortPair("COM13", "COM14");
-            this.server.Connect("COM15");
+
+            if (this.IsConnected)
+                throw new InvalidOperationException("Already connected.");
+
+            if (string.IsNullOrWhiteSpace(this.COMPort))
+                throw new InvalidOperationException("COM Port not set");
+
+
+            this.server.Connect(this.COMPort);
+            this.IsConnected = true;
         }
 
         public void Disconnect()
         {
-            
+            if (!this.IsConnected)
+                throw new InvalidOperationException("Not connected.");
+
+            this.server.Disconnect();
+            this.IsConnected = false;
         }
 
         public void Send() 

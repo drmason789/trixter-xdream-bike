@@ -1,5 +1,7 @@
 ﻿
 using System;
+using System.IO.Ports;
+using System.Linq;
 using System.Windows.Forms;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Meters;
@@ -66,13 +68,25 @@ namespace Trixter.XDream.TestController
             this.controller.ResistanceChanged += Controller_ResistanceChanged;
             this.controller.CrankPositionChanged += Controller_CrankPositionChanged;
 
-            this.controller.Connect();
-            this.controller.Send();
+            this.PopulateComPortBox();
 
             this.nudCrankPosition.Paint += (s, e) =>
             {
                 this.DoWithSuppressedEvents(() => this.nudCrankPosition.Value = this.controller.State.CrankPosition);
             };
+        }
+
+        private void PopulateComPortBox()
+        {
+            string[] ports = SerialPort.GetPortNames().OrderBy(p => p).ToArray();
+            this.cbComPort.Items.Clear();
+            this.cbComPort.Items.AddRange(ports);
+            string userSettings = Properties.Settings.Default.ComPort;
+
+            int i = Array.IndexOf(ports, userSettings);
+            if (i >= 0)
+                this.cbComPort.SelectedIndex = i;
+
         }
 
         private void DoWithSuppressedEvents(Action action)
@@ -270,7 +284,7 @@ namespace Trixter.XDream.TestController
         {
             this.controller.ResistanceChanged -= Controller_ResistanceChanged;
             this.controller.CrankPositionChanged -= Controller_CrankPositionChanged;
-            
+
             try
             {
                 var gp = new GamePadForm();
@@ -282,6 +296,29 @@ namespace Trixter.XDream.TestController
                 this.controller.ResistanceChanged += Controller_ResistanceChanged;
                 this.controller.CrankPositionChanged += Controller_CrankPositionChanged;
             }
+        }
+
+        private void bnConnect_Click(object sender, EventArgs e)
+        {
+
+            this.controller.COMPort = this.cbComPort.Text;
+            this.controller.Connect();
+            this.controller.Send();
+
+            this.bnConnect.Enabled = false;
+            this.cbComPort.Enabled = false;
+            this.bnDisconnect.Enabled = true;
+            Properties.Settings.Default.ComPort = this.cbComPort.Text;
+            Properties.Settings.Default.Save();
+
+        }
+
+        private void bnDisconnect_Click(object sender, EventArgs e)
+        {
+            this.controller.Disconnect();
+            this.bnConnect.Enabled = true;
+            this.cbComPort.Enabled = true;
+            this.bnDisconnect.Enabled = false;
         }
 
         private void Brake_ValueChanged(object sender, EventArgs e)
