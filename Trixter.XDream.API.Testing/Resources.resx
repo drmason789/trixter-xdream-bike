@@ -130,6 +130,24 @@
   <data name="flywheel_spindown_messages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="flywheel_spindown_messages_R000" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R000.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R050" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R050.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R100" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R100.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R150" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R150.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R200" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R200.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R250" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R250.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="heartrate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\heartrate.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
