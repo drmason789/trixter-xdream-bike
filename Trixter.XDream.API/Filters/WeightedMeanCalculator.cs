@@ -3,22 +3,23 @@ using System.Diagnostics;
 
 namespace Trixter.XDream.API.Filters
 {
+
     [DebuggerDisplay("{DebuggerDisplay}")]
-    internal class MeanCalculator : IMeanCalculator
+    internal class WeightedMeanCalculator : IMeanCalculator
     {
         private double? mean = null;
         private string debuggerDisplay;
 
-        protected virtual string GetDebuggerDisplayString() => $"N:{N} Sum:{Sum} Mean:{Mean}";
-        protected string DebuggerDisplay
-                => this.debuggerDisplay ?? (this.debuggerDisplay = this.GetDebuggerDisplayString());
-
+       protected virtual string GetDebuggerDisplayString() => $"TotalWeight:{TotalWeight} Sum:{Sum} WeightedMean:{Mean}";
+       protected string DebuggerDisplay      
+               =>  this.debuggerDisplay ?? (this.debuggerDisplay = this.GetDebuggerDisplayString());
+           
         protected double Calculate(Func<double> calculation, ref double? cached)
         {
             if (cached.HasValue)
                 return cached.Value;
 
-            if (this.N == 0)
+            if (this.TotalWeight == 0)
                 throw new InvalidOperationException();
 
             cached = calculation();
@@ -29,23 +30,22 @@ namespace Trixter.XDream.API.Filters
         /// <summary>
         /// The number of items in the calculation.
         /// </summary>
-        public int N { get; protected set; } = 0;
+        public double TotalWeight { get; protected set; } = 0;
 
         /// <summary>
         /// The mean: sum divided by the number of items.
         /// </summary>
-        public double Mean => this.Calculate(() => this.Sum / this.N, ref this.mean);
-
+        public double Mean => this.Calculate(() => this.Sum / this.TotalWeight, ref this.mean);
+        
         /// <summary>
         /// The sum of the items added.
         /// </summary>
         public double Sum { get; protected set; }
-
-        public MeanCalculator()
+        
+        public WeightedMeanCalculator()
         {
 
         }
-
 
         #region Template methods
         protected virtual void DoAdd(double x)
@@ -55,10 +55,7 @@ namespace Trixter.XDream.API.Filters
 
         protected virtual void DoRemove(double x)
         {
-            double newSum = this.Sum - x;
-            if (this.N == 1 && newSum != 0d)
-                throw new InvalidOperationException("Removal would produce a non-zero sum for 0 items.");
-            this.Sum = newSum;
+            this.Sum -= x;
         }
 
         protected virtual void DoInvalidate()
@@ -78,10 +75,10 @@ namespace Trixter.XDream.API.Filters
         /// Add an item.
         /// </summary>
         /// <param name="x"></param>
-        public void Add(double x)
+        public void Add(double x, double weight)
         {
-            this.DoAdd(x);
-            this.N++;
+            this.DoAdd(x * weight);
+            this.TotalWeight += weight;
             this.Invalidate();
         }
 
@@ -90,13 +87,12 @@ namespace Trixter.XDream.API.Filters
         /// </summary>
         /// <param name="x"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Remove(double x)
+        public void Remove(double x, double weight)
         {
-            if (this.N == 0)
-                throw new InvalidOperationException();
-            this.DoRemove(x);
-
-            this.N--;
+            if(weight>this.TotalWeight)            
+                throw new InvalidOperationException("Removal would produce negative total weight.");
+            this.DoRemove(x * weight);
+            this.TotalWeight -= weight;
             this.Invalidate();
         }
 
@@ -114,7 +110,7 @@ namespace Trixter.XDream.API.Filters
         /// </summary>
         public void Reset()
         {
-            this.N = 0;
+            this.TotalWeight = 0;
             this.DoReset();
             this.Invalidate();
 
