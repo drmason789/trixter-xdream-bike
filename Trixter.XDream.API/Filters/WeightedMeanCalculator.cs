@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Trixter.XDream.API.Filters
 {
@@ -10,10 +11,10 @@ namespace Trixter.XDream.API.Filters
         private double? mean = null;
         private string debuggerDisplay;
 
-       protected virtual string GetDebuggerDisplayString() => $"TotalWeight:{TotalWeight} Sum:{Sum} WeightedMean:{Mean}";
-       protected string DebuggerDisplay      
-               =>  this.debuggerDisplay ?? (this.debuggerDisplay = this.GetDebuggerDisplayString());
-           
+        protected string GetDebuggerDisplayString() => $"TotalWeight:{TotalWeight} Sum:{Sum} WeightedMean:{Mean}";
+        protected string DebuggerDisplay
+                => this.debuggerDisplay ?? (this.debuggerDisplay = this.GetDebuggerDisplayString());
+
         protected double Calculate(Func<double> calculation, ref double? cached)
         {
             if (cached.HasValue)
@@ -28,71 +29,66 @@ namespace Trixter.XDream.API.Filters
         }
 
         /// <summary>
-        /// The number of items in the calculation.
+        /// The total weight of items in the calculation.
         /// </summary>
         public double TotalWeight { get; protected set; } = 0;
 
         /// <summary>
-        /// The mean: sum divided by the number of items.
+        /// The mean: sum divided by the total weight of items.
         /// </summary>
-        public double Mean => this.Calculate(() => this.Sum / this.TotalWeight, ref this.mean);
-        
+        public double Mean => this.mean.GetValueOrDefault(this.Calculate(() => this.Sum / this.TotalWeight, ref this.mean));
+
         /// <summary>
         /// The sum of the items added.
         /// </summary>
         public double Sum { get; protected set; }
-        
+
         public WeightedMeanCalculator()
         {
 
-        }
-
-        #region Template methods
-        protected virtual void DoAdd(double x)
-        {
-            this.Sum += x;
-        }
-
-        protected virtual void DoRemove(double x)
-        {
-            this.Sum -= x;
-        }
-
-        protected virtual void DoInvalidate()
-        {
-            this.mean = null;
-        }
-
-        protected virtual void DoReset()
-        {
-            this.mean = null;
-            this.Sum = 0;
-        }
-
-        #endregion
+        }       
 
         /// <summary>
         /// Add an item.
         /// </summary>
-        /// <param name="x"></param>
-        public void Add(double x, double weight)
+        /// <param name="value"></param>
+        /// <param name="weight"></param>
+        public void Add(double value, double weight)
         {
-            this.DoAdd(x * weight);
+            this.Sum += value * weight;
             this.TotalWeight += weight;
             this.Invalidate();
         }
-
+        
         /// <summary>
         /// Remove an item. If the removal will result in an invalid calculation or state of the object, an <see cref="InvalidOperationException"/> is thrown.
         /// </summary>
-        /// <param name="x"></param>
+        /// <param name="value"></param>
+        /// <param name="weight"></param>
         /// <exception cref="InvalidOperationException"></exception>
         public void Remove(double x, double weight)
         {
-            if(weight>this.TotalWeight)            
-                throw new InvalidOperationException("Removal would produce negative total weight.");
-            this.DoRemove(x * weight);
+            this.AssertValidWeight(weight);
+
+            this.Sum -= x * weight;
             this.TotalWeight -= weight;
+            this.Invalidate();
+        }
+        
+        /// <summary>
+        /// Change the weight of a value in one operation, avoiding overheads of calling <see cref="Add"/> and <see cref="Remove"/> separately.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="oldWeight"></param>
+        /// <param name="newWeight"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        public void Update(double value, double oldWeight, double newWeight)
+        {
+            this.AssertValidWeight(oldWeight);
+
+            double dW = newWeight - oldWeight;
+            this.Sum += value * dW;
+            this.TotalWeight += dW;
             this.Invalidate();
         }
 
@@ -102,7 +98,7 @@ namespace Trixter.XDream.API.Filters
         protected void Invalidate()
         {
             this.debuggerDisplay = null;
-            this.DoInvalidate();
+            this.mean = null;
         }
 
         /// <summary>
@@ -111,9 +107,23 @@ namespace Trixter.XDream.API.Filters
         public void Reset()
         {
             this.TotalWeight = 0;
-            this.DoReset();
+            this.mean = null;
+            this.Sum = 0;
             this.Invalidate();
 
+        }
+
+        /// <summary>
+        /// Assert that removal of the specified weight will not result in negative total weight and throw an <see cref="InvalidOperationException"/>
+        /// if it will.
+        /// </summary>
+        /// <param name="weight"></param>
+        /// <exception cref="InvalidOperationException"></exception>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void AssertValidWeight(double weight)
+        {
+            if (weight > this.TotalWeight)
+                throw new InvalidOperationException("Removal would produce negative total weight.");
         }
     }
 }

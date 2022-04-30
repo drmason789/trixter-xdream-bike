@@ -11,7 +11,7 @@ namespace Trixter.XDream.API.Filters
         protected Sample previous, next;
 
         public double Value;
-        public double? Delta;
+        public double? Delta => this.Value - this.previous?.Value;
         public double T;
         
         public double WeightedValue => this.Value * this.dT;
@@ -52,10 +52,9 @@ namespace Trixter.XDream.API.Filters
         }
 
 
-        public Sample(double t, double v, double? d)
+        public Sample(double t, double v)
         {
-            this.Value = v;
-            this.Delta = d;
+            this.Value = v;           
 
             this.T = t;
         }

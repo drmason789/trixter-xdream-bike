@@ -24,6 +24,10 @@ namespace Trixter.XDream.API.Filters
             this.meanDelta = new WeightedMeanCalculator();            
         }
 
+        /// <summary>
+        /// Collect statistics for the sample.
+        /// </summary>
+        /// <param name="sample"></param>
         protected override void Add(Sample sample)
         {
             double dT = sample.dT;
@@ -32,6 +36,10 @@ namespace Trixter.XDream.API.Filters
                 this.meanDelta.Add(sample.Delta.Value, dT);
         }
 
+        /// <summary>
+        /// Remove statistcs for the sample.
+        /// </summary>
+        /// <param name="sample"></param>
         protected override void Remove(Sample sample)
         {
             double dT = sample.dT;
@@ -46,9 +54,15 @@ namespace Trixter.XDream.API.Filters
             Sample next = current.Next;
             if (next?.T >= limit)
             {
-                Remove(next);
+                // Move the last sample that's beyond the limit up to the limit
+                // so that the period of the filter is the full length.
+                double olddT = next.dT;
                 current.T = limit;
-                Add(next);
+                double newdT = next.dT;
+
+                this.meanValue.Update(next.Value, olddT, newdT);
+                if (next.Delta != null)
+                    this.meanDelta.Update(next.Delta.Value, olddT, newdT);
             }
         }
 

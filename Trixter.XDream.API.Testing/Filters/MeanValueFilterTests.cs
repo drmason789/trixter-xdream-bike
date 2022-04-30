@@ -46,11 +46,11 @@ namespace Trixter.XDream.API.Testing.Filters
 
 
         [Test]
-        [TestCase(typeof(MeanValueFilter), 1000, 0.5476129745983358d)]
-        [TestCase(typeof(WeightedMeanValueFilter), 1000, 0.53976149111695693d)]
+        [TestCase(typeof(MeanValueFilter), 1000, 0.48671986893703406d)]
+        [TestCase(typeof(WeightedMeanValueFilter), 1000, 0.48562740929878312d)]
         public void SpeedTest(Type type, int period, double expected)
         {
-            const int iterations = 100000;
+            const int iterations = 1000000;
 
             Random random = new Random(10);
             DateTimeOffset t = DateTimeOffset.Now;

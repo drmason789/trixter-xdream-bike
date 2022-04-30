@@ -16,6 +16,9 @@ namespace Trixter.XDream.API.Filters
         protected abstract IMeanCalculator MeanValue { get; }
         protected abstract IMeanCalculator MeanDelta { get; }
 
+        /// <summary>
+        /// The period over which the mean value is calculated, over which samples are kept.
+        /// </summary>
         public int PeriodMilliseconds => (int)this.periodMilliseconds;
 
         /// <summary>
@@ -69,19 +72,26 @@ namespace Trixter.XDream.API.Filters
             this.startTime = DateTimeOffset.MinValue;
         }
 
-        public void Add(double x, DateTimeOffset timestamp)
+
+        public void Add(double value, DateTimeOffset timestamp)
         {
-            double? delta = this.samples.Count > 0 ? (double?)(x - this.samples.Latest.Value) : null;
-            this.Add(x, delta, timestamp);
+            double t = GetSampleTime(timestamp);
+            Sample newSample = new Sample(t, value);
+            this.samples.Add(newSample);
+            this.Add(newSample);
+            this.Trim(t);
+
+            // Clear the caches
+            this.ClearCachedValues();
         }
 
-        public void AddDelta(int dx, DateTimeOffset timestamp)
+        public void AddDelta(int delta, DateTimeOffset timestamp)
         {
             if (this.samples.Count == 0)
                 throw new InvalidOperationException("Adding a delta requires an existing sample value.");
 
-            double x = this.samples.Latest.Value + dx;
-            this.Add(x, dx, timestamp);
+            double x = this.samples.Latest.Value + delta;
+            this.Add(x, timestamp);
         }
 
         /// <summary>
@@ -117,18 +127,6 @@ namespace Trixter.XDream.API.Filters
                 return 0d;
             }
             return (t-this.startTime).TotalMilliseconds;
-        }
-
-        private void Add(double x, double? dx, DateTimeOffset timestamp)
-        {
-            double t = GetSampleTime(timestamp);
-            Sample newSample = new Sample(t, x, dx);
-            this.samples.Add(newSample);
-            this.Add(newSample);
-            this.Trim(t);
-
-            // Clear the caches
-            this.ClearCachedValues();
         }
 
         private void ClearCachedValues()
