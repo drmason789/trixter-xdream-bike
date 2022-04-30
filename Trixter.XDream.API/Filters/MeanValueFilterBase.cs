@@ -76,7 +76,7 @@ namespace Trixter.XDream.API.Filters
         public void Add(double value, DateTimeOffset timestamp)
         {
             double t = GetSampleTime(timestamp);
-            Sample newSample = new Sample(t, value);
+            Sample newSample = new Sample(t, value, value-this.samples.Latest?.Value);
             this.samples.Add(newSample);
             this.Add(newSample);
             this.Trim(t);
@@ -85,13 +85,12 @@ namespace Trixter.XDream.API.Filters
             this.ClearCachedValues();
         }
 
-        public void AddDelta(int delta, DateTimeOffset timestamp)
+        public void AddDelta(double delta, DateTimeOffset timestamp)
         {
             if (this.samples.Count == 0)
                 throw new InvalidOperationException("Adding a delta requires an existing sample value.");
 
-            double x = this.samples.Latest.Value + delta;
-            this.Add(x, timestamp);
+            this.Add(this.samples.Latest.Value + delta, timestamp);
         }
 
         /// <summary>
