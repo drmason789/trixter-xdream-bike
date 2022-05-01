@@ -12,7 +12,7 @@ namespace Trixter.XDream.API.Filters
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
     internal class WeightedMeanValueFilter : MeanValueFilterBase
     {
-        public WeightedMeanValueFilter(int periodMilliseconds) : base(periodMilliseconds, new WeightedMeanCalculator(), new WeightedMeanCalculator())
+        public WeightedMeanValueFilter(int periodMilliseconds, bool useMidPoint=false) : base(periodMilliseconds, new WeightedMeanCalculator(), new WeightedMeanCalculator(), useMidPoint)
         {
           
         }
@@ -29,7 +29,7 @@ namespace Trixter.XDream.API.Filters
                 current.T = limit;
                 double newdT = next.dT;
                                 
-                this.MeanValue.Update(next.Value, olddT, newdT);
+                this.MeanValue.Update(this.UseMidPoint ? next.MidPoint:next.Value, olddT, newdT);
                 if (next.Delta != null)
                     this.MeanDelta.Update(next.Delta.Value, olddT, newdT);
             }
