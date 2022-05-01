@@ -9,11 +9,13 @@ namespace Trixter.XDream.API.Filters
         private string DebuggerDisplay => $"{T:0.0000}: v={Value} d={Delta}";
 
         protected Sample previous, next;
+        
 
         public double Value;
         public double? Delta;
 
         public double T;
+        public bool IsActive;
         
         public double WeightedValue => this.Value * this.dT;
         public double? WeightedDelta => this.Delta * this.dT;

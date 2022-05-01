@@ -15,7 +15,7 @@ namespace Trixter.XDream.API.Testing.Filters
         const double tolerance = 1.0e-10;
 
         [Test]
-        public void TestMeanValueFilter()
+        public void TestMeanValueFilter_SplitMidSample()
         {
             MeanValueFilter mvf = new MeanValueFilter(500);
 
@@ -27,10 +27,27 @@ namespace Trixter.XDream.API.Testing.Filters
 
             // Not looking for 500 here because this filter doesn't split samples at the cutoff point.
             Assert.AreEqual(300, mvf.Period);
+            Assert.AreEqual((2 + 3) / 2d, mvf.Value, tolerance);
+        }
+
+
+        [Test]
+        public void TestMeanValueFilter_SplitOnSampleBoundary()
+        {
+            MeanValueFilter mvf = new MeanValueFilter(300);
+
+            DateTimeOffset t0 = DateTimeOffset.Now;
+
+            mvf.Add(1, t0);
+            mvf.Add(2, t0.AddMilliseconds(300));
+            mvf.Add(3, t0.AddMilliseconds(600));
+                        
+            Assert.AreEqual(300, mvf.Period);
+            Assert.AreEqual(3, mvf.Value, tolerance);
         }
 
         [Test]
-        public void TestWeightedMeanValueFilter()
+        public void TestWeightedMeanValueFilter_SplitMidSample()
         {
             WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(500);
 
@@ -44,11 +61,26 @@ namespace Trixter.XDream.API.Testing.Filters
             Assert.AreEqual((3d * 300d + 2d * 200d) / 500d, mvf.Value, tolerance);
         }
 
+        [Test]
+        public void TestWeightedMeanValueFilter_SplitOnSampleBoundary()
+        {
+            WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(300);
+
+            DateTimeOffset t0 = DateTimeOffset.Now;
+
+            mvf.Add(1, t0);
+            mvf.Add(2, t0.AddMilliseconds(300));
+            mvf.Add(3, t0.AddMilliseconds(600));
+
+            Assert.AreEqual(300, mvf.Period);
+            Assert.AreEqual(3, mvf.Value, tolerance);
+        }
+
 
         [Test]
-        [TestCase(typeof(MeanValueFilter), 1000, 0.48671986893703406d)]
-        [TestCase(typeof(WeightedMeanValueFilter), 1000, 0.48562740929878312d)]
-        public void SpeedTest(Type type, int period, double expected)
+        [TestCase(typeof(MeanValueFilter), 1000, 0.48544358988983127d, -0.0015909654334074566d)]
+        [TestCase(typeof(WeightedMeanValueFilter), 1000, 0.48562740929878312d, 0.0078560187173342937d)]
+        public void SpeedTest(Type type, int period, double expected, double expectedDelta)
         {
             const int iterations = 1000000;
 
@@ -70,6 +102,7 @@ namespace Trixter.XDream.API.Testing.Filters
             stopwatch.Stop();
             System.Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
             Assert.AreEqual(expected, mvf.Value);
+            Assert.AreEqual(expectedDelta, mvf.Delta);
         }
     }
 }

@@ -12,58 +12,28 @@ namespace Trixter.XDream.API.Filters
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
     internal class WeightedMeanValueFilter : MeanValueFilterBase
     {
-        WeightedMeanCalculator meanValue;
-        WeightedMeanCalculator meanDelta;
-
-        protected override IMeanCalculator MeanValue => this.meanValue;
-        protected override IMeanCalculator MeanDelta => this.meanDelta;
-
-        public WeightedMeanValueFilter(int periodMilliseconds) : base(periodMilliseconds)
+        public WeightedMeanValueFilter(int periodMilliseconds) : base(periodMilliseconds, new WeightedMeanCalculator(), new WeightedMeanCalculator())
         {
-            this.meanValue = new WeightedMeanCalculator();
-            this.meanDelta = new WeightedMeanCalculator();            
+          
         }
 
-        /// <summary>
-        /// Collect statistics for the sample.
-        /// </summary>
-        /// <param name="sample"></param>
-        protected override void Add(Sample sample)
-        {
-            double dT = sample.dT;
-            this.meanValue.Add(sample.Value, dT);
-            if (sample.Delta != null)
-                this.meanDelta.Add(sample.Delta.Value, dT);
-        }
-
-        /// <summary>
-        /// Remove statistcs for the sample.
-        /// </summary>
-        /// <param name="sample"></param>
-        protected override void Remove(Sample sample)
-        {
-            double dT = sample.dT;
-            this.meanValue.Remove(sample.Value, dT);
-            if (sample.Delta != null)
-                this.meanDelta.Remove(sample.Delta.Value, dT);
-        }
-
-        protected override void Trim(Sample current, double limit)
+        protected override void Trim(Sample current, double limit, out bool remove)
         {
             this.Remove(current);
             Sample next = current.Next;
-            if (next?.T >= limit)
+            if (next?.T > limit)
             {
                 // Move the last sample that's beyond the limit up to the limit
                 // so that the period of the filter is the full length.
                 double olddT = next.dT;
                 current.T = limit;
                 double newdT = next.dT;
-
-                this.meanValue.Update(next.Value, olddT, newdT);
+                                
+                this.MeanValue.Update(next.Value, olddT, newdT);
                 if (next.Delta != null)
-                    this.meanDelta.Update(next.Delta.Value, olddT, newdT);
+                    this.MeanDelta.Update(next.Delta.Value, olddT, newdT);
             }
+            remove = current.T < limit;
         }
 
     }

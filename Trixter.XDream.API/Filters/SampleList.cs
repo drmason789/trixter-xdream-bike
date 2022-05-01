@@ -6,12 +6,14 @@ namespace Trixter.XDream.API.Filters
 {
     internal class SampleList : IEnumerable<Sample>
     {        
+        public delegate void RemoveSampleDelegate(Sample removing, double limit, out bool remove);
+
         public Sample Latest { get; private set; }
         public Sample Oldest { get; private set; }
 
         public int Count { get; private set; }
 
-        public double Period => this.Count > 1 ? (this.Latest.T - this.Oldest.T) : 0;
+        public double Period => this.Count > 1 ? (this.Latest.T - this.Oldest.T-this.Oldest.dT) : 0;
 
         public SampleList()
         {
@@ -38,24 +40,29 @@ namespace Trixter.XDream.API.Filters
             this.Count++;
         }
 
-        public void Trim(double limit, Action<Sample, double> onRemove)
+        public void Trim(double limit, RemoveSampleDelegate onRemove)
         {
             bool changed = false;
+
+            // While trimming, don't chop the tail off the list as we go, because this changes the dT value in the next sample.
             
-            while (this.Oldest != null && this.Oldest.T < limit)
+            while (this.Oldest?.T <= limit)
             {
+                Sample current = this.Oldest;
+
                 bool remove = true;
                 if (onRemove != null)
                 {
-                    onRemove(this.Oldest, limit);
-                    remove = this.Oldest.T < limit;
+                    onRemove(current, limit, out remove);
                 }
                 if (remove)
                 {
-                    this.Oldest = this.Oldest.Next;
+                    this.Oldest = current.Next;
                     this.Count--;
                     changed = true;
                 }
+                if (current.T == limit)
+                    break;
             }
 
             if (!changed)
@@ -65,9 +72,8 @@ namespace Trixter.XDream.API.Filters
                 this.Latest = null;
             else
             {
+                // chop off the tail
                 this.Oldest.Previous = null;
-                if (this.Oldest.Next == null)
-                    this.Latest = this.Oldest;
             }
         }
 

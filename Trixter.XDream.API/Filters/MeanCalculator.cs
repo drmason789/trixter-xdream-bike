@@ -78,7 +78,7 @@ namespace Trixter.XDream.API.Filters
         /// Add an item.
         /// </summary>
         /// <param name="x"></param>
-        public void Add(double x)
+        public void Add(double x, double weight=1)
         {
             this.DoAdd(x);
             this.N++;
@@ -90,7 +90,7 @@ namespace Trixter.XDream.API.Filters
         /// </summary>
         /// <param name="x"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Remove(double x)
+        public void Remove(double x, double weight=1)
         {
             if (this.N == 0)
                 throw new InvalidOperationException();
@@ -98,6 +98,11 @@ namespace Trixter.XDream.API.Filters
 
             this.N--;
             this.Invalidate();
+        }
+
+        public void Update(double value, double oldWeight, double newWeight)
+        {
+            // weights are ignored
         }
 
         /// <summary>

@@ -4,17 +4,17 @@ using System.Diagnostics;
 namespace Trixter.XDream.API.Filters
 {
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
-    internal abstract class MeanValueFilterBase
+    internal abstract class MeanValueFilterBase 
     {
         private DateTimeOffset startTime;
         double periodMilliseconds;
 
         int? intValue;
         int? intDelta;
-        double? deltaPerMillisecond;   
+        double? deltaPerMillisecond;
         SampleList samples;
-        protected abstract IMeanCalculator MeanValue { get; }
-        protected abstract IMeanCalculator MeanDelta { get; }
+        protected IMeanCalculator MeanValue { get; private set; }
+        protected IMeanCalculator MeanDelta { get; private set; }
 
         /// <summary>
         /// The period over which the mean value is calculated, over which samples are kept.
@@ -65,18 +65,20 @@ namespace Trixter.XDream.API.Filters
         /// </summary>
         public int Count => this.samples.Count;
 
-        public MeanValueFilterBase(int periodMilliseconds)
+        protected MeanValueFilterBase(int periodMilliseconds, IMeanCalculator meanValue, IMeanCalculator meanDelta)
         {
             this.periodMilliseconds = periodMilliseconds;
             this.samples = new SampleList();
             this.startTime = DateTimeOffset.MinValue;
+            this.MeanValue = meanValue;
+            this.MeanDelta = meanDelta;
         }
 
 
         public void Add(double value, DateTimeOffset timestamp)
         {
             double t = GetSampleTime(timestamp);
-            Sample newSample = new Sample(t, value, value-this.samples.Latest?.Value);
+            Sample newSample = new Sample(t, value, value - this.samples.Latest?.Value);
             this.samples.Add(newSample);
             this.Add(newSample);
             this.Trim(t);
@@ -115,8 +117,41 @@ namespace Trixter.XDream.API.Filters
             return cached.Value;
         }
 
-        protected abstract void Add(Sample sample);
-        protected abstract void Remove(Sample sample);
+
+        /// <summary>
+        /// Adds the sample's values from the <see cref="IMeanCalculator"/> objects and sets <see cref="Sample.IsActive"/> to true.
+        /// Ignores samples where <see cref="Sample.IsActive"/> is already true.
+        /// </summary>
+        protected void Add(Sample sample)
+        {
+            if (sample.IsActive)
+                return;
+
+            double dT = sample.dT;
+            this.MeanValue.Add(sample.Value, dT);
+            if (sample.Delta != null)
+                this.MeanDelta.Add(sample.Delta.Value, dT);
+
+            sample.IsActive = true;
+        }
+
+        /// <summary>
+        /// Removes the sample's values from the <see cref="IMeanCalculator"/> objects and sets <see cref="Sample.IsActive"/> to false.
+        /// Ignores samples where <see cref="Sample.IsActive"/> is already false.
+        /// </summary>
+        /// <param name="sample"></param>
+        protected void Remove(Sample sample)
+        {
+            if (!sample.IsActive)
+                return;
+
+            double dT = sample.dT;
+            this.MeanValue.Remove(sample.Value, dT);
+            if (sample.Delta != null)
+                this.MeanDelta.Remove(sample.Delta.Value, dT);
+
+            sample.IsActive = false;
+        }
 
         private double GetSampleTime(DateTimeOffset t)
         {
@@ -125,7 +160,7 @@ namespace Trixter.XDream.API.Filters
                 this.startTime = t;
                 return 0d;
             }
-            return (t-this.startTime).TotalMilliseconds;
+            return (t - this.startTime).TotalMilliseconds;
         }
 
         private void ClearCachedValues()
@@ -135,16 +170,16 @@ namespace Trixter.XDream.API.Filters
             this.deltaPerMillisecond = null;
             this.intDelta = null;
         }
-     
+
 
         private void Trim(double t)
         {
-            double limit = t-this.periodMilliseconds;
+            double limit = t - this.periodMilliseconds;
 
-            this.samples.Trim(limit, (s,l)=>this.Trim(s, l));
+            this.samples.Trim(limit, this.Trim);
         }
 
-        protected abstract void Trim(Sample sample, double limit);
-        
+        protected abstract void Trim(Sample sample, double limit, out bool replace);
+
     }
 }

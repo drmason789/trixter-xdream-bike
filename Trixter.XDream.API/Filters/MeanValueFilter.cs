@@ -13,31 +13,17 @@ namespace Trixter.XDream.API.Filters
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
     internal class MeanValueFilter : MeanValueFilterBase
     {
-        MeanCalculator meanValue, meanDelta;
-        protected override IMeanCalculator MeanValue => this.meanValue;
-        protected override IMeanCalculator MeanDelta => this.meanDelta;
-
-        public MeanValueFilter(int periodMilliseconds):base(periodMilliseconds)
+        public MeanValueFilter(int periodMilliseconds):base(periodMilliseconds, new MeanCalculator(), new MeanCalculator())
         {
-            this.meanValue = new MeanCalculator();
-            this.meanDelta = new MeanCalculator();
         }
 
-        protected override void Trim(Sample s, double limit) => this.Remove(s);
+        protected override void Trim(Sample s, double limit, out bool replace) 
+        {
+            this.Remove(s);   
+            replace = s.T < limit;
+        }
         
-        protected override void Add(Sample sample)
-        {   
-            this.meanValue.Add(sample.Value);
-            if (sample.Delta != null)
-                this.meanDelta.Add(sample.Delta.Value);           
-        }
-
-        protected override void Remove(Sample sample)
-        {
-            this.meanValue.Remove(sample.Value);
-            if (sample.Delta != null)
-                this.meanDelta.Remove(sample.Delta.Value);
-        }
+        
 
        
     }
