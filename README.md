@@ -8,7 +8,7 @@ This repository and the associated discussions / wikis are not associated with t
 
 ---
 
-The source code in this repository is intended to provide developers with an API to interact with this bike, and some diagnostic tools to demonstrate its use, and to eventually become better alternatives to the equivalent utilities provided with the original X-Dream software.
+The source code in this repository is intended to provide developers with an API to interact with this bike, and some diagnostic tools to demonstrate its use, and to provide a better alternative to the equivalent utilities provided with the original X-Dream software.
 
 Help with the X-Dream mountain biking simulation software itself can be found in the Discussions.
 
