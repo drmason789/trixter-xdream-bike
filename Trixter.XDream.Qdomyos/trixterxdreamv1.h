@@ -92,7 +92,7 @@ public:
 	/**
 	 * \brief Receives and processes a character of input from the device.
 	 * \param c Should be '0' to '9' or 'a' to 'f' (lower case)
-	 * \param t The time: the number of milliseconds since the last reset.
+	 * \param t The time: the number of 1/1024 s since the last reset.
 	 */
 	void ReceiveChar(char c, unsigned long t);
 
