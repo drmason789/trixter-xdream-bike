@@ -2,7 +2,7 @@
 #include <queue>
 #include <vector>
 
-class trixterxdreamv1
+class trixterxdreamv1client
 {
 public:
 	/**
@@ -69,7 +69,7 @@ private:
 	std::vector<char> inputBuffer;
 	std::vector<unsigned char> byteBuffer;
 	state lastState;
-
+	
 	/**
 	 * \brief Clear the input buffer.
 	 */
@@ -87,7 +87,7 @@ private:
 
 public:
 
-	trixterxdreamv1();
+	trixterxdreamv1client();
 
 	/**
 	 * \brief Receives and processes a character of input from the device.

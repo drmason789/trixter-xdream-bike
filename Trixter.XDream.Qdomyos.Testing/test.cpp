@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../Trixter.XDream.Qdomyos/trixterxdreamv1.h"
+#include "../Trixter.XDream.Qdomyos/trixterxdreamv1client.h"
 
 
 // The fixture for testing class Foo.
@@ -34,14 +34,14 @@ protected:
 
 	void TestInput(std::string input, unsigned short expectedT)
 	{
-		trixterxdreamv1 tx1;
+		trixterxdreamv1client tx1;
 
 		unsigned long t = 0;
 		
 		for (char value : input)
 			tx1.ReceiveChar(value, t++);
 
-		trixterxdreamv1::state state = tx1.getLastState();
+		trixterxdreamv1client::state state = tx1.getLastState();
 
 		EXPECT_EQ(state.LastWheelEventTime, expectedT);
 

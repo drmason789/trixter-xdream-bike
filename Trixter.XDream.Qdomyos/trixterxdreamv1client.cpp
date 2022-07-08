@@ -1,14 +1,14 @@
 #include "pch.h"
-#include "trixterxdreamv1.h"
+#include "trixterxdreamv1client.h"
 
 #include <string>
 
-trixterxdreamv1::trixterxdreamv1()
+trixterxdreamv1client::trixterxdreamv1client()
 {
     this->ConfigureResistanceMessages();
 }
 
-void trixterxdreamv1::ResetBuffer()
+void trixterxdreamv1client::ResetBuffer()
 {
     // for the case of an invalid packet, if this was smart, it would store all the input
     // and backtrack to the first header bytes after the beginning.
@@ -17,7 +17,7 @@ void trixterxdreamv1::ResetBuffer()
     this->byteBuffer.clear();
 }
 
-trixterxdreamv1::PacketState trixterxdreamv1::ProcessChar(char c)
+trixterxdreamv1client::PacketState trixterxdreamv1client::ProcessChar(char c)
 {
  /* Packet content
  *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
@@ -94,7 +94,7 @@ trixterxdreamv1::PacketState trixterxdreamv1::ProcessChar(char c)
     return Incomplete;    
 }
 
-void trixterxdreamv1::ConfigureResistanceMessages()
+void trixterxdreamv1client::ConfigureResistanceMessages()
 {
     resistanceMessages = new unsigned char*[251];
 
@@ -112,7 +112,7 @@ void trixterxdreamv1::ConfigureResistanceMessages()
     
 }
 
-void trixterxdreamv1::ReceiveChar(char c, unsigned long t)
+void trixterxdreamv1client::ReceiveChar(char c, unsigned long t)
 {
     if (this->ProcessChar(c) != Complete) return;
         
@@ -167,23 +167,23 @@ void trixterxdreamv1::ReceiveChar(char c, unsigned long t)
     this->lastState = newState;
 }
 
-trixterxdreamv1::state trixterxdreamv1::getLastState() const
+trixterxdreamv1client::state trixterxdreamv1client::getLastState() const
 {
     return this->lastState;
 }
 
-void trixterxdreamv1::SendResistance(int level)
+void trixterxdreamv1client::SendResistance(int level)
 {
     // to maintain the resistance, this needs to be resent about every 10ms.
     this->SendBytes(this->resistanceMessages[max(250, min(0, level))]);
 }
 
-void trixterxdreamv1::SendBytes(unsigned char* bytes)
+void trixterxdreamv1client::SendBytes(unsigned char* bytes)
 {
 	
 }
 
-void trixterxdreamv1::Reset()
+void trixterxdreamv1client::Reset()
 {
     this->lastT = 0;
     this->flywheelRevolutions = 0.0;
