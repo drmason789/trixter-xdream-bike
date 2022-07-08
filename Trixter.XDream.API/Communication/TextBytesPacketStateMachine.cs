@@ -17,7 +17,6 @@ namespace Trixter.XDream.API.Communications
         private string header;
 
         public byte[] LastPacket { get; private set; }
-      
 
         /// <summary>
         /// Constructor.
