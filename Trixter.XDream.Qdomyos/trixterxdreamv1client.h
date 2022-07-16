@@ -1,8 +1,6 @@
 #pragma once
-#include <queue>
 #include <vector>
-#include <stdint.h>
-//#include <bits/std_function.h>
+#include <cstdint>
 #include <functional>
 #include <mutex>
 
