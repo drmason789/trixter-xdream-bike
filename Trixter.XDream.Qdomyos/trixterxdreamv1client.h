@@ -55,7 +55,7 @@ public:
     };
 
 private:
-    unsigned char** resistanceMessages{};
+    uint8_t** resistanceMessages{};
 
     enum PacketState { None, Incomplete, Invalid, Complete };
 

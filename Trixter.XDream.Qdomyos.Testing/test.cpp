@@ -43,9 +43,7 @@ protected:
 	void TestInput(std::string input, uint8_t expectedHR, uint8_t expectedSteering)
 	{
 		trixterxdreamv1client tx1;
-
-		//auto thisObject = this;
-		//tx1.set_GetTime([&thisObject]()->uint32_t { return thisObject->getTime(); });
+		
 		tx1.set_GetTime(getTime);
 
 		
@@ -63,6 +61,42 @@ protected:
 
 	}
 
+	uint8_t* packet;
+	int packetLength;
+
+	void TestResistance(trixterxdreamv1client * tx1, uint8_t resistanceLevel)
+	{
+
+		this->packet = nullptr;
+		this->packetLength = -1;
+		tx1->SendResistance(resistanceLevel);
+		
+		auto p = this->packet;
+
+		if(resistanceLevel==0)
+		{
+			// no packet sent = request for no resistance
+			EXPECT_EQ(-1, this->packetLength);
+			EXPECT_TRUE(p == nullptr);
+
+			return;
+		}
+
+		// make sure the resistance is clipped
+		if (resistanceLevel > trixterxdreamv1client::MaxResistance)
+			resistanceLevel = trixterxdreamv1client::MaxResistance;
+
+		EXPECT_EQ(6, this->packetLength);
+		EXPECT_TRUE(p != nullptr);
+		EXPECT_EQ(p[0], 0x6a);
+		EXPECT_EQ(p[1], resistanceLevel);
+		EXPECT_EQ(p[2], (resistanceLevel+60)%255);
+		EXPECT_EQ(p[3], (resistanceLevel+90)%255);
+		EXPECT_EQ(p[4], (resistanceLevel+120)%255);
+		EXPECT_EQ(p[5], p[0]^p[1]^p[2]^p[3]^p[4]);
+
+	}
+
 };
 
 //int main(int argc, char** argv) {
@@ -73,5 +107,17 @@ protected:
 TEST_F(PacketInterpreter, ValidPacket) {
 
 	TestInput("56b6a00000000000000000000000000016b6a7f45000000000000000000000050006a", 0x50, 0x7f);
+}
+
+TEST_F(PacketInterpreter, SendResistance) {
+
+	trixterxdreamv1client tx1;
+
+	tx1.set_GetTime(getTime);
+	auto device = this;
+	tx1.set_WriteBytes([device](uint8_t* bytes, int length)->void { device->packet = bytes; device->packetLength = length; });
+
+	for (int i = 0; i <= 255; i++)
+		TestResistance(&tx1, static_cast<uint8_t>(i));	
 }
 

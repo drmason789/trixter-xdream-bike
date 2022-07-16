@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trixter.XDream.Qdomyos", "T
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trixter.XDream.Qdomyos.Testing", "Trixter.XDream.Qdomyos.Testing\Trixter.XDream.Qdomyos.Testing.vcxproj", "{CE7A7186-0A26-4A2E-B31B-C7AEF45C7A14}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Qdomyos", "Qdomyos", "{E398CDB7-AE91-4D26-B579-967980BA5F54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -119,6 +121,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CF7DF41D-757D-4AA1-8B98-046730D0FACC} = {67EB8205-A989-4ED8-8032-4C36AF9F4685}
+		{BDC0F54C-5937-45E2-AD27-9DECD80DC88A} = {E398CDB7-AE91-4D26-B579-967980BA5F54}
+		{CE7A7186-0A26-4A2E-B31B-C7AEF45C7A14} = {E398CDB7-AE91-4D26-B579-967980BA5F54}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6A9739C9-A1F7-44F6-B107-9453AD8DA5F5}

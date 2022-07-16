@@ -2,8 +2,9 @@
 #include "trixterxdreamv1client.h"
 
 #include <string>
-//#include <math.h>
 #include <cmath>
+
+using namespace std;
 
 trixterxdreamv1client::trixterxdreamv1client() { this->ConfigureResistanceMessages(); }
 
@@ -88,14 +89,14 @@ void trixterxdreamv1client::ConfigureResistanceMessages() {
     resistanceMessages = new uint8_t * [251];
 
     for (uint8_t level = 0; level <= 250; level++) {
-        unsigned char* message = new uint8_t[6];
+        uint8_t* message = new uint8_t[6];
         resistanceMessages[level] = message;
 
         message[5] = message[0] = 0x6a;
-        message[5] |= message[1] = level;
-        message[5] |= message[2] = (level + 60) % 255;
-        message[5] |= message[3] = (level + 90) % 255;
-        message[5] |= message[4] = (level + 120) % 255;
+        message[5] ^= message[1] = level;
+        message[5] ^= message[2] = (level + 60) % 255;
+        message[5] ^= message[3] = (level + 90) % 255;
+        message[5] ^= message[4] = (level + 120) % 255;
     }
 }
 
@@ -170,7 +171,7 @@ bool trixterxdreamv1client::ReceiveChar(char c) {
 
 trixterxdreamv1client::state trixterxdreamv1client::getLastState() {
     this->stateMutex.lock();
-    state result = this->lastState;
+    const state result = this->lastState;
     this->stateMutex.unlock();
     return result;
 }
@@ -181,7 +182,7 @@ void trixterxdreamv1client::SendResistance(uint8_t level) {
     if (level != 0 && this->write_bytes)
     {
         this->writeMutex.lock();
-        try { this->write_bytes(this->resistanceMessages[max(250, min(0, level))], 6); }
+        try { this->write_bytes(this->resistanceMessages[min(MaxResistance, level)], 6); }
         catch (...)
         {
             this->writeMutex.unlock();
