@@ -6,6 +6,12 @@
 #include <functional>
 #include <mutex>
 
+/**
+ * @brief Basic functionality to interpret character data read from a Trixter X-Dream V1 bike via a serial port.
+ * Intended to be free from any non-standard C++ library code.
+ * Requires a time source callback (set_getTime) to timestamp packets and optionally
+ * a callback to write resistance packets to the serial port.
+ */
 class trixterxdreamv1client {
 public:
     /**
@@ -133,5 +139,5 @@ public:
      * @brief Sends 1 packet indicating a specific resistance level to the device. Needs to be sent every 50ms.
      * @param level 0 to 250.
      */
-    void SendResistance(int level);
+    void SendResistance(uint8_t level);
 };

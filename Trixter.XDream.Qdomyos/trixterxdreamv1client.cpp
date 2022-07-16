@@ -175,7 +175,7 @@ trixterxdreamv1client::state trixterxdreamv1client::getLastState() {
     return result;
 }
 
-void trixterxdreamv1client::SendResistance(int level) {
+void trixterxdreamv1client::SendResistance(uint8_t level) {
 
     // to maintain the resistance, this needs to be resent about every 50ms.
     if (level != 0 && this->write_bytes)
