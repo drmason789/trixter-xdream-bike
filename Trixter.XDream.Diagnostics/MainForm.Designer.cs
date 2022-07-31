@@ -39,9 +39,13 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect = new System.Windows.Forms.ToolStripButton();
             this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbCapture = new System.Windows.Forms.ToolStripButton();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tcTabs = new System.Windows.Forms.TabControl();
             this.tpDetails = new System.Windows.Forms.TabPage();
             this.tpDriver = new System.Windows.Forms.TabPage();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
             this.gpGroupPolicyControl = new Trixter.XDream.Diagnostics.Controls.GroupPolicy();
             this.tsToolStrip.SuspendLayout();
@@ -58,7 +62,10 @@ namespace Trixter.XDream.Diagnostics
             this.tsbRefreshPorts,
             this.tsbConnect,
             this.tsbDisconnect,
-            this.toolStripSeparator1});
+            this.toolStripSeparator1,
+            this.tsbCapture,
+            this.tsbSave,
+            this.toolStripSeparator2});
             this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.tsToolStrip.Name = "tsToolStrip";
             this.tsToolStrip.Size = new System.Drawing.Size(520, 25);
@@ -99,6 +106,7 @@ namespace Trixter.XDream.Diagnostics
             // tsbDisconnect
             // 
             this.tsbDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbDisconnect.Enabled = false;
             this.tsbDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisconnect.Image")));
             this.tsbDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDisconnect.Name = "tsbDisconnect";
@@ -110,6 +118,28 @@ namespace Trixter.XDream.Diagnostics
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbCapture
+            // 
+            this.tsbCapture.CheckOnClick = true;
+            this.tsbCapture.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbCapture.Image = ((System.Drawing.Image)(resources.GetObject("tsbCapture.Image")));
+            this.tsbCapture.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCapture.Name = "tsbCapture";
+            this.tsbCapture.Size = new System.Drawing.Size(53, 22);
+            this.tsbCapture.Text = "Capture";
+            this.tsbCapture.Click += new System.EventHandler(this.tsbCapture_Click);
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSave.Enabled = false;
+            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(35, 22);
+            this.tsbSave.Text = "Save";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tcTabs
             // 
@@ -144,6 +174,17 @@ namespace Trixter.XDream.Diagnostics
             this.tpDriver.Text = "Driver";
             this.tpDriver.UseVisualStyleBackColor = true;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // dlgSaveFile
+            // 
+            this.dlgSaveFile.DefaultExt = "csv";
+            this.dlgSaveFile.Filter = "CSV Files|*.csv";
+            this.dlgSaveFile.SupportMultiDottedExtensions = true;
+            // 
             // dDetailsControl
             // 
             this.dDetailsControl.DataAccess = null;
@@ -153,6 +194,7 @@ namespace Trixter.XDream.Diagnostics
             this.dDetailsControl.Name = "dDetailsControl";
             this.dDetailsControl.Size = new System.Drawing.Size(497, 432);
             this.dDetailsControl.TabIndex = 0;
+            this.dDetailsControl.UpdateInterval = 1000;
             // 
             // gpGroupPolicyControl
             // 
@@ -196,6 +238,10 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.TabPage tpDriver;
         private Details dDetailsControl;
         private GroupPolicy gpGroupPolicyControl;
+        private System.Windows.Forms.ToolStripButton tsbCapture;
+        private System.Windows.Forms.ToolStripButton tsbSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.SaveFileDialog dlgSaveFile;
     }
 }
 

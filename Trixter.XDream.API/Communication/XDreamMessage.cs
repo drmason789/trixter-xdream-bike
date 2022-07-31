@@ -6,7 +6,7 @@ using System.Text;
 namespace Trixter.XDream.API.Communications
 {
     [DebuggerDisplay("{DebuggerDisplay}")]
-    internal class XDreamMessage : XDreamState    
+    public class XDreamMessage : XDreamState    
     {
         /* Packet content
          *                            6A 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00

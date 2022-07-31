@@ -88,7 +88,6 @@ namespace Trixter.XDream.Diagnostics
 
         private void tsbConnect_Click(object sender, EventArgs e)
         {
-
             string port = this.tscSerialPorts.SelectedItem as string;
             if(port!=null)
             {                
@@ -103,6 +102,7 @@ namespace Trixter.XDream.Diagnostics
                     this.tsbDisconnect.Enabled = true;
                     this.tsbRefreshPorts.Enabled = false;
                     this.dDetailsControl.Enabled = true;
+                    this.tsbCapture.Enabled = true;
                 }
                 catch 
                 {
@@ -146,6 +146,8 @@ namespace Trixter.XDream.Diagnostics
 
                     this.tsbDisconnect.Enabled = false;
                     this.tsbRefreshPorts.Enabled = true;
+                    this.tsbCapture.Enabled = false;
+
                 }
             }
         }
@@ -167,5 +169,24 @@ namespace Trixter.XDream.Diagnostics
                 this.gpGroupPolicyControl.Update();
         }
 
+        private void tsbCapture_Click(object sender, EventArgs e)
+        {
+            this.DataAccess.Capturing = this.tsbCapture.Checked;
+            this.tsbSave.Enabled = this.DataAccess.HasData;
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            string suggestedFileName = $"XDream.{DateTimeOffset.Now:yyyyMMddHHmmss}.csv";
+
+            this.dlgSaveFile.FileName = suggestedFileName;
+            
+            if (this.dlgSaveFile.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            using(var stream = this.dlgSaveFile.OpenFile())
+                this.DataAccess.Save(stream);
+
+        }
     }
 }
