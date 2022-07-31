@@ -32,6 +32,8 @@ namespace Trixter.XDream.Diagnostics
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tbResistance = new System.Windows.Forms.TrackBar();
             this.gbInput = new System.Windows.Forms.GroupBox();
+            this.lbTotalPower = new System.Windows.Forms.Label();
+            this.lbTotalPowerValue = new System.Windows.Forms.Label();
             this.pnRawData = new System.Windows.Forms.Panel();
             this.lbCrankTimeValue = new System.Windows.Forms.Label();
             this.lbFlywheelTime = new System.Windows.Forms.Label();
@@ -44,9 +46,6 @@ namespace Trixter.XDream.Diagnostics
             this.lbCrankRevsValue = new System.Windows.Forms.Label();
             this.lbFlywheelRevs = new System.Windows.Forms.Label();
             this.lbFlywheelRevsValue = new System.Windows.Forms.Label();
-            this.vbRightBrake = new Trixter.XDream.Diagnostics.ValueBar();
-            this.vbLeftBrake = new Trixter.XDream.Diagnostics.ValueBar();
-            this.vbSteering = new Trixter.XDream.Diagnostics.ValueBar();
             this.lbCrankDirection = new System.Windows.Forms.Label();
             this.lbCrankDirectionValue = new System.Windows.Forms.Label();
             this.lbCrankSpeed = new System.Windows.Forms.Label();
@@ -67,23 +66,43 @@ namespace Trixter.XDream.Diagnostics
             this.clbButtons = new System.Windows.Forms.CheckedListBox();
             this.gbOutput = new System.Windows.Forms.GroupBox();
             this.lbAppliedResistance = new System.Windows.Forms.Label();
-            this.vbActualResistance = new Trixter.XDream.Diagnostics.ValueBar();
             this.cbApplyBrakes = new System.Windows.Forms.CheckBox();
             this.lbResistance = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDriver = new System.Windows.Forms.Button();
-            this.bnRefreshPorts = new System.Windows.Forms.Button();
-            this.bnDisconnect = new System.Windows.Forms.Button();
-            this.bnConnect = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cbPorts = new System.Windows.Forms.ComboBox();
-            this.lbTotalPower = new System.Windows.Forms.Label();
-            this.lbTotalPowerValue = new System.Windows.Forms.Label();
+            this.tsToolStrip = new System.Windows.Forms.ToolStrip();
+            this.tslSerialPort = new System.Windows.Forms.ToolStripLabel();
+            this.tscSerialPorts = new System.Windows.Forms.ToolStripComboBox();
+            this.tsbRefreshPorts = new System.Windows.Forms.ToolStripButton();
+            this.tsbConnect = new System.Windows.Forms.ToolStripButton();
+            this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tcTabs = new System.Windows.Forms.TabControl();
+            this.tpDetails = new System.Windows.Forms.TabPage();
+            this.tpDriver = new System.Windows.Forms.TabPage();
+            this.gbGroupPolicy = new System.Windows.Forms.GroupBox();
+            this.lblOpinion = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pnBlocking = new System.Windows.Forms.Panel();
+            this.lbXDreamDevices = new System.Windows.Forms.Label();
+            this.lbDevices = new System.Windows.Forms.ListBox();
+            this.cbRetroactive = new System.Windows.Forms.CheckBox();
+            this.cbBlocking = new System.Windows.Forms.CheckBox();
+            this.lbSummary = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.vbActualResistance = new Trixter.XDream.Diagnostics.ValueBar();
+            this.vbRightBrake = new Trixter.XDream.Diagnostics.ValueBar();
+            this.vbLeftBrake = new Trixter.XDream.Diagnostics.ValueBar();
+            this.vbSteering = new Trixter.XDream.Diagnostics.ValueBar();
+            this.lbExplanation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbResistance)).BeginInit();
             this.gbInput.SuspendLayout();
             this.pnRawData.SuspendLayout();
             this.gbOutput.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.tsToolStrip.SuspendLayout();
+            this.tcTabs.SuspendLayout();
+            this.tpDetails.SuspendLayout();
+            this.tpDriver.SuspendLayout();
+            this.gbGroupPolicy.SuspendLayout();
+            this.pnBlocking.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbResistance
@@ -131,12 +150,31 @@ namespace Trixter.XDream.Diagnostics
             this.gbInput.Controls.Add(this.lbLeftBrake);
             this.gbInput.Controls.Add(this.lbSteering);
             this.gbInput.Controls.Add(this.clbButtons);
-            this.gbInput.Location = new System.Drawing.Point(9, 73);
+            this.gbInput.Location = new System.Drawing.Point(6, 6);
             this.gbInput.Name = "gbInput";
             this.gbInput.Size = new System.Drawing.Size(347, 432);
             this.gbInput.TabIndex = 4;
             this.gbInput.TabStop = false;
             this.gbInput.Text = "From Device";
+            // 
+            // lbTotalPower
+            // 
+            this.lbTotalPower.AutoSize = true;
+            this.lbTotalPower.Location = new System.Drawing.Point(277, 289);
+            this.lbTotalPower.Name = "lbTotalPower";
+            this.lbTotalPower.Size = new System.Drawing.Size(64, 13);
+            this.lbTotalPower.TabIndex = 48;
+            this.lbTotalPower.Text = "Total Power";
+            this.lbTotalPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbTotalPowerValue
+            // 
+            this.lbTotalPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbTotalPowerValue.Location = new System.Drawing.Point(279, 305);
+            this.lbTotalPowerValue.Name = "lbTotalPowerValue";
+            this.lbTotalPowerValue.Size = new System.Drawing.Size(60, 24);
+            this.lbTotalPowerValue.TabIndex = 47;
+            this.lbTotalPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pnRawData
             // 
@@ -255,45 +293,6 @@ namespace Trixter.XDream.Diagnostics
             this.lbFlywheelRevsValue.Size = new System.Drawing.Size(60, 24);
             this.lbFlywheelRevsValue.TabIndex = 34;
             this.lbFlywheelRevsValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // vbRightBrake
-            // 
-            this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbRightBrake.ClipOutOfRangeValues = true;
-            this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbRightBrake.Location = new System.Drawing.Point(92, 83);
-            this.vbRightBrake.Maximum = 250;
-            this.vbRightBrake.Name = "vbRightBrake";
-            this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbRightBrake.Size = new System.Drawing.Size(196, 24);
-            this.vbRightBrake.TabIndex = 33;
-            this.vbRightBrake.Value = 0;
-            // 
-            // vbLeftBrake
-            // 
-            this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbLeftBrake.ClipOutOfRangeValues = true;
-            this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbLeftBrake.Location = new System.Drawing.Point(92, 53);
-            this.vbLeftBrake.Maximum = 250;
-            this.vbLeftBrake.Name = "vbLeftBrake";
-            this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbLeftBrake.Size = new System.Drawing.Size(196, 24);
-            this.vbLeftBrake.TabIndex = 32;
-            this.vbLeftBrake.Value = 0;
-            // 
-            // vbSteering
-            // 
-            this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbSteering.ClipOutOfRangeValues = true;
-            this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbSteering.Location = new System.Drawing.Point(92, 24);
-            this.vbSteering.Maximum = 255;
-            this.vbSteering.Name = "vbSteering";
-            this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.vbSteering.Size = new System.Drawing.Size(196, 24);
-            this.vbSteering.TabIndex = 31;
-            this.vbSteering.Value = 0;
             // 
             // lbCrankDirection
             // 
@@ -485,7 +484,7 @@ namespace Trixter.XDream.Diagnostics
             this.gbOutput.Controls.Add(this.cbApplyBrakes);
             this.gbOutput.Controls.Add(this.lbResistance);
             this.gbOutput.Controls.Add(this.tbResistance);
-            this.gbOutput.Location = new System.Drawing.Point(362, 73);
+            this.gbOutput.Location = new System.Drawing.Point(359, 6);
             this.gbOutput.Name = "gbOutput";
             this.gbOutput.Size = new System.Drawing.Size(143, 432);
             this.gbOutput.TabIndex = 5;
@@ -500,20 +499,6 @@ namespace Trixter.XDream.Diagnostics
             this.lbAppliedResistance.TabIndex = 4;
             this.lbAppliedResistance.Text = "Applied Resistance";
             this.lbAppliedResistance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // vbActualResistance
-            // 
-            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.vbActualResistance.ClipOutOfRangeValues = true;
-            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.vbActualResistance.Location = new System.Drawing.Point(83, 97);
-            this.vbActualResistance.Maximum = 250;
-            this.vbActualResistance.Name = "vbActualResistance";
-            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.vbActualResistance.Size = new System.Drawing.Size(23, 318);
-            this.vbActualResistance.TabIndex = 3;
-            this.vbActualResistance.Text = "valueBar1";
-            this.vbActualResistance.Value = 0;
             // 
             // cbApplyBrakes
             // 
@@ -536,106 +521,280 @@ namespace Trixter.XDream.Diagnostics
             this.lbResistance.Text = "Base Resistance";
             this.lbResistance.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // groupBox1
+            // tsToolStrip
             // 
-            this.groupBox1.Controls.Add(this.btnDriver);
-            this.groupBox1.Controls.Add(this.bnRefreshPorts);
-            this.groupBox1.Controls.Add(this.bnDisconnect);
-            this.groupBox1.Controls.Add(this.bnConnect);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cbPorts);
-            this.groupBox1.Location = new System.Drawing.Point(9, 13);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(496, 52);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Device";
+            this.tsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslSerialPort,
+            this.tscSerialPorts,
+            this.tsbRefreshPorts,
+            this.tsbConnect,
+            this.tsbDisconnect,
+            this.toolStripSeparator1});
+            this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.tsToolStrip.Name = "tsToolStrip";
+            this.tsToolStrip.Size = new System.Drawing.Size(520, 25);
+            this.tsToolStrip.TabIndex = 7;
+            this.tsToolStrip.Text = "toolStrip1";
             // 
-            // btnDriver
+            // tslSerialPort
             // 
-            this.btnDriver.Location = new System.Drawing.Point(389, 17);
-            this.btnDriver.Name = "btnDriver";
-            this.btnDriver.Size = new System.Drawing.Size(75, 23);
-            this.btnDriver.TabIndex = 4;
-            this.btnDriver.Text = "Driver";
-            this.btnDriver.UseVisualStyleBackColor = true;
-            this.btnDriver.Click += new System.EventHandler(this.btnDriver_Click);
+            this.tslSerialPort.Name = "tslSerialPort";
+            this.tslSerialPort.Size = new System.Drawing.Size(60, 22);
+            this.tslSerialPort.Text = "Serial Port";
             // 
-            // bnRefreshPorts
+            // tscSerialPorts
             // 
-            this.bnRefreshPorts.Image = ((System.Drawing.Image)(resources.GetObject("bnRefreshPorts.Image")));
-            this.bnRefreshPorts.Location = new System.Drawing.Point(191, 18);
-            this.bnRefreshPorts.Name = "bnRefreshPorts";
-            this.bnRefreshPorts.Size = new System.Drawing.Size(29, 23);
-            this.bnRefreshPorts.TabIndex = 1;
-            this.bnRefreshPorts.UseVisualStyleBackColor = true;
-            this.bnRefreshPorts.Click += new System.EventHandler(this.btnRefreshPorts_Click);
+            this.tscSerialPorts.Name = "tscSerialPorts";
+            this.tscSerialPorts.Size = new System.Drawing.Size(75, 25);
             // 
-            // bnDisconnect
+            // tsbRefreshPorts
             // 
-            this.bnDisconnect.Location = new System.Drawing.Point(308, 17);
-            this.bnDisconnect.Name = "bnDisconnect";
-            this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
-            this.bnDisconnect.TabIndex = 3;
-            this.bnDisconnect.Text = "Disconnect";
-            this.bnDisconnect.UseVisualStyleBackColor = true;
-            this.bnDisconnect.Click += new System.EventHandler(this.bnDisconnect_Click);
+            this.tsbRefreshPorts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRefreshPorts.Image = global::Trixter.XDream.Diagnostics.Properties.Resources.Refresh;
+            this.tsbRefreshPorts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRefreshPorts.Name = "tsbRefreshPorts";
+            this.tsbRefreshPorts.Size = new System.Drawing.Size(23, 22);
+            this.tsbRefreshPorts.Text = "toolStripButton1";
+            this.tsbRefreshPorts.Click += new System.EventHandler(this.tsbRefreshPorts_Click);
             // 
-            // bnConnect
+            // tsbConnect
             // 
-            this.bnConnect.Location = new System.Drawing.Point(227, 17);
-            this.bnConnect.Name = "bnConnect";
-            this.bnConnect.Size = new System.Drawing.Size(75, 23);
-            this.bnConnect.TabIndex = 2;
-            this.bnConnect.Text = "Connect";
-            this.bnConnect.UseVisualStyleBackColor = true;
-            this.bnConnect.Click += new System.EventHandler(this.bnConnect_Click);
+            this.tsbConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbConnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbConnect.Image")));
+            this.tsbConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbConnect.Name = "tsbConnect";
+            this.tsbConnect.Size = new System.Drawing.Size(56, 22);
+            this.tsbConnect.Text = "Connect";
+            this.tsbConnect.Click += new System.EventHandler(this.tsbConnect_Click);
             // 
-            // label5
+            // tsbDisconnect
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(28, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Serial Port";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tsbDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisconnect.Image")));
+            this.tsbDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDisconnect.Name = "tsbDisconnect";
+            this.tsbDisconnect.Size = new System.Drawing.Size(70, 22);
+            this.tsbDisconnect.Text = "Disconnect";
+            this.tsbDisconnect.Click += new System.EventHandler(this.tsbDisconnect_Click);
             // 
-            // cbPorts
+            // toolStripSeparator1
             // 
-            this.cbPorts.FormattingEnabled = true;
-            this.cbPorts.Location = new System.Drawing.Point(90, 19);
-            this.cbPorts.Name = "cbPorts";
-            this.cbPorts.Size = new System.Drawing.Size(94, 21);
-            this.cbPorts.TabIndex = 0;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // lbTotalPower
+            // tcTabs
             // 
-            this.lbTotalPower.AutoSize = true;
-            this.lbTotalPower.Location = new System.Drawing.Point(277, 289);
-            this.lbTotalPower.Name = "lbTotalPower";
-            this.lbTotalPower.Size = new System.Drawing.Size(64, 13);
-            this.lbTotalPower.TabIndex = 48;
-            this.lbTotalPower.Text = "Total Power";
-            this.lbTotalPower.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tcTabs.Controls.Add(this.tpDetails);
+            this.tcTabs.Controls.Add(this.tpDriver);
+            this.tcTabs.Location = new System.Drawing.Point(3, 28);
+            this.tcTabs.Name = "tcTabs";
+            this.tcTabs.SelectedIndex = 0;
+            this.tcTabs.Size = new System.Drawing.Size(518, 472);
+            this.tcTabs.TabIndex = 8;
+            this.tcTabs.SelectedIndexChanged += new System.EventHandler(this.tcTabs_SelectedIndexChanged);
             // 
-            // lbTotalPowerValue
+            // tpDetails
             // 
-            this.lbTotalPowerValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbTotalPowerValue.Location = new System.Drawing.Point(279, 305);
-            this.lbTotalPowerValue.Name = "lbTotalPowerValue";
-            this.lbTotalPowerValue.Size = new System.Drawing.Size(60, 24);
-            this.lbTotalPowerValue.TabIndex = 47;
-            this.lbTotalPowerValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tpDetails.Controls.Add(this.gbOutput);
+            this.tpDetails.Controls.Add(this.gbInput);
+            this.tpDetails.Location = new System.Drawing.Point(4, 22);
+            this.tpDetails.Name = "tpDetails";
+            this.tpDetails.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDetails.Size = new System.Drawing.Size(510, 446);
+            this.tpDetails.TabIndex = 0;
+            this.tpDetails.Text = "Details";
+            this.tpDetails.UseVisualStyleBackColor = true;
+            // 
+            // tpDriver
+            // 
+            this.tpDriver.Controls.Add(this.gbGroupPolicy);
+            this.tpDriver.Location = new System.Drawing.Point(4, 22);
+            this.tpDriver.Name = "tpDriver";
+            this.tpDriver.Padding = new System.Windows.Forms.Padding(3);
+            this.tpDriver.Size = new System.Drawing.Size(510, 446);
+            this.tpDriver.TabIndex = 2;
+            this.tpDriver.Text = "Driver";
+            this.tpDriver.UseVisualStyleBackColor = true;
+            // 
+            // gbGroupPolicy
+            // 
+            this.gbGroupPolicy.Controls.Add(this.lbExplanation);
+            this.gbGroupPolicy.Controls.Add(this.lblOpinion);
+            this.gbGroupPolicy.Controls.Add(this.label3);
+            this.gbGroupPolicy.Controls.Add(this.pnBlocking);
+            this.gbGroupPolicy.Controls.Add(this.cbRetroactive);
+            this.gbGroupPolicy.Controls.Add(this.cbBlocking);
+            this.gbGroupPolicy.Controls.Add(this.lbSummary);
+            this.gbGroupPolicy.Controls.Add(this.label1);
+            this.gbGroupPolicy.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gbGroupPolicy.Location = new System.Drawing.Point(3, 3);
+            this.gbGroupPolicy.Name = "gbGroupPolicy";
+            this.gbGroupPolicy.Size = new System.Drawing.Size(504, 436);
+            this.gbGroupPolicy.TabIndex = 20;
+            this.gbGroupPolicy.TabStop = false;
+            this.gbGroupPolicy.Text = "Group Policy";
+            // 
+            // lblOpinion
+            // 
+            this.lblOpinion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblOpinion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOpinion.Location = new System.Drawing.Point(80, 216);
+            this.lblOpinion.Name = "lblOpinion";
+            this.lblOpinion.Size = new System.Drawing.Size(410, 40);
+            this.lblOpinion.TabIndex = 26;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 216);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 25;
+            this.label3.Text = "Opinion";
+            // 
+            // pnBlocking
+            // 
+            this.pnBlocking.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnBlocking.Controls.Add(this.lbXDreamDevices);
+            this.pnBlocking.Controls.Add(this.lbDevices);
+            this.pnBlocking.Location = new System.Drawing.Point(14, 284);
+            this.pnBlocking.Name = "pnBlocking";
+            this.pnBlocking.Size = new System.Drawing.Size(476, 137);
+            this.pnBlocking.TabIndex = 24;
+            // 
+            // lbXDreamDevices
+            // 
+            this.lbXDreamDevices.AutoSize = true;
+            this.lbXDreamDevices.Location = new System.Drawing.Point(7, 4);
+            this.lbXDreamDevices.Name = "lbXDreamDevices";
+            this.lbXDreamDevices.Size = new System.Drawing.Size(180, 13);
+            this.lbXDreamDevices.TabIndex = 8;
+            this.lbXDreamDevices.Text = "Known X-Dream Devices Registered";
+            // 
+            // lbDevices
+            // 
+            this.lbDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDevices.FormattingEnabled = true;
+            this.lbDevices.IntegralHeight = false;
+            this.lbDevices.Location = new System.Drawing.Point(10, 23);
+            this.lbDevices.Name = "lbDevices";
+            this.lbDevices.Size = new System.Drawing.Size(458, 111);
+            this.lbDevices.TabIndex = 6;
+            // 
+            // cbRetroactive
+            // 
+            this.cbRetroactive.AutoCheck = false;
+            this.cbRetroactive.AutoSize = true;
+            this.cbRetroactive.Location = new System.Drawing.Point(139, 261);
+            this.cbRetroactive.Name = "cbRetroactive";
+            this.cbRetroactive.Size = new System.Drawing.Size(125, 17);
+            this.cbRetroactive.TabIndex = 21;
+            this.cbRetroactive.Text = "Retroactive Blocking";
+            this.cbRetroactive.UseVisualStyleBackColor = true;
+            // 
+            // cbBlocking
+            // 
+            this.cbBlocking.AutoCheck = false;
+            this.cbBlocking.AutoSize = true;
+            this.cbBlocking.Location = new System.Drawing.Point(24, 261);
+            this.cbBlocking.Name = "cbBlocking";
+            this.cbBlocking.Size = new System.Drawing.Size(109, 17);
+            this.cbBlocking.TabIndex = 23;
+            this.cbBlocking.Text = "Blocking Enabled";
+            this.cbBlocking.UseVisualStyleBackColor = true;
+            // 
+            // lbSummary
+            // 
+            this.lbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbSummary.Location = new System.Drawing.Point(80, 171);
+            this.lbSummary.Name = "lbSummary";
+            this.lbSummary.Size = new System.Drawing.Size(410, 40);
+            this.lbSummary.TabIndex = 22;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 171);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Summary";
+            // 
+            // vbActualResistance
+            // 
+            this.vbActualResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbActualResistance.ClipOutOfRangeValues = true;
+            this.vbActualResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbActualResistance.Location = new System.Drawing.Point(83, 97);
+            this.vbActualResistance.Maximum = 250;
+            this.vbActualResistance.Name = "vbActualResistance";
+            this.vbActualResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.vbActualResistance.Size = new System.Drawing.Size(23, 318);
+            this.vbActualResistance.TabIndex = 3;
+            this.vbActualResistance.Text = "valueBar1";
+            this.vbActualResistance.Value = 0;
+            // 
+            // vbRightBrake
+            // 
+            this.vbRightBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbRightBrake.ClipOutOfRangeValues = true;
+            this.vbRightBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbRightBrake.Location = new System.Drawing.Point(92, 83);
+            this.vbRightBrake.Maximum = 250;
+            this.vbRightBrake.Name = "vbRightBrake";
+            this.vbRightBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbRightBrake.Size = new System.Drawing.Size(196, 24);
+            this.vbRightBrake.TabIndex = 33;
+            this.vbRightBrake.Value = 0;
+            // 
+            // vbLeftBrake
+            // 
+            this.vbLeftBrake.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbLeftBrake.ClipOutOfRangeValues = true;
+            this.vbLeftBrake.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbLeftBrake.Location = new System.Drawing.Point(92, 53);
+            this.vbLeftBrake.Maximum = 250;
+            this.vbLeftBrake.Name = "vbLeftBrake";
+            this.vbLeftBrake.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbLeftBrake.Size = new System.Drawing.Size(196, 24);
+            this.vbLeftBrake.TabIndex = 32;
+            this.vbLeftBrake.Value = 0;
+            // 
+            // vbSteering
+            // 
+            this.vbSteering.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vbSteering.ClipOutOfRangeValues = true;
+            this.vbSteering.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vbSteering.Location = new System.Drawing.Point(92, 24);
+            this.vbSteering.Maximum = 255;
+            this.vbSteering.Name = "vbSteering";
+            this.vbSteering.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.vbSteering.Size = new System.Drawing.Size(196, 24);
+            this.vbSteering.TabIndex = 31;
+            this.vbSteering.Value = 0;
+            // 
+            // lbExplanation
+            // 
+            this.lbExplanation.Location = new System.Drawing.Point(11, 24);
+            this.lbExplanation.Name = "lbExplanation";
+            this.lbExplanation.Size = new System.Drawing.Size(479, 137);
+            this.lbExplanation.TabIndex = 27;
+            this.lbExplanation.Text = resources.GetString("lbExplanation.Text");
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 514);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gbOutput);
-            this.Controls.Add(this.gbInput);
+            this.ClientSize = new System.Drawing.Size(520, 501);
+            this.Controls.Add(this.tcTabs);
+            this.Controls.Add(this.tsToolStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -648,9 +807,17 @@ namespace Trixter.XDream.Diagnostics
             this.pnRawData.PerformLayout();
             this.gbOutput.ResumeLayout(false);
             this.gbOutput.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.tsToolStrip.ResumeLayout(false);
+            this.tsToolStrip.PerformLayout();
+            this.tcTabs.ResumeLayout(false);
+            this.tpDetails.ResumeLayout(false);
+            this.tpDriver.ResumeLayout(false);
+            this.gbGroupPolicy.ResumeLayout(false);
+            this.gbGroupPolicy.PerformLayout();
+            this.pnBlocking.ResumeLayout(false);
+            this.pnBlocking.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -669,11 +836,6 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.Label lbSteering;
         private System.Windows.Forms.Label lbFlywheelSpeedValue;
         private System.Windows.Forms.Label lbCrankPositionValue;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cbPorts;
-        private System.Windows.Forms.Button bnDisconnect;
-        private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.Label lbRightBrakeValue;
         private System.Windows.Forms.Label lbLeftBrakeValue;
         private System.Windows.Forms.Label lbSteeringValue;
@@ -683,7 +845,6 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.Label lbCrankSpeed;
         private System.Windows.Forms.CheckBox cbApplyBrakes;
         private ValueBar vbActualResistance;
-        private System.Windows.Forms.Button bnRefreshPorts;
         private System.Windows.Forms.Label lbCrankDirection;
         private System.Windows.Forms.Label lbCrankDirectionValue;
         private ValueBar vbRightBrake;
@@ -702,9 +863,29 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.Label lbFlywheelTimeValue;
         private System.Windows.Forms.Label lbCrankTime;
         private System.Windows.Forms.CheckBox cbRawData;
-        private System.Windows.Forms.Button btnDriver;
         private System.Windows.Forms.Label lbTotalPower;
         private System.Windows.Forms.Label lbTotalPowerValue;
+        private System.Windows.Forms.ToolStrip tsToolStrip;
+        private System.Windows.Forms.ToolStripLabel tslSerialPort;
+        private System.Windows.Forms.ToolStripComboBox tscSerialPorts;
+        private System.Windows.Forms.ToolStripButton tsbRefreshPorts;
+        private System.Windows.Forms.ToolStripButton tsbConnect;
+        private System.Windows.Forms.ToolStripButton tsbDisconnect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.TabControl tcTabs;
+        private System.Windows.Forms.TabPage tpDetails;
+        private System.Windows.Forms.TabPage tpDriver;
+        private System.Windows.Forms.GroupBox gbGroupPolicy;
+        private System.Windows.Forms.Label lblOpinion;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel pnBlocking;
+        private System.Windows.Forms.Label lbXDreamDevices;
+        private System.Windows.Forms.ListBox lbDevices;
+        private System.Windows.Forms.CheckBox cbRetroactive;
+        private System.Windows.Forms.CheckBox cbBlocking;
+        private System.Windows.Forms.Label lbSummary;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbExplanation;
     }
 }
 

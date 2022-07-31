@@ -15,20 +15,19 @@ namespace Trixter.XDream.Diagnostics
                 
         private DateTime lastMessageTime = DateTime.MinValue;
         private XDreamState lastMessage = null;
-
+        
         public MainForm()
         {
             InitializeComponent();
             this.RefreshPorts();          
 
-            this.bnDisconnect.Enabled = false;
+            this.tsbDisconnect.Enabled = false;
             
             this.gbInput.Enabled = false;
             this.gbOutput.Enabled = false;
 
             this.vbActualResistance.Maximum = XDreamSerialPortClient.MaxResistance;
             this.tbResistance.Maximum = XDreamSerialPortClient.MaxResistance;
-
         }
 
         private int GetResistance()
@@ -76,7 +75,7 @@ namespace Trixter.XDream.Diagnostics
             }
         }
 
-        public void Update(object sender, XDreamState message)
+        private void Update(object sender, XDreamState message)
         {
             try
             {
@@ -85,79 +84,104 @@ namespace Trixter.XDream.Diagnostics
                 if (this.xdreamMachine == null || this.IsDisposed || this.Disposing || !this.Visible)
                     return;
 
-                if (DateTime.Now.Subtract(this.lastMessageTime).TotalMilliseconds < 100)
-                    return;
 
                 if (this.InvokeRequired)
                 {
                     Monitor.Exit(this.sync);
+
                     try
                     {
                         this.Invoke(new MethodInvoker(() => this.Update(sender, message)));
+
                     }
-                    catch(ObjectDisposedException)
+                    catch (ObjectDisposedException)
                     {
                         // TODO: refactor so this doesn't happen
                         // Checking for (!this.IsDisposed && !this.Disposing) is not enough.
                     }
+
                     return;
                 }
-
-                this.lastMessageTime = DateTime.Now;
-                this.lastMessage = message;
-
-                if (message == null)
-                    gbInput.Enabled = false;
-                else
-                    gbInput.Enabled = true;
-
-                this.UpdateResistance();
-                this.vbActualResistance.Value = this.xdreamMachine.Resistance;
-                this.vbSteering.Value = message.Steering;
-                this.lbSteeringValue.Text = message.Steering.ToString();
-                this.vbLeftBrake.Value = message.LeftBrake;
-                this.lbLeftBrakeValue.Text = message.LeftBrake.ToString();
-                this.vbRightBrake.Value = message.RightBrake;
-                this.lbRightBrakeValue.Text = message.RightBrake.ToString();
-                this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
-                this.lbCrankTimeValue.Text = message.Crank.ToString();
-                this.lbCrankSpeedValue.Text = this.xdreamMachine.CrankMeter.RPM.ToString()+" RPM";
-                this.lbCrankDirectionValue.Text = $"{this.xdreamMachine.CrankMeter.Direction}";
-                this.lbFlywheelTimeValue.Text = message?.Flywheel.ToString();
-                this.lbFlywheelSpeedValue.Text = this.xdreamMachine.FlywheelMeter.RPM.ToString()+" RPM";
-                this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
-
-                this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
-                this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
-
-                this.lbPowerValue.Text = this.xdreamMachine.PowerMeter.Power + " W";
-                this.lbTotalPowerValue.Text = this.xdreamMachine.TripMeter.Power.ToString("0") + " W";
-
-                this.clbButtons.SetItemChecked(0, message.FrontGearUp);
-                this.clbButtons.SetItemChecked(1, message.FrontGearDown);
-                this.clbButtons.SetItemChecked(2, message.BackGearUp);
-                this.clbButtons.SetItemChecked(3, message.BackGearDown);
-                this.clbButtons.SetItemChecked(4, message.UpArrow);
-                this.clbButtons.SetItemChecked(5, message.DownArrow);
-                this.clbButtons.SetItemChecked(6, message.LeftArrow);
-                this.clbButtons.SetItemChecked(7, message.RightArrow);
-                this.clbButtons.SetItemChecked(8, message.Red);
-                this.clbButtons.SetItemChecked(9, message.Green);
-                this.clbButtons.SetItemChecked(10, message.Blue);
-                this.clbButtons.SetItemChecked(11, message.Seated);
+                
+                if (DateTime.Now.Subtract(this.lastMessageTime).TotalMilliseconds < 100)
+                    return;
+                
+                // determine the visible tab
+                if (tcTabs.SelectedTab==tpDetails)
+                    UpdateDetailsTab(message);
+                    
             }
             finally
             {
-                if(Monitor.IsEntered(this.sync))
-                    Monitor.Exit(this.sync);                
+                if (Monitor.IsEntered(this.sync))
+                    Monitor.Exit(this.sync);
             }
+        }
+        private void UpdateDriverTab()
+        {
+            XDreamDeviceGroupPolicyUsbDeviceRestrictionReader xdr = new XDreamDeviceGroupPolicyUsbDeviceRestrictionReader();
+            XDreamDeviceBlockingReport report = new XDreamDeviceBlockingReport(xdr);
 
+            this.lbSummary.Text = report.GetSummary();
+            this.lblOpinion.Text = report.GetOpinion();
+            this.cbBlocking.Checked = xdr.DenyDeviceIDs;
+            this.cbRetroactive.Checked = xdr.DenyDeviceIDsRetroactive;
+            this.pnBlocking.Enabled = this.cbBlocking.Checked;
+            this.cbRetroactive.Enabled = this.cbBlocking.Checked;
+
+            foreach (var item in xdr.XDreamDevicesListed)
+                this.lbDevices.Items.Add(item);
+        }
+        private void UpdateDetailsTab(XDreamState message)
+        {
+            this.lastMessageTime = DateTime.Now;
+            this.lastMessage = message;
+
+            if (message == null)
+                gbInput.Enabled = false;
+            else
+                gbInput.Enabled = true;
+
+            this.UpdateResistance();
+            this.vbActualResistance.Value = this.xdreamMachine.Resistance;
+            this.vbSteering.Value = message.Steering;
+            this.lbSteeringValue.Text = message.Steering.ToString();
+            this.vbLeftBrake.Value = message.LeftBrake;
+            this.lbLeftBrakeValue.Text = message.LeftBrake.ToString();
+            this.vbRightBrake.Value = message.RightBrake;
+            this.lbRightBrakeValue.Text = message.RightBrake.ToString();
+            this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
+            this.lbCrankTimeValue.Text = message.Crank.ToString();
+            this.lbCrankSpeedValue.Text = this.xdreamMachine.CrankMeter.RPM.ToString() + " RPM";
+            this.lbCrankDirectionValue.Text = $"{this.xdreamMachine.CrankMeter.Direction}";
+            this.lbFlywheelTimeValue.Text = message?.Flywheel.ToString();
+            this.lbFlywheelSpeedValue.Text = this.xdreamMachine.FlywheelMeter.RPM.ToString() + " RPM";
+            this.lbHeartRateValue.Text = $"{message.HeartRate} BPM";
+
+            this.lbFlywheelRevsValue.Text = this.xdreamMachine.TripMeter.FlywheelRevolutions.ToString("0.0");
+            this.lbCrankRevsValue.Text = this.xdreamMachine.TripMeter.CrankRevolutions.ToString("0.0");
+
+            this.lbPowerValue.Text = this.xdreamMachine.PowerMeter.Power + " W";
+            this.lbTotalPowerValue.Text = this.xdreamMachine.TripMeter.Power.ToString("0") + " W";
+
+            this.clbButtons.SetItemChecked(0, message.FrontGearUp);
+            this.clbButtons.SetItemChecked(1, message.FrontGearDown);
+            this.clbButtons.SetItemChecked(2, message.BackGearUp);
+            this.clbButtons.SetItemChecked(3, message.BackGearDown);
+            this.clbButtons.SetItemChecked(4, message.UpArrow);
+            this.clbButtons.SetItemChecked(5, message.DownArrow);
+            this.clbButtons.SetItemChecked(6, message.LeftArrow);
+            this.clbButtons.SetItemChecked(7, message.RightArrow);
+            this.clbButtons.SetItemChecked(8, message.Red);
+            this.clbButtons.SetItemChecked(9, message.Green);
+            this.clbButtons.SetItemChecked(10, message.Blue);
+            this.clbButtons.SetItemChecked(11, message.Seated);
         }
 
-        private void bnConnect_Click(object sender, EventArgs e)
+        private void tsbConnect_Click(object sender, EventArgs e)
         {
 
-            string port = this.cbPorts.SelectedItem as string;
+            string port = this.tscSerialPorts.SelectedItem as string;
             if(port!=null)
             {                
                 this.xdreamMachine = XDreamBikeFactory.CreatePremium();
@@ -166,12 +190,12 @@ namespace Trixter.XDream.Diagnostics
                 try
                 {
                     (this.xdreamMachine.DataSource as XDreamSerialPortClient).Connect(port);
-                    this.cbPorts.Enabled = false;
-                    this.bnConnect.Enabled = false;
-                    this.bnDisconnect.Enabled = true;
+                    this.tscSerialPorts.Enabled = false;
+                    this.tsbConnect.Enabled = false;
+                    this.tsbDisconnect.Enabled = true;
                     this.gbInput.Enabled = true;
                     this.gbOutput.Enabled = true;
-                    this.bnRefreshPorts.Enabled = false;
+                    this.tsbRefreshPorts.Enabled = false;
                 }
                 catch 
                 {
@@ -184,17 +208,17 @@ namespace Trixter.XDream.Diagnostics
         {
             var comPorts = System.IO.Ports.SerialPort.GetPortNames();
             Array.Sort(comPorts);
-            this.cbPorts.Items.Clear();
-            this.cbPorts.Items.AddRange(comPorts);
+            this.tscSerialPorts.Items.Clear();
+            this.tscSerialPorts.Items.AddRange(comPorts);
 
             var bikePort = XDreamSerialPortClient.FindPorts(comPorts).FirstOrDefault();
             if (bikePort != null)
-                this.cbPorts.SelectedItem = bikePort;
+                this.tscSerialPorts.SelectedItem = bikePort;
             else if (comPorts.Length > 0)
-                this.cbPorts.SelectedIndex = 0;
+                this.tscSerialPorts.SelectedIndex = 0;
 
-            this.bnConnect.Enabled = comPorts.Length > 0;
-            this.cbPorts.Enabled = comPorts.Length > 0;
+            this.tsbConnect.Enabled = comPorts.Length > 0;
+            this.tscSerialPorts.Enabled = comPorts.Length > 0;
         }
 
         private void Disconnect()
@@ -208,22 +232,22 @@ namespace Trixter.XDream.Diagnostics
 
                     this.xdreamMachine = null;
 
-                    this.cbPorts.Enabled = true;
-                    this.bnConnect.Enabled = true;
-                    this.bnDisconnect.Enabled = false;
+                    this.tscSerialPorts.Enabled = true;
+                    this.tsbConnect.Enabled = true;
+                    this.tsbDisconnect.Enabled = false;
                     this.gbInput.Enabled = false;
                     this.gbOutput.Enabled = false;
-                    this.bnRefreshPorts.Enabled = true;
+                    this.tsbRefreshPorts.Enabled = true;
                 }
             }
         }
 
-        private void bnDisconnect_Click(object sender, EventArgs e)
+        private void tsbDisconnect_Click(object sender, EventArgs e)
         {
             this.Disconnect();
         }
 
-        private void btnRefreshPorts_Click(object sender, EventArgs e)
+        private void tsbRefreshPorts_Click(object sender, EventArgs e)
         {
             this.RefreshPorts();
         }
@@ -233,9 +257,12 @@ namespace Trixter.XDream.Diagnostics
             this.pnRawData.Visible = this.cbRawData.Checked;
         }
 
-        private void btnDriver_Click(object sender, EventArgs e)
+        
+        private void tcTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
-            new GroupPolicyForm().ShowDialog();
+            if (this.tcTabs.SelectedTab == this.tpDriver)
+                this.UpdateDriverTab();
         }
+
     }
 }
