@@ -6,7 +6,9 @@
 
 using namespace std;
 
-trixterxdreamv1client::trixterxdreamv1client() { this->ConfigureResistanceMessages(); }
+trixterxdreamv1client::trixterxdreamv1client() {
+    this->ConfigureResistanceMessages();
+}
 
 void trixterxdreamv1client::ResetBuffer() {
     // for the case of an invalid packet, if this was smart, it would store all the input
@@ -14,6 +16,11 @@ void trixterxdreamv1client::ResetBuffer() {
 
     this->inputBuffer.clear();
     this->byteBuffer.clear();
+}
+
+void trixterxdreamv1client::set_GetTime(std::function<uint32_t()> get_time_ms) {
+    this->get_time_ms = get_time_ms;
+    this->t0 = this->get_time_ms ? this->get_time_ms():0;
 }
 
 trixterxdreamv1client::PacketState trixterxdreamv1client::ProcessChar(char c) {
@@ -127,8 +134,7 @@ bool trixterxdreamv1client::ReceiveChar(char c) {
         crankRevsPerMinute = crankToRevolutionsPerMinute / max(static_cast<uint16_t>(1), lastPacket.Crank);
     }
 
-    
-    const uint32_t t = this->get_time_ms();
+    const uint32_t t = this->get_time_ms() - this->t0;
     const uint32_t lt = this->lastT ? this->lastT : t;
 
     this->lastT = t;
@@ -137,13 +143,13 @@ bool trixterxdreamv1client::ReceiveChar(char c) {
     {
         // TODO: error logging - this could be indicative of a problem
         // It should usually be about 12ms
-        
+
         this->Reset();
         return false;
     }
 
     const uint32_t dt = t - lt;
-        
+
     if (dt > 0)
     {
         // update the internal, precise state
@@ -153,7 +159,7 @@ bool trixterxdreamv1client::ReceiveChar(char c) {
         this->crankRevolutions += dt_minutes * crankRevsPerMinute;
     }
 
-	state newState{};
+    state newState{};
     newState.LastEventTime = static_cast<uint16_t>(millisecondsToBaseUnit * t);
     newState.Steering = lastPacket.Steering;
     newState.HeartRate = lastPacket.HeartRate;
@@ -178,7 +184,7 @@ trixterxdreamv1client::state trixterxdreamv1client::getLastState() {
 
 void trixterxdreamv1client::SendResistance(uint8_t level) {
 
-    // to maintain the resistance, this needs to be resent about every 50ms.
+    // to maintain the resistance, this needs to be resent about every 10ms 
     if (level != 0 && this->write_bytes)
     {
         this->writeMutex.lock();

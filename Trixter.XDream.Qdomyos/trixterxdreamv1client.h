@@ -67,13 +67,14 @@ private:
         uint8_t HeartRate;
     };
 
-    std::function<uint32_t()> get_time_ms;
-    std::function<void(uint8_t*, int)> write_bytes;
+    std::function<uint32_t()> get_time_ms=nullptr;
+    std::function<void(uint8_t*, int)> write_bytes=nullptr;
     std::mutex stateMutex, writeMutex;
     uint32_t lastT = 0;
+    uint32_t t0 = 0;
     double flywheelRevolutions{}, crankRevolutions{};
     Packet lastPacket{};
-    std::vector<char> inputBuffer;
+    std::vector<uint8_t> inputBuffer;
     std::vector<uint8_t> byteBuffer;
     state lastState;
 
@@ -99,7 +100,7 @@ public:
     /**
      * @brief The time interval between sending resistance requests to the device.
      */
-    constexpr static uint8_t ResistancePulseIntervalMilliseconds = 50;
+    constexpr static uint8_t ResistancePulseIntervalMilliseconds = 10;
 
     trixterxdreamv1client();
 
@@ -121,7 +122,7 @@ public:
      * a starting point understood by the client.
      * @param get_time_ms A function to get the time.
      */
-    void set_GetTime(std::function<uint32_t()> get_time_ms) { this->get_time_ms = get_time_ms; }
+    void set_GetTime(std::function<uint32_t()> get_time_ms);
 
     /**
      * @brief Gets the state of the device as it was last read. This consists of CSCS data, steering and heartbeat.
@@ -134,7 +135,7 @@ public:
     void Reset();
 
     /**
-     * @brief Sends 1 packet indicating a specific resistance level to the device. Needs to be sent every 50ms.
+     * @brief Sends 1 packet indicating a specific resistance level to the device. Needs to be sent at the rate specified by ResistancePulseIntervalMilliseconds.
      * @param level 0 to 250.
      */
     void SendResistance(uint8_t level);
