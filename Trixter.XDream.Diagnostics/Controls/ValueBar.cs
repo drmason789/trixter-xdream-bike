@@ -3,41 +3,37 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Trixter.XDream.Diagnostics
+namespace Trixter.XDream.Diagnostics.Controls
 {
     public class ValueBar : Label
     {
-        const string appearanceCategory = "Appearance";
-        const string valueCategory = "Value";
-        const string behaviorCategory = "Behavior";
-
         private Brush barBrush;
         private int value;
         private double scale;
         private Rectangle? barRect;
-            
+
         private int maximum = 100;
         private Orientation orientation = Orientation.Horizontal;
-       
-                
+
+
         private void Rescale()
         {
-            Rectangle client = this.ClientRectangle;
+            Rectangle client = ClientRectangle;
             barRect = null;
-                       
-            scale = (double)(this.Orientation==Orientation.Horizontal ? client.Width:client.Height) / maximum;            
+
+            scale = (double)(Orientation == Orientation.Horizontal ? client.Width : client.Height) / maximum;
             Invalidate();
         }
 
-        [Browsable(true), Category(appearanceCategory)]
+        [Browsable(true), Category(Constants.AppearanceCategory)]
         public Orientation Orientation
         {
             get => orientation;
             set
             {
-                if (this.orientation!=value)
+                if (orientation != value)
                 {
-                    this.orientation = value;
+                    orientation = value;
                     barRect = null;
                     Rescale();
                 }
@@ -47,11 +43,11 @@ namespace Trixter.XDream.Diagnostics
         /// <summary>
         /// If set to true, out of range values are clipped to the Minimum and Maximum. Otherwise an execption is thrown.
         /// </summary>
-        [Browsable(true), Category(behaviorCategory)]
+        [Browsable(true), Category(Constants.BehaviorCategory)]
         public bool ClipOutOfRangeValues { get; set; }
-        
 
-        [Browsable(true), Category(appearanceCategory)]
+
+        [Browsable(true), Category(Constants.AppearanceCategory)]
         public int Maximum
         {
             get => maximum;
@@ -67,7 +63,7 @@ namespace Trixter.XDream.Diagnostics
             }
         }
 
-        [Browsable(true), Category(valueCategory)]
+        [Browsable(true), Category(Constants.ValueCategory)]
         public int Value
         {
             get => value;
@@ -75,19 +71,19 @@ namespace Trixter.XDream.Diagnostics
             {
                 if (this.value != value)
                 {
-                    if (value < 0 || value > this.Maximum)
+                    if (value < 0 || value > Maximum)
                     {
-                        if(!this.ClipOutOfRangeValues)
+                        if (!ClipOutOfRangeValues)
                             throw new ArgumentOutOfRangeException(nameof(value));
-                        value = Math.Max(0, Math.Min(this.Maximum, value));
+                        value = Math.Max(0, Math.Min(Maximum, value));
                     }
                     this.value = value;
                     barRect = null;
-                    this.Invalidate();
+                    Invalidate();
                 }
 
             }
-        }        
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -96,31 +92,31 @@ namespace Trixter.XDream.Diagnostics
 
             Rectangle b = barRect.Value;
             b.Intersect(e.ClipRectangle);
-            e.Graphics.FillRectangle(this.barBrush, b);
+            e.Graphics.FillRectangle(barBrush, b);
         }
 
         public ValueBar()
         {
-            this.DoubleBuffered = true;
-            this.AutoSize = false;
-            this.Text = "";
-            this.barBrush = new SolidBrush(this.ForeColor);
+            DoubleBuffered = true;
+            AutoSize = false;
+            Text = "";
+            barBrush = new SolidBrush(ForeColor);
 
-            this.Resize += delegate { Rescale(); };
-            this.ForeColorChanged += (s, e) =>
+            Resize += delegate { Rescale(); };
+            ForeColorChanged += (s, e) =>
             {
-                this.barBrush = new SolidBrush(this.ForeColor);
+                barBrush = new SolidBrush(ForeColor);
             };
-            this.ForeColor = SystemColors.HotTrack;
+            ForeColor = SystemColors.HotTrack;
         }
 
         private void CalculateBar()
         {
-            Rectangle rect = this.ClientRectangle;
+            Rectangle rect = ClientRectangle;
             Size size;
             Point location;
 
-            if (this.Orientation == Orientation.Horizontal)
+            if (Orientation == Orientation.Horizontal)
             {
                 location = rect.Location;
                 size = new Size((int)(value * scale), rect.Height);
@@ -128,7 +124,7 @@ namespace Trixter.XDream.Diagnostics
             else
             {
                 size = new Size(rect.Width, (int)(value * scale));
-                location = new Point(rect.X, rect.Bottom - size.Height);                
+                location = new Point(rect.X, rect.Bottom - size.Height);
             }
 
             barRect = new Rectangle(location, size);

@@ -12,10 +12,12 @@ namespace Trixter.XDream.Diagnostics
         [STAThread]
         static int Main(string[] args)
         {
+            DataAccess dataAccess = new DataAccess();
             //Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            MainForm mainForm = new MainForm() { DataAccess = dataAccess };
+            Application.Run(mainForm);
 
             return 0;
         }
