@@ -30,6 +30,8 @@ namespace Trixter.XDream.Diagnostics
 
             this.tsbDisconnect.Enabled = false;
             this.dDetailsControl.Enabled = false;
+            this.tsbCapture.Enabled = false;
+            this.tsbSave.Enabled = false;
 
             this.dDetailsControl.DataAccess = this.DataAccess;
         }
