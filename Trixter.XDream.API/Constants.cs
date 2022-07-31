@@ -4,7 +4,7 @@ namespace Trixter.XDream.API
 {
     public static class Constants
     {
-        public const int MaxHeartRate = 300;
+        public const int MaxHeartRate = 255;
         public const int MinHeartRate = 0; // no reading
 
 

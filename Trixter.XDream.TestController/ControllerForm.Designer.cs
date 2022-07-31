@@ -45,6 +45,8 @@ namespace Trixter.XDream.TestController
             this.bnRightGearDown = new System.Windows.Forms.Button();
             this.bnRightGearUp = new System.Windows.Forms.Button();
             this.gbControls = new System.Windows.Forms.GroupBox();
+            this.lbHeartRate = new System.Windows.Forms.Label();
+            this.nudHeartRate = new System.Windows.Forms.NumericUpDown();
             this.bnGamePad = new System.Windows.Forms.Button();
             this.lbBothBrakes = new System.Windows.Forms.Label();
             this.lbRightBrake = new System.Windows.Forms.Label();
@@ -73,13 +75,14 @@ namespace Trixter.XDream.TestController
             this.tbCrankSpeed = new System.Windows.Forms.TrackBar();
             this.nudCrankRevTime = new System.Windows.Forms.NumericUpDown();
             this.gbSystem = new System.Windows.Forms.GroupBox();
-            this.cbComPort = new System.Windows.Forms.ComboBox();
-            this.lbComPort = new System.Windows.Forms.Label();
-            this.bnConnect = new System.Windows.Forms.Button();
             this.bnDisconnect = new System.Windows.Forms.Button();
+            this.bnConnect = new System.Windows.Forms.Button();
+            this.lbComPort = new System.Windows.Forms.Label();
+            this.cbComPort = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
             this.gbControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeartRate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLeftBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRightBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBothBrakes)).BeginInit();
@@ -283,6 +286,8 @@ namespace Trixter.XDream.TestController
             // 
             // gbControls
             // 
+            this.gbControls.Controls.Add(this.lbHeartRate);
+            this.gbControls.Controls.Add(this.nudHeartRate);
             this.gbControls.Controls.Add(this.bnGamePad);
             this.gbControls.Controls.Add(this.lbBothBrakes);
             this.gbControls.Controls.Add(this.lbRightBrake);
@@ -313,6 +318,28 @@ namespace Trixter.XDream.TestController
             this.gbControls.TabIndex = 14;
             this.gbControls.TabStop = false;
             this.gbControls.Text = "Controls";
+            // 
+            // lbHeartRate
+            // 
+            this.lbHeartRate.AutoSize = true;
+            this.lbHeartRate.Location = new System.Drawing.Point(118, 125);
+            this.lbHeartRate.Name = "lbHeartRate";
+            this.lbHeartRate.Size = new System.Drawing.Size(85, 13);
+            this.lbHeartRate.TabIndex = 26;
+            this.lbHeartRate.Text = "Heart Rate BPM";
+            // 
+            // nudHeartRate
+            // 
+            this.nudHeartRate.Location = new System.Drawing.Point(156, 141);
+            this.nudHeartRate.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.nudHeartRate.Name = "nudHeartRate";
+            this.nudHeartRate.Size = new System.Drawing.Size(51, 20);
+            this.nudHeartRate.TabIndex = 25;
+            this.nudHeartRate.ValueChanged += new System.EventHandler(this.nudHeartRate_ValueChanged);
             // 
             // bnGamePad
             // 
@@ -686,22 +713,16 @@ namespace Trixter.XDream.TestController
             this.gbSystem.TabStop = false;
             this.gbSystem.Text = "Configuration";
             // 
-            // cbComPort
+            // bnDisconnect
             // 
-            this.cbComPort.FormattingEnabled = true;
-            this.cbComPort.Location = new System.Drawing.Point(8, 41);
-            this.cbComPort.Name = "cbComPort";
-            this.cbComPort.Size = new System.Drawing.Size(77, 21);
-            this.cbComPort.TabIndex = 0;
-            // 
-            // lbComPort
-            // 
-            this.lbComPort.AutoSize = true;
-            this.lbComPort.Location = new System.Drawing.Point(6, 25);
-            this.lbComPort.Name = "lbComPort";
-            this.lbComPort.Size = new System.Drawing.Size(53, 13);
-            this.lbComPort.TabIndex = 1;
-            this.lbComPort.Text = "COM Port";
+            this.bnDisconnect.Enabled = false;
+            this.bnDisconnect.Location = new System.Drawing.Point(10, 97);
+            this.bnDisconnect.Name = "bnDisconnect";
+            this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.bnDisconnect.TabIndex = 3;
+            this.bnDisconnect.Text = "Disconnect";
+            this.bnDisconnect.UseVisualStyleBackColor = true;
+            this.bnDisconnect.Click += new System.EventHandler(this.bnDisconnect_Click);
             // 
             // bnConnect
             // 
@@ -713,16 +734,22 @@ namespace Trixter.XDream.TestController
             this.bnConnect.UseVisualStyleBackColor = true;
             this.bnConnect.Click += new System.EventHandler(this.bnConnect_Click);
             // 
-            // bnDisconnect
+            // lbComPort
             // 
-            this.bnDisconnect.Enabled = false;
-            this.bnDisconnect.Location = new System.Drawing.Point(10, 97);
-            this.bnDisconnect.Name = "bnDisconnect";
-            this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
-            this.bnDisconnect.TabIndex = 3;
-            this.bnDisconnect.Text = "Disconnect";
-            this.bnDisconnect.UseVisualStyleBackColor = true;
-            this.bnDisconnect.Click += new System.EventHandler(this.bnDisconnect_Click);
+            this.lbComPort.AutoSize = true;
+            this.lbComPort.Location = new System.Drawing.Point(6, 25);
+            this.lbComPort.Name = "lbComPort";
+            this.lbComPort.Size = new System.Drawing.Size(53, 13);
+            this.lbComPort.TabIndex = 1;
+            this.lbComPort.Text = "COM Port";
+            // 
+            // cbComPort
+            // 
+            this.cbComPort.FormattingEnabled = true;
+            this.cbComPort.Location = new System.Drawing.Point(8, 41);
+            this.cbComPort.Name = "cbComPort";
+            this.cbComPort.Size = new System.Drawing.Size(77, 21);
+            this.cbComPort.TabIndex = 0;
             // 
             // ControllerForm
             // 
@@ -742,6 +769,7 @@ namespace Trixter.XDream.TestController
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).EndInit();
             this.gbControls.ResumeLayout(false);
             this.gbControls.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudHeartRate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudLeftBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRightBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBothBrakes)).EndInit();
@@ -814,6 +842,8 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.ComboBox cbComPort;
         private System.Windows.Forms.Button bnDisconnect;
         private System.Windows.Forms.Button bnConnect;
+        private System.Windows.Forms.Label lbHeartRate;
+        private System.Windows.Forms.NumericUpDown nudHeartRate;
     }
 }
 

@@ -8,9 +8,6 @@ namespace Trixter.XDream.API.Testing
     [TestFixture]
     public class MessageStreamTests
     {
-
-
-
         /// <summary>
         /// Tests that the <see cref="TextBytesPacketStateMachine"/> converts the supplied byte array into the expected
         /// number of packets, and they all convert to <see cref="XDreamState"/> objects without error.
@@ -28,7 +25,7 @@ namespace Trixter.XDream.API.Testing
         public void TestGeneral() => TestBytes(Resources.input, 4587);
 
 
-        [Test(Description ="Test with input focussed on heart rate data.")]
+        [Test(Description ="Test with input focused on heart rate data.")]
         public void HeartRate() => TestBytes(Resources.heartrate, 4588);
 
 

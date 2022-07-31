@@ -57,6 +57,9 @@ namespace Trixter.XDream.TestController
                 this.tbSteering.Maximum = Constants.MaxSteering;
                 this.tbSteering.Minimum = Constants.MinSteering;
                 this.tbSteering.Value = Constants.MidSteering;
+                
+                this.nudHeartRate.Maximum = Constants.MaxHeartRate;
+                this.nudHeartRate.Minimum = Constants.MinHeartRate;
 
                 this.nudFlywheelRevTime.Maximum = MappedFlywheelMeter.DefaultFlywheelRpmToRaw(0);
                 this.nudFlywheelRevTime.Minimum = MappedFlywheelMeter.DefaultFlywheelRpmToRaw(MaxFlywheelRPM);
@@ -271,6 +274,15 @@ namespace Trixter.XDream.TestController
                 int rpm = MappedFlywheelMeter.DefaultFlywheelRawToRpm(this.controller.State.Flywheel);
                 this.tbFlywheelSpeed.Value = rpm;
                 this.nudRPM.Value = rpm;
+                this.controller.Send();
+            });
+        }
+
+        private void nudHeartRate_ValueChanged(object sender, EventArgs e)
+        {
+            this.DoWithSuppressedEvents(() =>
+            {
+                this.controller.State.HeartRate = (int)this.nudHeartRate.Value;
                 this.controller.Send();
             });
         }
