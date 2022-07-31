@@ -131,7 +131,7 @@ namespace Trixter.XDream.API.Communications
             result[0x0C] = (byte)(state.Flywheel >> 8);
             result[0x0D] = (byte)(state.Flywheel & 0xFF);
             result[0x0E] = (byte)state.HeartRate;
-            result[0x0F] = result.Take(0x0E).Aggregate((a, b) => (byte)(a ^ b));
+            result[0x0F] = result.Take(0x0F).Aggregate((a, b) => (byte)(a ^ b));
 
             return result;
         }
