@@ -168,7 +168,7 @@ namespace Trixter.XDream.Diagnostics
         private void tcTabs_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.tcTabs.SelectedTab == this.tpDriver)
-                this.gpGroupPolicyControl.Update();
+                this.gpGroupPolicyControl.UpdateDetails();
         }
 
         private void tsbCapture_Click(object sender, EventArgs e)
