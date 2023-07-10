@@ -1,6 +1,8 @@
 # trixter-xdream-bike
 An API and diagnostic utility for interaction with a [Trixter X-Dream V1 Exercise Bike](https://www.amazon.co.uk/Trixter-X-Dream-Interactive-Exercise-Bike/dp/B008VOQXDA).
 
+Also, a discussion forum for the X-Dream Mountain Biking software supplied with that bike.
+
 ---
 
 The "Trixter" company or companies that made this bike and the X-Dream mountain biking simulator are now dissolved.  
