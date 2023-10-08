@@ -29,7 +29,7 @@ So far the improvements over the originals are:
 - detects the COM port the bike is on
 - detects backpedalling and shows the crank RPM in the backwards direction
 - calculates flywheel and crank cumulative revolutions.
-- estimates of the power being applied to the flywheel (not accounting for resistance) momentarily and cumulatively
+- estimates of the power being applied to the flywheel (not accounting for resistance, until #101 is released) momentarily and cumulatively
 - is maintainable
 
 The default mode of the utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
