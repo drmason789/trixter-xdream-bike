@@ -9,7 +9,11 @@ namespace Trixter.XDream.API.Meters
         DateTimeOffset? StartTime { get; }
         decimal FlywheelRevolutions { get; }
         decimal CrankRevolutions { get; }
-        decimal Power { get; }
+
+        /// <summary>
+        /// The total energy put into the crank, in joules.
+        /// </summary>
+        decimal Energy { get; }
 
         void Update(DateTimeOffset timestamp);
         void Reset();

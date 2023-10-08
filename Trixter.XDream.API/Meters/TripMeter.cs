@@ -4,33 +4,30 @@ namespace Trixter.XDream.API.Meters
 {
     public class TripMeter : ITripMeter
     {
-        private IFlywheelMeter flywheelMeter;
-        private ICrankMeter crankMeter;
-        private IPowerMeter powerMeter;
+        private XDreamMachine xdreamMachine;
         private DateTimeOffset lastUpdate;
         private decimal flywheelRadians;
         private decimal crankRadians;
-        
+
         public DateTimeOffset? StartTime { get; private set; }
 
-        public decimal FlywheelRevolutions => this.flywheelRadians*(decimal)Constants.RadiansToRevolutions;
+        public decimal FlywheelRevolutions => this.flywheelRadians * (decimal)Constants.RadiansToRevolutions;
 
-        public decimal CrankRevolutions => this.crankRadians*(decimal)Constants.RadiansToRevolutions;
+        public decimal CrankRevolutions => this.crankRadians * (decimal)Constants.RadiansToRevolutions;
 
-        public decimal Power { get; private set; }
+        public decimal Energy { get; private set; }
 
-        public TripMeter(IFlywheelMeter flywheelMeter, ICrankMeter crankMeter, IPowerMeter powerMeter)
+        public TripMeter(XDreamMachine xdreamMachine)
         {
-            this.crankMeter = crankMeter ?? throw new ArgumentNullException(nameof(crankMeter));
-            this.flywheelMeter = flywheelMeter??throw new ArgumentNullException(nameof(flywheelMeter));
-            this.powerMeter = powerMeter ?? throw new ArgumentNullException(nameof(powerMeter));
+            this.xdreamMachine = xdreamMachine;
+            
         }
 
         public void Reset()
         {
             this.flywheelRadians = 0m;
             this.crankRadians = 0m;
-            this.Power = 0m;
+            this.Energy = 0m;
             this.lastUpdate = DateTimeOffset.MinValue;
             this.StartTime = null;
         }
@@ -48,18 +45,20 @@ namespace Trixter.XDream.API.Meters
 
                 if (dt > 0)
                 {
-                    double fw = this.flywheelMeter.AngularVelocity;
-                    double? cw = this.crankMeter.HasData && this.crankMeter.Direction==CrankDirection.Forward ? (double?)this.crankMeter.AngularVelocity : null;
-                    int power = this.powerMeter.Power;
+                    var (flywheelMeter, crankMeter, powerMeter) = (this.xdreamMachine.FlywheelMeter, this.xdreamMachine.CrankMeter, this.xdreamMachine.PowerMeter);
 
-                    if(fw>0)
-                        this.flywheelRadians += (decimal)(dt * this.flywheelMeter.AngularVelocity);
+                    double fw = flywheelMeter.AngularVelocity;
+                    double? cw = crankMeter.HasData && crankMeter.Direction == CrankDirection.Forward ? (double?)crankMeter.AngularVelocity : null;
+                    int power = powerMeter.Power;
 
-                    if (cw.GetValueOrDefault()>0)
-                        this.crankRadians += (decimal)(dt * this.crankMeter.AngularVelocity);
+                    if (fw > 0)
+                        this.flywheelRadians += (decimal)(dt * flywheelMeter.AngularVelocity);
+
+                    if (cw.GetValueOrDefault() > 0)
+                        this.crankRadians += (decimal)(dt * crankMeter.AngularVelocity);
 
                     if (power > 0)
-                        this.Power += (decimal)(dt * power);
+                        this.Energy += (decimal)(dt * power);
                 }
             }
             this.lastUpdate = timestamp;

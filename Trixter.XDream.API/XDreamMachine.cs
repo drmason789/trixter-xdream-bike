@@ -23,14 +23,17 @@ namespace Trixter.XDream.API
         /// <summary>
         /// Meter that calculates the power being applied to the flywheel.
         /// </summary>
-        IPowerMeter PowerMeter { get; }
-
-
+        IPowerMeter FlywheelPowerMeter { get; }
+        
         /// <summary>
         /// Meter that determines the crank speed and direction from incoming state data.
         /// </summary>
         ICrankMeter CrankMeter { get; }
 
+        /// <summary>
+        /// Meter that determines the power being applied to the crank.
+        /// </summary>
+        IPowerMeter PowerMeter { get; }
 
         /// <summary>
         /// Meter that determines the cumulative revolutions of the crank and flywheel.

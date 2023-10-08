@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Trixter.XDream.API;
 using Trixter.XDream.API.Communications;
+using Trixter.XDream.API.Meters;
 
 namespace Trixter.XDream.Diagnostics.Controls
 {
@@ -79,7 +80,7 @@ namespace Trixter.XDream.Diagnostics.Controls
             this.lastUpdate = DateTimeOffset.UtcNow;
 
             XDreamMachine xdm = this.DataAccess?.XDreamMachine;
-
+            
             if (xdm == null)
                 return;
 
@@ -98,6 +99,9 @@ namespace Trixter.XDream.Diagnostics.Controls
             this.lbRightBrakeValue.Text = message.RightBrake.ToString();
             this.lbCrankPositionValue.Text = message.CrankPosition.ToString();
             this.lbCrankTimeValue.Text = message.Crank.ToString();
+
+
+
             this.lbCrankSpeedValue.Text = xdm.CrankMeter.RPM.ToString() + " RPM";
             this.lbCrankDirectionValue.Text = $"{xdm.CrankMeter.Direction}";
             this.lbFlywheelTimeValue.Text = message?.Flywheel.ToString();
@@ -108,7 +112,11 @@ namespace Trixter.XDream.Diagnostics.Controls
             this.lbCrankRevsValue.Text = xdm.TripMeter.CrankRevolutions.ToString("0.0");
 
             this.lbPowerValue.Text = xdm.PowerMeter.Power + " W";
-            this.lbTotalPowerValue.Text = xdm.TripMeter.Power.ToString("0") + " W";
+
+            var energy = (double)xdm.TripMeter.Energy * 0.001;
+           
+
+            this.lbTotalEnergyValue.Text = energy.ToString("0.00 kJ");
 
             this.clbButtons.SetItemChecked(0, message.FrontGearUp);
             this.clbButtons.SetItemChecked(1, message.FrontGearDown);
