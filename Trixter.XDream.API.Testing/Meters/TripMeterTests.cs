@@ -16,23 +16,20 @@ namespace Trixter.XDream.API.Testing.Meters
         [Test(Description = "A regression test that uses real data, obtained from a real X-Dream bike, with a real person pedalling, pushing buttons and pulling levers.")]
         public void KeepingItReal()
         {
-            IFlywheelMeter fwm = new MappedFlywheelMeter();
-            ICrankMeter cm = new HybridCrankMeter();
-            IPowerMeter pm = new PowerMeter(XDreamFlywheel.Default.MomentOfInertia);
-            ITripMeter tm = new TripMeter(fwm, cm, pm);
+            XDreamTestClient xtc = new XDreamTestClient();
+            XDreamMachine xdm = XDreamBikeFactory.CreatePremium(xtc);
 
             var inputMessages = XDreamMessageIO.Read(Resources.flywheel_crank_messages);
             var statistics = new Experimental.StandardDeviationCalculator();
             DateTimeOffset last = DateTimeOffset.MinValue, t0=inputMessages[0].TimeStamp;
             List<string> logs = new List<string>(inputMessages.Length);
 
+            var (cm, fwm, pm) = (xdm.CrankMeter, xdm.FlywheelMeter,xdm.FlywheelPowerMeter);
+
             Array.ForEach(inputMessages,
                 m =>
                 {
-                    fwm.AddData(m);
-                    cm.AddData(m);
-                    pm.Update(m.TimeStamp, fwm.AngularVelocity);
-                    tm.Update(m.TimeStamp);
+                    xtc.UpdateState(m);
                 
                     if(last!=DateTimeOffset.MinValue)
                     {
@@ -54,11 +51,11 @@ namespace Trixter.XDream.API.Testing.Meters
             System.Console.WriteLine(String.Join("\r\n", logs));
 
 
-            Assert.AreEqual(19, Math.Round(tm.CrankRevolutions, 0, MidpointRounding.AwayFromZero));
-            Assert.AreEqual(243, Math.Round(tm.FlywheelRevolutions,0,MidpointRounding.AwayFromZero));
+            Assert.AreEqual(19, Math.Round(xdm.TripMeter.CrankRevolutions, 0, MidpointRounding.AwayFromZero));
+            Assert.AreEqual(243, Math.Round(xdm.TripMeter.FlywheelRevolutions,0,MidpointRounding.AwayFromZero));
 
-            // It's not certain if this is actually an accurate power calculation, it's just a regression test.
-            Assert.AreEqual(1218, Math.Round(tm.Power, 0, MidpointRounding.AwayFromZero));
+            // It's not certain if this is actually an accurate energy calculation, it's just a regression test.
+            Assert.AreEqual(1254, Math.Round(xdm.TripMeter.Energy, 0, MidpointRounding.AwayFromZero));
         }
 
         [Test]
@@ -84,9 +81,8 @@ namespace Trixter.XDream.API.Testing.Meters
             Assert.AreEqual((double)199.98, (double)tm.CrankRevolutions, tolerance);
             Assert.AreEqual((double)959.904m, (double)tm.FlywheelRevolutions, tolerance);
 
-            // This was constant speed, and current system doesn't account for friction or
-            // other forces that might slow the wheel. So expect 0 power applied.
-            Assert.AreEqual(0m, tm.Power);
+            // This is just a regression test, and the value comes from a calculation using the power table gleaned from an X-Dream configuration file.
+            Assert.AreEqual(1319.868m, tm.Energy);
 
         }
     }
