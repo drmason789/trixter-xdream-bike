@@ -24,6 +24,9 @@
     <ClInclude Include="trixterxdreamv1client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bilinearinterpolator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="trixterxdreamv1client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="bilinearinterpolator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
