@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Trixter.XDream.API.Meters
 {
@@ -12,22 +9,7 @@ namespace Trixter.XDream.API.Meters
     /// </summary>
     internal static class PowerTable
     {
-        [DebuggerDisplay("{RPM} RPM | {Resistance} R | {Power} W")]
-        private class PowerPoint
-        {
-            public int RPM { get; }
-            public int Resistance { get;  }
-            public double Power { get; }
-
-            public PowerPoint(int rpm, int resistance, double power)
-            {
-                this.RPM = rpm;
-                this.Resistance = resistance;
-                this.Power = power;
-            }
-        }
-
-        private const int minimumRPM = 30;
+       private const int minimumRPM = 30;
         private const int maximumRPM = 120;
         private const int maximumResistance = 250;
         private const int minimumResistance = 0;
@@ -299,106 +281,36 @@ namespace Trixter.XDream.API.Meters
             {120, 250, 830.31}
         };
         
-        private static PowerPoint[,] powerTable;
+        
         private static double[][] fullPowerTable;
         
         static PowerTable()
         {
-            PowerPoint[] powerPoints = Enumerable.Range(0, values.GetLength(0))
-                .Select(i => new PowerPoint((int)values[i, 0], (int)values[i, 1], values[i, 2]))
-                .ToArray();
 
-            powerTable = new PowerPoint[(maximumRPM-minimumRPM)/10 + 1, (maximumResistance-minimumResistance)/10+1];
+            double getPower(int c, int r)
+            {
+                int i = 26 * (c - 30) / 10 + r / 10;
+                (int cadence, int resistance) = ((int)values[i, 0], (int)values[i, 1]);
 
-            foreach (var pp in powerPoints)
-                powerTable[(pp.RPM / 10) - 3, pp.Resistance / 10] = pp;
+                if (cadence != c || resistance != r)
+                    throw new ArgumentException();
 
-            // TODO: check that only the 1st column is 0
+                return values[i, 2];
+            }
 
             // Precalculate the values for all parameter values.
+            var powerTableInterpolator = new BilinearInterpolator(30, 120, 10, 0, 250, 10, getPower);
             fullPowerTable = new double[maximumRPM - minimumRPM + 1][];
             for (int rpm = minimumRPM; rpm <= maximumRPM; rpm++)
             {
                 double [] row = fullPowerTable[rpm - minimumRPM] = new double[maximumResistance - minimumResistance + 1];
 
                 for (int resistance = minimumResistance; resistance <= maximumResistance; resistance++)
-                    row[resistance] = GetWattsFromTable(rpm, resistance);
+                    row[resistance] = powerTableInterpolator[rpm,resistance];
             }
         }
-
-        private static double GetWattsFromTable(int rpm, int resistance)
-        {
-            rpm = ClipRPM(rpm);
-            resistance = ClipResistance(resistance);
-
-            int y = rpm / 10 - 3, x = resistance / 10;
-            int yr = rpm % 10, xr = resistance % 10;
-
-            if(yr==0 && xr==0)
-                return powerTable[y, x].Power;
-
-            if (yr == 0)
-                return LinearInterpolation(new [] { powerTable[y, x], powerTable[y, x + 1] }, resistance, p => p.Resistance);
-            
-            if (xr == 0)
-                return LinearInterpolation(new [] { powerTable[y, x], powerTable[y+1, x] }, rpm, p => p.RPM);
-            
-            PowerPoint[,] region = new PowerPoint[2, 2];
-
-            region[0, 0] = powerTable[y, x];
-            region[0, 1] = powerTable[y, x + 1];
-            region[1, 0] = powerTable[y + 1, x];
-            region[1, 1] = powerTable[y + 1, x + 1];
-
-
-            double power = BilinearInterpolation(region, rpm, resistance);
-
-            return power;
-        }
-
-        private static double LinearInterpolation(PowerPoint[] line, int p, Func<PowerPoint, int> getProperty)
-        {
-            if (line == null)
-                throw new ArgumentNullException(nameof(line));
-            if(getProperty==null)
-                throw new ArgumentNullException(nameof(getProperty));
-            if (line.Length != 2)
-                throw new ArgumentException("Line should have 2 power points.", nameof(line));
-            int p0= getProperty(line[0]), p1 = getProperty(line[1]);
-
-            if (p0 >= p1)
-                throw new ArgumentException("Power points are not in increasing order of the specified property.",
-                    nameof(line));
-            if (p < p0 || p > p1)
-                throw new ArgumentException("Point is not between power points.", nameof(p));
-
-            return ((p1-p)*line[0].Power+(p-p0)*line[1].Power) / (p1-p0);
-        }
-
-        private static double BilinearInterpolation(PowerPoint [,] pp,int rpm, int r)
-        {
-            if (pp[0, 0].Resistance != pp[1, 0].Resistance || pp[0, 1].Resistance != pp[1,1].Resistance
-                || pp[0, 0].RPM != pp[0,1].RPM || pp[1,0].RPM != pp[1,1].RPM)
-                throw new ArgumentException("Power points do not form a rectangle.", nameof(pp));
-            
-            double[,] w = new double[2, 2];
-            
-            double x0 = pp[0,0].Resistance, x1 = pp[0,1].Resistance;
-            double y0 = pp[0,0].RPM, y1 = pp[1,0].RPM;
-            double x = r, y = rpm;
-
-            double dx = x1 - x0, dy = y1 - y0, dxdy = dx * dy, dy1 = y1 - y, dy0= y-y0, dx1=x1-x, dx0=x-x0;
-
-            w[0, 0] = dx1 * dy1;
-            w[0, 1] = dx1 * dy0;
-            w[1, 0] = dx0 * dy1;
-            w[1, 1] = dx0 * dy0;
-
-            double power = (w[0,0]*pp[0,0].Power + w[0,1]*pp[0,1].Power + w[1,0]*pp[1,0].Power + w[1,1]*pp[1,1].Power)* dxdy * 0.0001;
-            return power;
-        }
-        private static int ClipRPM(int rpm) => Math.Max(30, Math.Min(120, rpm));
-        private static int ClipResistance(int resistance) => Math.Max(0, Math.Min(250, resistance));
+        
+       
         
         /// <summary>
         /// Gets the power corresponding to the crank speed and resistance.
@@ -426,7 +338,8 @@ namespace Trixter.XDream.API.Meters
         /// <returns></returns>
         public static int ResistanceFromWatts(int rpm, int watts)
         {
-            rpm = ClipRPM(rpm);
+            // clip the cadence
+            rpm = Math.Min(Math.Max(minimumRPM, rpm), maximumRPM);
 
             double[] rpmSeries = fullPowerTable[rpm - minimumRPM];
             int index = Array.BinarySearch(rpmSeries, watts);
@@ -435,5 +348,4 @@ namespace Trixter.XDream.API.Meters
             
         }
     }
-    
 }
