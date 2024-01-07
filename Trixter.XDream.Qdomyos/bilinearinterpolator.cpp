@@ -1,19 +1,22 @@
 #include "pch.h"
 #include "bilinearinterpolator.h"
 
+#include <stdexcept>
+
 bilinearinterpolator::bilinearinterpolator(uint32_t xmin, uint32_t xmax, uint32_t xi, uint32_t ymin, uint32_t ymax,
 	uint32_t yi, std::function<double(int32_t, int32_t)> getValue): minX(xmin), maxX(xmax), minY(ymin), maxY(ymax), incX(xi), incY(yi)
 {
-	if (xi < 1) throw "xi should be greater than 0";
-	if (yi < 1) throw "yi should be greater than 0";
-	if (xmin > xmax) "x values in wrong order";
-	if (ymin > ymax) throw "y values in wrong order";
-	if (!getValue) throw "No sample function provided";
+	
+	if (xi < 1) throw std::invalid_argument("xi should be greater than 0");
+	if (yi < 1) throw std::invalid_argument("yi should be greater than 0");
+	if (xmin > xmax) throw std::invalid_argument("x values in wrong order");
+	if (ymin > ymax) throw std::invalid_argument("y values in wrong order");
+	if (!getValue) throw std::invalid_argument("No sample function provided");
 
 	uint32_t deltaX = xmax - xmin, deltaY = ymax - ymin;
 
-	if (deltaX % xi != 0) throw "x increment should evenly divide the domain.";
-	if (deltaY % yi != 0) throw "y increment should evenly divide the domain.";
+	if (deltaX % xi != 0) throw std::invalid_argument("x increment should evenly divide the domain.");
+	if (deltaY % yi != 0) throw std::invalid_argument("y increment should evenly divide the domain.");
 
 	uint32_t countX = 1 + deltaX / xi, countY = 1 + deltaY / yi;
         
@@ -65,10 +68,10 @@ double bilinearinterpolator::GetValue(uint32_t x, uint32_t y) const
 double bilinearinterpolator::Interpolate(uint32_t p0, uint32_t p1, double v0, double v1, uint32_t p)
 {
 	if (p0 >= p1)
-		throw "Sample points are not in increasing order.";
+		throw std::invalid_argument("Sample points are not in increasing order.");
                         
 	if (p < p0 || p > p1)
-		throw "Point is not between sample points.";
+		throw std::invalid_argument("Point is not between sample points.");
 
 	return ((p1 - p) * v0 + (p - p0) * v1) / (p1 - p0);
 }
@@ -78,10 +81,10 @@ double bilinearinterpolator::Interpolate(const Sample& x0y0, const Sample& x0y1,
 {
 	if (x0y0.X != x0y1.X || x1y0.X != x1y1.X
 		|| x0y0.Y != x1y0.Y || x0y1.Y != x1y1.Y)
-		throw "Sample points do not form a rectangle or are not correctly ordered.";
+		throw std::invalid_argument("Sample points do not form a rectangle or are not correctly ordered.");
 
 	if (x0y0.X > x1y0.X || x0y0.Y > x0y1.Y)
-		throw "Sample points are in wrong order.";
+		throw std::invalid_argument("Sample points are in wrong order.");
                 
 	double y0 = x0y0.Y, y1 = x0y1.Y;
 	double x0 = x0y0.X, x1 = x1y0.X;
