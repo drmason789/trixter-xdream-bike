@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "../Trixter.XDream.Qdomyos/bilinearinterpolator.h"
-
+#include <stdexcept>
 
 // The fixture for testing class Foo.
 class BilinearInterpolatorTest : public ::testing::Test {
@@ -48,8 +48,8 @@ protected:
 	void TestInterpolation(int minX, int incX, int minY, int incY)
     {
         // To generate an internal point, this will use 1/4 of the increment
-        if (incX < 4) throw "Increment should be 4 or greater";
-        if (incY < 4) throw "Increment should be 4 or greater";
+        if (incX < 4) throw std::invalid_argument("Increment should be 4 or greater");
+        if (incY < 4) throw std::invalid_argument("Increment should be 4 or greater");
         TestPoint partial(incX >> 2, incY >> 2, "");             
 		
 		// domain corners
@@ -95,6 +95,7 @@ protected:
 		std::vector<TestPoint> testPoints;
 		std::vector<double> expectedValues;
 		std::string nonDomain = "non-domain";
+		std::string complementOfDomain = "complement of domain " + pointString(dc00) + "-" + pointString(dc11);
 
 		// bottom left corner of domain		
 		testPoints.push_back(TestPoint(dc00.X-1, dc00.Y+incY, nonDomain)); // left of domain
@@ -133,7 +134,7 @@ protected:
 		{
 			TestPoint testPoint = testPoints[i];
 			double expected = expectedValues[i];
-			this->TestInterpolation(bi, testPoint, expected, "domain complement");
+			this->TestInterpolation(bi, testPoint, expected, complementOfDomain);
 		}
 		
 	}
@@ -141,11 +142,6 @@ protected:
 	
 
 };
-
-//int main(int argc, char** argv) {
-//	::testing::InitGoogleTest(&argc, argv);
-//	return RUN_ALL_TESTS();
-//}
 
 TEST_F(BilinearInterpolatorTest, TestInterpolation) {
 
