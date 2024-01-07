@@ -3,8 +3,8 @@
 
 #include <stdexcept>
 
-bilinearinterpolator::bilinearinterpolator(uint32_t xmin, uint32_t xmax, uint32_t xi, uint32_t ymin, uint32_t ymax,
-	uint32_t yi, std::function<double(int32_t, int32_t)> getValue): minX(xmin), maxX(xmax), minY(ymin), maxY(ymax), incX(xi), incY(yi)
+bilinearinterpolator::bilinearinterpolator(int32_t xmin, int32_t xmax, int32_t xi, int32_t ymin, int32_t ymax,
+	int32_t yi, std::function<double(int32_t, int32_t)> getValue): minX(xmin), maxX(xmax), minY(ymin), maxY(ymax), incX(xi), incY(yi)
 {
 	
 	if (xi < 1) throw std::invalid_argument("xi should be greater than 0");
@@ -13,33 +13,33 @@ bilinearinterpolator::bilinearinterpolator(uint32_t xmin, uint32_t xmax, uint32_
 	if (ymin > ymax) throw std::invalid_argument("y values in wrong order");
 	if (!getValue) throw std::invalid_argument("No sample function provided");
 
-	uint32_t deltaX = xmax - xmin, deltaY = ymax - ymin;
+	int32_t deltaX = xmax - xmin, deltaY = ymax - ymin;
 
 	if (deltaX % xi != 0) throw std::invalid_argument("x increment should evenly divide the domain.");
 	if (deltaY % yi != 0) throw std::invalid_argument("y increment should evenly divide the domain.");
 
-	uint32_t countX = 1 + deltaX / xi, countY = 1 + deltaY / yi;
+	int32_t countX = 1 + deltaX / xi, countY = 1 + deltaY / yi;
         
 	this->values.resize(countY);
 
-	for (uint32_t y = ymin, ly = 0; y <= ymax; y += yi, ly++)
-		for (uint32_t x = xmin, lx = 0; x <= xmax; x += xi, lx++)
+	for (int32_t y = ymin, ly = 0; y <= ymax; y += yi, ly++)
+		for (int32_t x = xmin, lx = 0; x <= xmax; x += xi, lx++)
 			this->values[ly].push_back(Sample(x, y, getValue(x, y)));
 }
 
-double bilinearinterpolator::GetValue(uint32_t x, uint32_t y) const
+double bilinearinterpolator::GetValue(int32_t x, int32_t y) const
 {
 	x = this->ClipX(x);
 	y = this->ClipY(y);
 
 	// point offset by the sample origin
-	uint32_t yo = y - this->minY, xo = x - this->minX;
+	int32_t yo = y - this->minY, xo = x - this->minX;
 
 	// distance into the quad
-	uint32_t yr = yo % this->incY, xr = xo % this->incX;
+	int32_t yr = yo % this->incY, xr = xo % this->incX;
 
 	// local position in the sample array
-	uint32_t yl = yo / this->incY, xl = xo / this->incX;
+	int32_t yl = yo / this->incY, xl = xo / this->incX;
 
 	if (yr == 0 && xr == 0)
 		// it's exactly on a sample
@@ -65,7 +65,7 @@ double bilinearinterpolator::GetValue(uint32_t x, uint32_t y) const
 	return result;
 }
 
-double bilinearinterpolator::Interpolate(uint32_t p0, uint32_t p1, double v0, double v1, uint32_t p)
+double bilinearinterpolator::Interpolate(int32_t p0, int32_t p1, double v0, double v1, int32_t p)
 {
 	if (p0 >= p1)
 		throw std::invalid_argument("Sample points are not in increasing order.");
@@ -77,7 +77,7 @@ double bilinearinterpolator::Interpolate(uint32_t p0, uint32_t p1, double v0, do
 }
 
 double bilinearinterpolator::Interpolate(const Sample& x0y0, const Sample& x0y1, const Sample& x1y0, const Sample& x1y1,
-	uint32_t x, uint32_t y)
+	int32_t x, int32_t y)
 {
 	if (x0y0.X != x0y1.X || x1y0.X != x1y1.X
 		|| x0y0.Y != x1y0.Y || x0y1.Y != x1y1.Y)

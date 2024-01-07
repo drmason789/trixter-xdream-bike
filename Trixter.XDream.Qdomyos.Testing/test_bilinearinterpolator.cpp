@@ -50,11 +50,14 @@ protected:
         // To generate an internal point, this will use 1/4 of the increment
         if (incX < 4) throw std::invalid_argument("Increment should be 4 or greater");
         if (incY < 4) throw std::invalid_argument("Increment should be 4 or greater");
-        TestPoint partial(incX >> 2, incY >> 2, "");             
-		
+        TestPoint partial(incX >> 2, incY >> 2, ""); 
+
 		// domain corners
 		std::string dc = "domain corner";
 		TestPoint dc00(minX, minY, dc), dc10(minX+2*incX, minY, dc), dc01(minX, minY+2*incY, dc), dc11(minX+2*incX, minY+2*incY, dc);
+		std::string domainBounds = pointString(dc00) + "-" + pointString(dc11);
+
+		std::cout << "Testing domain: " << domainBounds + "\n";
 
         // Create a bilinear interpolator that is rooted at (minX,minY) and has 4 quadrants, i.e. dimensions are 2*the increment.
         bilinearinterpolator bi(dc00.X, dc10.X, incX, dc00.Y, dc01.Y, incY, getValue);
@@ -95,7 +98,7 @@ protected:
 		std::vector<TestPoint> testPoints;
 		std::vector<double> expectedValues;
 		std::string nonDomain = "non-domain";
-		std::string complementOfDomain = "complement of domain " + pointString(dc00) + "-" + pointString(dc11);
+		std::string complementOfDomain = "complement of domain " + domainBounds;
 
 		// bottom left corner of domain		
 		testPoints.push_back(TestPoint(dc00.X-1, dc00.Y+incY, nonDomain)); // left of domain
@@ -136,7 +139,8 @@ protected:
 			double expected = expectedValues[i];
 			this->TestInterpolation(bi, testPoint, expected, complementOfDomain);
 		}
-		
+
+        std::cout << "Finished testing domain: " << domainBounds << "\n";
 	}
 
 	
@@ -147,6 +151,8 @@ TEST_F(BilinearInterpolatorTest, TestInterpolation) {
 
 	this->TestInterpolation(30, 10, 100, 50);
 	this->TestInterpolation(100, 50, 30, 10);
+	this->TestInterpolation(-200, 50, -50, 10);
+	this->TestInterpolation(-200, 50, -50, 10);
 }
 
 
