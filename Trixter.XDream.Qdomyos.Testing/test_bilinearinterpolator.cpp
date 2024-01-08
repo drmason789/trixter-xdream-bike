@@ -33,10 +33,10 @@ protected:
 
 
 	void TestInterpolation(const bilinearinterpolator& bi, const TestPoint& testPoint, double expectedValue, const std::string& quadrant)
-	{
-		double value = bi(testPoint.X, testPoint.Y);
-		
+	{			
 		std::string what = "Testing " + testPoint.Description + " point " + pointString(testPoint) + " in " + quadrant;
+
+		double value = bi(testPoint.X, testPoint.Y);
 
 		std::cout << what << " : expecting " << expectedValue << " got " << value << "\n";
 
@@ -68,7 +68,7 @@ protected:
 			for (int qx = 0; qx < 2; qx++)
 			{
 				// Create the corners. Values for these should not need to be interpolated.
-				std:std::vector<TestPoint> testPoints;
+				std::vector<TestPoint> testPoints;
 				TestPoint c00(minX + qx * incX, minY + qy * incY, corner);
 				TestPoint c11(c00.X + incX, c00.Y + incY, corner);
 				testPoints.push_back(c00);
@@ -101,44 +101,54 @@ protected:
 		std::string complementOfDomain = "complement of domain " + domainBounds;
 
 		// bottom left corner of domain		
-		testPoints.push_back(TestPoint(dc00.X-1, dc00.Y+incY, nonDomain)); // left of domain
-		expectedValues.push_back(getValue(dc00.X, dc00.Y+incY));
-		testPoints.push_back(TestPoint(dc00.X+incX, dc00.Y-1, nonDomain)); // below domain
-		expectedValues.push_back(getValue(dc00.X+incX, dc00.Y));
+		testPoints.push_back(TestPoint(dc00.X-1, dc00.Y+incY, nonDomain)); // left of domain		
+		testPoints.push_back(TestPoint(dc00.X+incX, dc00.Y-1, nonDomain)); // below domain		
 		testPoints.push_back(TestPoint(dc00.X-1, dc00.Y - 1, nonDomain)); // left of and below domain
-		expectedValues.push_back(getValue(dc00.X, dc00.Y));
-
+		
 		// bottom right corner of domain
-		testPoints.push_back(TestPoint(dc10.X + 1, dc10.Y + incY, nonDomain)); // right of domain
-		expectedValues.push_back(getValue(dc10.X, dc10.Y+incY));
-		testPoints.push_back(TestPoint(dc10.X-incX, dc10.Y - 1, nonDomain)); // below domain
-		expectedValues.push_back(getValue(dc10.X-incX, dc10.Y));
+		testPoints.push_back(TestPoint(dc10.X + 1, dc10.Y + incY, nonDomain)); // right of domain		
+		testPoints.push_back(TestPoint(dc10.X-incX, dc10.Y - 1, nonDomain)); // below domain		
 		testPoints.push_back(TestPoint(dc10.X + 1, dc10.Y - 1, nonDomain)); // right of and below domain
-		expectedValues.push_back(getValue(dc10.X, dc10.Y));
-
+		
 		// top left corner of domain
-		testPoints.push_back(TestPoint(dc01.X -1, dc01.Y - incY, nonDomain)); // left of domain
-		expectedValues.push_back(getValue(dc01.X, dc01.Y-incY));
-		testPoints.push_back(TestPoint(dc01.X + incX, dc01.Y + 1, nonDomain)); // above domain
-		expectedValues.push_back(getValue(dc01.X+incX, dc01.Y));
+		testPoints.push_back(TestPoint(dc01.X -1, dc01.Y - incY, nonDomain)); // left of domain		
+		testPoints.push_back(TestPoint(dc01.X + incX, dc01.Y + 1, nonDomain)); // above domain		
 		testPoints.push_back(TestPoint(dc01.X - 1, dc01.Y + 1, nonDomain)); // left of and above domain
-		expectedValues.push_back(getValue(dc01.X, dc01.Y));
-
+		
 
 		// top right corner of domain
-		testPoints.push_back(TestPoint(dc11.X + 1, dc11.Y - incY, nonDomain)); // right of domain
-		expectedValues.push_back(getValue(dc11.X, dc11.Y-incY));
-		testPoints.push_back(TestPoint(dc11.X - incX , dc11.Y + 1, nonDomain)); // above domain
-		expectedValues.push_back(getValue(dc11.X-incX, dc11.Y));
+		testPoints.push_back(TestPoint(dc11.X + 1, dc11.Y - incY, nonDomain)); // right of domain		
+		testPoints.push_back(TestPoint(dc11.X - incX , dc11.Y + 1, nonDomain)); // above domain		
 		testPoints.push_back(TestPoint(dc11.X + 1, dc11.Y + 1, nonDomain)); // right of and above domain
-		expectedValues.push_back(getValue(dc11.X, dc11.Y));
+		
 
 		for(int i=0; i<testPoints.size(); i++)
 		{
 			TestPoint testPoint = testPoints[i];
-			double expected = expectedValues[i];
-			this->TestInterpolation(bi, testPoint, expected, complementOfDomain);
+
+			std::string what = "Testing " + testPoint.Description + " point " + pointString(testPoint) + " in " + complementOfDomain;
+
+			std::cout << what << " : expecting std::out_of_range thrown\n";
+			try
+			{
+				double value = bi(testPoint.X, testPoint.Y);
+				FAIL() << "std::out_of_range was not thrown for non-domain point";
+			}
+			catch(std::out_of_range)
+			{
+				SUCCEED();
+			}
+
+			// test clipping
+			int32_t x = testPoint.X, y=testPoint.Y;
+			ASSERT_TRUE(x < dc00.X || x > dc10.X || y < dc00.Y || y > dc01.Y) << "Test point is not outside domain";
+			ASSERT_TRUE(bi.clip(x, y)) << "clip function did not report that it clipped";
+			ASSERT_TRUE(x >= dc00.X && x <= dc10.X && y >= dc00.Y && y <= dc01.Y) << "values were not clipped";
+			uint32_t oldX = x, oldY = y;
+			ASSERT_FALSE(bi.clip(x, y)) << "clip function reported that it clipped in-domain coordinates";
+			ASSERT_TRUE(oldX == x && oldY == y) << "clip function changed in-domain coordinates";
 		}
+			
 
         std::cout << "Finished testing domain: " << domainBounds << "\n";
 	}

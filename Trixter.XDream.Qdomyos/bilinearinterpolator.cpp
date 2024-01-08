@@ -4,33 +4,37 @@
 #include <stdexcept>
 
 bilinearinterpolator::bilinearinterpolator(int32_t xmin, int32_t xmax, int32_t xi, int32_t ymin, int32_t ymax,
-	int32_t yi, std::function<double(int32_t, int32_t)> getValue): minX(xmin), maxX(xmax), minY(ymin), maxY(ymax), incX(xi), incY(yi)
+	int32_t yi, 
+	const std::function<double(int32_t, int32_t)>& getSample): minX(xmin), maxX(xmax), minY(ymin), maxY(ymax), incX(xi), incY(yi)
 {
 	
 	if (xi < 1) throw std::invalid_argument("xi should be greater than 0");
 	if (yi < 1) throw std::invalid_argument("yi should be greater than 0");
 	if (xmin > xmax) throw std::invalid_argument("x values in wrong order");
 	if (ymin > ymax) throw std::invalid_argument("y values in wrong order");
-	if (!getValue) throw std::invalid_argument("No sample function provided");
+	if (!getSample) throw std::invalid_argument("No sample function provided");
 
 	int32_t deltaX = xmax - xmin, deltaY = ymax - ymin;
 
 	if (deltaX % xi != 0) throw std::invalid_argument("x increment should evenly divide the domain.");
 	if (deltaY % yi != 0) throw std::invalid_argument("y increment should evenly divide the domain.");
-
+	
 	int32_t countX = 1 + deltaX / xi, countY = 1 + deltaY / yi;
-        
+
 	this->values.resize(countY);
 
 	for (int32_t y = ymin, ly = 0; y <= ymax; y += yi, ly++)
 		for (int32_t x = xmin, lx = 0; x <= xmax; x += xi, lx++)
-			this->values[ly].push_back(Sample(x, y, getValue(x, y)));
+			this->values[ly].push_back(Sample(x, y, getSample(x, y)));
 }
 
 double bilinearinterpolator::GetValue(int32_t x, int32_t y) const
 {
-	x = this->ClipX(x);
-	y = this->ClipY(y);
+	// Check that the arguments are inside the domain.
+	if(this->clip(x, y))
+	{
+		throw std::out_of_range("Arguments are out of range.");
+	}
 
 	// point offset by the sample origin
 	int32_t yo = y - this->minY, xo = x - this->minX;
@@ -64,6 +68,7 @@ double bilinearinterpolator::GetValue(int32_t x, int32_t y) const
 
 	return result;
 }
+
 
 double bilinearinterpolator::Interpolate(int32_t p0, int32_t p1, double v0, double v1, int32_t p)
 {

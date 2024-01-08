@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+#include <stdexcept>
 #include <vector>
 
 /**
@@ -19,12 +20,12 @@ private:
 
     std::vector<std::vector<Sample>> values;
     const int32_t minX, maxX, minY, maxY, incX, incY;
+    
+    int32_t clip(int32_t v, int32_t lower, int32_t upper) const { return v < lower ? lower : (v > upper ? upper : v); }
+    int32_t clipX(int32_t x) const { return this->clip(x, minX, maxX); }
+    int32_t clipY(int32_t y) const { return  this->clip(y, minY, maxY); }
 
-    int32_t Clip(int32_t v, int32_t lower, int32_t upper) const { return v < lower ? lower : (v > upper ? upper : v); }
-    int32_t ClipX(int32_t x) const { return this->Clip(x, minX, maxX); }
-    int32_t ClipY(int32_t y) const { return  this->Clip(y, minY, maxY); }
-
-    double GetValue(int32_t x, int32_t y) const;
+    double GetValue(int32_t x, int32_t y) const;    
 
     static double Interpolate(int32_t p0, int32_t p1, double v0, double v1, int32_t p);
     static double Interpolate(const Sample& x0y0, const Sample& x0y1, const Sample& x1y0, const Sample& x1y1, int32_t x, int32_t y);
@@ -37,9 +38,10 @@ public:
      * \param ymin Minimum Y value (bottom edge of domain)
      * \param ymax Maximum Y value (top edge of domain). ymax-ymin should be evenly divisible by yi.
      * \param yi Sample increment in Y direction. 
-     * \param getValue 
+     * \param getSample Gets a sample at a specified location. Used to build the sample grid.
      */
-    bilinearinterpolator(int32_t xmin, int32_t xmax, int32_t xi, int32_t ymin, int32_t ymax, int32_t yi, std::function<double(int32_t, int32_t)> getValue);
+    bilinearinterpolator(int32_t xmin, int32_t xmax, int32_t xi, int32_t ymin, int32_t ymax, int32_t yi, 
+        const std::function<double(int32_t, int32_t)>& getSample);
 
     /**
      * \brief Gets the value for the specified inputs.
@@ -48,7 +50,22 @@ public:
      * \param y 
      * \return 
      */
-    double operator()(int32_t x, int32_t y) const { return this->GetValue(x,y); }        
+    double operator()(int32_t x, int32_t y) const { return this->GetValue(x,y); }
 
+    /**
+     * \brief Clips the coordinates to the boundaries of the domain.
+     * \param x 
+     * \param y 
+     * \return Indicates if clipping occurred.
+     */
+    bool clip(int32_t& x, int32_t& y) const
+    {
+        int32_t oldX = x, oldY = y;
+        x = this->clipX(x);
+        y = this->clipY(y);
+        return x != oldX || y != oldY;
+    }
+    
+    
 };
 
