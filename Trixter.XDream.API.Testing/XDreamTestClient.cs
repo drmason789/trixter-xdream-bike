@@ -25,7 +25,7 @@ namespace Trixter.XDream.API
             for(int i=1; sorted && i<array.Length; i++)
                 sorted &= array[i].TimeStamp>array[i-1].TimeStamp;
 
-            Assert.True(sorted, "States are not in order of increasing timestamp.");
+            Assert.That(sorted, "States are not in order of increasing timestamp.");
 
             Array.ForEach(array, UpdateState);
         }

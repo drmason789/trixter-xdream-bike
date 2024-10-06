@@ -47,7 +47,7 @@ namespace Trixter.XDream.API.Testing.Meters
                 powerMeter.Update(t, rpms[i]*Constants.RpmToRadiansPerSecond);
             }
 
-            Assert.AreEqual(expectedWatts, powerMeter.Power);
+            Assert.That(powerMeter.Power, Is.EqualTo(expectedWatts));
 
         }
                 

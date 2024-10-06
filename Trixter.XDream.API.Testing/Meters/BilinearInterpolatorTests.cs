@@ -68,12 +68,12 @@ namespace Trixter.XDream.API.Testing.Meters
                             Point corner = c[x, y];
                             double value = bi[corner.X, corner.Y];
 
-                            Assert.AreEqual(getValue(corner.X, corner.Y), value, $"Corner {pointString(corner)} in " + quadrant);
+                            Assert.That(value, Is.EqualTo(getValue(corner.X, corner.Y)), $"Corner {pointString(corner)} in " + quadrant);
                         }
 
-                    Assert.AreEqual(getValue(pi.X, pi.Y), bi[pi.X, pi.Y], $"Internal point {pointString(pi)} in " + quadrant);
-                    Assert.AreEqual(getValue(px.X, px.Y), bi[px.X, px.Y], $"Edge point {pointString(px)} in " + quadrant);
-                    Assert.AreEqual(getValue(py.X, py.Y), bi[py.X, py.Y], $"Edge point {pointString(py)} in " + quadrant);
+                    Assert.That(bi[pi.X, pi.Y], Is.EqualTo(getValue(pi.X, pi.Y)), $"Internal point {pointString(pi)} in " + quadrant);
+                    Assert.That(bi[px.X, px.Y], Is.EqualTo(getValue(px.X, px.Y)), $"Edge point {pointString(px)} in " + quadrant);
+                    Assert.That(bi[py.X, py.Y], Is.EqualTo(getValue(py.X, py.Y)), $"Edge point {pointString(py)} in " + quadrant);
                 }
         }
         

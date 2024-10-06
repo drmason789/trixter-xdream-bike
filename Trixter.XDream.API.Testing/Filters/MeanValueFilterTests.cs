@@ -35,11 +35,11 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(3, t0.AddMilliseconds(600));
 
             // Not looking for 500 here because this filter doesn't split samples at the cutoff point.
-            Assert.AreEqual(300, mvf.Period);
+            Assert.That(mvf.Period, Is.EqualTo(300));
             if(valueType == ValueType.Value)
-                Assert.AreEqual((2 + 3) / 2d, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo((2 + 3) / 2d).Within(tolerance));
             else
-                Assert.AreEqual((1.5 + 2.5) / 2d, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo((1.5 + 2.5) / 2d).Within(tolerance));
         }
 
 
@@ -55,12 +55,12 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(1, t0);
             mvf.Add(2, t0.AddMilliseconds(300));
             mvf.Add(3, t0.AddMilliseconds(600));
-                        
-            Assert.AreEqual(300, mvf.Period);
+
+            Assert.That(mvf.Period, Is.EqualTo(300));
             if (valueType == ValueType.Value)
-                Assert.AreEqual(3, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
             else
-                Assert.AreEqual(2.5, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo(2.5).Within(tolerance));
         }
 
         [Test]
@@ -76,11 +76,11 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(2, t0.AddMilliseconds(300));
             mvf.Add(3, t0.AddMilliseconds(600));
 
-            Assert.AreEqual(500, mvf.Period);
+            Assert.That(mvf.Period, Is.EqualTo(500));
             if(valueType==ValueType.Value)
-                Assert.AreEqual((3d * 300d + 2d * 200d) / 500d, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo((3d * 300d + 2d * 200d) / 500d).Within(tolerance));
             else
-                Assert.AreEqual((2.5d * 300d + 1.5d * 200d) / 500d, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo((2.5d * 300d + 1.5d * 200d) / 500d).Within(tolerance));
 
         }
 
@@ -97,11 +97,11 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(2, t0.AddMilliseconds(300));
             mvf.Add(3, t0.AddMilliseconds(600));
 
-            Assert.AreEqual(300, mvf.Period);
+            Assert.That(mvf.Period, Is.EqualTo(300));
             if(valueType==ValueType.Value)
-                Assert.AreEqual(3, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
             else
-                Assert.AreEqual(2.5, mvf.Value, tolerance);
+                Assert.That(mvf.Value, Is.EqualTo(2.5).Within(tolerance));
         }
 
 
@@ -131,8 +131,8 @@ namespace Trixter.XDream.API.Testing.Filters
             }
             stopwatch.Stop();
             System.Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
-            Assert.AreEqual(expected, mvf.Value);
-            Assert.AreEqual(expectedDelta, mvf.Delta);
+            Assert.That(mvf.Value, Is.EqualTo(expected));
+            Assert.That(mvf.Delta, Is.EqualTo(expectedDelta));
         }
     }
 }

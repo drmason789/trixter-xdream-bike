@@ -31,7 +31,7 @@ namespace Trixter.XDream.API.Testing
             // Wait for the messages to be processed.
             Thread.Sleep(1000);
 
-            Assert.AreEqual(expected, states.Count);
+            Assert.That(states.Count, Is.EqualTo(expected));
 
         }
     }

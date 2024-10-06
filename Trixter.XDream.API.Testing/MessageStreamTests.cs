@@ -18,7 +18,7 @@ namespace Trixter.XDream.API.Testing
         {
             var xbm = XDreamMessageIO.GetStates(bytes, ()=>DateTimeOffset.UtcNow);
 
-            Assert.AreEqual(expectedNumberOfPackets, xbm.Length);
+            Assert.That(xbm.Length, Is.EqualTo(expectedNumberOfPackets));
         }
 
         [Test(Description ="Test with input from flywheel, brake and steering, crank and button inputs.")]

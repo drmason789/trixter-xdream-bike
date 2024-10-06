@@ -51,11 +51,11 @@ namespace Trixter.XDream.API.Testing.Meters
             System.Console.WriteLine(String.Join("\r\n", logs));
 
 
-            Assert.AreEqual(19, Math.Round(xdm.TripMeter.CrankRevolutions, 0, MidpointRounding.AwayFromZero));
-            Assert.AreEqual(243, Math.Round(xdm.TripMeter.FlywheelRevolutions,0,MidpointRounding.AwayFromZero));
+            Assert.That(Math.Round(xdm.TripMeter.CrankRevolutions, 0, MidpointRounding.AwayFromZero), Is.EqualTo(19));
+            Assert.That(Math.Round(xdm.TripMeter.FlywheelRevolutions, 0, MidpointRounding.AwayFromZero), Is.EqualTo(243));
 
             // It's not certain if this is actually an accurate energy calculation, it's just a regression test.
-            Assert.AreEqual(1254, Math.Round(xdm.TripMeter.Energy, 0, MidpointRounding.AwayFromZero));
+            Assert.That(Math.Round(xdm.TripMeter.Energy, 0, MidpointRounding.AwayFromZero), Is.EqualTo(1254));
         }
 
         [Test]
@@ -78,11 +78,11 @@ namespace Trixter.XDream.API.Testing.Meters
             // Wait for the asynchronous message processing to catch up.
             Thread.Sleep(1000);
 
-            Assert.AreEqual((double)199.98, (double)tm.CrankRevolutions, tolerance);
-            Assert.AreEqual((double)959.904m, (double)tm.FlywheelRevolutions, tolerance);
+            Assert.That((double)tm.CrankRevolutions, Is.EqualTo((double)199.98).Within(tolerance));
+            Assert.That((double)tm.FlywheelRevolutions, Is.EqualTo((double)959.904m).Within(tolerance));
 
             // This is just a regression test, and the value comes from a calculation using the power table gleaned from an X-Dream configuration file.
-            Assert.AreEqual(1319.868m, tm.Energy);
+            Assert.That(tm.Energy, Is.EqualTo(1319.868m));
 
         }
     }

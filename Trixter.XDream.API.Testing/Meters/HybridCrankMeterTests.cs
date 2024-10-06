@@ -59,7 +59,7 @@ namespace Trixter.XDream.API.Testing.Meters
                     mismatches.Add($"Actual: {actualDirectionalRPM}RPM vs Expected: {rpm}RPM");
             }
 
-            Assert.AreEqual(0, mismatches.Count, string.Join("\r\n", mismatches));
+            Assert.That(mismatches.Count, Is.EqualTo(0), string.Join("\r\n", mismatches));
             
         }
     }

@@ -58,7 +58,7 @@ namespace Trixter.XDream.API.Testing.Communications
         private void TestPacketStateMachine(string text, string expected)
         {
             // Test the test
-            Assert.AreEqual(text.ToLower(), text, "Text must be lower case.");
+            Assert.That(text, Is.EqualTo(text.ToLower()), "Text must be lower case.");
                 
             IPacketStateMachine psm = XDreamSerialData.CreateBikeStatePacketStateMachine();
 
@@ -70,7 +70,7 @@ namespace Trixter.XDream.API.Testing.Communications
             }
 
 
-            Assert.AreEqual(expected, stringBuilder.ToString());
+            Assert.That(stringBuilder.ToString(), Is.EqualTo(expected));
         }
     }
 }

@@ -139,10 +139,10 @@ namespace Trixter.XDream.API.Testing.StateMonitoring
             monitor.UpdateMessage(state0);
             monitor.UpdateMessage(state1);
 
-            Assert.AreEqual(1, args.Count, $"Nothing for {change}");
-            Assert.AreEqual(change, args[0].Changes, $"{change} not detected");
-            Assert.AreEqual(args[0].State, state1, $"Current state not set properly for {change}");
-            Assert.AreEqual(args[0].PreviousState, state0, $"Previous state not set properly for {change}");
+            Assert.That(args.Count, Is.EqualTo(1), $"Nothing for {change}");
+            Assert.That(args[0].Changes, Is.EqualTo(change), $"{change} not detected");
+            Assert.That(state1, Is.EqualTo(args[0].State), $"Current state not set properly for {change}");
+            Assert.That(state0, Is.EqualTo(args[0].PreviousState), $"Previous state not set properly for {change}");
 
         }
 
@@ -181,7 +181,7 @@ namespace Trixter.XDream.API.Testing.StateMonitoring
                 monitor.UpdateMessage(state);
 
 
-            Assert.AreEqual(1600, stateChanges.Count);
+            Assert.That(stateChanges.Count, Is.EqualTo(1600));
 
         }
 

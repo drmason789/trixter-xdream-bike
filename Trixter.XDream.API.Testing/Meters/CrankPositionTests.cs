@@ -21,7 +21,7 @@ namespace Trixter.XDream.API.Testing.Meters
         public void TestAdd(int position, int delta, int expected)
         {
             int actual = CrankPositions.Add(position, delta);
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 

@@ -115,7 +115,7 @@ namespace Trixter.XDream.API.Testing.Flywheel
         {
             double actual = FlywheelSection.VolumeOfConicFrustumRing(innerRadius, outerRadius, innerThickness, outerThickness);
 
-            Assert.AreEqual(expected, actual);
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
 
@@ -134,7 +134,7 @@ namespace Trixter.XDream.API.Testing.Flywheel
                 System.Console.WriteLine($"{section.Name} | From outer radius: {section.OuterRadius} to inner radius: {section.InnerRadius} | Thickness: {section.OuterThickness} to {section.InnerThickness}");
             }
 
-            Assert.AreEqual(expectedMass, fw.Mass, tolerance);
+            Assert.That(fw.Mass, Is.EqualTo(expectedMass).Within(tolerance));
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace Trixter.XDream.API.Testing.Flywheel
 
             IFlywheel fw = new SectionedFlywheel(sections);
 
-            Assert.AreEqual(expectedMass, fw.Mass, tolerance);
+            Assert.That(fw.Mass, Is.EqualTo(expectedMass).Within(tolerance));
         }
 
         [Test]
@@ -165,8 +165,8 @@ namespace Trixter.XDream.API.Testing.Flywheel
 
             IFlywheel fw = new SectionedFlywheel(sections);
 
-            Assert.AreEqual(sections.Max(s => s.OuterRadius), fw.Radius, tolerance);
-            Assert.AreEqual(expectedI, fw.MomentOfInertia, tolerance);
+            Assert.That(fw.Radius, Is.EqualTo(sections.Max(s => s.OuterRadius)).Within(tolerance));
+            Assert.That(fw.MomentOfInertia, Is.EqualTo(expectedI).Within(tolerance));
         }
     }
 }

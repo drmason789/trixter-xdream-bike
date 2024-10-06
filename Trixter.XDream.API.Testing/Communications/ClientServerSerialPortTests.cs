@@ -25,7 +25,7 @@ namespace Trixter.XDream.API.Testing.Communications
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            Assert.NotNull(GetPortPair(), "The virtual COM port pair is not configured.\r\n" +
+            Assert.That(GetPortPair(), Is.Not.Null, "The virtual COM port pair is not configured.\r\n" +
                 "Install com0com and run the " + nameof(InstallPorts) + " \"test\" with Visual Studio elevated to configure it.\r\n" +
                 "After that, the tests don't need to be run elevated to use the port pair.\r\n" +
                 "Run the " + nameof(UninstallPorts) + " \"test\" elevated to remove the port pair");
@@ -41,7 +41,7 @@ namespace Trixter.XDream.API.Testing.Communications
         [Test, Explicit]
         public void InstallPorts()
         {
-            Assert.True(IsAdministrator, "Configuring the virtual COM ports requires this code to be run elevated.");
+            Assert.That(IsAdministrator, "Configuring the virtual COM ports requires this code to be run elevated.");
 
             Com0Com.CSharp.Com0ComSetupCFacade setupCFacade = new Com0Com.CSharp.Com0ComSetupCFacade();
 
@@ -52,7 +52,7 @@ namespace Trixter.XDream.API.Testing.Communications
         [Test, Explicit]
         public void UninstallPorts()
         {
-            Assert.True(IsAdministrator, "Configuring the virtual COM ports requires this code to be run elevated.");
+            Assert.That(IsAdministrator, "Configuring the virtual COM ports requires this code to be run elevated.");
 
             Com0Com.CSharp.Com0ComSetupCFacade setupCFacade = new Com0Com.CSharp.Com0ComSetupCFacade();
 
@@ -80,8 +80,8 @@ namespace Trixter.XDream.API.Testing.Communications
             client.Disconnect();
             server.Disconnect();
 
-            Assert.NotZero(received.Count);
-            CollectionAssert.AreEqual(testBytes, received);
+            Assert.That(received.Count, Is.Not.Zero);
+            Assert.That(received, Is.EqualTo(testBytes));
 
         }
 
@@ -111,12 +111,12 @@ namespace Trixter.XDream.API.Testing.Communications
             client.Disconnect();
             server.Disconnect();
 
-            Assert.NotZero(incoming.Count);
+            Assert.That(incoming.Count, Is.Not.Zero);
 
             byte [] basicBytes = XDreamMessage.GetDataPacketTextBytes(stateBuilder);
 
             for (int i = 0; i < incoming.Count; i++)
-                Assert.AreEqual(basicBytes[i % basicBytes.Length], incoming[i]);
+                Assert.That(incoming[i], Is.EqualTo(basicBytes[i % basicBytes.Length]));
 
         }
 
@@ -146,7 +146,7 @@ namespace Trixter.XDream.API.Testing.Communications
             client.Disconnect();
             server.Disconnect();
 
-            Assert.NotZero(incoming.Count);
+            Assert.That(incoming.Count, Is.Not.Zero);
 
         }
 

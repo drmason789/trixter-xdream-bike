@@ -29,11 +29,11 @@ namespace Trixter.XDream.API.Testing.Meters
             cs.AddData(t0, position0, 0);
             cs.AddData(t1, position1, 0);
 
-            Assert.AreEqual(expectedDirection, cs.Direction);
+            Assert.That(cs.Direction, Is.EqualTo(expectedDirection));
 
             if (cs.Direction == CrankDirection.None)
             {
-                Assert.AreEqual(0, cs.RPM);
+                Assert.That(cs.RPM, Is.EqualTo(0));
             }
             else
             {
@@ -49,7 +49,7 @@ namespace Trixter.XDream.API.Testing.Meters
                 double notchesPerMinute = Constants.MillisecondsPerMinute * notchesPerMillisecond;
                 int rpm = (int)(0.5 + CrankPositions.RevolutionsPerPosition * notchesPerMinute);
 
-                Assert.AreEqual(rpm, cs.RPM, "Expected RPM");
+                Assert.That(cs.RPM, Is.EqualTo(rpm), "Expected RPM");
             }
         }
 
@@ -70,7 +70,7 @@ namespace Trixter.XDream.API.Testing.Meters
                        new[] { 0, 100, 200, 300, 400, 500, 600, 700, 800, 900 }, 4, 500)]
         public void TestSpeed(int[] positions, int[] t, int expectedRPM, int smoothingIntervalMilliseconds)
         {
-            Assert.AreEqual(positions.Length, t.Length, "Position and time arrays should be the same length.");
+            Assert.That(t.Length, Is.EqualTo(positions.Length), "Position and time arrays should be the same length.");
 
             ICrankMeter cs = new PositionalCrankMeter(smoothingIntervalMilliseconds);
 
@@ -86,7 +86,7 @@ namespace Trixter.XDream.API.Testing.Meters
                     cs.AddData(t0.AddMilliseconds(t[sample]), p, 0);
                 }
 
-                Assert.AreEqual(expectedRPM, cs.RPM, $"Expected RPM failed when positions offset by {i}");
+                Assert.That(cs.RPM, Is.EqualTo(expectedRPM), $"Expected RPM failed when positions offset by {i}");
             }
 
         }
@@ -121,8 +121,8 @@ namespace Trixter.XDream.API.Testing.Meters
 
             Array.ForEach(cadenceData, cs.AddData);
 
-            Assert.AreEqual(expectedDirection, cs.Direction);
-            Assert.LessOrEqual(Math.Abs(cs.RPM-directionalRpm), tolerance, "Calculated RPM is not within expected tolerance.");
+            Assert.That(cs.Direction, Is.EqualTo(expectedDirection));
+            Assert.That(Math.Abs(cs.RPM - directionalRpm), Is.LessThanOrEqualTo(tolerance), "Calculated RPM is not within expected tolerance.");
 
         }
     }
