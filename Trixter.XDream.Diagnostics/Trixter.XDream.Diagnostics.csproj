@@ -10,10 +10,10 @@
     <ApplicationIcon>White-X.ico</ApplicationIcon>
     <Authors>David Mason</Authors>
     <Description>Diagnostic utility for reading the status of a Trixter X-Dream V1 exercise bike and setting its resistance.</Description>
-    <Copyright>(C) David Mason 2021-2022</Copyright>
-    <AssemblyVersion>1.4.0</AssemblyVersion>
-    <FileVersion>1.4.0</FileVersion>
-	<Version>1.4.0</Version>
+    <Copyright>(C) David Mason 2021-2024</Copyright>
+    <AssemblyVersion>1.4.1</AssemblyVersion>
+    <FileVersion>1.4.1</FileVersion>
+	<Version>1.4.1</Version>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <PackageProjectUrl>https://github.com/drmason789/trixter-xdream-bike</PackageProjectUrl>

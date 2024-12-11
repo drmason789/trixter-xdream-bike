@@ -30,9 +30,6 @@ namespace Trixter.XDream.Diagnostics
 
             this.tsbDisconnect.Enabled = false;
             this.dDetailsControl.Enabled = false;
-            this.tsbCapture.Enabled = false;
-            this.tsbSave.Enabled = false;
-
             this.dDetailsControl.DataAccess = this.DataAccess;
         }
 
@@ -77,8 +74,7 @@ namespace Trixter.XDream.Diagnostics
                     return;
                 }
 
-                if (tcTabs.SelectedTab == this.tpDetails)
-                    this.dDetailsControl.UpdateDetails();
+                this.dDetailsControl.UpdateDetails();
             }
             finally
             {
@@ -104,7 +100,6 @@ namespace Trixter.XDream.Diagnostics
                     this.tsbDisconnect.Enabled = true;
                     this.tsbRefreshPorts.Enabled = false;
                     this.dDetailsControl.Enabled = true;
-                    this.tsbCapture.Enabled = true;
                 }
                 catch 
                 {
@@ -148,7 +143,6 @@ namespace Trixter.XDream.Diagnostics
 
                     this.tsbDisconnect.Enabled = false;
                     this.tsbRefreshPorts.Enabled = true;
-                    this.tsbCapture.Enabled = false;
 
                 }
             }
@@ -163,32 +157,12 @@ namespace Trixter.XDream.Diagnostics
         {
             this.RefreshPorts();
         }
+          
 
-       
-        private void tcTabs_SelectedIndexChanged(object sender, EventArgs e)
+        private void tsbDriver_Click(object sender, EventArgs e)
         {
-            if (this.tcTabs.SelectedTab == this.tpDriver)
-                this.gpGroupPolicyControl.UpdateDetails();
-        }
-
-        private void tsbCapture_Click(object sender, EventArgs e)
-        {
-            this.DataAccess.Capturing = this.tsbCapture.Checked;
-            this.tsbSave.Enabled = this.DataAccess.HasData;
-        }
-
-        private void tsbSave_Click(object sender, EventArgs e)
-        {
-            string suggestedFileName = $"XDream.{DateTimeOffset.Now:yyyyMMddHHmmss}.csv";
-
-            this.dlgSaveFile.FileName = suggestedFileName;
-            
-            if (this.dlgSaveFile.ShowDialog(this) != DialogResult.OK)
-                return;
-
-            using(var stream = this.dlgSaveFile.OpenFile())
-                this.DataAccess.Save(stream);
-
+            using(GroupPolicyForm gpf = new GroupPolicyForm())
+                gpf.ShowDialog();
         }
     }
 }

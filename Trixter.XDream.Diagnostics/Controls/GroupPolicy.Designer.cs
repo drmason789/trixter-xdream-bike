@@ -66,7 +66,7 @@
             // 
             this.lbExplanation.Location = new System.Drawing.Point(11, 24);
             this.lbExplanation.Name = "lbExplanation";
-            this.lbExplanation.Size = new System.Drawing.Size(467, 137);
+            this.lbExplanation.Size = new System.Drawing.Size(467, 132);
             this.lbExplanation.TabIndex = 27;
             this.lbExplanation.Text = resources.GetString("lbExplanation.Text");
             // 
@@ -75,7 +75,7 @@
             this.lblOpinion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblOpinion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblOpinion.Location = new System.Drawing.Point(80, 216);
+            this.lblOpinion.Location = new System.Drawing.Point(80, 208);
             this.lblOpinion.Name = "lblOpinion";
             this.lblOpinion.Size = new System.Drawing.Size(398, 40);
             this.lblOpinion.TabIndex = 26;
@@ -83,7 +83,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 216);
+            this.label3.Location = new System.Drawing.Point(21, 208);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 25;
@@ -149,7 +149,7 @@
             this.lbSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbSummary.Location = new System.Drawing.Point(80, 171);
+            this.lbSummary.Location = new System.Drawing.Point(80, 163);
             this.lbSummary.Name = "lbSummary";
             this.lbSummary.Size = new System.Drawing.Size(398, 40);
             this.lbSummary.TabIndex = 22;
@@ -157,7 +157,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 171);
+            this.label1.Location = new System.Drawing.Point(21, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 20;
