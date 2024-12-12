@@ -39,9 +39,8 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect = new System.Windows.Forms.ToolStripButton();
             this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.tsbDriver = new System.Windows.Forms.ToolStripButton();
+            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
             this.tsToolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +54,6 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect,
             this.tsbDisconnect,
             this.toolStripSeparator1,
-            this.toolStripSeparator2,
             this.tsbDriver});
             this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.tsToolStrip.Name = "tsToolStrip";
@@ -110,17 +108,6 @@ namespace Trixter.XDream.Diagnostics
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // dlgSaveFile
-            // 
-            this.dlgSaveFile.DefaultExt = "csv";
-            this.dlgSaveFile.Filter = "CSV Files|*.csv";
-            this.dlgSaveFile.SupportMultiDottedExtensions = true;
-            // 
             // tsbDriver
             // 
             this.tsbDriver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -130,6 +117,12 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDriver.Size = new System.Drawing.Size(42, 22);
             this.tsbDriver.Text = "Driver";
             this.tsbDriver.Click += new System.EventHandler(this.tsbDriver_Click);
+            // 
+            // dlgSaveFile
+            // 
+            this.dlgSaveFile.DefaultExt = "csv";
+            this.dlgSaveFile.Filter = "CSV Files|*.csv";
+            this.dlgSaveFile.SupportMultiDottedExtensions = true;
             // 
             // dDetailsControl
             // 
@@ -170,7 +163,6 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.ToolStripButton tsbConnect;
         private System.Windows.Forms.ToolStripButton tsbDisconnect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.SaveFileDialog dlgSaveFile;
         private System.Windows.Forms.ToolStripButton tsbDriver;
         private Details dDetailsControl;

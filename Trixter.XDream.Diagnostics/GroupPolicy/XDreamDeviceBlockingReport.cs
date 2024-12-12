@@ -48,7 +48,9 @@ namespace Trixter.XDream.Diagnostics
                 else
                     return Constants.DeviceRestricted;
             }
+#pragma warning disable CS0162 // Unreachable code detected
             return String.Empty;
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
         public string GetOpinion()
