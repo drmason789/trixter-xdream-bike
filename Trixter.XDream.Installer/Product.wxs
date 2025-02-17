@@ -12,7 +12,7 @@
 
   <?include Version.wxi?>
 
-  <Package Name="$(var.PRODUCT_NAME)" Language="1033" Version="$(var.VERSION)" Manufacturer="David Mason" UpgradeCode="$(var.UPGRADE_CODE)" InstallerVersion="400"><!-- Upgrade details -->
+  <Package Name="$(var.PRODUCT_NAME)" Language="1033" Version="$(var.VERSION)" Manufacturer="$(var.MANUFACTURER)" UpgradeCode="$(var.UPGRADE_CODE)" InstallerVersion="400"><!-- Upgrade details -->
 
     <Property Id="PREVIOUSVERSIONINSTALLED" Secure="yes" />
     <Property Id="NEWERVERSIONINSTALLED" Secure="yes" />
@@ -55,32 +55,24 @@
     <!-- https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed -->
     <PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
     <Launch Condition="Installed OR (WIXNETFX4RELEASEINSTALLED &gt;= &quot;#528040&quot;)" Message="This software requires the .NET Framework 4.8." />
+   
 
-    
-
-    
-
-    <ComponentGroup Id="Components">
-
-      <!--Begin Help Files-->
-      <Component Id="ProgramItems" Guid="{2295BEAB-1010-43A5-B1F2-FCE74018B89F}" Directory="INSTALLLOCATION" Permanent="no">
-        <RegistryValue Root="HKLM" Key="Software\$(var.MANUFACTURER)\$(var.PRODUCT_NAME)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+    <ComponentGroup Id="Components">      
+      <Component Id="ProgramItems" Guid="{2295BEAB-1010-43A5-B1F2-FCE74018B89F}" Directory="INSTALLFOLDER" Permanent="no">
         <File Id="Trixter.XDream.API.dll" Source="$(var.SOURCE_DIAGNOSTICS_BIN)Trixter.XDream.API.dll" Vital="yes" />
         <File Id="System.IO.Ports.dll" Source="$(var.SOURCE_DIAGNOSTICS_BIN)System.IO.Ports.dll" Vital="yes" />
         <File Id="Trixter.XDream.Diagnostics.exe" Source="$(var.SOURCE_DIAGNOSTICS_BIN)Trixter.XDream.Diagnostics.exe" Vital="yes" />
         <File Id="license.txt" Source="$(var.LICENSE)" Vital="yes" />
       </Component>
-      <!--End Help Files-->
-
     </ComponentGroup>
 
     <DirectoryRef Id="ProgramMenuTrixterFolder">
-      <Component Id="Shortcuts" Guid="{6018E398-5D27-4899-B3AA-4C5A0189B05D}">
+      <Component Id="Shortcuts" >
 
-        <Shortcut Id="Trixter.XDream.UI.ShortCut" Name="Trixter X-Dream Bike UI" Description="GUI" Target="[INSTALLLOCATION]Trixter.XDream.Diagnostics.exe" WorkingDirectory="INSTALLLOCATION" Icon="white_x.ico" />
-        <Shortcut Id="Trixter.XDream.Console.ShortCut" Name="Trixter X-Dream Bike Console" Description="Console application" Target="[INSTALLLOCATION]Trixter.XDream.Diagnostics.exe" Arguments="--console" WorkingDirectory="INSTALLLOCATION" Icon="white_x_console.ico" />
+        <Shortcut Id="Trixter.XDream.UI.ShortCut" Name="Trixter X-Dream Bike UI" Description="GUI" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" WorkingDirectory="INSTALLFOLDER" Icon="white_x.ico" />
+        <Shortcut Id="Trixter.XDream.Console.ShortCut" Name="Trixter X-Dream Bike Console" Description="Console application" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" Arguments="--console" WorkingDirectory="INSTALLFOLDER" Icon="white_x_console.ico" />
 
-        <RemoveFolder Id="RemoveINSTALLLOCATION" Directory="INSTALLLOCATION" On="uninstall" />
+        <RemoveFolder Id="RemoveINSTALLFOLDER" Directory="INSTALLFOLDER" On="uninstall" />
         <RemoveFolder Id="RemoveProgramMenuTrixterFolder" Directory="ProgramMenuTrixterFolder" On="uninstall" />
         
         <RegistryValue Root="HKCU" Key="Software\$(var.MANUFACTURER)\$(var.PRODUCT_NAME)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
@@ -101,7 +93,7 @@
   
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="TRIXTERFOLDER" Name="Trixter">
-          <Directory Id="INSTALLLOCATION" Name="X-Dream Bike" />
+          <Directory Id="INSTALLFOLDER" Name="X-Dream Bike" />
         </Directory>
       </StandardDirectory>
 
