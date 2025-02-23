@@ -22,10 +22,8 @@
 		<Media Id="1" Cabinet="$(var.OUTPUT_CAB).cab" EmbedCab="yes" />
 
 		<!--    Check for .NET 4.8  -->
-		<!-- https://www.mking.net/blog/detecting-dotnet-framework-versions-with-wix -->
-		<!-- https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed -->
-		<PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
-		<Launch Condition="Installed OR (WIXNETFX4RELEASEINSTALLED &gt;= &quot;#528040&quot;)" Message="This software requires the .NET Framework 4.8." />
+		<PropertyRef Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" />
+		<Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Message="This software requires the .NET Framework 4.8." />
 
 		<Feature Id="ProductFeature" Title="Trixter.XDream">
 			<ComponentGroupRef Id="AppComponents" />
