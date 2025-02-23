@@ -12,8 +12,7 @@
 
 			<Component Id="Shortcuts" Directory="ProgramMenuTrixterFolder" >
 
-				<Shortcut Id="Trixter.XDream.UI.ShortCut" Name="Trixter X-Dream Bike UI" Description="GUI" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" WorkingDirectory="INSTALLFOLDER" Icon="white_x.ico" />
-				<Shortcut Id="Trixter.XDream.Console.ShortCut" Name="Trixter X-Dream Bike Console" Description="Console application" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" Arguments="--console" WorkingDirectory="INSTALLFOLDER" Icon="white_x_console.ico" />
+				<Shortcut Id="Trixter.XDream.UI.ShortCut" Name="$(var.PRODUCT_NAME)" Description="GUI" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" WorkingDirectory="INSTALLFOLDER" Icon="white_x.ico" />
 
 				<RemoveFolder Id="RemoveProgramMenuTrixterFolder" Directory="ProgramMenuTrixterFolder" On="uninstall" />
 

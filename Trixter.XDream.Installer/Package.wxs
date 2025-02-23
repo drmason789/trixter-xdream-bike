@@ -8,7 +8,6 @@
 
 		<!-- Make the icons available-->
 		<Icon Id="white_x.ico" SourceFile="..\Trixter.XDream.Diagnostics\white-x.ico" />
-		<Icon Id="white_x_console.ico" SourceFile="..\Trixter.XDream.Diagnostics\Resources\white-x-console.ico" />
 
 		<!-- Installer icon in Settings/Apps and Control Panel/Programs and Features -->
 		<Property Id="ARPPRODUCTICON" Value="white_x.ico" />
