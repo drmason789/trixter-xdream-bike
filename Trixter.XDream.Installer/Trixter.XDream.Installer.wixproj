@@ -1,13 +1,14 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.2">
 	<ItemGroup>
 		<Content Include="Definitions.wxi" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
+		<Content Include="Version.wxi" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
 		<PackageReference Include="WixToolset.NetFx.wixext" Version="5.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
 	</ItemGroup>
 	<!-- 
 	This is due to a bug in Visual Studio 17.13 
