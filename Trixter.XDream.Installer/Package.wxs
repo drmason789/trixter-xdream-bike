@@ -1,0 +1,39 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui" >
+
+	<?include Definitions.wxi ?>
+	<?include Version.wxi ?>
+
+	<Package Name="$(var.PRODUCT_NAME)" Manufacturer="$(var.MANUFACTURER)" Version="$(var.VERSION)" UpgradeCode="$(var.UPGRADE_CODE)" >
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<!-- Make the icons available-->
+		<Icon Id="white_x.ico" SourceFile="..\Trixter.XDream.Diagnostics\white-x.ico" />
+		<Icon Id="white_x_console.ico" SourceFile="..\Trixter.XDream.Diagnostics\Resources\white-x-console.ico" />
+
+		<!-- Installer icon in Settings/Apps and Control Panel/Programs and Features -->
+		<Property Id="ARPPRODUCTICON" Value="white_x.ico" />
+
+		<!-- Manufacturer (support) URL displayed in Control Panel / Programs and Features -->
+		<Property Id="ARPURLINFOABOUT" Value="$(var.GITHUB_URL)" />
+
+		<Property Id="ARPCOMMENTS" Value="$(var.PRODUCT_DESC)" />
+		<Property Id="ARPHELPLINK" Value="$(var.GITHUB_URL)" />
+
+		<!-- Media -->
+		<Media Id="1" Cabinet="$(var.OUTPUT_CAB).cab" EmbedCab="yes" />
+
+		<!--    Check for .NET 4.8  -->
+		<!-- https://www.mking.net/blog/detecting-dotnet-framework-versions-with-wix -->
+		<!-- https://docs.microsoft.com/en-us/dotnet/framework/migration-guide/how-to-determine-which-versions-are-installed -->
+		<PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
+		<Launch Condition="Installed OR (WIXNETFX4RELEASEINSTALLED &gt;= &quot;#528040&quot;)" Message="This software requires the .NET Framework 4.8." />
+
+		<Feature Id="ProductFeature" Title="Trixter.XDream">
+			<ComponentGroupRef Id="AppComponents" />
+		</Feature>
+
+		<ui:WixUI Id="WixUI_Minimal" />
+		<WixVariable Id="WixUILicenseRtf" Value="$(var.LICENSE)" />
+
+	</Package>
+</Wix>
