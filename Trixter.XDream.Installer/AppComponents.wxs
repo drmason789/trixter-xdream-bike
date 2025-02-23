@@ -1,0 +1,27 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?include Definitions.wxi ?>
+
+	<Fragment>
+		<ComponentGroup Id="AppComponents" >
+			<Component Guid="{2295BEAB-1010-43A5-B1F2-FCE74018B89F}" Directory="INSTALLFOLDER" >
+				<File Source="Trixter.XDream.API.dll" />
+				<File Source="System.IO.Ports.dll" />
+				<File Source="Trixter.XDream.Diagnostics.exe" />
+				<File Source="$(var.LICENSE)" />
+			</Component>
+
+			<Component Id="Shortcuts" Directory="ProgramMenuTrixterFolder" >
+
+				<Shortcut Id="Trixter.XDream.UI.ShortCut" Name="Trixter X-Dream Bike UI" Description="GUI" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" WorkingDirectory="INSTALLFOLDER" Icon="white_x.ico" />
+				<Shortcut Id="Trixter.XDream.Console.ShortCut" Name="Trixter X-Dream Bike Console" Description="Console application" Target="[INSTALLFOLDER]Trixter.XDream.Diagnostics.exe" Arguments="--console" WorkingDirectory="INSTALLFOLDER" Icon="white_x_console.ico" />
+
+				<!--<RemoveFolder Id="RemoveINSTALLFOLDER" Directory="INSTALLFOLDER" On="uninstall" />-->
+				<RemoveFolder Id="RemoveProgramMenuTrixterFolder" Directory="ProgramMenuTrixterFolder" On="uninstall" />
+
+				<RegistryValue Root="HKCU" Key="Software\$(var.MANUFACTURER)\$(var.PRODUCT_NAME)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+
+		</ComponentGroup>
+
+	</Fragment>
+</Wix>
