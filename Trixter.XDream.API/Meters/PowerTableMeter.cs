@@ -31,11 +31,7 @@ namespace Trixter.XDream.API.Meters
 
             if (applyingPower)
             {
-                // Currently it's not entirely certain what the power table provides, so this
-                // assumes it's an something to add to the power detected from the acceleration of the flywheel.
-                this.Power =
-                    PowerTable.GetWattsFromRPM(this.xdreamMachine.CrankMeter.RPM, this.xdreamMachine.Resistance) +
-                    xdm.FlywheelPowerMeter.Power;
+                this.Power = PowerTable.GetWattsFromRPM(this.xdreamMachine.CrankMeter.RPM, this.xdreamMachine.Resistance);
             }
             else 
                 this.Power = 0;
