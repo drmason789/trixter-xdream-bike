@@ -41,12 +41,14 @@ namespace Trixter.XDream.Diagnostics
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbDriver = new System.Windows.Forms.ToolStripButton();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
+            this.tsbUpdates = new System.Windows.Forms.ToolStripButton();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
             this.tsToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsToolStrip
             // 
+            this.tsToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.tsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tslSerialPort,
             this.tscSerialPorts,
@@ -54,23 +56,25 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect,
             this.tsbDisconnect,
             this.toolStripSeparator1,
-            this.tsbDriver});
+            this.tsbDriver,
+            this.tsbUpdates});
             this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.tsToolStrip.Name = "tsToolStrip";
-            this.tsToolStrip.Size = new System.Drawing.Size(504, 25);
+            this.tsToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.tsToolStrip.Size = new System.Drawing.Size(756, 38);
             this.tsToolStrip.TabIndex = 7;
             this.tsToolStrip.Text = "toolStrip1";
             // 
             // tslSerialPort
             // 
             this.tslSerialPort.Name = "tslSerialPort";
-            this.tslSerialPort.Size = new System.Drawing.Size(60, 22);
+            this.tslSerialPort.Size = new System.Drawing.Size(91, 33);
             this.tslSerialPort.Text = "Serial Port";
             // 
             // tscSerialPorts
             // 
             this.tscSerialPorts.Name = "tscSerialPorts";
-            this.tscSerialPorts.Size = new System.Drawing.Size(75, 25);
+            this.tscSerialPorts.Size = new System.Drawing.Size(110, 38);
             // 
             // tsbRefreshPorts
             // 
@@ -78,7 +82,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbRefreshPorts.Image = global::Trixter.XDream.Diagnostics.Properties.Resources.Refresh;
             this.tsbRefreshPorts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefreshPorts.Name = "tsbRefreshPorts";
-            this.tsbRefreshPorts.Size = new System.Drawing.Size(23, 22);
+            this.tsbRefreshPorts.Size = new System.Drawing.Size(34, 33);
             this.tsbRefreshPorts.Text = "toolStripButton1";
             this.tsbRefreshPorts.Click += new System.EventHandler(this.tsbRefreshPorts_Click);
             // 
@@ -88,7 +92,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbConnect.Image")));
             this.tsbConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConnect.Name = "tsbConnect";
-            this.tsbConnect.Size = new System.Drawing.Size(56, 22);
+            this.tsbConnect.Size = new System.Drawing.Size(81, 33);
             this.tsbConnect.Text = "Connect";
             this.tsbConnect.Click += new System.EventHandler(this.tsbConnect_Click);
             // 
@@ -99,14 +103,14 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisconnect.Image")));
             this.tsbDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDisconnect.Name = "tsbDisconnect";
-            this.tsbDisconnect.Size = new System.Drawing.Size(70, 22);
+            this.tsbDisconnect.Size = new System.Drawing.Size(103, 33);
             this.tsbDisconnect.Text = "Disconnect";
             this.tsbDisconnect.Click += new System.EventHandler(this.tsbDisconnect_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
             // 
             // tsbDriver
             // 
@@ -114,7 +118,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDriver.Image = ((System.Drawing.Image)(resources.GetObject("tsbDriver.Image")));
             this.tsbDriver.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDriver.Name = "tsbDriver";
-            this.tsbDriver.Size = new System.Drawing.Size(42, 22);
+            this.tsbDriver.Size = new System.Drawing.Size(63, 33);
             this.tsbDriver.Text = "Driver";
             this.tsbDriver.Click += new System.EventHandler(this.tsbDriver_Click);
             // 
@@ -124,28 +128,42 @@ namespace Trixter.XDream.Diagnostics
             this.dlgSaveFile.Filter = "CSV Files|*.csv";
             this.dlgSaveFile.SupportMultiDottedExtensions = true;
             // 
+            // tsbUpdates
+            // 
+            this.tsbUpdates.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tsbUpdates.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbUpdates.Image = ((System.Drawing.Image)(resources.GetObject("tsbUpdates.Image")));
+            this.tsbUpdates.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUpdates.Name = "tsbUpdates";
+            this.tsbUpdates.Size = new System.Drawing.Size(74, 33);
+            this.tsbUpdates.Text = "&Update";
+            this.tsbUpdates.ToolTipText = "Check for Updates";
+            this.tsbUpdates.Click += new System.EventHandler(this.tsbUpdates_Click);
+            // 
             // dDetailsControl
             // 
             this.dDetailsControl.DataAccess = null;
-            this.dDetailsControl.Location = new System.Drawing.Point(5, 28);
-            this.dDetailsControl.MaximumSize = new System.Drawing.Size(497, 432);
-            this.dDetailsControl.MinimumSize = new System.Drawing.Size(497, 432);
+            this.dDetailsControl.Location = new System.Drawing.Point(8, 43);
+            this.dDetailsControl.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.dDetailsControl.MaximumSize = new System.Drawing.Size(746, 665);
+            this.dDetailsControl.MinimumSize = new System.Drawing.Size(746, 665);
             this.dDetailsControl.Name = "dDetailsControl";
-            this.dDetailsControl.Padding = new System.Windows.Forms.Padding(3);
-            this.dDetailsControl.Size = new System.Drawing.Size(497, 432);
+            this.dDetailsControl.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dDetailsControl.Size = new System.Drawing.Size(746, 665);
             this.dDetailsControl.TabIndex = 0;
             this.dDetailsControl.UpdateInterval = 1000;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(504, 463);
+            this.ClientSize = new System.Drawing.Size(756, 712);
             this.Controls.Add(this.dDetailsControl);
             this.Controls.Add(this.tsToolStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.Text = "X-Dream Bike Diagnostic UI";
             this.tsToolStrip.ResumeLayout(false);
@@ -166,6 +184,7 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.SaveFileDialog dlgSaveFile;
         private System.Windows.Forms.ToolStripButton tsbDriver;
         private Details dDetailsControl;
+        private System.Windows.Forms.ToolStripButton tsbUpdates;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Trixter.XDream.API;
@@ -10,6 +11,7 @@ namespace Trixter.XDream.Diagnostics
 {
     public partial class MainForm : Form
     {
+        private const string updateRepo = "eGRyZWFtLWJpa2luZy90cml4dGVyLXhkcmVhbS1iaWtl";
         private object sync = new object();
         private DataAccess dataAccess;
 
@@ -163,6 +165,28 @@ namespace Trixter.XDream.Diagnostics
         {
             using(GroupPolicyForm gpf = new GroupPolicyForm())
                 gpf.ShowDialog();
+        }
+
+        private async void tsbUpdates_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                byte[] bytes = Convert.FromBase64String(updateRepo);
+
+                var updateChecker = new UpdateChecker(Encoding.UTF8.GetString(bytes));
+                bool updateExists = await updateChecker.UpdateExists();
+
+                if(updateExists)
+                    MessageBox.Show("An update is available.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("No updates were found.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("Failed to check for updates.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
         }
     }
 }
