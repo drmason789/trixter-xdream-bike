@@ -6,6 +6,7 @@
 			<Component Guid="{2295BEAB-1010-43A5-B1F2-FCE74018B89F}" Directory="INSTALLFOLDER" >
 				<File Source="Trixter.XDream.API.dll" />
 				<File Source="System.IO.Ports.dll" />
+				<File Source="Newtonsoft.Json.dll" />
 				<File Source="Trixter.XDream.Diagnostics.exe" />
 				<File Source="$(var.LICENSE)" />
 			</Component>
