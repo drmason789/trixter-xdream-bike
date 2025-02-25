@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using System;
 using System.Net.Http;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json.Linq;
+
 
 
 namespace Trixter.XDream.Diagnostics
@@ -89,25 +90,26 @@ namespace Trixter.XDream.Diagnostics
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "request");
-                                
+
                 var response = await client.GetStringAsync(this.githubRepoUrl);
-                var releases = JsonDocument.Parse(response).RootElement;
+                var releases = JArray.Parse(response);
 
                 var releaseList = new List<ReleaseInfo>();
 
-                foreach (var release in releases.EnumerateArray())
+                foreach (var release in releases)
                 {
-                    var releaseVersionString = release.GetProperty("tag_name").GetString();
+                    var releaseVersionString = release["tag_name"].ToString();
                     if (Version.TryParse(releaseVersionString, out var releaseVersion))
                     {
-                        var releaseName = release.GetProperty("name").GetString();
-                        var publishedAt = release.GetProperty("published_at").GetDateTime();
+                        var releaseName = release["name"].ToString();
+                        var publishedAt = release["published_at"].ToObject<DateTime>();
                         releaseList.Add(new ReleaseInfo(releaseVersion, releaseName, publishedAt));
                     }
                 }
 
                 return releaseList.OrderByDescending(r => r.Release).ToArray();
             }
+            
         }
     }
 
