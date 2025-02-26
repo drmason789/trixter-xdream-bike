@@ -52,10 +52,6 @@ namespace Trixter.XDream.Diagnostics
                     {
                         this.t0 = default;
                         this.states = new List<XDreamState>(1048576);
-
-
-                      
-
                     }
                 }
             }
@@ -131,29 +127,7 @@ namespace Trixter.XDream.Diagnostics
                 {
                     this.states.Add(message);
                     if (states.Count == 1)
-                        this.t0 = message.TimeStamp;
-
-                    //if (message is XDreamMessage messageData)
-                    //{
-                    //    string packetData = string.Join(string.Empty, messageData.RawInput.Select(b => b.ToString("x2")));
-                    //    uint timestamp = 0;
-
-                    //    this.states.Add(message);
-
-                    //    if (this.t0 == default(DateTimeOffset))
-                    //        this.t0 = message.TimeStamp;
-                    //    else
-                    //        timestamp = (uint)(message.TimeStamp.Subtract(this.t0).TotalMilliseconds + 0.5);
-
-                    //    if (timestamp > this.displayLimit)
-                    //    {
-                    //        uint limit = timestamp - this.displayLimit;
-                    //        for (int i = this.GridItems.Count - 1; i >= 0 && this.GridItems[i].TimeStamp < limit; i--)
-                    //            this.GridItems.RemoveAt(i);
-                    //    }
-
-                    //    this.GridItems.Insert(0, new PacketDataGridItem { TimeStamp = timestamp, DataPacket = packetData });
-                    //}
+                        this.t0 = message.TimeStamp;                    
                 }
             }
 

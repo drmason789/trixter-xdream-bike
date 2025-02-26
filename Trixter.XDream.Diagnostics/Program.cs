@@ -16,14 +16,9 @@ namespace Trixter.XDream.Diagnostics
         [STAThread]
         static int Main(string[] args)
         {
-     
-
             if (args.Length > 0 && args[0].ToLower() == "--console")
             {
-             
-
-                    return ConsoleFunctionality.Entry(args);
-                
+                return ConsoleFunctionality.Entry(args);                
             }
             else
             {
