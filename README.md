@@ -42,7 +42,8 @@ Each brake applies 50% flywheel resistance.
 The utility also has a console mode to provide a similar experience to the original.
 If the utility is invoked with the --console command line option, or through the program menu short cut for the console mode, it shows a console application.
 
-![image](https://github.com/user-attachments/assets/6748e04a-7e9b-4883-93b6-5c8ff2b2f641)
+![image](https://github.com/user-attachments/assets/0a7e3790-a4a7-4aaf-b9c7-88abb6e4ff19)
+
 
 
 
