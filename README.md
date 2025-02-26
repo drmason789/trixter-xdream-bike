@@ -30,7 +30,8 @@ So far the improvements over the originals are:
 - detects the COM port the bike is on
 - detects backpedalling and shows the crank RPM in the backwards direction
 - calculates flywheel and crank cumulative revolutions.
-- estimates of the power being applied to the flywheel (not accounting for resistance, until #101 is released) momentarily and cumulatively
+- estimate of the power being applied to the flywheel from a power table of crank speed and resistance to power.
+- estimate of expended energy
 - is maintainable
 
 The default mode of the utility has a graphic user interface that shows the state of the various controls and a slider bar to set flywheel resistance.
@@ -41,7 +42,8 @@ Each brake applies 50% flywheel resistance.
 The utility also has a console mode to provide a similar experience to the original.
 If the utility is invoked with the --console command line option, or through the program menu short cut for the console mode, it shows a console application.
 
-![image](https://user-images.githubusercontent.com/29954900/148430888-c37726aa-3c2b-47d3-87fc-34d3f5ecd4e9.png)
+![image](https://github.com/user-attachments/assets/6748e04a-7e9b-4883-93b6-5c8ff2b2f641)
+
 
 
 
