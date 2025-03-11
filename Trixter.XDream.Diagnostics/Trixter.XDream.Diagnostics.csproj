@@ -10,7 +10,7 @@
     <ApplicationIcon>White-X.ico</ApplicationIcon>
     <Authors>David Mason</Authors>
     <Description>Diagnostic utility for reading the status of a Trixter X-Dream V1 exercise bike and setting its resistance.</Description>
-    <Copyright>(C) David Mason 2021-2024</Copyright>
+    <Copyright>(C) David Mason 2021-2025</Copyright>
     <AssemblyVersion>1.4.1</AssemblyVersion>
     <FileVersion>1.4.1</FileVersion>
 	<Version>1.4.1</Version>
