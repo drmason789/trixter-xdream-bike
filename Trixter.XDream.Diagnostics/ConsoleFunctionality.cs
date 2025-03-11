@@ -122,23 +122,23 @@ namespace Trixter.XDream.Diagnostics
                     deltaR = 0;
                 }
 
-                sb.AppendLine($"Port              : {comPort}");
-                sb.AppendLine($"Steering          : {e.Steering}  / {Constants.MaxSteering}");
-                sb.AppendLine($"Left Brake        : {e.LeftBrake} / {Constants.MaxBrake}");
-                sb.AppendLine($"Right Brake       : {e.RightBrake} / {Constants.MaxBrake}");
-                sb.AppendLine($"Crank Position    : {e.CrankPosition} / {CrankPositions.Positions}");
-                sb.AppendLine($"Crank Raw Data    : {e.Crank}");
-                sb.AppendLine($"Crank RPM         : {(sender.CrankMeter.HasData ? sender.CrankMeter.RPM : 0)}");
-                sb.AppendLine($"Crank Direction   : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction : CrankDirection.None)}");
-                sb.AppendLine($"Crank Revs        : {sender.TripMeter.CrankRevolutions:0.0}");
-                sb.AppendLine($"Flywheel Raw Data : {e.Flywheel}");
-                sb.AppendLine($"Flywheel Revs     : {sender.TripMeter.FlywheelRevolutions:0.0}");
-                sb.AppendLine($"Flywheel RPM      : {sender.FlywheelMeter.RPM} RPM");
-                sb.AppendLine($"Power             : {sender.PowerMeter.Power} W");
-                sb.AppendLine($"Total Energy      : {sender.TripMeter.Energy/1000:0.001} kJ");
-                sb.AppendLine($"Heart Rate        : {e.HeartRate}");
-                sb.AppendLine($"Buttons           : {e.Buttons}");
-                sb.AppendLine($"Resistance        : {sender.Resistance} / {XDreamSerialPortClient.MaxResistance}");
+                sb.AppendLine($"Port                 : {comPort}");
+                sb.AppendLine($"Steering             : {e.Steering}  / {Constants.MaxSteering}");
+                sb.AppendLine($"Left Brake           : {e.LeftBrake} / {Constants.MaxBrake}");
+                sb.AppendLine($"Right Brake          : {e.RightBrake} / {Constants.MaxBrake}");
+                sb.AppendLine($"Crank Position       : {e.CrankPosition} / {CrankPositions.Positions}");
+                sb.AppendLine($"Crank Raw Data       : {e.Crank}");
+                sb.AppendLine($"Crank RPM            : {(sender.CrankMeter.HasData ? sender.CrankMeter.RPM : 0)}");
+                sb.AppendLine($"Crank Direction      : {(sender.CrankMeter.HasData ? sender.CrankMeter.Direction : CrankDirection.None)}");
+                sb.AppendLine($"Crank Revs           : {sender.TripMeter.CrankRevolutions:0.0}");
+                sb.AppendLine($"Flywheel Raw Data    : {e.Flywheel}");
+                sb.AppendLine($"Flywheel Revs        : {sender.TripMeter.FlywheelRevolutions:0.0}");
+                sb.AppendLine($"Flywheel RPM         : {sender.FlywheelMeter.RPM} RPM");
+                sb.AppendLine($"Power Estimate       : {sender.PowerMeter.Power} W");
+                sb.AppendLine($"Total Energy Estimate: {sender.TripMeter.Energy/1000:0.001} kJ");
+                sb.AppendLine($"Heart Rate           : {e.HeartRate}");
+                sb.AppendLine($"Buttons              : {e.Buttons}");
+                sb.AppendLine($"Resistance           : {sender.Resistance} / {XDreamSerialPortClient.MaxResistance}");
 
                 System.Console.Clear();
                 System.Console.WriteLine(sb.ToString());
