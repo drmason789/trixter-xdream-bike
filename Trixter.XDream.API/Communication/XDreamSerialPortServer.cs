@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Trixter.XDream.API.Filters;
 
 
 namespace Trixter.XDream.API.Communications
@@ -19,16 +20,32 @@ namespace Trixter.XDream.API.Communications
         readonly object resistanceSync = new object();
         int resistanceLevel = 0;
         DateTimeOffset resistanceExpires;
+        SampleList resistancePacketSamples = new SampleList();
 
         private readonly object stateSync = new object();
         private XDreamState state;
         private byte[] stateBytes;
+
+        private readonly DateTimeOffset startTime = DateTimeOffset.UtcNow;
+
+        
 
         public List<string> packetsReceived = new List<string>();
 
         private System.Timers.Timer resistanceTimer;
 
         public event XDreamResistanceChangedDelegate<XDreamServer> ResistanceChanged;
+
+        private double TimeSinceStart => (DateTimeOffset.UtcNow - this.startTime).TotalMilliseconds;
+
+        public double ResistancePacketsPerSecond 
+        { 
+            get 
+            {
+                this.resistancePacketSamples.Trim(this.TimeSinceStart - 1000, null);
+                return this.resistancePacketSamples.Count;
+            } 
+        }
 
         public XDreamState State 
         {
@@ -84,6 +101,8 @@ namespace Trixter.XDream.API.Communications
             if(packet?.Length==XDreamSerialData.ResistancePacketLength)
             {
                 this.Resistance= packet[1];
+
+                this.resistancePacketSamples.Add(new Sample(this.TimeSinceStart, 1, null));
             }
         }
 

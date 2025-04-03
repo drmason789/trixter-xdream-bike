@@ -129,6 +129,7 @@ namespace Trixter.XDream.TestController
                 return;
             }
             this.lbResistanceValue.Text = this.controller.Resistance.ToString();
+            this.lblRequestsPerSecond.Text = this.controller.ResistanceRequestsPerSecond.ToString("N2");
         }
 
         private void Controller_ResistanceChanged(Controller sender)

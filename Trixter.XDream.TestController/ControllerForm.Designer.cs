@@ -79,6 +79,8 @@ namespace Trixter.XDream.TestController
             this.bnConnect = new System.Windows.Forms.Button();
             this.lbComPort = new System.Windows.Forms.Label();
             this.cbComPort = new System.Windows.Forms.ComboBox();
+            this.lblRequestsPerSecond = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
             this.gbControls.SuspendLayout();
@@ -104,9 +106,10 @@ namespace Trixter.XDream.TestController
             // 
             this.bnGreen.BackColor = System.Drawing.Color.Green;
             this.bnGreen.ForeColor = System.Drawing.SystemColors.Window;
-            this.bnGreen.Location = new System.Drawing.Point(265, 216);
+            this.bnGreen.Location = new System.Drawing.Point(398, 332);
+            this.bnGreen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnGreen.Name = "bnGreen";
-            this.bnGreen.Size = new System.Drawing.Size(64, 25);
+            this.bnGreen.Size = new System.Drawing.Size(96, 38);
             this.bnGreen.TabIndex = 0;
             this.bnGreen.Text = "Select";
             this.bnGreen.UseVisualStyleBackColor = false;
@@ -119,9 +122,10 @@ namespace Trixter.XDream.TestController
             // 
             this.bnRed.BackColor = System.Drawing.Color.Red;
             this.bnRed.ForeColor = System.Drawing.SystemColors.Window;
-            this.bnRed.Location = new System.Drawing.Point(197, 215);
+            this.bnRed.Location = new System.Drawing.Point(296, 331);
+            this.bnRed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnRed.Name = "bnRed";
-            this.bnRed.Size = new System.Drawing.Size(64, 25);
+            this.bnRed.Size = new System.Drawing.Size(96, 38);
             this.bnRed.TabIndex = 1;
             this.bnRed.Text = "Cancel";
             this.bnRed.UseVisualStyleBackColor = false;
@@ -134,9 +138,10 @@ namespace Trixter.XDream.TestController
             // 
             this.bnBlue.BackColor = System.Drawing.Color.Blue;
             this.bnBlue.ForeColor = System.Drawing.SystemColors.Window;
-            this.bnBlue.Location = new System.Drawing.Point(233, 187);
+            this.bnBlue.Location = new System.Drawing.Point(350, 288);
+            this.bnBlue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnBlue.Name = "bnBlue";
-            this.bnBlue.Size = new System.Drawing.Size(64, 25);
+            this.bnBlue.Size = new System.Drawing.Size(96, 38);
             this.bnBlue.TabIndex = 2;
             this.bnBlue.Text = "View";
             this.bnBlue.UseVisualStyleBackColor = false;
@@ -147,9 +152,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnUp
             // 
-            this.bnUp.Location = new System.Drawing.Point(84, 179);
+            this.bnUp.Location = new System.Drawing.Point(126, 275);
+            this.bnUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnUp.Name = "bnUp";
-            this.bnUp.Size = new System.Drawing.Size(64, 20);
+            this.bnUp.Size = new System.Drawing.Size(96, 31);
             this.bnUp.TabIndex = 3;
             this.bnUp.Text = "Up";
             this.bnUp.UseVisualStyleBackColor = true;
@@ -160,9 +166,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnRight
             // 
-            this.bnRight.Location = new System.Drawing.Point(118, 203);
+            this.bnRight.Location = new System.Drawing.Point(177, 312);
+            this.bnRight.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnRight.Name = "bnRight";
-            this.bnRight.Size = new System.Drawing.Size(64, 20);
+            this.bnRight.Size = new System.Drawing.Size(96, 31);
             this.bnRight.TabIndex = 4;
             this.bnRight.Text = "Right";
             this.bnRight.UseVisualStyleBackColor = true;
@@ -173,9 +180,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnLeft
             // 
-            this.bnLeft.Location = new System.Drawing.Point(50, 203);
+            this.bnLeft.Location = new System.Drawing.Point(75, 312);
+            this.bnLeft.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnLeft.Name = "bnLeft";
-            this.bnLeft.Size = new System.Drawing.Size(64, 20);
+            this.bnLeft.Size = new System.Drawing.Size(96, 31);
             this.bnLeft.TabIndex = 5;
             this.bnLeft.Text = "Left";
             this.bnLeft.UseVisualStyleBackColor = true;
@@ -186,9 +194,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnDown
             // 
-            this.bnDown.Location = new System.Drawing.Point(84, 227);
+            this.bnDown.Location = new System.Drawing.Point(126, 349);
+            this.bnDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnDown.Name = "bnDown";
-            this.bnDown.Size = new System.Drawing.Size(64, 20);
+            this.bnDown.Size = new System.Drawing.Size(96, 31);
             this.bnDown.TabIndex = 6;
             this.bnDown.Text = "Down";
             this.bnDown.UseVisualStyleBackColor = true;
@@ -199,11 +208,12 @@ namespace Trixter.XDream.TestController
             // 
             // tbFlywheelSpeed
             // 
-            this.tbFlywheelSpeed.Location = new System.Drawing.Point(6, 19);
+            this.tbFlywheelSpeed.Location = new System.Drawing.Point(9, 29);
+            this.tbFlywheelSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbFlywheelSpeed.Maximum = 1000;
             this.tbFlywheelSpeed.Name = "tbFlywheelSpeed";
             this.tbFlywheelSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbFlywheelSpeed.Size = new System.Drawing.Size(45, 247);
+            this.tbFlywheelSpeed.Size = new System.Drawing.Size(69, 380);
             this.tbFlywheelSpeed.TabIndex = 7;
             this.tbFlywheelSpeed.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.tbFlywheelSpeed.ValueChanged += new System.EventHandler(this.tbFlywheelSpeed_ValueChanged);
@@ -211,9 +221,10 @@ namespace Trixter.XDream.TestController
             // cbSeated
             // 
             this.cbSeated.AutoSize = true;
-            this.cbSeated.Location = new System.Drawing.Point(299, 250);
+            this.cbSeated.Location = new System.Drawing.Point(448, 385);
+            this.cbSeated.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbSeated.Name = "cbSeated";
-            this.cbSeated.Size = new System.Drawing.Size(60, 17);
+            this.cbSeated.Size = new System.Drawing.Size(87, 24);
             this.cbSeated.TabIndex = 8;
             this.cbSeated.Text = "Seated";
             this.cbSeated.UseVisualStyleBackColor = true;
@@ -222,10 +233,11 @@ namespace Trixter.XDream.TestController
             // tbSteering
             // 
             this.tbSteering.AutoSize = false;
-            this.tbSteering.Location = new System.Drawing.Point(16, 79);
+            this.tbSteering.Location = new System.Drawing.Point(24, 122);
+            this.tbSteering.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbSteering.Maximum = 255;
             this.tbSteering.Name = "tbSteering";
-            this.tbSteering.Size = new System.Drawing.Size(333, 30);
+            this.tbSteering.Size = new System.Drawing.Size(500, 46);
             this.tbSteering.TabIndex = 9;
             this.tbSteering.TickStyle = System.Windows.Forms.TickStyle.None;
             this.tbSteering.Value = 128;
@@ -234,9 +246,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnLeftGearUp
             // 
-            this.bnLeftGearUp.Location = new System.Drawing.Point(15, 120);
+            this.bnLeftGearUp.Location = new System.Drawing.Point(22, 185);
+            this.bnLeftGearUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnLeftGearUp.Name = "bnLeftGearUp";
-            this.bnLeftGearUp.Size = new System.Drawing.Size(64, 20);
+            this.bnLeftGearUp.Size = new System.Drawing.Size(96, 31);
             this.bnLeftGearUp.TabIndex = 10;
             this.bnLeftGearUp.Text = "Up";
             this.bnLeftGearUp.UseVisualStyleBackColor = true;
@@ -247,9 +260,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnLeftGearDown
             // 
-            this.bnLeftGearDown.Location = new System.Drawing.Point(15, 145);
+            this.bnLeftGearDown.Location = new System.Drawing.Point(22, 223);
+            this.bnLeftGearDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnLeftGearDown.Name = "bnLeftGearDown";
-            this.bnLeftGearDown.Size = new System.Drawing.Size(64, 20);
+            this.bnLeftGearDown.Size = new System.Drawing.Size(96, 31);
             this.bnLeftGearDown.TabIndex = 11;
             this.bnLeftGearDown.Text = "Down";
             this.bnLeftGearDown.UseVisualStyleBackColor = true;
@@ -260,9 +274,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnRightGearDown
             // 
-            this.bnRightGearDown.Location = new System.Drawing.Point(285, 145);
+            this.bnRightGearDown.Location = new System.Drawing.Point(428, 223);
+            this.bnRightGearDown.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnRightGearDown.Name = "bnRightGearDown";
-            this.bnRightGearDown.Size = new System.Drawing.Size(64, 20);
+            this.bnRightGearDown.Size = new System.Drawing.Size(96, 31);
             this.bnRightGearDown.TabIndex = 13;
             this.bnRightGearDown.Text = "Down";
             this.bnRightGearDown.UseVisualStyleBackColor = true;
@@ -273,9 +288,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnRightGearUp
             // 
-            this.bnRightGearUp.Location = new System.Drawing.Point(285, 120);
+            this.bnRightGearUp.Location = new System.Drawing.Point(428, 185);
+            this.bnRightGearUp.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnRightGearUp.Name = "bnRightGearUp";
-            this.bnRightGearUp.Size = new System.Drawing.Size(64, 20);
+            this.bnRightGearUp.Size = new System.Drawing.Size(96, 31);
             this.bnRightGearUp.TabIndex = 12;
             this.bnRightGearUp.Text = "Up";
             this.bnRightGearUp.UseVisualStyleBackColor = true;
@@ -312,9 +328,11 @@ namespace Trixter.XDream.TestController
             this.gbControls.Controls.Add(this.bnRight);
             this.gbControls.Controls.Add(this.bnLeft);
             this.gbControls.Controls.Add(this.bnDown);
-            this.gbControls.Location = new System.Drawing.Point(12, 12);
+            this.gbControls.Location = new System.Drawing.Point(18, 18);
+            this.gbControls.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbControls.Name = "gbControls";
-            this.gbControls.Size = new System.Drawing.Size(365, 273);
+            this.gbControls.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbControls.Size = new System.Drawing.Size(548, 420);
             this.gbControls.TabIndex = 14;
             this.gbControls.TabStop = false;
             this.gbControls.Text = "Controls";
@@ -322,30 +340,33 @@ namespace Trixter.XDream.TestController
             // lbHeartRate
             // 
             this.lbHeartRate.AutoSize = true;
-            this.lbHeartRate.Location = new System.Drawing.Point(118, 125);
+            this.lbHeartRate.Location = new System.Drawing.Point(177, 192);
+            this.lbHeartRate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbHeartRate.Name = "lbHeartRate";
-            this.lbHeartRate.Size = new System.Drawing.Size(85, 13);
+            this.lbHeartRate.Size = new System.Drawing.Size(126, 20);
             this.lbHeartRate.TabIndex = 26;
             this.lbHeartRate.Text = "Heart Rate BPM";
             // 
             // nudHeartRate
             // 
-            this.nudHeartRate.Location = new System.Drawing.Point(156, 141);
+            this.nudHeartRate.Location = new System.Drawing.Point(234, 217);
+            this.nudHeartRate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudHeartRate.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
             this.nudHeartRate.Name = "nudHeartRate";
-            this.nudHeartRate.Size = new System.Drawing.Size(51, 20);
+            this.nudHeartRate.Size = new System.Drawing.Size(76, 26);
             this.nudHeartRate.TabIndex = 25;
             this.nudHeartRate.ValueChanged += new System.EventHandler(this.nudHeartRate_ValueChanged);
             // 
             // bnGamePad
             // 
-            this.bnGamePad.Location = new System.Drawing.Point(6, 239);
+            this.bnGamePad.Location = new System.Drawing.Point(9, 368);
+            this.bnGamePad.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnGamePad.Name = "bnGamePad";
-            this.bnGamePad.Size = new System.Drawing.Size(67, 26);
+            this.bnGamePad.Size = new System.Drawing.Size(100, 40);
             this.bnGamePad.TabIndex = 24;
             this.bnGamePad.Text = "Gamepad";
             this.bnGamePad.UseVisualStyleBackColor = true;
@@ -354,9 +375,10 @@ namespace Trixter.XDream.TestController
             // lbBothBrakes
             // 
             this.lbBothBrakes.AutoSize = true;
-            this.lbBothBrakes.Location = new System.Drawing.Point(159, 16);
+            this.lbBothBrakes.Location = new System.Drawing.Point(238, 25);
+            this.lbBothBrakes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbBothBrakes.Name = "lbBothBrakes";
-            this.lbBothBrakes.Size = new System.Drawing.Size(65, 13);
+            this.lbBothBrakes.Size = new System.Drawing.Size(97, 20);
             this.lbBothBrakes.TabIndex = 23;
             this.lbBothBrakes.Text = "Both Brakes";
             this.lbBothBrakes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -364,9 +386,10 @@ namespace Trixter.XDream.TestController
             // lbRightBrake
             // 
             this.lbRightBrake.AutoSize = true;
-            this.lbRightBrake.Location = new System.Drawing.Point(282, 19);
+            this.lbRightBrake.Location = new System.Drawing.Point(423, 29);
+            this.lbRightBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRightBrake.Name = "lbRightBrake";
-            this.lbRightBrake.Size = new System.Drawing.Size(63, 13);
+            this.lbRightBrake.Size = new System.Drawing.Size(93, 20);
             this.lbRightBrake.TabIndex = 22;
             this.lbRightBrake.Text = "Right Brake";
             this.lbRightBrake.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -374,18 +397,20 @@ namespace Trixter.XDream.TestController
             // lbLeftBrake
             // 
             this.lbLeftBrake.AutoSize = true;
-            this.lbLeftBrake.Location = new System.Drawing.Point(17, 18);
+            this.lbLeftBrake.Location = new System.Drawing.Point(26, 28);
+            this.lbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLeftBrake.Name = "lbLeftBrake";
-            this.lbLeftBrake.Size = new System.Drawing.Size(56, 13);
+            this.lbLeftBrake.Size = new System.Drawing.Size(83, 20);
             this.lbLeftBrake.TabIndex = 21;
             this.lbLeftBrake.Text = "Left Brake";
             // 
             // lbRightGears
             // 
             this.lbRightGears.AutoSize = true;
-            this.lbRightGears.Location = new System.Drawing.Point(252, 101);
+            this.lbRightGears.Location = new System.Drawing.Point(378, 155);
+            this.lbRightGears.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRightGears.Name = "lbRightGears";
-            this.lbRightGears.Size = new System.Drawing.Size(97, 13);
+            this.lbRightGears.Size = new System.Drawing.Size(145, 20);
             this.lbRightGears.TabIndex = 20;
             this.lbRightGears.Text = "Right (Back) Gears";
             this.lbRightGears.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -393,15 +418,17 @@ namespace Trixter.XDream.TestController
             // lbLeftGears
             // 
             this.lbLeftGears.AutoSize = true;
-            this.lbLeftGears.Location = new System.Drawing.Point(16, 101);
+            this.lbLeftGears.Location = new System.Drawing.Point(24, 155);
+            this.lbLeftGears.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbLeftGears.Name = "lbLeftGears";
-            this.lbLeftGears.Size = new System.Drawing.Size(89, 13);
+            this.lbLeftGears.Size = new System.Drawing.Size(137, 20);
             this.lbLeftGears.TabIndex = 19;
             this.lbLeftGears.Text = "Left (Front) Gears";
             // 
             // nudLeftBrake
             // 
-            this.nudLeftBrake.Location = new System.Drawing.Point(47, 50);
+            this.nudLeftBrake.Location = new System.Drawing.Point(70, 77);
+            this.nudLeftBrake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudLeftBrake.Maximum = new decimal(new int[] {
             250,
             0,
@@ -413,7 +440,7 @@ namespace Trixter.XDream.TestController
             0,
             0});
             this.nudLeftBrake.Name = "nudLeftBrake";
-            this.nudLeftBrake.Size = new System.Drawing.Size(50, 20);
+            this.nudLeftBrake.Size = new System.Drawing.Size(75, 26);
             this.nudLeftBrake.TabIndex = 18;
             this.nudLeftBrake.Value = new decimal(new int[] {
             135,
@@ -424,7 +451,8 @@ namespace Trixter.XDream.TestController
             // 
             // nudRightBrake
             // 
-            this.nudRightBrake.Location = new System.Drawing.Point(255, 50);
+            this.nudRightBrake.Location = new System.Drawing.Point(382, 77);
+            this.nudRightBrake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudRightBrake.Maximum = new decimal(new int[] {
             250,
             0,
@@ -436,7 +464,7 @@ namespace Trixter.XDream.TestController
             0,
             0});
             this.nudRightBrake.Name = "nudRightBrake";
-            this.nudRightBrake.Size = new System.Drawing.Size(53, 20);
+            this.nudRightBrake.Size = new System.Drawing.Size(80, 26);
             this.nudRightBrake.TabIndex = 17;
             this.nudRightBrake.Value = new decimal(new int[] {
             135,
@@ -447,13 +475,14 @@ namespace Trixter.XDream.TestController
             // 
             // tbBothBrakes
             // 
-            this.tbBothBrakes.Location = new System.Drawing.Point(162, 28);
+            this.tbBothBrakes.Location = new System.Drawing.Point(243, 43);
+            this.tbBothBrakes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbBothBrakes.Maximum = 250;
             this.tbBothBrakes.Minimum = 135;
             this.tbBothBrakes.Name = "tbBothBrakes";
             this.tbBothBrakes.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbBothBrakes.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tbBothBrakes.Size = new System.Drawing.Size(45, 53);
+            this.tbBothBrakes.Size = new System.Drawing.Size(69, 82);
             this.tbBothBrakes.TabIndex = 16;
             this.tbBothBrakes.TickFrequency = 10;
             this.tbBothBrakes.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -463,12 +492,13 @@ namespace Trixter.XDream.TestController
             // 
             // tbRightBrake
             // 
-            this.tbRightBrake.Location = new System.Drawing.Point(314, 28);
+            this.tbRightBrake.Location = new System.Drawing.Point(471, 43);
+            this.tbRightBrake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbRightBrake.Maximum = 250;
             this.tbRightBrake.Minimum = 135;
             this.tbRightBrake.Name = "tbRightBrake";
             this.tbRightBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbRightBrake.Size = new System.Drawing.Size(45, 53);
+            this.tbRightBrake.Size = new System.Drawing.Size(69, 82);
             this.tbRightBrake.TabIndex = 15;
             this.tbRightBrake.TickFrequency = 10;
             this.tbRightBrake.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
@@ -478,12 +508,13 @@ namespace Trixter.XDream.TestController
             // 
             // tbLeftBrake
             // 
-            this.tbLeftBrake.Location = new System.Drawing.Point(16, 28);
+            this.tbLeftBrake.Location = new System.Drawing.Point(24, 43);
+            this.tbLeftBrake.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbLeftBrake.Maximum = 250;
             this.tbLeftBrake.Minimum = 135;
             this.tbLeftBrake.Name = "tbLeftBrake";
             this.tbLeftBrake.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbLeftBrake.Size = new System.Drawing.Size(45, 53);
+            this.tbLeftBrake.Size = new System.Drawing.Size(69, 82);
             this.tbLeftBrake.TabIndex = 14;
             this.tbLeftBrake.TickFrequency = 10;
             this.tbLeftBrake.Value = 135;
@@ -492,7 +523,8 @@ namespace Trixter.XDream.TestController
             // 
             // nudFlywheelRevTime
             // 
-            this.nudFlywheelRevTime.Location = new System.Drawing.Point(66, 49);
+            this.nudFlywheelRevTime.Location = new System.Drawing.Point(99, 75);
+            this.nudFlywheelRevTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudFlywheelRevTime.Maximum = new decimal(new int[] {
             65534,
             0,
@@ -504,7 +536,7 @@ namespace Trixter.XDream.TestController
             0,
             0});
             this.nudFlywheelRevTime.Name = "nudFlywheelRevTime";
-            this.nudFlywheelRevTime.Size = new System.Drawing.Size(72, 20);
+            this.nudFlywheelRevTime.Size = new System.Drawing.Size(108, 26);
             this.nudFlywheelRevTime.TabIndex = 14;
             this.nudFlywheelRevTime.Value = new decimal(new int[] {
             65534,
@@ -515,11 +547,15 @@ namespace Trixter.XDream.TestController
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblRequestsPerSecond);
+            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lbResistanceValue);
             this.groupBox1.Controls.Add(this.lbResistance);
-            this.groupBox1.Location = new System.Drawing.Point(714, 13);
+            this.groupBox1.Location = new System.Drawing.Point(1071, 20);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(94, 80);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(141, 205);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "From Client";
@@ -527,9 +563,10 @@ namespace Trixter.XDream.TestController
             // lbResistanceValue
             // 
             this.lbResistanceValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbResistanceValue.Location = new System.Drawing.Point(20, 47);
+            this.lbResistanceValue.Location = new System.Drawing.Point(30, 72);
+            this.lbResistanceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResistanceValue.Name = "lbResistanceValue";
-            this.lbResistanceValue.Size = new System.Drawing.Size(52, 20);
+            this.lbResistanceValue.Size = new System.Drawing.Size(77, 30);
             this.lbResistanceValue.TabIndex = 1;
             this.lbResistanceValue.Text = "0";
             this.lbResistanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -537,22 +574,24 @@ namespace Trixter.XDream.TestController
             // lbResistance
             // 
             this.lbResistance.AutoSize = true;
-            this.lbResistance.Location = new System.Drawing.Point(17, 27);
+            this.lbResistance.Location = new System.Drawing.Point(26, 42);
+            this.lbResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResistance.Name = "lbResistance";
-            this.lbResistance.Size = new System.Drawing.Size(60, 13);
+            this.lbResistance.Size = new System.Drawing.Size(89, 20);
             this.lbResistance.TabIndex = 0;
             this.lbResistance.Text = "Resistance";
             // 
             // nudRPM
             // 
-            this.nudRPM.Location = new System.Drawing.Point(67, 98);
+            this.nudRPM.Location = new System.Drawing.Point(100, 151);
+            this.nudRPM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudRPM.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.nudRPM.Name = "nudRPM";
-            this.nudRPM.Size = new System.Drawing.Size(72, 20);
+            this.nudRPM.Size = new System.Drawing.Size(108, 26);
             this.nudRPM.TabIndex = 15;
             this.nudRPM.Value = new decimal(new int[] {
             2000,
@@ -568,9 +607,11 @@ namespace Trixter.XDream.TestController
             this.gbFlywheel.Controls.Add(this.nudRPM);
             this.gbFlywheel.Controls.Add(this.tbFlywheelSpeed);
             this.gbFlywheel.Controls.Add(this.nudFlywheelRevTime);
-            this.gbFlywheel.Location = new System.Drawing.Point(548, 13);
+            this.gbFlywheel.Location = new System.Drawing.Point(822, 20);
+            this.gbFlywheel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbFlywheel.Name = "gbFlywheel";
-            this.gbFlywheel.Size = new System.Drawing.Size(160, 272);
+            this.gbFlywheel.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbFlywheel.Size = new System.Drawing.Size(240, 418);
             this.gbFlywheel.TabIndex = 16;
             this.gbFlywheel.TabStop = false;
             this.gbFlywheel.Text = "Flywheel";
@@ -578,18 +619,20 @@ namespace Trixter.XDream.TestController
             // lbRPM
             // 
             this.lbRPM.AutoSize = true;
-            this.lbRPM.Location = new System.Drawing.Point(64, 78);
+            this.lbRPM.Location = new System.Drawing.Point(96, 120);
+            this.lbRPM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRPM.Name = "lbRPM";
-            this.lbRPM.Size = new System.Drawing.Size(31, 13);
+            this.lbRPM.Size = new System.Drawing.Size(44, 20);
             this.lbRPM.TabIndex = 17;
             this.lbRPM.Text = "RPM";
             // 
             // lbFlywheelRevTime
             // 
             this.lbFlywheelRevTime.AutoSize = true;
-            this.lbFlywheelRevTime.Location = new System.Drawing.Point(63, 29);
+            this.lbFlywheelRevTime.Location = new System.Drawing.Point(94, 45);
+            this.lbFlywheelRevTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbFlywheelRevTime.Name = "lbFlywheelRevTime";
-            this.lbFlywheelRevTime.Size = new System.Drawing.Size(84, 13);
+            this.lbFlywheelRevTime.Size = new System.Drawing.Size(122, 20);
             this.lbFlywheelRevTime.TabIndex = 16;
             this.lbFlywheelRevTime.Text = "Revolution Time";
             // 
@@ -602,9 +645,11 @@ namespace Trixter.XDream.TestController
             this.gbCrank.Controls.Add(this.nudCrankRPM);
             this.gbCrank.Controls.Add(this.tbCrankSpeed);
             this.gbCrank.Controls.Add(this.nudCrankRevTime);
-            this.gbCrank.Location = new System.Drawing.Point(383, 12);
+            this.gbCrank.Location = new System.Drawing.Point(574, 18);
+            this.gbCrank.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbCrank.Name = "gbCrank";
-            this.gbCrank.Size = new System.Drawing.Size(158, 273);
+            this.gbCrank.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbCrank.Size = new System.Drawing.Size(237, 420);
             this.gbCrank.TabIndex = 17;
             this.gbCrank.TabStop = false;
             this.gbCrank.Text = "Crank";
@@ -612,15 +657,17 @@ namespace Trixter.XDream.TestController
             // lbPosition
             // 
             this.lbPosition.AutoSize = true;
-            this.lbPosition.Location = new System.Drawing.Point(63, 125);
+            this.lbPosition.Location = new System.Drawing.Point(94, 192);
+            this.lbPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbPosition.Name = "lbPosition";
-            this.lbPosition.Size = new System.Drawing.Size(75, 13);
+            this.lbPosition.Size = new System.Drawing.Size(111, 20);
             this.lbPosition.TabIndex = 24;
             this.lbPosition.Text = "Crank Position";
             // 
             // nudCrankPosition
             // 
-            this.nudCrankPosition.Location = new System.Drawing.Point(66, 145);
+            this.nudCrankPosition.Location = new System.Drawing.Point(99, 223);
+            this.nudCrankPosition.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudCrankPosition.Maximum = new decimal(new int[] {
             60,
             0,
@@ -632,7 +679,7 @@ namespace Trixter.XDream.TestController
             0,
             0});
             this.nudCrankPosition.Name = "nudCrankPosition";
-            this.nudCrankPosition.Size = new System.Drawing.Size(72, 20);
+            this.nudCrankPosition.Size = new System.Drawing.Size(108, 26);
             this.nudCrankPosition.TabIndex = 23;
             this.nudCrankPosition.Value = new decimal(new int[] {
             1,
@@ -643,31 +690,34 @@ namespace Trixter.XDream.TestController
             // lbCrankRPM
             // 
             this.lbCrankRPM.AutoSize = true;
-            this.lbCrankRPM.Location = new System.Drawing.Point(64, 78);
+            this.lbCrankRPM.Location = new System.Drawing.Point(96, 120);
+            this.lbCrankRPM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCrankRPM.Name = "lbCrankRPM";
-            this.lbCrankRPM.Size = new System.Drawing.Size(31, 13);
+            this.lbCrankRPM.Size = new System.Drawing.Size(44, 20);
             this.lbCrankRPM.TabIndex = 22;
             this.lbCrankRPM.Text = "RPM";
             // 
             // lbRevolutionTime
             // 
             this.lbRevolutionTime.AutoSize = true;
-            this.lbRevolutionTime.Location = new System.Drawing.Point(63, 29);
+            this.lbRevolutionTime.Location = new System.Drawing.Point(94, 45);
+            this.lbRevolutionTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbRevolutionTime.Name = "lbRevolutionTime";
-            this.lbRevolutionTime.Size = new System.Drawing.Size(84, 13);
+            this.lbRevolutionTime.Size = new System.Drawing.Size(122, 20);
             this.lbRevolutionTime.TabIndex = 21;
             this.lbRevolutionTime.Text = "Revolution Time";
             // 
             // nudCrankRPM
             // 
-            this.nudCrankRPM.Location = new System.Drawing.Point(67, 98);
+            this.nudCrankRPM.Location = new System.Drawing.Point(100, 151);
+            this.nudCrankRPM.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudCrankRPM.Maximum = new decimal(new int[] {
             300,
             0,
             0,
             0});
             this.nudCrankRPM.Name = "nudCrankRPM";
-            this.nudCrankRPM.Size = new System.Drawing.Size(72, 20);
+            this.nudCrankRPM.Size = new System.Drawing.Size(108, 26);
             this.nudCrankRPM.TabIndex = 20;
             this.nudCrankRPM.Value = new decimal(new int[] {
             300,
@@ -678,11 +728,12 @@ namespace Trixter.XDream.TestController
             // 
             // tbCrankSpeed
             // 
-            this.tbCrankSpeed.Location = new System.Drawing.Point(6, 19);
+            this.tbCrankSpeed.Location = new System.Drawing.Point(9, 29);
+            this.tbCrankSpeed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbCrankSpeed.Maximum = 300;
             this.tbCrankSpeed.Name = "tbCrankSpeed";
             this.tbCrankSpeed.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbCrankSpeed.Size = new System.Drawing.Size(45, 247);
+            this.tbCrankSpeed.Size = new System.Drawing.Size(69, 380);
             this.tbCrankSpeed.TabIndex = 18;
             this.tbCrankSpeed.TickFrequency = 5;
             this.tbCrankSpeed.TickStyle = System.Windows.Forms.TickStyle.Both;
@@ -690,14 +741,15 @@ namespace Trixter.XDream.TestController
             // 
             // nudCrankRevTime
             // 
-            this.nudCrankRevTime.Location = new System.Drawing.Point(66, 49);
+            this.nudCrankRevTime.Location = new System.Drawing.Point(99, 75);
+            this.nudCrankRevTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudCrankRevTime.Maximum = new decimal(new int[] {
             65534,
             0,
             0,
             0});
             this.nudCrankRevTime.Name = "nudCrankRevTime";
-            this.nudCrankRevTime.Size = new System.Drawing.Size(72, 20);
+            this.nudCrankRevTime.Size = new System.Drawing.Size(108, 26);
             this.nudCrankRevTime.TabIndex = 19;
             // 
             // gbSystem
@@ -706,9 +758,11 @@ namespace Trixter.XDream.TestController
             this.gbSystem.Controls.Add(this.bnConnect);
             this.gbSystem.Controls.Add(this.lbComPort);
             this.gbSystem.Controls.Add(this.cbComPort);
-            this.gbSystem.Location = new System.Drawing.Point(714, 99);
+            this.gbSystem.Location = new System.Drawing.Point(1071, 235);
+            this.gbSystem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Size = new System.Drawing.Size(94, 186);
+            this.gbSystem.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbSystem.Size = new System.Drawing.Size(141, 203);
             this.gbSystem.TabIndex = 18;
             this.gbSystem.TabStop = false;
             this.gbSystem.Text = "Configuration";
@@ -716,9 +770,10 @@ namespace Trixter.XDream.TestController
             // bnDisconnect
             // 
             this.bnDisconnect.Enabled = false;
-            this.bnDisconnect.Location = new System.Drawing.Point(10, 97);
+            this.bnDisconnect.Location = new System.Drawing.Point(15, 149);
+            this.bnDisconnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnDisconnect.Name = "bnDisconnect";
-            this.bnDisconnect.Size = new System.Drawing.Size(75, 23);
+            this.bnDisconnect.Size = new System.Drawing.Size(112, 35);
             this.bnDisconnect.TabIndex = 3;
             this.bnDisconnect.Text = "Disconnect";
             this.bnDisconnect.UseVisualStyleBackColor = true;
@@ -726,9 +781,10 @@ namespace Trixter.XDream.TestController
             // 
             // bnConnect
             // 
-            this.bnConnect.Location = new System.Drawing.Point(10, 68);
+            this.bnConnect.Location = new System.Drawing.Point(15, 105);
+            this.bnConnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.bnConnect.Name = "bnConnect";
-            this.bnConnect.Size = new System.Drawing.Size(75, 23);
+            this.bnConnect.Size = new System.Drawing.Size(112, 35);
             this.bnConnect.TabIndex = 2;
             this.bnConnect.Text = "Connect";
             this.bnConnect.UseVisualStyleBackColor = true;
@@ -737,25 +793,48 @@ namespace Trixter.XDream.TestController
             // lbComPort
             // 
             this.lbComPort.AutoSize = true;
-            this.lbComPort.Location = new System.Drawing.Point(6, 25);
+            this.lbComPort.Location = new System.Drawing.Point(9, 38);
+            this.lbComPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbComPort.Name = "lbComPort";
-            this.lbComPort.Size = new System.Drawing.Size(53, 13);
+            this.lbComPort.Size = new System.Drawing.Size(78, 20);
             this.lbComPort.TabIndex = 1;
             this.lbComPort.Text = "COM Port";
             // 
             // cbComPort
             // 
             this.cbComPort.FormattingEnabled = true;
-            this.cbComPort.Location = new System.Drawing.Point(8, 41);
+            this.cbComPort.Location = new System.Drawing.Point(12, 63);
+            this.cbComPort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbComPort.Name = "cbComPort";
-            this.cbComPort.Size = new System.Drawing.Size(77, 21);
+            this.cbComPort.Size = new System.Drawing.Size(114, 28);
             this.cbComPort.TabIndex = 0;
+            // 
+            // lblRequestsPerSecond
+            // 
+            this.lblRequestsPerSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblRequestsPerSecond.Location = new System.Drawing.Point(30, 151);
+            this.lblRequestsPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRequestsPerSecond.Name = "lblRequestsPerSecond";
+            this.lblRequestsPerSecond.Size = new System.Drawing.Size(77, 30);
+            this.lblRequestsPerSecond.TabIndex = 3;
+            this.lblRequestsPerSecond.Text = "0";
+            this.lblRequestsPerSecond.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 121);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Requests / s";
             // 
             // ControllerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 289);
+            this.ClientSize = new System.Drawing.Size(1222, 445);
             this.Controls.Add(this.gbSystem);
             this.Controls.Add(this.gbCrank);
             this.Controls.Add(this.gbFlywheel);
@@ -763,6 +842,7 @@ namespace Trixter.XDream.TestController
             this.Controls.Add(this.gbControls);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ControllerForm";
             this.Text = "X-Dream Bike Emulator";
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).EndInit();
@@ -844,6 +924,8 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.Label lbHeartRate;
         private System.Windows.Forms.NumericUpDown nudHeartRate;
+        private System.Windows.Forms.Label lblRequestsPerSecond;
+        private System.Windows.Forms.Label label2;
     }
 }
 
