@@ -32,6 +32,8 @@ namespace Trixter.XDream.TestController
 
         public int Resistance { get; private set; } = 0;
 
+        public double ResistanceRequestsPerSecond => this.server.ResistancePacketsPerSecond;
+
         public event CrankPositionChangedDelegate<Controller> CrankPositionChanged;
 
         public int CrankRPM
