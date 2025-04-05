@@ -79,7 +79,7 @@ namespace Trixter.XDream.TestController
             this.bnConnect = new System.Windows.Forms.Button();
             this.lbComPort = new System.Windows.Forms.Label();
             this.cbComPort = new System.Windows.Forms.ComboBox();
-            this.lblRequestsPerSecond = new System.Windows.Forms.Label();
+            this.lbRequestsPerSecond = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
@@ -547,7 +547,7 @@ namespace Trixter.XDream.TestController
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblRequestsPerSecond);
+            this.groupBox1.Controls.Add(this.lbRequestsPerSecond);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lbResistanceValue);
             this.groupBox1.Controls.Add(this.lbResistance);
@@ -811,14 +811,14 @@ namespace Trixter.XDream.TestController
             // 
             // lblRequestsPerSecond
             // 
-            this.lblRequestsPerSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblRequestsPerSecond.Location = new System.Drawing.Point(30, 151);
-            this.lblRequestsPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRequestsPerSecond.Name = "lblRequestsPerSecond";
-            this.lblRequestsPerSecond.Size = new System.Drawing.Size(77, 30);
-            this.lblRequestsPerSecond.TabIndex = 3;
-            this.lblRequestsPerSecond.Text = "0";
-            this.lblRequestsPerSecond.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbRequestsPerSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbRequestsPerSecond.Location = new System.Drawing.Point(30, 151);
+            this.lbRequestsPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbRequestsPerSecond.Name = "lblRequestsPerSecond";
+            this.lbRequestsPerSecond.Size = new System.Drawing.Size(77, 30);
+            this.lbRequestsPerSecond.TabIndex = 3;
+            this.lbRequestsPerSecond.Text = "0";
+            this.lbRequestsPerSecond.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -924,7 +924,7 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.Label lbHeartRate;
         private System.Windows.Forms.NumericUpDown nudHeartRate;
-        private System.Windows.Forms.Label lblRequestsPerSecond;
+        private System.Windows.Forms.Label lbRequestsPerSecond;
         private System.Windows.Forms.Label label2;
     }
 }
