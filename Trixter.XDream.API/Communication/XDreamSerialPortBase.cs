@@ -83,7 +83,14 @@ namespace Trixter.XDream.API.Communications
         {
             if (bytes!=null && bytes.Length!=0 && this.port != null && this.port.IsOpen)
             {
-                this.port.Write(bytes);
+                try
+                {
+                    this.port.Write(bytes);
+                }
+                catch(InvalidOperationException)
+                {
+                    // The port has probably closed since the above check, ignore
+                }
             }
         }
 

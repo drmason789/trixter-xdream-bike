@@ -147,6 +147,7 @@ namespace Trixter.XDream.API.Communications
         {
             base.Dispose();
 
+            this.State = null;
             this.resistanceTimer?.Dispose();
             this.resistanceTimer = null;
         }
