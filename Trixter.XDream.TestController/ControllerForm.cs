@@ -18,6 +18,7 @@ namespace Trixter.XDream.TestController
         Func<int, int> invertBrakeValue = v => MaxBrake - v + MinBrake;
         const int MaxFlywheelRPM = 1000;
         DateTimeOffset lastCrankPositionInvalidated = DateTimeOffset.MinValue;
+        System.Timers.Timer updateTimer;
 
         public ControllerForm()
         {
@@ -77,6 +78,20 @@ namespace Trixter.XDream.TestController
             {
                 this.DoWithSuppressedEvents(() => this.nudCrankPosition.Value = this.controller.State.CrankPosition);
             };
+
+            this.updateTimer = new System.Timers.Timer();
+            this.updateTimer.Interval = 1000;
+            this.updateTimer.Elapsed += (s, e) =>
+            {
+                this.DoWithSuppressedEvents(() =>
+                {
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        this.lbRequestsPerSecond.Text = this.controller.ResistanceRequestsPerSecond.ToString("N2");
+                    }));                    
+                });
+            };
+            this.updateTimer.AutoReset = true;
         }
 
         private void PopulateComPortBox()
@@ -128,8 +143,9 @@ namespace Trixter.XDream.TestController
 
                 return;
             }
+                        
             this.lbResistanceValue.Text = this.controller.Resistance.ToString();
-            this.lblRequestsPerSecond.Text = this.controller.ResistanceRequestsPerSecond.ToString("N2");
+           
         }
 
         private void Controller_ResistanceChanged(Controller sender)
@@ -324,6 +340,8 @@ namespace Trixter.XDream.TestController
             Properties.Settings.Default.ComPort = this.cbComPort.Text;
             Properties.Settings.Default.Save();
 
+            this.updateTimer.Start();
+
         }
 
         private void bnDisconnect_Click(object sender, EventArgs e)
@@ -332,6 +350,8 @@ namespace Trixter.XDream.TestController
             this.bnConnect.Enabled = true;
             this.cbComPort.Enabled = true;
             this.bnDisconnect.Enabled = false;
+
+            this.updateTimer.Stop();
         }
 
         private void Brake_ValueChanged(object sender, EventArgs e)
