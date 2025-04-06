@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Trixter.XDream.API\Trixter.XDream.API.csproj" />
+    <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,11 +27,7 @@ namespace Trixter.XDream.API.Communications
         private byte[] stateBytes;
 
         private readonly DateTimeOffset startTime = DateTimeOffset.UtcNow;
-
         
-
-        public List<string> packetsReceived = new List<string>();
-
         private System.Timers.Timer resistanceTimer;
 
         public event XDreamResistanceChangedDelegate<XDreamServer> ResistanceChanged;
@@ -42,8 +38,11 @@ namespace Trixter.XDream.API.Communications
         { 
             get 
             {
-                this.resistancePacketSamples.Trim(this.TimeSinceStart - 1000, null);
-                return this.resistancePacketSamples.Count;
+                lock (this.resistancePacketSamples)
+                {
+                    this.resistancePacketSamples.Trim(this.TimeSinceStart - 1000, null);
+                    return this.resistancePacketSamples.Count;
+                }
             } 
         }
 
@@ -102,7 +101,11 @@ namespace Trixter.XDream.API.Communications
             {
                 this.Resistance= packet[1];
 
-                this.resistancePacketSamples.Add(new Sample(this.TimeSinceStart, 1, null));
+                lock(this.resistancePacketSamples)
+                {
+                    this.resistancePacketSamples.Add(new Sample(this.TimeSinceStart, this.Resistance, null));
+                    this.resistancePacketSamples.Trim(this.TimeSinceStart - 1000, null);
+                }
             }
         }
 
