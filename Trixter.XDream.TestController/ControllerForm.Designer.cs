@@ -59,7 +59,12 @@ namespace Trixter.XDream.TestController
             this.tbRightBrake = new System.Windows.Forms.TrackBar();
             this.tbLeftBrake = new System.Windows.Forms.TrackBar();
             this.nudFlywheelRevTime = new System.Windows.Forms.NumericUpDown();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbResistance = new System.Windows.Forms.GroupBox();
+            this.lb0 = new System.Windows.Forms.Label();
+            this.lb250 = new System.Windows.Forms.Label();
+            this.vblResistance = new Trixter.XDream.Diagnostics.Controls.ValueBar();
+            this.lbRequestsPerSecond = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lbResistanceValue = new System.Windows.Forms.Label();
             this.lbResistance = new System.Windows.Forms.Label();
             this.nudRPM = new System.Windows.Forms.NumericUpDown();
@@ -74,13 +79,13 @@ namespace Trixter.XDream.TestController
             this.nudCrankRPM = new System.Windows.Forms.NumericUpDown();
             this.tbCrankSpeed = new System.Windows.Forms.TrackBar();
             this.nudCrankRevTime = new System.Windows.Forms.NumericUpDown();
-            this.gbSystem = new System.Windows.Forms.GroupBox();
-            this.bnDisconnect = new System.Windows.Forms.Button();
-            this.bnConnect = new System.Windows.Forms.Button();
-            this.lbComPort = new System.Windows.Forms.Label();
-            this.cbComPort = new System.Windows.Forms.ComboBox();
-            this.lbRequestsPerSecond = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.tsToolStrip = new System.Windows.Forms.ToolStrip();
+            this.tslSerialPort = new System.Windows.Forms.ToolStripLabel();
+            this.tscSerialPorts = new System.Windows.Forms.ToolStripComboBox();
+            this.tsbConnect = new System.Windows.Forms.ToolStripButton();
+            this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.tbFlywheelSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSteering)).BeginInit();
             this.gbControls.SuspendLayout();
@@ -91,7 +96,7 @@ namespace Trixter.XDream.TestController
             ((System.ComponentModel.ISupportInitialize)(this.tbRightBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLeftBrake)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlywheelRevTime)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.gbResistance.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRPM)).BeginInit();
             this.gbFlywheel.SuspendLayout();
             this.gbCrank.SuspendLayout();
@@ -99,7 +104,7 @@ namespace Trixter.XDream.TestController
             ((System.ComponentModel.ISupportInitialize)(this.nudCrankRPM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbCrankSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCrankRevTime)).BeginInit();
-            this.gbSystem.SuspendLayout();
+            this.tsToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // bnGreen
@@ -328,7 +333,7 @@ namespace Trixter.XDream.TestController
             this.gbControls.Controls.Add(this.bnRight);
             this.gbControls.Controls.Add(this.bnLeft);
             this.gbControls.Controls.Add(this.bnDown);
-            this.gbControls.Location = new System.Drawing.Point(18, 18);
+            this.gbControls.Location = new System.Drawing.Point(11, 40);
             this.gbControls.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbControls.Name = "gbControls";
             this.gbControls.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -545,25 +550,81 @@ namespace Trixter.XDream.TestController
             0});
             this.nudFlywheelRevTime.ValueChanged += new System.EventHandler(this.nudFlywheelRevTime_ValueChanged);
             // 
-            // groupBox1
+            // gbResistance
             // 
-            this.groupBox1.Controls.Add(this.lbRequestsPerSecond);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.lbResistanceValue);
-            this.groupBox1.Controls.Add(this.lbResistance);
-            this.groupBox1.Location = new System.Drawing.Point(1071, 20);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(141, 205);
-            this.groupBox1.TabIndex = 15;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "From Client";
+            this.gbResistance.Controls.Add(this.lb0);
+            this.gbResistance.Controls.Add(this.lb250);
+            this.gbResistance.Controls.Add(this.vblResistance);
+            this.gbResistance.Controls.Add(this.lbRequestsPerSecond);
+            this.gbResistance.Controls.Add(this.label2);
+            this.gbResistance.Controls.Add(this.lbResistanceValue);
+            this.gbResistance.Controls.Add(this.lbResistance);
+            this.gbResistance.Location = new System.Drawing.Point(1064, 42);
+            this.gbResistance.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbResistance.Name = "gbResistance";
+            this.gbResistance.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbResistance.Size = new System.Drawing.Size(185, 418);
+            this.gbResistance.TabIndex = 15;
+            this.gbResistance.TabStop = false;
+            this.gbResistance.Text = "Resistance";
+            // 
+            // lb0
+            // 
+            this.lb0.AutoSize = true;
+            this.lb0.Location = new System.Drawing.Point(69, 386);
+            this.lb0.Name = "lb0";
+            this.lb0.Size = new System.Drawing.Size(18, 20);
+            this.lb0.TabIndex = 7;
+            this.lb0.Text = "0";
+            // 
+            // lb250
+            // 
+            this.lb250.AutoSize = true;
+            this.lb250.Location = new System.Drawing.Point(69, 28);
+            this.lb250.Name = "lb250";
+            this.lb250.Size = new System.Drawing.Size(36, 20);
+            this.lb250.TabIndex = 6;
+            this.lb250.Text = "250";
+            // 
+            // vblResistance
+            // 
+            this.vblResistance.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.vblResistance.ClipOutOfRangeValues = true;
+            this.vblResistance.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.vblResistance.Location = new System.Drawing.Point(27, 29);
+            this.vblResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.vblResistance.Maximum = 250;
+            this.vblResistance.Name = "vblResistance";
+            this.vblResistance.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.vblResistance.Size = new System.Drawing.Size(34, 377);
+            this.vblResistance.TabIndex = 5;
+            this.vblResistance.Value = 0;
+            // 
+            // lbRequestsPerSecond
+            // 
+            this.lbRequestsPerSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbRequestsPerSecond.Location = new System.Drawing.Point(76, 225);
+            this.lbRequestsPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbRequestsPerSecond.Name = "lbRequestsPerSecond";
+            this.lbRequestsPerSecond.Size = new System.Drawing.Size(77, 30);
+            this.lbRequestsPerSecond.TabIndex = 3;
+            this.lbRequestsPerSecond.Text = "0";
+            this.lbRequestsPerSecond.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(76, 198);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Requests / s";
             // 
             // lbResistanceValue
             // 
             this.lbResistanceValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbResistanceValue.Location = new System.Drawing.Point(30, 72);
+            this.lbResistanceValue.Location = new System.Drawing.Point(76, 151);
             this.lbResistanceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResistanceValue.Name = "lbResistanceValue";
             this.lbResistanceValue.Size = new System.Drawing.Size(77, 30);
@@ -574,12 +635,12 @@ namespace Trixter.XDream.TestController
             // lbResistance
             // 
             this.lbResistance.AutoSize = true;
-            this.lbResistance.Location = new System.Drawing.Point(26, 42);
+            this.lbResistance.Location = new System.Drawing.Point(76, 124);
             this.lbResistance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbResistance.Name = "lbResistance";
-            this.lbResistance.Size = new System.Drawing.Size(89, 20);
+            this.lbResistance.Size = new System.Drawing.Size(46, 20);
             this.lbResistance.TabIndex = 0;
-            this.lbResistance.Text = "Resistance";
+            this.lbResistance.Text = "Level";
             // 
             // nudRPM
             // 
@@ -607,7 +668,7 @@ namespace Trixter.XDream.TestController
             this.gbFlywheel.Controls.Add(this.nudRPM);
             this.gbFlywheel.Controls.Add(this.tbFlywheelSpeed);
             this.gbFlywheel.Controls.Add(this.nudFlywheelRevTime);
-            this.gbFlywheel.Location = new System.Drawing.Point(822, 20);
+            this.gbFlywheel.Location = new System.Drawing.Point(815, 42);
             this.gbFlywheel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbFlywheel.Name = "gbFlywheel";
             this.gbFlywheel.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -645,7 +706,7 @@ namespace Trixter.XDream.TestController
             this.gbCrank.Controls.Add(this.nudCrankRPM);
             this.gbCrank.Controls.Add(this.tbCrankSpeed);
             this.gbCrank.Controls.Add(this.nudCrankRevTime);
-            this.gbCrank.Location = new System.Drawing.Point(574, 18);
+            this.gbCrank.Location = new System.Drawing.Point(567, 40);
             this.gbCrank.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gbCrank.Name = "gbCrank";
             this.gbCrank.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -752,93 +813,74 @@ namespace Trixter.XDream.TestController
             this.nudCrankRevTime.Size = new System.Drawing.Size(108, 26);
             this.nudCrankRevTime.TabIndex = 19;
             // 
-            // gbSystem
+            // tsToolStrip
             // 
-            this.gbSystem.Controls.Add(this.bnDisconnect);
-            this.gbSystem.Controls.Add(this.bnConnect);
-            this.gbSystem.Controls.Add(this.lbComPort);
-            this.gbSystem.Controls.Add(this.cbComPort);
-            this.gbSystem.Location = new System.Drawing.Point(1071, 235);
-            this.gbSystem.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbSystem.Name = "gbSystem";
-            this.gbSystem.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbSystem.Size = new System.Drawing.Size(141, 203);
-            this.gbSystem.TabIndex = 18;
-            this.gbSystem.TabStop = false;
-            this.gbSystem.Text = "Configuration";
+            this.tsToolStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.tsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslSerialPort,
+            this.tscSerialPorts,
+            this.tsbConnect,
+            this.tsbDisconnect,
+            this.toolStripSeparator1,
+            this.toolStripSeparator2});
+            this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.tsToolStrip.Name = "tsToolStrip";
+            this.tsToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.tsToolStrip.Size = new System.Drawing.Size(1257, 34);
+            this.tsToolStrip.TabIndex = 19;
+            this.tsToolStrip.Text = "toolStrip1";
             // 
-            // bnDisconnect
+            // tslSerialPort
             // 
-            this.bnDisconnect.Enabled = false;
-            this.bnDisconnect.Location = new System.Drawing.Point(15, 149);
-            this.bnDisconnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.bnDisconnect.Name = "bnDisconnect";
-            this.bnDisconnect.Size = new System.Drawing.Size(112, 35);
-            this.bnDisconnect.TabIndex = 3;
-            this.bnDisconnect.Text = "Disconnect";
-            this.bnDisconnect.UseVisualStyleBackColor = true;
-            this.bnDisconnect.Click += new System.EventHandler(this.bnDisconnect_Click);
+            this.tslSerialPort.Name = "tslSerialPort";
+            this.tslSerialPort.Size = new System.Drawing.Size(91, 29);
+            this.tslSerialPort.Text = "Serial Port";
             // 
-            // bnConnect
+            // tscSerialPorts
             // 
-            this.bnConnect.Location = new System.Drawing.Point(15, 105);
-            this.bnConnect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.bnConnect.Name = "bnConnect";
-            this.bnConnect.Size = new System.Drawing.Size(112, 35);
-            this.bnConnect.TabIndex = 2;
-            this.bnConnect.Text = "Connect";
-            this.bnConnect.UseVisualStyleBackColor = true;
-            this.bnConnect.Click += new System.EventHandler(this.bnConnect_Click);
+            this.tscSerialPorts.Name = "tscSerialPorts";
+            this.tscSerialPorts.Size = new System.Drawing.Size(110, 34);
             // 
-            // lbComPort
+            // tsbConnect
             // 
-            this.lbComPort.AutoSize = true;
-            this.lbComPort.Location = new System.Drawing.Point(9, 38);
-            this.lbComPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbComPort.Name = "lbComPort";
-            this.lbComPort.Size = new System.Drawing.Size(78, 20);
-            this.lbComPort.TabIndex = 1;
-            this.lbComPort.Text = "COM Port";
+            this.tsbConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbConnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbConnect.Image")));
+            this.tsbConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbConnect.Name = "tsbConnect";
+            this.tsbConnect.Size = new System.Drawing.Size(81, 29);
+            this.tsbConnect.Text = "Connect";
+            this.tsbConnect.Click += new System.EventHandler(this.bnConnect_Click);
             // 
-            // cbComPort
+            // tsbDisconnect
             // 
-            this.cbComPort.FormattingEnabled = true;
-            this.cbComPort.Location = new System.Drawing.Point(12, 63);
-            this.cbComPort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.cbComPort.Name = "cbComPort";
-            this.cbComPort.Size = new System.Drawing.Size(114, 28);
-            this.cbComPort.TabIndex = 0;
+            this.tsbDisconnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbDisconnect.Enabled = false;
+            this.tsbDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisconnect.Image")));
+            this.tsbDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbDisconnect.Name = "tsbDisconnect";
+            this.tsbDisconnect.Size = new System.Drawing.Size(103, 29);
+            this.tsbDisconnect.Text = "Disconnect";
+            this.tsbDisconnect.Click += new System.EventHandler(this.bnDisconnect_Click);
             // 
-            // lblRequestsPerSecond
+            // toolStripSeparator1
             // 
-            this.lbRequestsPerSecond.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbRequestsPerSecond.Location = new System.Drawing.Point(30, 151);
-            this.lbRequestsPerSecond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbRequestsPerSecond.Name = "lblRequestsPerSecond";
-            this.lbRequestsPerSecond.Size = new System.Drawing.Size(77, 30);
-            this.lbRequestsPerSecond.TabIndex = 3;
-            this.lbRequestsPerSecond.Text = "0";
-            this.lbRequestsPerSecond.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
             // 
-            // label2
+            // toolStripSeparator2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 121);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 20);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Requests / s";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
             // 
             // ControllerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1222, 445);
-            this.Controls.Add(this.gbSystem);
+            this.ClientSize = new System.Drawing.Size(1257, 467);
+            this.Controls.Add(this.tsToolStrip);
             this.Controls.Add(this.gbCrank);
             this.Controls.Add(this.gbFlywheel);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbResistance);
             this.Controls.Add(this.gbControls);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -856,8 +898,8 @@ namespace Trixter.XDream.TestController
             ((System.ComponentModel.ISupportInitialize)(this.tbRightBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLeftBrake)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudFlywheelRevTime)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbResistance.ResumeLayout(false);
+            this.gbResistance.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudRPM)).EndInit();
             this.gbFlywheel.ResumeLayout(false);
             this.gbFlywheel.PerformLayout();
@@ -867,9 +909,10 @@ namespace Trixter.XDream.TestController
             ((System.ComponentModel.ISupportInitialize)(this.nudCrankRPM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbCrankSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCrankRevTime)).EndInit();
-            this.gbSystem.ResumeLayout(false);
-            this.gbSystem.PerformLayout();
+            this.tsToolStrip.ResumeLayout(false);
+            this.tsToolStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -890,7 +933,7 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.Button bnRightGearDown;
         private System.Windows.Forms.Button bnRightGearUp;
         private System.Windows.Forms.GroupBox gbControls;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbResistance;
         private System.Windows.Forms.Label lbResistanceValue;
         private System.Windows.Forms.Label lbResistance;
         private System.Windows.Forms.NumericUpDown nudFlywheelRevTime;
@@ -917,15 +960,20 @@ namespace Trixter.XDream.TestController
         private System.Windows.Forms.Label lbRightBrake;
         private System.Windows.Forms.Label lbLeftBrake;
         private System.Windows.Forms.Button bnGamePad;
-        private System.Windows.Forms.GroupBox gbSystem;
-        private System.Windows.Forms.Label lbComPort;
-        private System.Windows.Forms.ComboBox cbComPort;
-        private System.Windows.Forms.Button bnDisconnect;
-        private System.Windows.Forms.Button bnConnect;
         private System.Windows.Forms.Label lbHeartRate;
         private System.Windows.Forms.NumericUpDown nudHeartRate;
         private System.Windows.Forms.Label lbRequestsPerSecond;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolStrip tsToolStrip;
+        private System.Windows.Forms.ToolStripLabel tslSerialPort;
+        private System.Windows.Forms.ToolStripComboBox tscSerialPorts;
+        private System.Windows.Forms.ToolStripButton tsbConnect;
+        private System.Windows.Forms.ToolStripButton tsbDisconnect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private Diagnostics.Controls.ValueBar vblResistance;
+        private System.Windows.Forms.Label lb0;
+        private System.Windows.Forms.Label lb250;
     }
 }
 
