@@ -79,8 +79,14 @@ namespace Trixter.XDream.Diagnostics
                     return;
                 }
 
+                if(message.Crank!=0 && message.Crank<=65534)
+                    this.tdCrankDetails.VisitCrankPosition(message.CrankPosition);
+
                 if (tcTabs.SelectedTab == this.tpDetails)
                     this.dDetailsControl.UpdateDetails();
+                else if(tcTabs.SelectedTab==this.tpCrank)
+                    this.tdCrankDetails.UpdateSeries();
+
             }
             finally
             {
