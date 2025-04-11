@@ -46,12 +46,15 @@ namespace Trixter.XDream.Diagnostics
             this.tcTabs = new System.Windows.Forms.TabControl();
             this.tpDetails = new System.Windows.Forms.TabPage();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
+            this.tpCrank = new System.Windows.Forms.TabPage();
+            this.tdCrankDetails = new Trixter.XDream.Diagnostics.Controls.CrankDetails();
             this.tpDriver = new System.Windows.Forms.TabPage();
             this.gpGroupPolicyControl = new Trixter.XDream.Diagnostics.Controls.GroupPolicy();
             this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.tsToolStrip.SuspendLayout();
             this.tcTabs.SuspendLayout();
             this.tpDetails.SuspendLayout();
+            this.tpCrank.SuspendLayout();
             this.tpDriver.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,21 +74,20 @@ namespace Trixter.XDream.Diagnostics
             this.tsbUpdates});
             this.tsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.tsToolStrip.Name = "tsToolStrip";
-            this.tsToolStrip.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.tsToolStrip.Size = new System.Drawing.Size(780, 34);
+            this.tsToolStrip.Size = new System.Drawing.Size(520, 38);
             this.tsToolStrip.TabIndex = 7;
             this.tsToolStrip.Text = "toolStrip1";
             // 
             // tslSerialPort
             // 
             this.tslSerialPort.Name = "tslSerialPort";
-            this.tslSerialPort.Size = new System.Drawing.Size(91, 29);
+            this.tslSerialPort.Size = new System.Drawing.Size(91, 33);
             this.tslSerialPort.Text = "Serial Port";
             // 
             // tscSerialPorts
             // 
             this.tscSerialPorts.Name = "tscSerialPorts";
-            this.tscSerialPorts.Size = new System.Drawing.Size(110, 34);
+            this.tscSerialPorts.Size = new System.Drawing.Size(75, 38);
             // 
             // tsbRefreshPorts
             // 
@@ -93,8 +95,8 @@ namespace Trixter.XDream.Diagnostics
             this.tsbRefreshPorts.Image = global::Trixter.XDream.Diagnostics.Properties.Resources.Refresh;
             this.tsbRefreshPorts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefreshPorts.Name = "tsbRefreshPorts";
-            this.tsbRefreshPorts.Size = new System.Drawing.Size(34, 29);
-            this.tsbRefreshPorts.Text = "toolStripButton1";
+            this.tsbRefreshPorts.Size = new System.Drawing.Size(34, 33);
+            this.tsbRefreshPorts.Text = "Refresh Port List";
             this.tsbRefreshPorts.Click += new System.EventHandler(this.tsbRefreshPorts_Click);
             // 
             // tsbConnect
@@ -103,7 +105,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbConnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbConnect.Image")));
             this.tsbConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConnect.Name = "tsbConnect";
-            this.tsbConnect.Size = new System.Drawing.Size(81, 29);
+            this.tsbConnect.Size = new System.Drawing.Size(81, 33);
             this.tsbConnect.Text = "Connect";
             this.tsbConnect.Click += new System.EventHandler(this.tsbConnect_Click);
             // 
@@ -114,14 +116,14 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDisconnect.Image = ((System.Drawing.Image)(resources.GetObject("tsbDisconnect.Image")));
             this.tsbDisconnect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDisconnect.Name = "tsbDisconnect";
-            this.tsbDisconnect.Size = new System.Drawing.Size(103, 29);
+            this.tsbDisconnect.Size = new System.Drawing.Size(103, 33);
             this.tsbDisconnect.Text = "Disconnect";
             this.tsbDisconnect.Click += new System.EventHandler(this.tsbDisconnect_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 34);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
             // 
             // tsbCapture
             // 
@@ -130,7 +132,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbCapture.Image = ((System.Drawing.Image)(resources.GetObject("tsbCapture.Image")));
             this.tsbCapture.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCapture.Name = "tsbCapture";
-            this.tsbCapture.Size = new System.Drawing.Size(78, 29);
+            this.tsbCapture.Size = new System.Drawing.Size(78, 33);
             this.tsbCapture.Text = "Capture";
             this.tsbCapture.Click += new System.EventHandler(this.tsbCapture_Click);
             // 
@@ -163,23 +165,22 @@ namespace Trixter.XDream.Diagnostics
             // tcTabs
             // 
             this.tcTabs.Controls.Add(this.tpDetails);
+            this.tcTabs.Controls.Add(this.tpCrank);
             this.tcTabs.Controls.Add(this.tpDriver);
-            this.tcTabs.Location = new System.Drawing.Point(4, 43);
-            this.tcTabs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tcTabs.Location = new System.Drawing.Point(3, 28);
             this.tcTabs.Name = "tcTabs";
             this.tcTabs.SelectedIndex = 0;
-            this.tcTabs.Size = new System.Drawing.Size(777, 726);
+            this.tcTabs.Size = new System.Drawing.Size(518, 472);
             this.tcTabs.TabIndex = 8;
             this.tcTabs.SelectedIndexChanged += new System.EventHandler(this.tcTabs_SelectedIndexChanged);
             // 
             // tpDetails
             // 
             this.tpDetails.Controls.Add(this.dDetailsControl);
-            this.tpDetails.Location = new System.Drawing.Point(4, 29);
-            this.tpDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tpDetails.Location = new System.Drawing.Point(4, 22);
             this.tpDetails.Name = "tpDetails";
-            this.tpDetails.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpDetails.Size = new System.Drawing.Size(769, 693);
+            this.tpDetails.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpDetails.Size = new System.Drawing.Size(510, 446);
             this.tpDetails.TabIndex = 0;
             this.tpDetails.Text = "Details";
             this.tpDetails.UseVisualStyleBackColor = true;
@@ -187,33 +188,53 @@ namespace Trixter.XDream.Diagnostics
             // dDetailsControl
             // 
             this.dDetailsControl.DataAccess = null;
-            this.dDetailsControl.Location = new System.Drawing.Point(9, 9);
-            this.dDetailsControl.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.dDetailsControl.MaximumSize = new System.Drawing.Size(746, 665);
-            this.dDetailsControl.MinimumSize = new System.Drawing.Size(746, 665);
+            this.dDetailsControl.Location = new System.Drawing.Point(6, 6);
+            this.dDetailsControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dDetailsControl.MaximumSize = new System.Drawing.Size(497, 432);
+            this.dDetailsControl.MinimumSize = new System.Drawing.Size(497, 432);
             this.dDetailsControl.Name = "dDetailsControl";
-            this.dDetailsControl.Size = new System.Drawing.Size(746, 665);
+            this.dDetailsControl.Size = new System.Drawing.Size(497, 432);
             this.dDetailsControl.TabIndex = 0;
             this.dDetailsControl.UpdateInterval = 1000;
+            // 
+            // tpCrank
+            // 
+            this.tpCrank.Controls.Add(this.tdCrankDetails);
+            this.tpCrank.Location = new System.Drawing.Point(4, 22);
+            this.tpCrank.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpCrank.Name = "tpCrank";
+            this.tpCrank.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tpCrank.Size = new System.Drawing.Size(510, 446);
+            this.tpCrank.TabIndex = 3;
+            this.tpCrank.Text = "Crank";
+            this.tpCrank.UseVisualStyleBackColor = true;
+            // 
+            // tdCrankDetails
+            // 
+            this.tdCrankDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tdCrankDetails.Location = new System.Drawing.Point(2, 2);
+            this.tdCrankDetails.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.tdCrankDetails.Name = "tdCrankDetails";
+            this.tdCrankDetails.Size = new System.Drawing.Size(506, 442);
+            this.tdCrankDetails.TabIndex = 0;
             // 
             // tpDriver
             // 
             this.tpDriver.Controls.Add(this.gpGroupPolicyControl);
-            this.tpDriver.Location = new System.Drawing.Point(4, 29);
-            this.tpDriver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tpDriver.Location = new System.Drawing.Point(4, 22);
             this.tpDriver.Name = "tpDriver";
-            this.tpDriver.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpDriver.Size = new System.Drawing.Size(769, 693);
+            this.tpDriver.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpDriver.Size = new System.Drawing.Size(510, 446);
             this.tpDriver.TabIndex = 2;
             this.tpDriver.Text = "Driver";
             this.tpDriver.UseVisualStyleBackColor = true;
             // 
             // gpGroupPolicyControl
             // 
-            this.gpGroupPolicyControl.Location = new System.Drawing.Point(10, 11);
-            this.gpGroupPolicyControl.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
+            this.gpGroupPolicyControl.Location = new System.Drawing.Point(7, 7);
+            this.gpGroupPolicyControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.gpGroupPolicyControl.Name = "gpGroupPolicyControl";
-            this.gpGroupPolicyControl.Size = new System.Drawing.Size(750, 671);
+            this.gpGroupPolicyControl.Size = new System.Drawing.Size(500, 436);
             this.gpGroupPolicyControl.TabIndex = 0;
             // 
             // dlgSaveFile
@@ -224,21 +245,21 @@ namespace Trixter.XDream.Diagnostics
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 771);
+            this.ClientSize = new System.Drawing.Size(520, 501);
             this.Controls.Add(this.tcTabs);
             this.Controls.Add(this.tsToolStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MainForm";
             this.Text = "X-Dream Bike Diagnostic UI";
             this.tsToolStrip.ResumeLayout(false);
             this.tsToolStrip.PerformLayout();
             this.tcTabs.ResumeLayout(false);
             this.tpDetails.ResumeLayout(false);
+            this.tpCrank.ResumeLayout(false);
             this.tpDriver.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -263,6 +284,8 @@ namespace Trixter.XDream.Diagnostics
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.SaveFileDialog dlgSaveFile;
         private System.Windows.Forms.ToolStripButton tsbUpdates;
+        private System.Windows.Forms.TabPage tpCrank;
+        private CrankDetails tdCrankDetails;
     }
 }
 
