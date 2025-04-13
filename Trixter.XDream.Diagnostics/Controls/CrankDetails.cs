@@ -18,13 +18,17 @@ namespace Trixter.XDream.Diagnostics.Controls
 
         long[] crankPositionVisits = new long[CrankPositions.MaxCrankPosition];
         Label[] labels;
-        Color unvisited = Color.Red, visited = Color.Green, current = Color.Blue;
+        Color unvisited = Color.Red, visited = Color.Black, current = Color.DodgerBlue;
         bool paused = false;
         DateTimeOffset lastUpdate;
 
         public CrankDetails()
         {
             InitializeComponent();
+
+            this.lbCurrentColor.BackColor = current;
+            this.lbReportedColor.BackColor = visited;
+            this.lbUnreportedColor.BackColor = unvisited;
 
             this.DoubleBuffered = true;
 
