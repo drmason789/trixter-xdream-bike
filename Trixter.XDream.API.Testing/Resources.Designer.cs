@@ -113,9 +113,89 @@ namespace Trixter.XDream.API.Testing {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] flywheel_spindown_messages_R010 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R010", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R020 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R020", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R030 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R030", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R040 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R040", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] flywheel_spindown_messages_R050 {
             get {
                 object obj = ResourceManager.GetObject("flywheel_spindown_messages_R050", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R060 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R060", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R070 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R070", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R080 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R080", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R090 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R090", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -133,6 +213,46 @@ namespace Trixter.XDream.API.Testing {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] flywheel_spindown_messages_R110 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R110", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R120 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R120", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R130 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R130", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R140 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R140", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] flywheel_spindown_messages_R150 {
             get {
                 object obj = ResourceManager.GetObject("flywheel_spindown_messages_R150", resourceCulture);
@@ -143,9 +263,89 @@ namespace Trixter.XDream.API.Testing {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] flywheel_spindown_messages_R160 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R160", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R170 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R170", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R180 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R180", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R190 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R190", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] flywheel_spindown_messages_R200 {
             get {
                 object obj = ResourceManager.GetObject("flywheel_spindown_messages_R200", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R210 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R210", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R220 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R220", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R230 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R230", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] flywheel_spindown_messages_R240 {
+            get {
+                object obj = ResourceManager.GetObject("flywheel_spindown_messages_R240", resourceCulture);
                 return ((byte[])(obj));
             }
         }
