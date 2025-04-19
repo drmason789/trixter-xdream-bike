@@ -133,17 +133,77 @@
   <data name="flywheel_spindown_messages_R000" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R000.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="flywheel_spindown_messages_R010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R010.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R020" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R020.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R030" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R030.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R040" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R040.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="flywheel_spindown_messages_R050" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R050.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R060" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R060.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R070" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R070.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R080" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R080.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R090" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R090.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="flywheel_spindown_messages_R100" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R100.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="flywheel_spindown_messages_R110" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R110.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R120" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R120.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R130" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R130.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R140" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R140.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="flywheel_spindown_messages_R150" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R150.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="flywheel_spindown_messages_R160" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R160.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R170" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R170.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R180" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R180.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R190" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R190.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="flywheel_spindown_messages_R200" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R200.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R210" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R210.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R220" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R220.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R230" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R230.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="flywheel_spindown_messages_R240" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\flywheel-spindown.messages.R240.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="flywheel_spindown_messages_R250" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\flywheel-spindown.messages.R250.bin;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
