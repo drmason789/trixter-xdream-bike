@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Include xmlns="http://wixtoolset.org/schemas/v4/wxs">
 	<?define UPGRADE_CODE="{4C97982C-09F9-4515-9FA5-1F2625D04BAB}"?>
-	<?define OUTPUT_CAB="XDream"?>
 	<?define SOURCE_DIAGNOSTICS="..\\Trixter.XDream.Diagnostics"?>
 	<?define SOURCE_DIAGNOSTICS_BIN="$(var.SOURCE_DIAGNOSTICS)\\bin\\$(var.Configuration)\\net48\\"?>
 	<?define PRODUCT_NAME = "Trixter X-Dream Bike Utilities"?>
