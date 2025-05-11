@@ -40,8 +40,8 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDisconnect = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbDriver = new System.Windows.Forms.ToolStripButton();
-            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.tsbUpdates = new System.Windows.Forms.ToolStripButton();
+            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.dDetailsControl = new Trixter.XDream.Diagnostics.Controls.Details();
             this.tsToolStrip.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +83,7 @@ namespace Trixter.XDream.Diagnostics
             this.tsbRefreshPorts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefreshPorts.Name = "tsbRefreshPorts";
             this.tsbRefreshPorts.Size = new System.Drawing.Size(34, 33);
-            this.tsbRefreshPorts.Text = "toolStripButton1";
+            this.tsbRefreshPorts.Text = "&Refresh Ports";
             this.tsbRefreshPorts.Click += new System.EventHandler(this.tsbRefreshPorts_Click);
             // 
             // tsbConnect
@@ -122,12 +122,6 @@ namespace Trixter.XDream.Diagnostics
             this.tsbDriver.Text = "Driver";
             this.tsbDriver.Click += new System.EventHandler(this.tsbDriver_Click);
             // 
-            // dlgSaveFile
-            // 
-            this.dlgSaveFile.DefaultExt = "csv";
-            this.dlgSaveFile.Filter = "CSV Files|*.csv";
-            this.dlgSaveFile.SupportMultiDottedExtensions = true;
-            // 
             // tsbUpdates
             // 
             this.tsbUpdates.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -139,6 +133,12 @@ namespace Trixter.XDream.Diagnostics
             this.tsbUpdates.Text = "&Update";
             this.tsbUpdates.ToolTipText = "Check for Updates";
             this.tsbUpdates.Click += new System.EventHandler(this.tsbUpdates_Click);
+            // 
+            // dlgSaveFile
+            // 
+            this.dlgSaveFile.DefaultExt = "csv";
+            this.dlgSaveFile.Filter = "CSV Files|*.csv";
+            this.dlgSaveFile.SupportMultiDottedExtensions = true;
             // 
             // dDetailsControl
             // 
