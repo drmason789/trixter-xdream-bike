@@ -1,17 +1,16 @@
-﻿<Project Sdk="WixToolset.Sdk/5.0.2">
-	<ItemGroup>
-		<Content Include="Definitions.wxi" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
-		<PackageReference Include="WixToolset.NetFx.wixext" Version="5.0.2" />
-	</ItemGroup>
-	<!-- 
-	This is due to a bug in Visual Studio 17.13 
-	https://github.com/firegiant/HeatWaveSupport/issues/73	
-	-->
-	<Target Name="CollectSuggestedVisualStudioComponentIds" />
+﻿<Project Sdk="WixToolset.Sdk/6.0.0">
+  <PropertyGroup>
+    <InstallerPlatform>x86</InstallerPlatform>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Definitions.wxi" />
+    <Content Include="Version.wxi" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="WixToolset.UI.wixext" Version="6.0.0" />
+    <PackageReference Include="WixToolset.NetFx.wixext" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Trixter.XDream.Diagnostics\Trixter.XDream.Diagnostics.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,37 +1,119 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs" xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui" >
 
-	<?include Definitions.wxi ?>
-	<?include Version.wxi ?>
+  <?include Definitions.wxi ?>
+  <?include Version.wxi ?>
 
-	<Package Name="$(var.PRODUCT_NAME)" Manufacturer="$(var.MANUFACTURER)" Version="$(var.VERSION)" UpgradeCode="$(var.UPGRADE_CODE)" >
-		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+  <Package Name="$(var.PRODUCT_NAME)" Manufacturer="$(var.MANUFACTURER)"
+			 Version="$(var.VERSION)"
+			 UpgradeCode="$(var.UPGRADE_CODE)"
+			 Scope="perUserOrMachine">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
-		<!-- Make the icons available-->
-		<Icon Id="white_x.ico" SourceFile="..\Trixter.XDream.Diagnostics\white-x.ico" />
-		<Icon Id="white_x_console.ico" SourceFile="..\Trixter.XDream.Diagnostics\Resources\white-x-console.ico" />
+    <!-- Make the icons available-->
+    <Icon Id="white_x.ico" SourceFile="..\Trixter.XDream.Diagnostics\white-x.ico" />
+    <Icon Id="white_x_console.ico" SourceFile="..\Trixter.XDream.Diagnostics\Resources\white-x-console.ico" />
 
-		<!-- Installer icon in Settings/Apps and Control Panel/Programs and Features -->
-		<Property Id="ARPPRODUCTICON" Value="white_x.ico" />
+    <!-- Installer icon in Settings/Apps and Control Panel/Programs and Features -->
+    <Property Id="ARPPRODUCTICON" Value="white_x.ico" />
 
-		<!-- Manufacturer (support) URL displayed in Control Panel / Programs and Features -->
-		<Property Id="ARPURLINFOABOUT" Value="$(var.GITHUB_URL)" />
+    <!-- Manufacturer (support) URL displayed in Control Panel / Programs and Features -->
+    <Property Id="ARPURLINFOABOUT" Value="$(var.GITHUB_URL)" />
 
-		<Property Id="ARPCOMMENTS" Value="$(var.PRODUCT_DESC)" />
-		<Property Id="ARPHELPLINK" Value="$(var.GITHUB_URL)" />
+    <Property Id="ARPCOMMENTS" Value="$(var.PRODUCT_DESC)" />
+    <Property Id="ARPHELPLINK" Value="$(var.GITHUB_URL)" />
 
-		<!-- Media -->
-		<Media Id="1" Cabinet="$(var.OUTPUT_CAB).cab" EmbedCab="yes" />
+    <!-- Media -->
+    <MediaTemplate EmbedCab="yes" />
 
-		<!--    Check for .NET 4.8  -->
-		<PropertyRef Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" />
-		<Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Message="This software requires the .NET Framework 4.8." />
+    <!--    Check for .NET 4.8  -->
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" />
+    <Launch Condition="Installed OR WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Message="This software requires the .NET Framework 4.8." />
 
-		<Feature Id="ProductFeature" Title="Trixter.XDream">
-			<ComponentGroupRef Id="AppComponents" />
-		</Feature>
+    <Feature Id="ProductFeature" Title="Trixter.XDream">
+      <ComponentGroupRef Id="AppComponents" />
+    </Feature>
 
-		<ui:WixUI Id="WixUI_Minimal" />
-		<WixVariable Id="WixUILicenseRtf" Value="$(var.LICENSE)" />
 
-	</Package>
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <Property Id="ApplicationFolderName" Value="Trixter\X-Dream Bike" />
+
+    <WixVariable Id="WixUISupportPerUser" Value="1" Overridable="yes" />
+    <WixVariable Id="WixUISupportPerMachine" Value="1" Overridable="yes" />
+
+    <CustomAction Id="ApplicationSetDefaultPerUserFolder" Property="ApplicationPerUserFolder" Value="[LocalAppDataFolder]\[ApplicationFolderName]" Execute="immediate" />
+    <CustomAction Id="ApplicationSetDefaultPerMachineFolder" Property="ApplicationPerMachineFolder" Value="[ProgramFilesFolder][ApplicationFolderName]" Execute="immediate" />
+    <CustomAction Id="ApplicationSetPerUserFolder" Property="APPLICATIONFOLDER" Value="[WixPerUserFolder]" Execute="immediate" />
+    <CustomAction Id="ApplicationSetPerMachineFolder" Property="APPLICATIONFOLDER" Value="[WixPerMachineFolder]" Execute="immediate" />
+
+    <InstallExecuteSequence>
+      <Custom Action="ApplicationSetDefaultPerUserFolder" Before="CostFinalize" />
+      <Custom Action="ApplicationSetDefaultPerMachineFolder" After="ApplicationSetDefaultPerUserFolder" />
+      <Custom Action="ApplicationSetPerUserFolder" After="ApplicationSetDefaultPerMachineFolder" Condition="ACTION=&quot;INSTALL&quot; AND APPLICATIONFOLDER=&quot;&quot; AND (ALLUSERS=&quot;&quot; OR (ALLUSERS=2 AND (NOT Privileged)))" />
+      <Custom Action="ApplicationSetPerMachineFolder" After="ApplicationSetPerUserFolder" Condition="ACTION=&quot;INSTALL&quot; AND APPLICATIONFOLDER=&quot;&quot; AND (ALLUSERS=1 OR (ALLUSERS=2 AND Privileged))" />
+    </InstallExecuteSequence>
+    <InstallUISequence>
+      <Custom Action="ApplicationSetDefaultPerUserFolder" Before="CostFinalize" />
+      <Custom Action="ApplicationSetDefaultPerMachineFolder" After="ApplicationSetDefaultPerUserFolder" />
+      <Custom Action="ApplicationSetPerUserFolder" After="ApplicationSetDefaultPerMachineFolder" Condition="ACTION=&quot;INSTALL&quot; AND APPLICATIONFOLDER=&quot;&quot; AND (ALLUSERS=&quot;&quot; OR (ALLUSERS=2 AND (NOT Privileged)))" />
+      <Custom Action="ApplicationSetPerMachineFolder" After="ApplicationSetPerUserFolder" Condition="ACTION=&quot;INSTALL&quot; AND APPLICATIONFOLDER=&quot;&quot; AND (ALLUSERS=1 OR (ALLUSERS=2 AND Privileged))" />
+    </InstallUISequence>
+
+    <UI Id="WixUI_DualPurpose">
+      <TextStyle Id="WixUI_Font_Normal" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Normal_Size)" />
+      <TextStyle Id="WixUI_Font_Bigger" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Bigger_Size)" />
+      <TextStyle Id="WixUI_Font_Title" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Title_Size)" Bold="yes" />
+      <TextStyle Id="WixUI_Font_Emphasized" FaceName="!(loc.Advanced_Font_FaceName)" Size="!(loc.Advanced_Font_Emphasized_Size)" Bold="yes" />
+
+      <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
+      <Property Id="WixUI_Mode" Value="Advanced" />
+
+      <DialogRef Id="BrowseDlg" />
+      <DialogRef Id="DiskCostDlg" />
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="MsiRMFilesInUse" />
+      <DialogRef Id="PrepareDlg" />
+      <DialogRef Id="ProgressDlg" />
+      <DialogRef Id="ResumeDlg" />
+      <DialogRef Id="UserExit" />
+      <DialogRef Id="WelcomeDlg" />
+
+      <Publish Dialog="ExitDialog" Control="Finish" Event="EndDialog" Value="Return" Order="999" />
+
+      <Publish Dialog="BrowseDlg" Control="OK" Event="DoAction" Value="WixUIValidatePath_$(sys.BUILDARCHSHORT)" Order="1" />
+      <Publish Dialog="BrowseDlg" Control="OK" Event="SpawnDialog" Value="InvalidDirDlg" Order="2" Condition="WIXUI_INSTALLDIR_VALID&lt;&gt;&quot;1&quot;" />
+
+      <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1" Condition="!(wix.WixUISupportPerMachine) AND !(wix.WixUISupportPerUser)" />
+      <Publish Dialog="InstallScopeDlg" Control="Back" Event="NewDialog" Value="AdvancedWelcomeEulaDlg" />
+
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerUserFolder" Order="1" Condition="!(wix.WixUISupportPerUser) AND NOT Privileged" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="{}" Order="2" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="1" Order="3" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="APPLICATIONFOLDER" Value="[WixPerUserFolder]" Order="4" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Property="APPLICATIONFOLDER" Value="[WixPerMachineFolder]" Order="5" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="6" Condition="WixAppFolder = &quot;WixPerUserFolder&quot;" />
+      <Publish Dialog="InstallScopeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Order="7" Condition="WixAppFolder = &quot;WixPerMachineFolder&quot;" />
+      <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg" />
+      <Publish Dialog="MaintenanceTypeDlg" Control="RepairButton" Event="NewDialog" Value="VerifyReadyDlg" />
+      <Publish Dialog="MaintenanceTypeDlg" Control="RemoveButton" Event="NewDialog" Value="VerifyReadyDlg" />
+      <Publish Dialog="MaintenanceTypeDlg" Control="Back" Event="NewDialog" Value="MaintenanceWelcomeDlg" />
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg" Order="2" Condition="Installed AND NOT PATCH" />
+      <Publish Dialog="VerifyReadyDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="3" Condition="Installed AND PATCH" />
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="VerifyReadyDlg" Condition="Installed AND PATCH" />
+    </UI>
+   
+
+    <InstallUISequence>
+      <Show Dialog="override WelcomeDlg" Before="AdvancedWelcomeEulaDlg" Condition="Installed AND PATCH" />
+    </InstallUISequence>
+
+
+    <UIRef Id="WixUI_Common" />
+
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.LICENSE)" />
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.png" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.png" />
+
+  </Package>
 </Wix>
