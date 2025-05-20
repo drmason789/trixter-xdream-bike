@@ -11,7 +11,7 @@ namespace Trixter.XDream.Diagnostics
 {
     public partial class MainForm : Form
     {
-        private const string updateRepo = "eGRyZWFtLWJpa2luZy90cml4dGVyLXhkcmVhbS1iaWtl";
+        private const string updateRepo = "xdream-biking/trixter-xdream-bike";
         private object sync = new object();
         private DataAccess dataAccess;
 
@@ -171,13 +171,18 @@ namespace Trixter.XDream.Diagnostics
         {
             try
             {
-                byte[] bytes = Convert.FromBase64String(updateRepo);
+                var updateChecker = new UpdateChecker(updateRepo);
+                var update = await updateChecker.GetLatestRelease();
 
-                var updateChecker = new UpdateChecker(Encoding.UTF8.GetString(bytes));
-                bool updateExists = await updateChecker.UpdateExists();
+                if (update!=null)
+                {
+                   var dialogResult= MessageBox.Show(
+                        $"An update to {update.Release} is available. \r\n\r\nClick 'Yes' to open the releases page in a web browser.", "Update",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-                if(updateExists)
-                    MessageBox.Show("An update is available.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                   if (dialogResult == DialogResult.Yes)
+                       System.Diagnostics.Process.Start(updateChecker.GithubReleaseUrl);
+                }
                 else
                     MessageBox.Show("No updates were found.", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
