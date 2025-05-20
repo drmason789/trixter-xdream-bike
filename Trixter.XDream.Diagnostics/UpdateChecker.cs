@@ -12,8 +12,8 @@ namespace Trixter.XDream.Diagnostics
 
     class UpdateChecker
     {
-        private const string githubUrlPattern = "https://api.github.com/repos/{0}/releases";
-        private readonly string githubRepoUrl;
+        private const string githubReleaseApiPattern = "https://api.github.com/repos/{0}/releases";
+        private const string githubReleaseUrlPattern = "https://github.com/{0}/releases";
 
         public class ReleaseInfo
         {
@@ -41,6 +41,21 @@ namespace Trixter.XDream.Diagnostics
         }
 
         /// <summary>
+        /// The URL to the github releases API for the associated repository
+        /// </summary>
+        public string GithubReleaseApiUrl { get; }
+
+        /// <summary>
+        /// The URL to the github releases page for the associated repository
+        /// </summary>
+        public string GithubReleaseUrl { get; }
+
+        /// <summary>
+        /// Gets the current version of this software from the assembly metadata.
+        /// </summary>
+        public Version CurrentVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="repo">The github repo, username/reponame</param>
@@ -50,7 +65,8 @@ namespace Trixter.XDream.Diagnostics
             if(string.IsNullOrEmpty(repo))
                 throw new ArgumentException(nameof(repo));
                       
-            this.githubRepoUrl = string.Format(githubUrlPattern, repo);
+            this.GithubReleaseApiUrl = string.Format(githubReleaseApiPattern, repo);
+            this.GithubReleaseUrl = string.Format(githubReleaseUrlPattern, repo);
         }
 
         /// <summary>
@@ -72,7 +88,7 @@ namespace Trixter.XDream.Diagnostics
         public async Task<ReleaseInfo> GetLatestRelease(Version currentRelease=null)
         {
             if (currentRelease == null)
-                currentRelease = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                currentRelease = this.CurrentVersion;
 
             var releases = await GetReleases();
 
@@ -91,7 +107,7 @@ namespace Trixter.XDream.Diagnostics
             {
                 client.DefaultRequestHeaders.Add("User-Agent", "request");
 
-                var response = await client.GetStringAsync(this.githubRepoUrl);
+                var response = await client.GetStringAsync(this.GithubReleaseApiUrl);
                 var releases = JArray.Parse(response);
 
                 var releaseList = new List<ReleaseInfo>();
