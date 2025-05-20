@@ -16,7 +16,7 @@
 	<Version>1.4.1</Version>
     <PackageLicenseFile>..\LICENSE.rtf</PackageLicenseFile>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <PackageProjectUrl>https://github.com/drmason789/trixter-xdream-bike</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/xdream-biking/trixter-xdream-bike</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
