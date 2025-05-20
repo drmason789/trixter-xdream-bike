@@ -6,6 +6,6 @@
 	<?define PRODUCT_NAME = "Trixter X-Dream Bike Utilities"?>
 	<?define PRODUCT_DESC = "A diagnostic utility for testing a Trixter X-Dream V1 Exercise Bike"?>
 	<?define MANUFACTURER="David Mason"?>
-	<?define GITHUB_URL = "https://github.com/drmason789/trixter-XDream" ?>
+	<?define GITHUB_URL = "https://github.com/xdream-biking/trixter-XDream" ?>
 	<?define LICENSE="..\\LICENSE.rtf" ?>
 </Include>
