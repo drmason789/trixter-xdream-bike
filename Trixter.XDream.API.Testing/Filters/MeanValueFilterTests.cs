@@ -14,19 +14,10 @@ namespace Trixter.XDream.API.Testing.Filters
     {
         const double tolerance = 1.0e-10;
 
-        public enum ValueType
-        {
-            Value,
-            MidPoint
-        }
-
-
         [Test]
-        [TestCase(ValueType.MidPoint)]
-        [TestCase(ValueType.Value)]
-        public void TestMeanValueFilter_SplitMidSample(ValueType valueType)
+        public void TestMeanValueFilter_SplitMidSample()
         {
-            MeanValueFilter mvf = new MeanValueFilter(500, valueType == ValueType.MidPoint);
+            MeanValueFilter mvf = new MeanValueFilter(500);
 
             DateTimeOffset t0 = DateTimeOffset.Now;
 
@@ -36,19 +27,16 @@ namespace Trixter.XDream.API.Testing.Filters
 
             // Not looking for 500 here because this filter doesn't split samples at the cutoff point.
             Assert.That(mvf.Period, Is.EqualTo(300));
-            if(valueType == ValueType.Value)
-                Assert.That(mvf.Value, Is.EqualTo((2 + 3) / 2d).Within(tolerance));
-            else
-                Assert.That(mvf.Value, Is.EqualTo((1.5 + 2.5) / 2d).Within(tolerance));
+            Assert.That(mvf.Value, Is.EqualTo((2 + 3) / 2d).Within(tolerance));
+            
         }
 
 
         [Test]
-        [TestCase(ValueType.MidPoint)]
-        [TestCase(ValueType.Value)]
-        public void TestMeanValueFilter_SplitOnSampleBoundary(ValueType valueType)
+
+        public void TestMeanValueFilter_SplitOnSampleBoundary()
         {
-            MeanValueFilter mvf = new MeanValueFilter(300, valueType == ValueType.MidPoint);
+            MeanValueFilter mvf = new MeanValueFilter(300);
 
             DateTimeOffset t0 = DateTimeOffset.Now;
 
@@ -57,18 +45,15 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(3, t0.AddMilliseconds(600));
 
             Assert.That(mvf.Period, Is.EqualTo(300));
-            if (valueType == ValueType.Value)
-                Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
-            else
-                Assert.That(mvf.Value, Is.EqualTo(2.5).Within(tolerance));
+            Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
+            
+                
         }
 
         [Test]
-        [TestCase(ValueType.MidPoint)]
-        [TestCase(ValueType.Value)]
-        public void TestWeightedMeanValueFilter_SplitMidSample(ValueType valueType)
+        public void TestWeightedMeanValueFilter_SplitMidSample()
         {
-            WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(500, valueType == ValueType.MidPoint);
+            WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(500);
 
             DateTimeOffset t0 = DateTimeOffset.Now;
 
@@ -77,19 +62,13 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(3, t0.AddMilliseconds(600));
 
             Assert.That(mvf.Period, Is.EqualTo(500));
-            if(valueType==ValueType.Value)
-                Assert.That(mvf.Value, Is.EqualTo((3d * 300d + 2d * 200d) / 500d).Within(tolerance));
-            else
-                Assert.That(mvf.Value, Is.EqualTo((2.5d * 300d + 1.5d * 200d) / 500d).Within(tolerance));
-
+            Assert.That(mvf.Value, Is.EqualTo((3d * 300d + 2d * 200d) / 500d).Within(tolerance));
         }
 
         [Test]
-        [TestCase(ValueType.MidPoint)]
-        [TestCase(ValueType.Value)]
-        public void TestWeightedMeanValueFilter_SplitOnSampleBoundary(ValueType valueType)
+        public void TestWeightedMeanValueFilter_SplitOnSampleBoundary()
         {
-            WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(300, valueType==ValueType.MidPoint);
+            WeightedMeanValueFilter mvf = new WeightedMeanValueFilter(300);
 
             DateTimeOffset t0 = DateTimeOffset.Now;
 
@@ -98,25 +77,20 @@ namespace Trixter.XDream.API.Testing.Filters
             mvf.Add(3, t0.AddMilliseconds(600));
 
             Assert.That(mvf.Period, Is.EqualTo(300));
-            if(valueType==ValueType.Value)
-                Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
-            else
-                Assert.That(mvf.Value, Is.EqualTo(2.5).Within(tolerance));
+            Assert.That(mvf.Value, Is.EqualTo(3).Within(tolerance));
         }
 
 
         [Test]
-        [TestCase(typeof(MeanValueFilter), 1000, ValueType.Value, 0.48544358988983127d, -0.0015909654334074566d)]
-        [TestCase(typeof(WeightedMeanValueFilter), 1000, ValueType.Value, 0.48562740929878312d, 0.0078560187173342937d)]
-        [TestCase(typeof(MeanValueFilter), 1000, ValueType.MidPoint,0.48544358988983127d, -0.0015909654334074566d)]
-        [TestCase(typeof(WeightedMeanValueFilter), 1000, ValueType.MidPoint, 0.48169939994004934d, 0.0078560187173342937d)]
-        public void SpeedTest(Type type, int period, ValueType valueType, double expected, double expectedDelta)
+        [TestCase(typeof(MeanValueFilter), 1000,  0.48544358988983127d, -0.0015909654334074566d)]
+        [TestCase(typeof(WeightedMeanValueFilter), 1000,  0.48562740929878312d, 0.0078560187173342937d)]
+        public void SpeedTest(Type type, int period, double expected, double expectedDelta)
         {
             const int iterations = 1000000;
 
             Random random = new Random(10);
             DateTimeOffset t = DateTimeOffset.Now;
-            MeanValueFilterBase mvf = (MeanValueFilterBase)Activator.CreateInstance(type, new object[] { period, valueType==ValueType.MidPoint });
+            MeanValueFilterBase mvf = (MeanValueFilterBase)Activator.CreateInstance(type, new object[] { period });
             double[] dT = Enumerable.Range(0, iterations).Select(x => random.NextDouble() * 10 + 0.0001).ToArray();
             double[] v = Enumerable.Range(0, iterations).Select(x => random.NextDouble()).ToArray();
             Stopwatch stopwatch = new Stopwatch();

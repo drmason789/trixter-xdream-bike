@@ -13,7 +13,7 @@ namespace Trixter.XDream.API.Filters
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
     internal class MeanValueFilter : MeanValueFilterBase
     {
-        public MeanValueFilter(int periodMilliseconds, bool useMidPoint=false):base(periodMilliseconds, new MeanCalculator(), new MeanCalculator(), useMidPoint)
+        public MeanValueFilter(int periodMilliseconds):base(periodMilliseconds, new MeanCalculator(), new MeanCalculator())
         {
         }
 

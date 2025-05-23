@@ -9,8 +9,7 @@ namespace Trixter.XDream.API.Filters
         private string DebuggerDisplay => $"{T:0.0000}: v={Value} d={Delta}";
 
         protected Sample previous, next;
-
-        public double MidPoint => this.Previous == null ? this.Value : (this.Value + this.Previous.Value) * 0.5;
+        
         public double Value;
         public double? Delta;
 

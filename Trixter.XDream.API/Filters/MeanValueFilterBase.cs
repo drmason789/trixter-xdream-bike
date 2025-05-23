@@ -17,11 +17,6 @@ namespace Trixter.XDream.API.Filters
         protected IMeanCalculator MeanDelta { get; private set; }
 
         /// <summary>
-        /// Indicates where a sample's <see cref="Sample.MidPoint"/> should be used instead of its <see cref="Sample.Value"/>.
-        /// </summary>
-        public bool UseMidPoint { get;  }
-
-        /// <summary>
         /// The period over which the mean value is calculated, over which samples are kept.
         /// </summary>
         public int PeriodMilliseconds => (int)this.periodMilliseconds;
@@ -70,14 +65,13 @@ namespace Trixter.XDream.API.Filters
         /// </summary>
         public int Count => this.samples.Count;
 
-        protected MeanValueFilterBase(int periodMilliseconds, IMeanCalculator meanValue, IMeanCalculator meanDelta, bool useMidPoint)
+        protected MeanValueFilterBase(int periodMilliseconds, IMeanCalculator meanValue, IMeanCalculator meanDelta)
         {
             this.periodMilliseconds = periodMilliseconds;
             this.samples = new SampleList();
             this.startTime = DateTimeOffset.MinValue;
             this.MeanValue = meanValue;
             this.MeanDelta = meanDelta;
-            this.UseMidPoint = useMidPoint;
         }
 
 
@@ -134,7 +128,7 @@ namespace Trixter.XDream.API.Filters
                 return;
 
             double dT = sample.dT;
-            this.MeanValue.Add(this.UseMidPoint? sample.MidPoint:sample.Value, dT);
+            this.MeanValue.Add(sample.Value, dT);
             if (sample.Delta != null)
                 this.MeanDelta.Add(sample.Delta.Value, dT);
 
@@ -152,7 +146,7 @@ namespace Trixter.XDream.API.Filters
                 return;
 
             double dT = sample.dT;
-            this.MeanValue.Remove(this.UseMidPoint ? sample.MidPoint : sample.Value, dT);
+            this.MeanValue.Remove(sample.Value, dT);
             if (sample.Delta != null)
                 this.MeanDelta.Remove(sample.Delta.Value, dT);
 
