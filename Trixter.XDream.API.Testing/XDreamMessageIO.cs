@@ -65,6 +65,24 @@ namespace Trixter.XDream.API.Testing
 
             return result.ToArray();
         }
+
+        /// <summary>
+        /// Sorts the samples by timestamp and takes only the first at each timestamp.
+        /// </summary>
+        /// <param name="states"></param>
+        /// <returns></returns>
+        public static IEnumerable<XDreamState> AsMonotonic(this IEnumerable<XDreamState> states)
+        {
+            DateTimeOffset last = DateTimeOffset.MinValue;
+            foreach (var state in states.OrderBy(s=>s.TimeStamp))
+            {
+                if (state.TimeStamp > last)
+                {
+                    last = state.TimeStamp;
+                    yield return state;
+                }
+            }
+        }
     }
 
 
