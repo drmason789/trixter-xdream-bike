@@ -5,7 +5,14 @@ using System.Collections.Generic;
 namespace Trixter.XDream.API.Filters
 {
     internal class SampleList : IEnumerable<Sample>
-    {        
+    {
+        /// <summary>
+        /// Delegate to be called when a sample is to be removed from the list.
+        /// Used to update statistics.
+        /// </summary>
+        /// <param name="removing">The sample that is to be removed.</param>
+        /// <param name="limit">The lower limit on <see cref="Sample.T"/></param>
+        /// <param name="remove">Signals if the sample can be removed entirely, not just deactivated.</param>
         public delegate void RemoveSampleDelegate(Sample removing, double limit, out bool remove);
 
         public Sample Latest { get; private set; }

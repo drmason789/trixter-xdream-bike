@@ -17,10 +17,12 @@ namespace Trixter.XDream.API.Filters
         {
         }
 
-        protected override void Trim(Sample s, double limit, out bool replace) 
+        protected override void Trim(Sample s, double limit, out bool remove) 
         {
-            this.Remove(s);   
-            replace = s.T < limit;
+            this.Remove(s);
+
+            remove = s.T < limit;
+            
         }
         
         

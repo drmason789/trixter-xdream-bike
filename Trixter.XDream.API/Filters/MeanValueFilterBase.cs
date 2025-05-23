@@ -4,7 +4,7 @@ using System.Diagnostics;
 namespace Trixter.XDream.API.Filters
 {
     [DebuggerDisplay("Count={Count} period={Period} v={Value} dv/ms={DeltaPerMillisecond}")]
-    internal abstract class MeanValueFilterBase 
+    internal abstract class MeanValueFilterBase
     {
         private DateTimeOffset startTime;
         double periodMilliseconds;
@@ -45,9 +45,9 @@ namespace Trixter.XDream.API.Filters
 
 
         /// <summary>
-        /// Delta per millisecond.
+        /// Delta per millisecond. Returns 0 if the period is 0.
         /// </summary>
-        public double DeltaPerMillisecond => this.CalculateCached(() => this.MeanDelta.Sum / this.Period, ref this.deltaPerMillisecond);
+        public double DeltaPerMillisecond => this.CalculateCached(() => this.Period == 0d ? 0d : this.MeanDelta.Sum / this.Period, ref this.deltaPerMillisecond);
 
 
         /// <summary>
@@ -73,13 +73,21 @@ namespace Trixter.XDream.API.Filters
             this.MeanValue = meanValue;
             this.MeanDelta = meanDelta;
         }
-
+        
 
         public void Add(double value, DateTimeOffset timestamp)
         {
             double t = GetSampleTime(timestamp);
+
+            var latestSample = this.samples.Latest;
+
+            if (latestSample != null && latestSample.T >= t)
+                throw new ArgumentException("Sample time must increase monotonically.");
+
             Sample newSample = new Sample(t, value, value - this.samples.Latest?.Value);
+            
             this.samples.Add(newSample);
+            
             this.Add(newSample);
             this.Trim(t);
 
@@ -127,10 +135,9 @@ namespace Trixter.XDream.API.Filters
             if (sample.IsActive)
                 return;
 
-            double dT = sample.dT;
-            this.MeanValue.Add(sample.Value, dT);
+            this.MeanValue.Add(sample.Value, sample.dT);
             if (sample.Delta != null)
-                this.MeanDelta.Add(sample.Delta.Value, dT);
+                this.MeanDelta.Add(sample.Delta.Value, sample.dT);
 
             sample.IsActive = true;
         }
@@ -145,14 +152,13 @@ namespace Trixter.XDream.API.Filters
             if (!sample.IsActive)
                 return;
 
-            double dT = sample.dT;
-            this.MeanValue.Remove(sample.Value, dT);
+            this.MeanValue.Remove(sample.Value, sample.dT);
             if (sample.Delta != null)
-                this.MeanDelta.Remove(sample.Delta.Value, dT);
+                this.MeanDelta.Remove(sample.Delta.Value, sample.dT);
 
             sample.IsActive = false;
         }
-
+        
         private double GetSampleTime(DateTimeOffset t)
         {
             if (this.startTime == DateTimeOffset.MinValue)
@@ -162,7 +168,6 @@ namespace Trixter.XDream.API.Filters
             }
             return (t - this.startTime).TotalMilliseconds;
         }
-
         private void ClearCachedValues()
         {
             // Clear cached values
@@ -179,7 +184,13 @@ namespace Trixter.XDream.API.Filters
             this.samples.Trim(limit, this.Trim);
         }
 
-        protected abstract void Trim(Sample sample, double limit, out bool replace);
+        /// <summary>
+        /// Trim the sample list to remove samples older than the specified limit.
+        /// </summary>
+        /// <param name="sample">The sample to trim.</param>
+        /// <param name="limit">The limit on <see cref="Sample.T"/></param>
+        /// <param name="remove">Indicates if the sample should be removed. Set to false if the sample is modified to fit the limit.</param>
+        protected abstract void Trim(Sample sample, double limit, out bool remove);
 
     }
 }

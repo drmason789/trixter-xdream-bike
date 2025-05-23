@@ -28,7 +28,7 @@ namespace Trixter.XDream.API.Filters
                 double olddT = next.dT;
                 sample.T = limit;
                 double newdT = next.dT;
-                                
+                
                 this.MeanValue.Update(next.Value, olddT, newdT);
                 if (next.Delta != null)
                     this.MeanDelta.Update(next.Delta.Value, olddT, newdT);

@@ -9,7 +9,7 @@ namespace Trixter.XDream.API.Testing.Experimental
         private double? variance = null;
         private double? stddev = null;
 
-        protected override string GetDebuggerDisplayString() => base.GetDebuggerDisplayString() + " Var:{Variance} StdDev:{StandardDeviation}";
+        protected override string GetDebuggerDisplayString() => base.GetDebuggerDisplayString() + $" Var:{Variance} StdDev:{StandardDeviation}";
 
         /// <summary>
         /// Variance. Uses formula that avoids storing the samples.

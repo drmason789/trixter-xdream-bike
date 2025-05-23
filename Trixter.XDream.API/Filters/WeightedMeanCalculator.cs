@@ -66,13 +66,10 @@ namespace Trixter.XDream.API.Filters
         /// <param name="value"></param>
         /// <param name="weight"></param>
         /// <exception cref="InvalidOperationException"></exception>
-        public void Remove(double x, double weight)
+        public void Remove(double value, double weight)
         {
             this.AssertValidWeight(weight);
-
-            this.Sum -= x * weight;
-            this.TotalWeight -= weight;
-            this.Invalidate();
+            this.Add(value, -weight);
         }
         
         /// <summary>
@@ -85,11 +82,8 @@ namespace Trixter.XDream.API.Filters
         public void Update(double value, double oldWeight, double newWeight)
         {
             this.AssertValidWeight(oldWeight);
-
             double dW = newWeight - oldWeight;
-            this.Sum += value * dW;
-            this.TotalWeight += dW;
-            this.Invalidate();
+            this.Add(value, dW);
         }
 
         /// <summary>
